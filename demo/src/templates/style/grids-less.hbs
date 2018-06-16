@@ -1,0 +1,34 @@
+@import "less/_nth-grid";
+
+{{!-- Nth-Grid Globals --}}
+{{#each grids.globals.default}}
+@nth-grid-{{@key}}: {{this}};
+{{/each}}
+
+{{!-- Styles --}}
+.less {
+{{#each grids.grids}}
+    .{{@key}} {
+        .nth-grid(
+            {{!-- Private globals --}}
+            {{#unless this.props.width}}@width: {{@root.grids.globals.private.width}},{{/unless}}
+            {{#unless this.props.order}}@order: {{@root.grids.globals.private.order}},{{/unless}}
+            {{#each this.props}}
+            @{{@key}}: {{this}}{{#unless @last}},{{/unless}}
+            {{/each}}
+        );
+        {{!-- Nested --}}
+        {{#each grids}}
+        .{{@key}} {
+            .nth-grid(
+                {{!-- Private globals --}}
+                {{#unless this.props.order}}@order: {{@root.grids.globals.private.order}},{{/unless}}
+                {{#each this.props}}
+                @{{@key}}: {{this}}{{#unless @last}},{{/unless}}
+                {{/each}}
+            );
+        }
+        {{/each}}
+    }
+{{/each}}
+}

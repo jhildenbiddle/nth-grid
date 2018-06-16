@@ -1,0 +1,593 @@
+// Nth-Grid @@version
+// @@homepage
+// @@copyright
+// @@license
+
+// =============================================================================
+// Global Options
+// =============================================================================
+// Layout
+@nth-grid-columns               : 1;
+@nth-grid-gutter                : 0;
+@nth-grid-margin                : 0;
+@nth-grid-center                : true;
+@nth-grid-eqheight              : false;
+@nth-grid-valign                : false;
+@nth-grid-direction             : ltr;
+@nth-grid-legacy                : false;
+
+// Debug
+@nth-grid-debug                 : false;
+@nth-grid-debug-background-color: #000;
+@nth-grid-debug-text-color      : #ccc;
+
+// Overlay
+@nth-grid-overlay               : false;
+@nth-grid-overlay-column-color  : #7c48c3;
+@nth-grid-overlay-margin-color  : #dabfff;
+@nth-grid-overlay-text-color    : #fff;
+
+// Compilation
+@nth-grid-rem-base              : 16;
+@nth-grid-warnings              : true;
+
+
+// =============================================================================
+// Mixins (Public)
+// =============================================================================
+.nth-grid(
+    @columns               : @nth-grid-columns,
+    @gutter                : @nth-grid-gutter,
+    @margin                : @nth-grid-margin,
+    @width                 : 100%,
+    @order                 : false,
+    @center                : @nth-grid-center,
+    @eqheight              : @nth-grid-eqheight,
+    @valign                : @nth-grid-valign,
+    @direction             : @nth-grid-direction,
+    @legacy                : @nth-grid-legacy,
+    @debug                 : @nth-grid-debug,
+    @debug-background-color: @nth-grid-debug-background-color,
+    @debug-text-color      : @nth-grid-debug-text-color,
+    @overlay               : @nth-grid-overlay,
+    @overlay-column-color  : @nth-grid-overlay-column-color,
+    @overlay-margin-color  : @nth-grid-overlay-margin-color,
+    @overlay-text-color    : @nth-grid-overlay-text-color,
+    @warnings              : @nth-grid-warnings) {
+
+    // Plugin
+    // -------------------------------------------------------------------------
+    @plugin 'less-plugin-nth-grid.js';
+
+    // Initialize plugin
+    @init: nth-grid(@columns, @gutter, @margin, @width, @order);
+
+    .warning() when not (@init) {
+        nth-warn('NTH-GRID: Plugin not loaded. Make sure _nth-grid.less.js is in the same directory as _nth-grid.less');
+    }
+    .warning();
+
+    // Variables
+    // -------------------------------------------------------------------------
+    // Rounding
+    @nth-rounding: 5;
+
+    // Default values
+    @auto-width         : nth-get(auto_width);
+    @calc               : nth-get(calc);
+    @columns-ratio      : nth-get(columns_ratio);
+    @columns-unit       : nth-get(columns_unit);
+    @grid-col-ratio     : nth-get(grid_col_ratio);
+    @grid-col-width     : nth-get(grid_col_width);
+    @grid-width         : nth-get(grid_width);
+    @order-offsets      : nth-get(order_offsets);
+    @total-columns      : nth-get(total_columns);
+    @total-ratio-columns: nth-get(total_ratio_columns);
+    @total-unit-columns : nth-get(total_unit_columns);
+
+    // Direction
+    .dir-vars() when (@direction = rtl) {
+        @dir-left : right;
+        @dir-right: left;
+    }
+    .dir-vars() when (default()) {
+        @dir-left : left;
+        @dir-right: right;
+    }
+    .dir-vars();
+
+    // Extract values from lists
+    .gutter-vars() when (length(@gutter) = 2) {
+        @gutter-h: extract(@gutter, 2);
+        @gutter-v: extract(@gutter, 1);
+    }
+    .gutter-vars() when (length(@gutter) = 1) {
+        @gutter-h: @gutter;
+        @gutter-v: @gutter;
+    }
+    .gutter-vars();
+
+    .margin-vars() when (length(@margin) = 2) {
+        @margin-h: extract(@margin, 2);
+        @margin-v: extract(@margin, 1);
+    }
+    .margin-vars() when (length(@margin) = 1) {
+        @margin-h: @margin;
+        @margin-v: @margin;
+    }
+    .margin-vars();
+
+    // Mixins (Private)
+    // -------------------------------------------------------------------------
+    // Renders pseudo content as column overlay
+    .overlay(@content) when (@overlay) {
+        &:before {
+            content: "@{content}" !important;
+        }
+    }
+
+    // Converts rem-to-px fallback for legacy browsers
+    .rem(@property, @value) {
+        .val() when (isnumber(@value)) {
+            @val: round(@value, @nth-rounding);
+        }
+        .val() when (default()) {
+            @val: @value;
+        }
+        .val();
+
+        .legacy() when (@legacy) and (isnumber(@val)) and (get-unit(@val) = rem) {
+            @{property}: unit((@val * @nth-grid-rem-base), px);
+        }
+        .legacy() {
+            @{property}: @val;
+        }
+        .legacy();
+    }
+
+    // Grid Container
+    // -------------------------------------------------------------------------
+    display: block;
+
+    .display() when (@legacy) {
+        // IE7 dobule padding fix
+        *display: inline-block;
+    }
+    .display();
+
+    .position() when (@legacy) and not (@order = false) {
+        // IE7 relative position fix
+        *position: relative;
+    }
+    .position();
+
+    // Box sizing
+    .box-sizing() when (@total-ratio-columns = 0) {
+        // Allow for borders when auto-width has been applied
+        box-sizing: content-box;
+    }
+    .box-sizing() when (default()) {
+        box-sizing: border-box;
+    }
+    .box-sizing();
+
+    // Flexbox
+    .flexbox() when (@eqheight), (@valign = top), (@valign = center), (@valign = middle), (@valign = bottom) {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+
+        // Equal-height columns
+        .eqheight() when (@eqheight) and (@legacy) and (@warnings) {
+            // Legacy warning
+            nth-warn('NTH-GRID: Flexbox support required for equal-height columns. This feature is not supported by legacy browsers.');
+        }
+        .eqheight();
+
+        // Vertical alignment
+        .valign() when not (@eqheight) {
+            // Legacy warning
+            .warning() when (@legacy) and (@warnings) {
+                nth-warn('NTH-GRID: Flexbox support required for vertical alignment. This feature is not supported by legacy browsers.');
+            }
+            .warning();
+
+            .align-items() when (@valign = top) {
+                -webkit-box-align: start;
+                -webkit-align-items: flex-start;
+                -ms-flex-align: start;
+                align-items: flex-start;
+            }
+            .align-items() when (@valign = center), (@valign = middle) {
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+            .align-items() when (@valign = bottom) {
+                -webkit-box-align: end;
+                -webkit-align-items: flex-end;
+                -ms-flex-align: end;
+                align-items: flex-end;
+            }
+            .align-items();
+        }
+        .valign();
+
+        // Direction
+        .direction() when (@direction = rtl) {
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: reverse;
+            -webkit-flex-direction: row-reverse;
+            -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+        }
+        .direction();
+    }
+    .flexbox();
+
+    // Width
+    .width() when (@total-ratio-columns = 0) and (@calc) {
+        width: calc(@auto-width);
+    }
+    .width() when (@total-ratio-columns = 0) and not (@calc) {
+        .rem(width, @auto-width);
+    }
+    .width() when not (@total-ratio-columns = 0) and not (@width = 100%) {
+        .rem(width, @width);
+    }
+    .width() when (default()) {
+        width: auto;
+    }
+    .width();
+
+    // Centering
+    .center() when (@center) {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .center() when (default()) {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .center();
+
+    // Clearfix
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    // Columns
+    // -------------------------------------------------------------------------
+    // Legacy warning
+    .warning() when (@legacy) and (@calc) and (@warnings) {
+        nth-warn('NTH-GRID: Calc() support required for grid columns. This grid will not render properly in legacy browsers.');
+    }
+    .warning();
+
+    > * {
+        display: block;
+        box-sizing: border-box;
+
+        // Rules & Resets
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // All Columns
+        &:nth-child(1n) {
+            float: @dir-left;
+            clear: none;
+            position: static;
+            @{dir-left}: auto;
+            margin-@{dir-right}: 0;
+
+            // Gutter - Vertical
+            .rem(margin-top, @gutter-v);
+
+            // Gutter - Horizontal
+            .rem(~'margin-@{dir-left}', @gutter-h);
+
+            .legacy() when (@legacy) {
+                // IE7 float fix
+                *display: inline;
+                *float: none;
+                *vertical-align: top;
+                *zoom: 1;
+            }
+            .legacy();
+        }
+
+        // All columns in first row
+        &:nth-child(-n + @{total-columns}) {
+            // Margin - Vertical
+            .rem(margin-top, @margin-v);
+        }
+
+        .legacy-subpixel() when (@legacy) and (@margin-h = 0) {
+            // Last column in each row
+            &:nth-child(@{total-columns}n) {
+                // IE7 sub-pixel rounding fix
+                *margin-@{dir-right}: -2px;
+            }
+        }
+        .legacy-subpixel();
+
+        // First column each row
+        &:nth-child(@{total-columns}n + 1) {
+            clear: @dir-left;
+
+            // Margin - Horizontal
+            .rem(~'margin-@{dir-left}', @margin-h);
+        }
+
+        // All columns in last row
+        &:nth-last-child(-n + @{total-columns}) {
+            // Margin - Vertical
+            // Calc used to target modern browsers because Selectivizr does
+            // not properly match this selector using NWMatcher (it does match
+            // properly with jQuery). Entire row must be targeted to ensure
+            // proper alignment when vertical alignment option is used.
+            .margin-bottom() when (@margin-v = 0) {
+                margin-bottom: 0;
+            }
+            .margin-bottom() when (default()) {
+                margin-bottom: calc(@margin-v);
+            }
+            .margin-bottom();
+        }
+
+        .legacy-margin-v() when (@legacy) {
+            // Last child serving as "last row" for selectivir compatibility.
+            // Only one element in the last row is needed for vertical margin
+            // since vertical alignment (via flexbox) is not an issue.
+            &:last-child {
+                // Margin - Vertical
+                .rem(margin-bottom, @margin-v);
+            }
+        }
+        .legacy-margin-v();
+
+        // Width: Unit-based column(s) only
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        .grid-columns() when (@total-ratio-columns = 0) {
+            .loop(@n, @i: 1) when (@i =< @n) {
+                @column-val: extract(@columns, @i);
+
+                &:nth-child(@{total-columns}n + @{i}) {
+                    .rem(width, @column-val);
+
+                    // Grid overlay
+                    .overlay('@{column-val}');
+                }
+
+                .loop(@n, (@i + 1));
+            }
+            .loop(@total-columns);
+        }
+
+        // Width: Single ratio-based value
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        .grid-columns() when (length(@columns-ratio) = 1) {
+            // Ratio-based column
+            &:nth-child(1n) {
+                // Calc() required
+                .width() when (@calc) {
+                    width: calc(@grid-col-width);
+
+                    // Grid overlay
+                    .overlay('1/@{grid-col-ratio} (calc)');
+                }
+                // Calc() not required
+                .width() when not (@calc) {
+                    .rem(width, @grid-col-width);
+
+                    // Grid overlay
+                    @round: round(@grid-col-width, 2);
+                    .overlay('1/@{grid-col-ratio} (@{round})');
+                }
+                .width();
+            }
+
+            // Get index of ratio-based value
+            .get-index(@i) when (@i > 0) and (get-unit(extract(@columns, @i)) = ~'') {
+                @ratio-col-index: @i;
+            }
+            .get-index(@i) when (@i > 0) {
+                .get-index((@i - 1));
+            }
+            .get-index(length(@columns));
+
+            // Unit-based column(s)
+            .loop(@n, @i: 1) when (@i =< @n) {
+                @column-val: extract(@columns, @i);
+
+                .width() when not (get-unit(@column-val) = ~'') {
+                    .nth-val() when (@i > @ratio-col-index) {
+                        @nth-col: ((@i - 1) + @total-ratio-columns);
+                    }
+                    .nth-val() when (default()) {
+                        @nth-col: @i;
+                    }
+                    .nth-val();
+
+                    &:nth-child(@{total-columns}n + @{nth-col}) {
+                        .rem(width, @column-val);
+
+                        // Grid overlay
+                        .overlay('@{column-val}');
+                    }
+                }
+                .width();
+
+                .loop(@n, (@i + 1));
+            }
+            .loop(length(@columns));
+        }
+
+        // Width: Mutiple ratio-based values
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        .grid-columns() when (length(@columns-ratio) > 1) {
+            .loop(@n, @i: 1) when (@i =< @n) {
+                @column-val: extract(@columns, @i);
+
+                &:nth-child(@{total-columns}n + @{i}) {
+                    // Ratio-based columns
+                    .width() when (get-unit(@column-val) = ~'') {
+                        // Calc() required
+                        .calc() when (@calc) {
+                            width: calc(~'(@{grid-col-width}) * @{column-val}');
+
+                            // Grid overlay
+                            .overlay('@{column-val}/@{grid-col-ratio} (calc)');
+                        }
+                        // Calc() not required
+                        .calc() when not (@calc) {
+                            @column-width: (@grid-col-width * @column-val);
+
+                            .rem(width, @column-width);
+
+                            // Grid overlay
+                            @round: round(@column-width, 2);
+                            .overlay('@{column-val}/@{grid-col-ratio} (@{round})');
+                        }
+                        .calc();
+
+                    }
+                    // Unit-based columns
+                    .width() when (default()) {
+                        .rem(width, @column-val);
+
+                        // Grid overlay
+                        .overlay('@{column-val}');
+                    }
+                    .width();
+                }
+
+                .loop(@n, (@i + 1));
+            }
+            .loop(@total-columns);
+        }
+        .grid-columns();
+
+        // Order
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // Invalid order
+        .order() when not (@order = false) and (length(@order) > @total-columns) {
+            nth-warn('NTH-GRID: Order (@{order}) exceeds total column count of @{total-columns} for columns (@{columns}). Order not applied.');
+        }
+        // Valid order
+        .order() when not (@order = false) and not (length(@order) > @total-columns) {
+            @order-offsets : nth-get(order_offsets);
+
+            .loop(@n, @i: 1) when (@i =< @n) {
+                @order-val: extract(@order, @i);
+                @offset   : extract(@order-offsets, @i);
+
+                .offset() when not (@offset = 0) {
+                    &:nth-child(@{total-columns}n + @{order-val}) {
+                        position: relative;
+
+                        .left() when (@calc) {
+                            @{dir-left}: calc(~'@{offset}');
+                        }
+                        .left() when not (@calc) {
+                            .rem(@dir-left, @offset);
+                        }
+                        .left();
+                    }
+                }
+                .offset();
+
+                .loop(@n, (@i + 1));
+            }
+            .loop(length(@order));
+        }
+        .order();
+    }
+
+    // Overlay
+    // -------------------------------------------------------------------------
+    .overlay() when (@overlay) {
+        @overlay-font-size: 14px;
+
+        /* Nth-Grid Overlay */
+        position: relative;
+        visibility: visible !important;
+        background: @overlay-margin-color !important;
+
+        > * {
+            /* Nth-Grid Overlay */
+            position: relative !important;
+            min-height: (@overlay-font-size * 3) !important;
+            background: @overlay-column-color !important;
+            color: transparent !important;
+
+            &:before {
+                /* Nth-Grid Overlay */
+                position: absolute !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                height: @overlay-font-size !important;
+                width: 100% !important;
+                margin: auto !important;
+                color: @overlay-text-color !important;
+                font-size: @overlay-font-size !important;
+                text-align: center !important;
+                line-height: 1 !important;
+            }
+
+            > * {
+                /* Nth-Grid Overlay */
+                visibility: hidden !important;
+            }
+        }
+    }
+    .overlay();
+
+    // Debug
+    // -------------------------------------------------------------------------
+    .debug() when (@debug) {
+        &:before {
+            /* Nth-Grid Debug */
+            content:
+                '@columns            : @{columns}\A'
+                '@gutter             : @{gutter}\A'
+                '@margin             : @{margin}\A'
+                '@width              : @{width}\A'
+                '@order              : @{order}\A'
+                '@center             : @{center}\A'
+                '@eqheight           : @{eqheight}\A'
+                '@legacy             : @{legacy}\A'
+                '\A'
+                '@auto-width         : @{auto-width}\A'
+                '@calc               : @{calc}\A'
+                '@columns-ratio      : @{columns-ratio}\A'
+                '@columns-unit       : @{columns-unit}\A'
+                '@grid-col-ratio     : @{grid-col-ratio}\A'
+                '@grid-col-width     : @{grid-col-width}\A'
+                '@grid-width         : @{grid-width}\A'
+                '@order-offsets      : @{order-offsets}\A'
+                '@total-columns      : @{total-columns}\A'
+                '@total-ratio-columns: @{total-ratio-columns}\A'
+                '@total-unit-columns : @{total-unit-columns}\A' !important;
+            display: block !important;
+            flex-basis: 100% !important;
+            overflow: hidden !important;
+            padding: 1em !important;
+            background: @debug-background-color !important;
+            color: @debug-text-color !important;
+            font-family: "Lucida Console", "Consolas", Monaco, monospace !important;
+            font-size: 12px !important;
+            line-height: 1.4 !important;
+            text-align: left !important;
+            white-space: pre !important;
+        }
+    }
+    .debug();
+}

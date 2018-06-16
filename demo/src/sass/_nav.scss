@@ -1,0 +1,417 @@
+// Layout - Navigation
+// =============================================================================
+$_nav-id                       : 'nav-toggle'             !default;
+$_nav-elm                      : 'ul'                     !default;
+$_nav-bar-autohide             : false                    !default;
+$_nav-bar-background           : #fff                     !default;
+$_nav-bar-height               : 5rem                     !default;
+$_nav-bar-padding              : 30px                     !default;
+$_nav-drawer-blur              : false                    !default;
+$_nav-drawer-breakpoint        : 48rem                    !default;
+$_nav-drawer-width             : 15rem                    !default;
+$_nav-icon-background          : transparent              !default;
+$_nav-icon-background-active   : $_nav-icon-background    !default;
+$_nav-icon-border              : 0                        !default;
+$_nav-icon-border-active       : $_nav-icon-border        !default;
+$_nav-icon-border-radius       : 0                        !default;
+$_nav-icon-border-radius-active: $_nav-icon-border-radius !default;
+$_nav-icon-color               : #000                     !default;
+$_nav-icon-color-active        : $_nav-icon-color         !default;
+$_nav-icon-padding             : 0                        !default;
+$_nav-icon-size                : 24px                     !default;
+$_nav-icon-transition-duration : 0.2s                     !default;
+$_nav-label-autohide           : true                     !default;
+$_nav-location                 : right                    !default;
+$_nav-overlay-color            : #000                     !default;
+$_nav-overlay-opacity          : 0.5                      !default;
+$_nav-transition-duration      : 0.5s                     !default;
+$_nav-z-index                  : 2147483646               !default;
+
+// Nav Drawer (Default)
+// -----------------------------------------------------------------------------
+// Toggles
+input##{$_nav-id},
+label[for="#{$_nav-id}"] {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+// Toggle overlay
+input##{$_nav-id} {
+    visibility: hidden;
+    position: fixed;
+    z-index: $_nav-z-index + 1;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: calc(100vw - #{$_nav-drawer-width});
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    opacity: 0;
+    cursor: pointer;
+    appearance: none;
+
+    // Active State
+    &:checked {
+        visibility: visible;
+    }
+
+    // Blur Effect
+    @if $_nav-drawer-blur == true {
+        & ~ *:not(label),
+        & ~ nav > :not(#{$_nav-elm}) {
+            filter: unset;
+            transition: filter $_nav-transition-duration;
+            will-change: filter;
+        }
+
+        &:checked {
+            & ~ *,
+            & ~ nav > :not(#{$_nav-elm}) {
+                filter: blur(4px);
+            }
+
+            & ~ label[for="#{$_nav-id}"],
+            & ~ nav {
+                filter: unset;
+            }
+        }
+
+        // Disable for IE9
+        & ~ *,
+        & ~ nav > * {
+            filter: progid:DXImageTransform.Microsoft.Blur(enabled='false') !important;
+        }
+    }
+}
+
+// Toggle Icon & Label
+label[for="#{$_nav-id}"] {
+    position: fixed;
+    z-index: $_nav-z-index + 1;
+    top: $_nav-bar-height / 2;
+    #{$_nav-location}: $_nav-bar-padding;
+    margin: 0;
+    padding: $_nav-icon-padding;
+    white-space: nowrap;
+    cursor: pointer;
+    appearance: none;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transition-property: filter opacity;
+
+    // Auto-hide
+    @if $_nav-label-autohide == true {
+        opacity: 1;
+        transition-delay: $_nav-transition-duration;
+        transition-duration: $_nav-transition-duration;
+        will-change: opacity;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    // Icon
+    i {
+        display: inline-block;
+        height: $_nav-icon-size;
+        width: $_nav-icon-size;
+        padding: 5px;
+        border: $_nav-icon-border;
+        border-radius: $_nav-icon-border-radius;
+        background: $_nav-icon-background;
+        font-size: 0;
+        transition-property: background, border, transform;
+        transition-duration: $_nav-icon-transition-duration;
+        will-change: background, border, transform;
+
+        // Label Spacing
+        * + &,
+        & + * {
+            margin-left: 0.5rem;
+        }
+
+        // Bars
+        & span {
+            // Middle bar
+            display: block;
+            position: relative;
+            top: 50%;
+            margin-top: -2px;
+
+            // Auto-hide
+            @if $_nav-label-autohide != true {
+                transition: background $_nav-icon-transition-duration;
+                will-change: background;
+            }
+
+            &,
+            &:before,
+            &:after {
+                height: 2px;
+                background: $_nav-icon-color;
+            }
+
+            &:before,
+            &:after {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 0;
+                width: 100%;
+                transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transition-property: top, bottom, transform;
+                transition-duration: $_nav-icon-transition-duration;
+                will-change: top, bottom, transform;
+            }
+
+            // Top bar
+            &:before {
+                top: -7px;
+            }
+
+            // Bottom bar
+            &:after {
+                bottom: -7px;
+            }
+        }
+    }
+
+    // Active State
+    input##{$_nav-id}:checked ~ & {
+        @if $_nav-label-autohide == true {
+            visibility: hidden;
+            opacity: 0;
+            transition-delay: 0s;
+            transition-duration: $_nav-transition-duration / 2;
+        }
+
+        // Icon
+        i {
+            @if ($_nav-icon-background-active != $_nav-icon-background) {
+                background: $_nav-icon-background-active;
+            }
+            @if ($_nav-icon-border-active != $_nav-icon-border) {
+                border: $_nav-icon-border-active;
+            }
+            @if ($_nav-icon-border-radius-active != $_nav-icon-border-radius) {
+                border-radius: $_nav-icon-border-radius-active;
+            }
+
+            @if $_nav-label-autohide != true {
+                & span {
+                    background: transparent;
+
+                    &:before,
+                    &:after {
+                        @if ($_nav-icon-color-active != $_nav-icon-color) {
+                            background: $_nav-icon-color-active;
+                        }
+                    }
+
+                    &:before {
+                        top: 0;
+                        transform: rotate(45deg);
+                        -ms-transform: rotate(45deg);
+                    }
+
+                    &:after {
+                        bottom: 0;
+                        transform: rotate(-45deg);
+                        -ms-transform: rotate(-45deg);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Container
+nav {
+    position: fixed;
+    z-index: $_nav-z-index;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 $_nav-bar-padding;
+    background: $_nav-bar-background;
+
+    // Auto-hide
+    @if $_nav-bar-autohide == true {
+        > *:not(#{$_nav-elm}) {
+            display: none;
+        }
+    }
+    @else {
+        height: $_nav-bar-height;
+    }
+
+    // Vertical centering element
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        width: 0;
+        margin-left: -0.25em;
+        vertical-align: middle;
+    }
+
+    // Visual Overlay
+    &:after {
+        content: '';
+        visibility: hidden;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background: $_nav-overlay-color;
+        opacity: 0;
+        transition-property: opacity, visibility;
+        transition-duration: $_nav-transition-duration;
+        will-change: opacity, visibility;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    // Vertically centered descendants
+    > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    // Drawer
+    > #{$_nav-elm} {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        #{$_nav-location}: 0 - $_nav-drawer-width;
+        overflow: auto;
+        height: 100vh;
+        width: $_nav-drawer-width;
+        background: $_nav-bar-background;
+        text-align: center;
+        transition: transform;
+        transition-duration: $_nav-transition-duration;
+        will-change: transform;
+
+        > * {
+            display: block;
+            margin-top: 2em;
+
+            @if $_nav-label-autohide != true {
+                &:first-child {
+                    margin-top: $_nav-bar-height;
+                }
+            }
+        }
+
+        a {
+            display: inline-block;
+        }
+    }
+
+    // Active State
+    input##{$_nav-id}:checked ~ & {
+        // Drawer
+        > #{$_nav-elm} {
+            transform: if($_nav-location == left, translateX($_nav-drawer-width), translateX(0 - $_nav-drawer-width));
+            -ms-transform: if($_nav-location == left, translateX($_nav-drawer-width), translateX(0 - $_nav-drawer-width));
+        }
+
+        // Visual Overlay
+        &:after {
+            visibility: visible;
+            opacity: $_nav-overlay-opacity;
+        }
+    }
+}
+
+
+// Nav Bar
+// -----------------------------------------------------------------------------
+@media (min-width: $_nav-drawer-breakpoint) {
+    // Toggle overlay
+    input##{$_nav-id} {
+        display: none;
+
+        // Active State
+        &:checked {
+            // Disable blur
+            @if $_nav-drawer-blur == true {
+                & ~ *,
+                & ~ nav > * {
+                    filter: unset !important;
+                    filter: progid:DXImageTransform.Microsoft.Blur(enabled='false') !important;
+                }
+            }
+        }
+    }
+
+    // Toggle Icon & Label
+    label[for="#{$_nav-id}"] {
+        display: none;
+    }
+
+    // Container
+    nav {
+        // Auto-hide
+        @if $_nav-bar-autohide == true {
+            height: $_nav-bar-height;
+
+            > *:not(#{$_nav-elm}) {
+                display: inline-block;
+            }
+        }
+
+        // Bar
+        > #{$_nav-elm} {
+            top: $_nav-bar-height / 2;
+            right: $_nav-bar-padding;
+            height: auto;
+            width: auto;
+            margin-top: -0.5em;
+            padding: 0;
+            text-align: right;
+            background: transparent;
+            transition-duration: 0s;
+
+            > * {
+                display: inline-block;
+                margin-top: 0;
+                margin-left: 2em;
+            }
+        }
+
+        // Active State
+        input##{$_nav-id}:checked ~ & {
+            // Bar
+            > #{$_nav-elm} {
+                transform: translateX(0);
+                -ms-transform: translateX(0);
+            }
+
+            // Visual Overlay
+            &:after {
+                display: none;
+            }
+        }
+    }
+}

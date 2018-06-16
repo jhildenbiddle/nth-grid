@@ -1,0 +1,36 @@
+:root {
+    {{!-- Nth-Grid Globals --}}
+    {{#each grids.globals.default}}
+    --nth-grid-{{@key}}: {{this}};
+    {{/each}}
+    {{!-- PostCSS Globals --}}
+    {{#each grids.globals.lang_postcss}}
+    --nth-grid-{{@key}}: {{this}};
+    {{/each}}
+}
+
+{{!-- Styles --}}
+{{#each grids.grids}}
+.postcss .{{@key}} {
+    nth-grid {
+        {{!-- Private globals --}}
+        {{#unless this.props.width}}width: {{@root.grids.globals.private.width}};{{/unless}}
+        {{#unless this.props.order}}order: {{@root.grids.globals.private.order}};{{/unless}}
+        {{#each this.props}}
+        {{@key}}: {{this}};
+        {{/each}}
+    }
+}
+{{!-- Nested --}}
+{{#each grids}}
+.postcss .{{@../key}} .{{@key}} {
+    nth-grid {
+        {{!-- Private globals --}}
+        {{#unless this.props.order}}order: {{@root.grids.globals.private.order}};{{/unless}}
+        {{#each this.props}}
+        {{@key}}: {{this}};
+        {{/each}}
+    }
+}
+{{/each}}
+{{/each}}

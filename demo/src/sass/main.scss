@@ -1,0 +1,230 @@
+// Imports
+// =============================================================================
+@import "nav";
+@import "sass/nth-grid";
+
+
+// Variables
+// =============================================================================
+// Elements
+$body-bg   : #ddd;
+$text-color: #000;
+
+// Vendor
+$vendor-color-map: (
+    compare: #333,
+    less   : #466DA9,
+    postcss: #dd3735,
+    sass   : #c6538c,
+    stylus : #ff6347
+);
+
+// Layout
+$space-fixed: 20px;
+
+// Timing
+$time-fast  : 0.25s;
+$time-medium: 0.5s;
+$time-slow  : 1s;
+
+// Typography
+$line-height       : 1.4;
+
+// Font Families
+$font-family-sans : sans-serif;
+$font-family-serif: serif;
+
+// Font Size
+$font-small  : 11px;
+$font-medium : 16px;
+$font-large  : 20px;
+
+// Components
+// -----------------------------------------------------------------------------
+// Nav
+// $_nav-id                       : 'nav-toggle';
+// $_nav-elm                      : 'ul';
+// $_nav-bar-autohide             : false;
+// $_nav-bar-background           : #fff;
+$_nav-bar-height               : 5rem;
+$_nav-bar-padding              : $space-fixed;
+// $_nav-drawer-blur              : false;
+// $_nav-drawer-breakpoint        : 48rem;
+// $_nav-drawer-width             : 15rem;
+// $_nav-icon-background          : transparent;
+// $_nav-icon-background-active   : $_nav-icon-background;
+// $_nav-icon-border              : 0;
+// $_nav-icon-border-active       : $_nav-icon-border;
+// $_nav-icon-border-radius       : 0;
+// $_nav-icon-border-radius-active: $_nav-icon-border-radius;
+// $_nav-icon-color               : #000;
+// $_nav-icon-color-active        : $_nav-icon-color;
+// $_nav-icon-padding             : 0;
+// $_nav-icon-size                : 24px;
+// $_nav-icon-transition-duration : 0.2s;
+// $_nav-label-autohide           : true;
+// $_nav-location                 : right;
+// $_nav-overlay-color            : #000;
+// $_nav-overlay-opacity          : 0.5;
+// $_nav-transition-duration      : 0.5s;
+// $_nav-z-index                  : 2147483646;
+
+
+// Base
+// =============================================================================
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    padding-top: $_nav-bar-height;
+    background: $body-bg;
+    font-family: $font-family-sans;
+    font-size: $font-medium;
+    font-weight: 300;
+}
+
+label {
+    cursor: pointer;
+}
+
+main {
+    margin-top: 4em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    line-height: 1;
+}
+
+h1 {
+    font-size: $font-large;
+}
+
+h2 {
+    font-size: $font-medium;
+    text-align: center;
+}
+
+
+// Nav (Component)
+// =============================================================================
+nav {
+    a {
+        padding-bottom: 2px;
+        border-bottom: 2px solid transparent;
+        color: #999;
+        text-decoration: none;
+
+        // Grid selection
+        @each $name, $color in $vendor-color-map {
+            .#{$name} &[href="\##{$name}"] {
+                color: $color;
+                border-color: $color;
+            }
+        }
+    }
+}
+
+
+// Grids
+// =============================================================================
+h2 {
+    margin-bottom: 0.75em;
+}
+
+section {
+    display: none;
+
+    & > [class*="grid-"] {
+        margin-bottom: 2em;
+    }
+}
+
+// Show section when body class matches
+@each $name, $color in $vendor-color-map {
+    .#{$name} section.#{$name} {
+        display: block;
+    }
+}
+
+// All Grids
+// -----------------------------------------------------------------------------
+[class*="grid-"] {
+    // Responsive images in grid containers
+    img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    // All columns
+    > * {
+        color: #fff;
+        line-height: 2.5;
+        text-align: center;
+
+        // Column content
+        p {
+            margin: 1em;
+            text-align: left;
+            line-height: $line-height;
+        }
+    }
+
+    // Grid colors
+    @each $name, $color in $vendor-color-map {
+        section.#{$name} &,
+        section.#{$name} & & {
+            background-color: desaturate(lighten($color, 20), 5) !important;
+
+            > * {
+                background: $color !important;
+
+                &:before {
+                    color: #fff !important;
+                }
+            }
+        }
+    }
+}
+
+// Compare View
+// -----------------------------------------------------------------------------
+.compare {
+    main {
+        @include nth-grid(
+            $columns: 4,
+            $gutter : 2%
+        );
+
+        h2 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: $body-bg;
+        }
+    }
+
+    section {
+        display: block;
+
+        > [class^="grid-"] {
+            margin-top: 2em;
+
+            ~ [class^="grid-"] {
+                margin-top: 4em;
+            }
+        }
+    }
+}
