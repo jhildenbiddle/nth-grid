@@ -1,0 +1,239 @@
+// Mixin - Icons
+// =============================================================================
+// Credit: Nicolas Gallagher - http://nicolasgallagher.com/pure-css-gui-icons
+
+// =============================================================================
+// Variables
+// =============================================================================
+$_icon-default-primary-color  : #000 !default;
+$_icon-default-secondary-color: #fff !default;
+$_icon-default-scale          : 1 !default;
+
+// =============================================================================
+// Placeholders
+// =============================================================================
+%_icon_props {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+
+    // Single element icons
+    &:empty {
+        padding-left: 28px;
+    }
+
+    &,
+    & + * {
+        vertical-align: middle;
+    }
+
+    &:before,
+    &:after,
+    & *:before,
+    & *:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    & * {
+        display: block;
+        padding-left: 28px;
+        border: 0;
+    }
+
+    & *:before,
+    & *:after {
+        margin:-8px 0 0;
+        background: $_icon-default-primary-color;
+    }
+}
+
+%_icon_shared_triangle {
+    &:before {
+        content: "!";
+        z-index: 2;
+        left: 9px;
+        margin-top: -7px;
+        font-size: 14px;
+    }
+
+    &:after {
+        z-index: 1;
+        margin-top: -10px;
+        border-width: 0 11px 18px;
+        border-style: solid;
+        border-radius: 4px;
+        background: transparent;
+    }
+}
+
+// Create icon classes
+// -------------------------------------------------------------------------
+@mixin create-icon-classes($list, $color-primary: false, $color-secondary: false, $scale: $_icon-default-scale) {
+
+}
+
+// Render icon
+// -------------------------------------------------------------------------
+@mixin icon($name, $color-primary: false, $color-secondary: false, $scale: $_icon-default-scale) {
+    @extend %_icon_props;
+
+    @if $name == add {
+        &:before {
+            z-index: 10;
+            left: 7px;
+            height: 10px;
+            width: 2px;
+            margin-top: -5px;
+            background: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+        }
+
+        & *:before {
+            height: 16px;
+            width: 16px;
+            border-radius: 16px;
+        }
+
+        & *:after {
+            left: 3px;
+            height: 2px;
+            width: 10px;
+            margin-top: -1px;
+            background: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+        }
+    }
+    @else if $name == clock {
+        & *:before,
+        & *:after {
+            left: 2px;
+            height: 13px;
+            width: 13px;
+            margin-top: -8px;
+            border: 2px solid if($color-primary, $color-primary, $_icon-default-primary-color);
+            background: transparent;
+        }
+
+        & *:before {
+            border-radius: 18px;
+        }
+
+        & *:after {
+            left: 10px;
+            height: 5px;
+            width: 4px;
+            margin-top: -5px;
+            border-width: 0 0 2px 2px;
+            background: transparent;
+        }
+    }
+    @else if $name == delete {
+        &:before {
+            z-index: 10;
+            left: 7px;
+            height: 10px;
+            width: 2px;
+            margin-top: -5px;
+            background: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+            transform: rotate(45deg);
+        }
+
+        & *:before {
+            height: 16px;
+            width: 16px;
+            border-radius: 16px;
+        }
+
+        & *:after {
+            left: 3px;
+            height: 2px;
+            width: 10px;
+            margin-top: -1px;
+            background: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+            transform: rotate(45deg);
+        }
+    }
+    @else if $name == error {
+        @extend %_icon_shared_triangle;
+
+        &:before {
+            color: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+        }
+
+        &:after {
+            border-color: if($color-primary, $color-primary, $_icon-default-primary-color) transparent;
+        }
+    }
+    @else if $name == info {
+        &:before {
+            content: "i";
+            left: 3px;
+            height: 16px;
+            width: 16px;
+            margin-top: -8px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            color: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+            background: if($color-primary, $color-primary, $_icon-default-primary-color);
+        }
+    }
+    @else if $name == remove {
+        & *:before {
+            height: 16px;
+            width: 16px;
+            border-radius: 16px;
+        }
+
+        & *:after {
+            left: 3px;
+            height: 2px;
+            width: 10px;
+            margin-top: -1px;
+            background: if($color-primary, $color-primary, $_icon-default-primary-color);
+        }
+    }
+    @else if $name == success {
+        &:before {
+            left: 3px;
+            height: 16px;
+            width: 16px;
+            margin-top: -8px;
+            border-radius: 16px;
+            background: if($color-primary, $color-primary, $_icon-default-primary-color);
+        }
+
+        &:after {
+            left: 8px;
+            height: 8px;
+            width: 3px;
+            margin-top: -6px;
+            border-width: 0 2px 2px 0;
+            border-style: solid;
+            border-color: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+            transform: rotate(35deg);
+            -ms-transform: rotate(35deg);
+        }
+    }
+    @else if $name == warning {
+        @extend %_icon_shared_triangle;
+
+        &:before {
+            color: if($color-secondary, $color-secondary, $_icon-default-secondary-color);
+        }
+
+        &:after {
+            border-color: if($color-primary, $color-primary, $_icon-default-primary-color) transparent;
+        }
+    }
+    @else {
+        @warn '@mixin icon: Unrecognized $name passed ('#{$name}')';
+    }
+}

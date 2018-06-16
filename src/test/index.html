@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="John Hildenbiddle">
+    <meta name="description" content="Nth-Grid is a lightweight and semantic CSS grid system available for Less, PostCSS, Sass and Stylus. The purpose of Nth-Grid is to provide a versatile grid-based layout system that balances simplicity and flexibility while addressing commonly criticized aspects of other grid systems.">
+    <meta name="keywords" content="css, flexbox, grid, framework, html, layout, legacy, less, mixin, plugin, postcss, postcss-plugin, sass, scss, semantic, stylus">
+    <title>Nth-Grid</title>
+    <!-- Facebook -->
+    <meta property="og:site_name" content="Nth-Grid">
+    <meta property="og:url" content="http://nth-grid.com/">
+    <meta property="og:title" content="Nth-Grid">
+    <meta property="og:description" content="A versatile, lightweight and semantic CSS grid system for Less, PostCSS, Sass and Stylus.">
+    <meta property="og:image" content="http://nth-grid.com/assets/images/preview-facebook.png?1">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@jhildenbiddle">
+    <meta name="twitter:title" content="Nth-Grid">
+    <meta name="twitter:description" ccontent="A versatile, lightweight and semantic CSS grid system for Less, PostCSS, Sass and Stylus.">
+    <meta name="twitter:image" content="http://nth-grid.com/assets/images/preview-twitter.png?1">
+    <!-- Stylesheets -->
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="assets/css/legacy.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <!--[if gte IE 9]>  <!-- -->
+    <!-- Nav -->
+    <input type="checkbox" id="nav-toggle" autocomplete="off">
+    <label for="nav-toggle">
+        <span>menu</span>
+        <i><span></span></i>
+    </label>
+    <nav>
+        <a class="logo" href="#splash">
+            <img class="logo" src="assets/images/logo-nthgrid-horizontal.png" srcset="assets/images/logo-nthgrid-horizontal.svg 1x" alt="Nth-Grid Logo">
+        </a>
+        <ul>
+            <li><a href="#about">Why Nth-Grid?</a></li>
+            <li><a href="#builder">Grid Builder</a></li>
+            <li><a href="#docs">Documentation</a></li>
+            <li><a href="//github.com/jhildenbiddle/nth-grid">Github</a></li>
+        </ul>
+    </nav>
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+    <div class="banner info">
+        <i><span></span></i>
+        <p>
+            <strong>Legacy Support:</strong>
+            You are viewing this site with a legacy browser. Nth-Grid provides
+            support for legacy browers, but this site has been designed with
+            modern browsers in mind. Please visit the Github repo for more
+            information.
+        </p>
+    </div>
+    <![endif]-->
+
+    <main>
+
+        <!-- Splash -->
+        <section id="splash">
+            <div class="center">
+                <img class="logo" src="assets/images/logo-nthgrid-vertical.png" srcset="assets/images/logo-nthgrid-vertical.svg 1x" alt="Nth-Grid Logo">
+                <p>
+                    Nth-Grid is a lightweight and semantic CSS grid system
+                    available for
+                    <a href="http://lesscss.org/">Less</a>,
+                    <a href="https://github.com/postcss/postcss">PostCSS</a>,
+                    <a href="http://sass-lang.com/">Sass</a> and
+                    <a href="http://stylus-lang.com/">Stylus</a>.
+                    The purpose of Nth-Grid is to provide a versatile grid-based
+                    layout system that balances simplicity and flexibility while
+                    addressing commonly criticized aspects of other grid
+                    systems.
+                </p>
+                <!--[if gte IE 9]>  <!-- -->
+                <ul>
+                    <li><a href="#about">Why Nth-Grid?</a></li>
+                    <li><a href="#builder">Grid Builder</a></li>
+                    <li><a href="#docs">Documentation</a></li>
+                </ul>
+                <![endif]-->
+                <a href="//github.com/jhildenbiddle/nth-grid" class="button">View on Github</a>
+            </div>
+        </section>
+
+        <!--[if gte IE 9]>  <!-- -->
+
+        <!-- Why Nth-Grid? -->
+        <section id="about">
+            <header>
+                <h1>Why Nth-Grid?</h1>
+                <p>There are many CSS frameworks and grid systems to choose
+                from, each with their own features, build requirements and grid
+                syntax. Nth-Grid stands out in this crowded field by providing
+                all of the features expected of a modern CSS grid system,
+                introducing new features that are unique to Nth-Grid, and
+                simplifying grid concepts and implementation.</p>
+            </header>
+            <ul>
+                <li>
+                    <h2>Custom grids without limitations</h2>
+                    <p>Nth-Grid provides a level of flexibility that no other
+                    grid system offers: multiple custom grids on the same page,
+                    fixed and fluid columns in the same grid, fluid grids with
+                    fixed gutters, multi-row grids, nested grids, column
+                    reordering, equal height columns, vertically-aligned
+                    columns, RTL support, and on-the-fly grid changes for  your
+                    responsive layouts.</p>
+                    <div class="frame-app browser">
+                        <div class="top">
+                            <span class="buttons"></span>
+                        </div>
+                        <div class="content">
+                            <div class="grid1">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="grid2">
+                                <div></div>
+                                <div>
+                                    <div class="grid2-1">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid3">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2>Support for modern and legacy browsers</h2>
+                    <p>Most grid systems have abandoned support for legacy
+                    browsers, leaving projects that require legacy support with
+                    a limited selection of grid systems to choose from. Nth-Grid
+                    supports a variety of grid layouts that are compatible with
+                    legacy browsers and enhanced functionality for modern
+                    browsers that support the latest CSS features.</p>
+                    <div class="support">
+                        <div><img src="assets/images/logo-chrome.png" srcset="assets/images/logo-chrome.svg 1x" alt="Chrome Logo"></div>
+                        <div>
+                            Chrome
+                            <div class="chrome">
+                                <div title="2006-2008: The time before Chrome"></div>
+                                <div class="support-good" title="Most features except calc-based grids and vertically-aligned columns (requires calc and flexbox support)">1-20</div>
+                                <div class="support-best" title="All features">21+</div>
+                            </div>
+                        </div>
+                        <div><img src="assets/images/logo-firefox.png" srcset="assets/images/logo-firefox@2x.png 2x" alt="Firefox Logo"></div>
+                        <div>
+                            Firefox
+                            <div class="firefox">
+                                <div class="support-good" title="Most features except calc-based grids and vertically-aligned columns (requires calc and flexbox support)">1-3</div>
+                                <div class="support-better" title="All features except vertically-aligned columns (requires flexbox support)">4-27</div>
+                                <div class="support-best" title="All features">28+</div>
+                            </div>
+                        </div>
+                        <div><img src="assets/images/logo-ie.png" srcset="assets/images/logo-ie.svg 1x" alt="Internet Explorer Logo"></div>
+                        <div>
+                            Internet Explorer
+                            <div class="ie">
+                                <div class="support-good" title="Most features except calc-based grids and vertically-aligned columns (requires calc and flexbox support)">7-8</div>
+                                <div class="support-better dateline" title="All features except vertically-aligned columns (requires flexbox support)">9</div>
+                                <div class="support-best" title="All features">10+</div>
+                            </div>
+                        </div>
+                        <div><img src="assets/images/logo-safari.png" srcset="assets/images/logo-safari@2x.png 2x" alt="Safari Logo"></div>
+                        <div>
+                            Safari
+                            <div class="safari">
+                                <div class="support-good" title="Most features except calc-based grids and vertically-aligned columns (requires calc and flexbox support)">1-2</div>
+                                <div class="support-better" title="All features except vertically-aligned columns (requires flexbox support)">3-6</div>
+                                <div class="support-best" title="All features">6.1+</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2>Semantic grids without CSS classes</h2>
+                    <p>Other grid systems require adding CSS classes to your
+                    HTML markup for containers, rows, columns, reordering,  nesting,
+                    clearing floats, responsive breakpoints, etc. The end result
+                    is markup littered with grid-specific CSS classes, adding
+                    unnecessary bloat and making changes a time-consuming
+                    challenge. Nth-Grid keeps your markup clean and the CSS for
+                    your grid-based layouts where it belongs: in your CSS.</p>
+                    <div class="frame-app editor">
+                        <div class="top">
+                            <span class="buttons"></span>
+                        </div>
+                        <div class="content">
+                            <pre><code class="language-html">&lt;!-- My 3 column grid --&gt;&#10;&lt;main&gt;&#10;    &lt;div&gt;First column&lt;/div&gt;&#10;    &lt;div&gt;Second column&lt;/div&gt;&#10;    &lt;div&gt;Third column&lt;/div&gt;&#10;&lt;/main&gt;&#10;&#10;</code></pre>
+                            <div class="lang">
+                                <span class="active">HTML</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2>Native support for Less, Sass, Stylus &amp; PostCSS</h2>
+                    <p>The flexibility to work with the languages, frameworks,
+                    applications and command-line tools you are already familiar
+                    with provides the fastest integration with the smallest
+                    learning curve possible. This versatility also allows for
+                    adoption of a single grid system across multiple projects:
+                    create grid layouts using Less.js in the browser, Sass with
+                    Ruby, Stylus with CodeKit, or PostCSS with Node.js and
+                    Gulp. The choice is yours.</p>
+                    <div class="frame-app editor">
+                        <div class="top">
+                            <span class="buttons"></span>
+                        </div>
+                        <div class="content">
+                            <input type="radio" name="tab-lang" id="tab-lang-less">
+                            <pre class="less"><code class="language-less">// My 3 column grid (Less)&#10;main {&#10;    .nth-grid(&#10;        @columns: 3,&#10;        @gutter: 1%&#10;    );&#10;}</code></pre>
+                            <input type="radio" name="tab-lang" id="tab-lang-postcss">
+                            <pre class="postcss"><code class="language-css">/* My 3 column grid (PostCSS) */&#10;main {&#10;    nth-grid(&#10;        columns: 3;&#10;        gutter: 1%;&#10;    );&#10;}</code></pre>
+                            <input type="radio" name="tab-lang" id="tab-lang-sass" checked>
+                            <pre class="sass"><code class="language-scss">// My 3 column grid (Sass)&#10;main {&#10;    @include nth-grid(&#10;        $columns: 3,&#10;        $gutter: 1%&#10;    );&#10;}</code></pre>
+                            <input type="radio" name="tab-lang" id="tab-lang-stylus">
+                            <pre class="stylus"><code class="language-stylus">// My 3 column grid (Stylus)&#10;main&#10;    .nth-grid(&#10;        $columns: 3&#10;        $gutter: 1%&#10;    )&#10;&#10;</code></pre>
+                            <div class="lang">
+                                <label for="tab-lang-less">Less</label>
+                                <label for="tab-lang-postcss">PostCSS</label>
+                                <label for="tab-lang-sass">Sass</label>
+                                <label for="tab-lang-stylus">Stylus</label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Grid Builder -->
+        <section id="builder">
+            <header>
+                <h1>Grid Builder</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Suscipit enim, ex labore distinctio ratione quibusdam nostrum
+                maxime. Consectetur assumenda inventore neque totam! Nulla,
+                commodi, eum? Aliquid nisi ratione reiciendis sapiente?</p>
+            </header>
+            <div class="grid">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Dignissimos soluta iusto labore sequi ad, cum dicta itaque
+                similique fuga vitae possimus animi quam numquam iste illum
+                accusantium id provident officiis!</p>
+            </div>
+        </section>
+
+        <!-- Documentation -->
+        <section id="docs">
+            <header>
+                <h1>Documentation</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Suscipit enim, ex labore distinctio ratione quibusdam nostrum
+                maxime. Consectetur assumenda inventore neque totam! Nulla,
+                commodi, eum? Aliquid nisi ratione reiciendis sapiente?</p>
+            </header>
+        </section>
+
+        <![endif]-->
+
+    </main>
+
+    <!--[if gte IE 9]>  <!-- -->
+    <!-- JavaScript -->
+        <script src="assets/js/vendor.js"></script>
+        <script src="assets/js/main.js"></script>
+    <![endif]-->
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+// Components - Section Header
+// =============================================================================
+section {
+    > header {
+        padding: $fixed-space-v $fluid-space-h;
+        background: #7c48c3;
+        background-image: linear-gradient(to bottom right, lighten(#3023ae, 10%), lighten(#c86dd7, 10%));
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#3023ae', EndColorStr='#c86dd7', GradientType='1')";
+        color: #fff;
+
+        p {
+            margin: 1em 0 0 0;
+        }
+
+        @media (min-width: 48em) {
+            padding: $fixed-space-v $fixed-space-h;
+
+            @include nth-grid(
+                $columns: 1 3
+            );
+        }
+    }
+}

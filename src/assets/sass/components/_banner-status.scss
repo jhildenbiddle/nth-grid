@@ -1,0 +1,86 @@
+// Components - Banner
+// =============================================================================
+$_error-dark   : #f44336 !default; // Red 500
+$_error-light  : #ffebee !default; // Red 50
+$_info-dark    : #2196f3 !default; // Blue 500
+$_info-light   : #e3f2fd !default; // Blue 50
+$_success-dark : #4caf50 !default; // Green 500
+$_success-light: #e8f5e9 !default; // Green 50
+$_warning-dark : #ffc107 !default; // Amber 500
+$_warning-light: #fff8e1 !default; // Amber 50
+
+// Style
+// =============================================================================
+.banner {
+    overflow: auto;
+    padding: 1em;
+    border: 0;
+    border-top-width: 4px;
+    border-style: solid;
+    border-color: transparent;
+    color: #333;
+
+    // Elements
+    // -------------------------------------------------------------------------
+    p {
+        margin-bottom: 0;
+    }
+
+    > * {
+        margin-left: 35px;
+    }
+
+    > i {
+        top: 1px;
+        float: left;
+    }
+
+    > i + * {
+        margin-top: 0;
+    }
+
+    > strong {
+        display: block;
+        margin-bottom: 0.75em;
+    }
+
+    > *:last-child {
+        margin-bottom: 0;
+    }
+
+    &.error {
+        border-color: $_error-dark;
+        background: $_error-light;
+
+        i {
+            @include icon(error, $_error-dark);
+        }
+    }
+
+    &.info {
+        border-color: $_info-dark;
+        background: $_info-light;
+
+        i {
+            @include icon(info, $_info-dark);
+        }
+    }
+
+    &.success {
+        border-color: $_success-dark;
+        background: $_success-light;
+
+        i {
+            @include icon(success, $_success-dark);
+        }
+    }
+
+    &.warning {
+        border-color: $_warning-dark;
+        background: $_warning-light;
+
+        i {
+            @include icon(warning, $_warning-dark);
+        }
+    }
+}

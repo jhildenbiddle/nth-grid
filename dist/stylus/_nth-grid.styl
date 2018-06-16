@@ -1,0 +1,800 @@
+// =============================================================================
+// Nth-Grid 1.0.0
+// =============================================================================
+// Author  : John Hildenbiddle
+// Homepage: https://github.com/jhildenbiddle/nth-grid
+// License : MIT
+
+
+// =============================================================================
+// Global Options
+// =============================================================================
+// Layout
+$nth-grid-columns                ?= 1
+$nth-grid-gutter                 ?= 0
+$nth-grid-margin                 ?= 0
+$nth-grid-center                 ?= true
+$nth-grid-eqheight               ?= false
+$nth-grid-valign                 ?= false
+$nth-grid-direction              ?= ltr
+$nth-grid-legacy                 ?= false
+
+// Debug
+$nth-grid-debug                  ?= false
+$nth-grid-debug-background-color ?= black
+$nth-grid-debug-text-color       ?= #ccc
+
+// Overlay
+$nth-grid-overlay                ?= false
+$nth-grid-overlay-column-color   ?= #7c48c3
+$nth-grid-overlay-margin-color   ?= #dabfff
+$nth-grid-overlay-text-color     ?= white
+
+// Compilation
+$nth-grid-rem-base               ?= 16
+$nth-grid-warnings               ?= true
+
+
+// =============================================================================
+// Functions (Private)
+// =============================================================================
+// Concatenate items and lists
+_nthConcat($args...)
+    $list = ()
+    for $item in $args
+        if length($item) > 1
+            for $val in $item
+                push($list, $val)
+        else
+            push($list, $item)
+
+    return $list
+
+/// Converts list to string with an (optional) separator ignoring empty strings
+_nthJoinToString($list, $separator = '')
+    $str = ''
+    for $item in $list
+        if $item != ''
+            if $str == ''
+                $str += $item
+            else
+                $str += $separator + $item
+
+    return $str
+
+/// Calculates columns offset for source ordering.
+/// Note that IE9 truncates css values after 128 characters. Grid columms
+/// that require an offset using a calc() string longer than this will
+/// not render properly.
+_nthOffset($column, $calc, $columns, $gutter-h, $grid-col-width, $order = false)
+    $offset = 0
+
+    // Only columns following the first need offset calculated
+    if $column > 1
+        // Calc() required
+        if $calc
+            // Store sibling ratio column and gutter counts.
+            // Used to generate the shortest possible calc() strings
+            $offset-vals        = ()
+            $sibling-gutters    = 0
+            $sibling-ratio-cols = 0
+            $sibling-unit-cols  = ()
+
+            // Loop through all preceding columns
+            for $i in 1..($column - 1)
+                // Get sibling values from $columns-normalized or $order
+                if $order != false
+                    $sibling-val = $columns[$order[$i - 1] - 1]
+                else
+                    $sibling-val = $columns[$i - 1]
+
+                // Gutter
+                if $gutter-h != 0
+                    $sibling-gutters += 1
+
+                // Ratio-based value
+                if unit($sibling-val) == ''
+                    $sibling-ratio-cols += $sibling-val
+                // Unit-based value
+                else
+                    push($sibling-unit-cols, $sibling-val)
+
+            // Ratio offset
+            if $sibling-ratio-cols > 0
+                if $sibling-ratio-cols == 1
+                    push($offset-vals, $grid-col-width)
+                else
+                    push($offset-vals, '((' + $grid-col-width + ') * ' + $sibling-ratio-cols + ')')
+
+            // Unit offset
+            if length($sibling-unit-cols) > 0
+                push($offset-vals, _nthJoinToString($sibling-unit-cols, ' + '))
+
+            // Gutter offset
+            if $sibling-gutters > 0
+                if $sibling-gutters == 1
+                    push($offset-vals, $gutter-h)
+                else
+                    push($offset-vals, '(' + $gutter-h + ' * ' + $sibling-gutters + ')')
+
+            // Final offset
+            $offset = _nthJoinToString($offset-vals, ' + ')
+        // Calc() not required
+        else
+            // Loop through all preceding columns
+            for $i in 1..($column - 1)
+                // Get sibling values from $columns-normalized or $order
+                if $order != false
+                    $sibling-val = $columns[$order[$i - 1] - 1]
+                else
+                    $sibling-val = $columns[$i - 1]
+
+                // Add ratio-based value
+                if unit($sibling-val) == ''
+                    if unit($grid-col-width) == '%'
+                        // Work around for Stylus percentage math bug
+                        // Bug: 0 + 50% = 0% (Stylus assumes "0 plus 50% of 0")
+                        // Fix: 0% + 50% = 50% (when units match, math is correct)
+                        // http://stackoverflow.com/questions/13976079/stylus-adding-percentages
+                        $offset = unit($offset, '%') + ($grid-col-width * $sibling-val) + $gutter-h
+                    else
+                        $offset += ($grid-col-width * $sibling-val) + $gutter-h
+                // Add unit-based value
+                else
+                    if unit($sibling-val) == '%'
+                        // Work around for Stylus percentage math bug
+                        // (See above. Can't add percentage to default $offset value of 0)
+                        $offset = unit($offset, '%') + $sibling-val + $gutter-h
+                    else
+                        $offset += $sibling-val + $gutter-h
+
+    return $offset
+
+// Compares list units, ignoring zero values
+_nthIsUnitMatch($list, $matchUnit = null)
+    // Return false if value os not a valid length (e.g. calc)
+    if typeof($list[0]) != 'unit'
+        return false
+    // Get matching unit from first item if unspecified
+    else if $matchUnit == null
+        $matchUnit = unit($list[0])
+
+    for $item in $list
+        $num = unit($item, '')
+
+        // Verify that value is a number.
+        // Used to detect an item defined using calc()
+        if typeof($item) != 'unit'
+            return false
+        else
+            $unit = unit($item)
+
+            if $num != 0 && $unit != $matchUnit
+                return false
+
+    return true
+
+// Removes unit from value if value is zero
+_nthStripZeroUnit($val)
+    if unit($val, '') == 0
+        return 0
+    else
+        return $val
+
+
+// =============================================================================
+// Mixins (Private)
+// =============================================================================
+// Renders pseudo content as column overlay
+_nth-overlay($content, $overlay = $nth-grid-overlay)
+    if $overlay
+        &:before
+            content: '"%s" !important' % $content
+
+// Converts rem-to-px fallback for legacy browsers
+_nth-rem($property, $val, $legacy = $nth-grid-legacy)
+    if $legacy and typeof($val) == 'unit' and unit($val) == 'rem'
+        {$property}: unit($val * $nth-grid-rem-base, 'px')
+    {$property}: $val
+
+
+// =============================================================================
+// Mixins (Public)
+// =============================================================================
+nth-grid(
+    $columns                 = $nth-grid-columns,
+    $gutter                 = $nth-grid-gutter,
+    $margin                 = $nth-grid-margin,
+    $width                  = 100%,
+    $order                  = false,
+    $center                 = $nth-grid-center,
+    $eqheight               = $nth-grid-eqheight,
+    $valign                 = $nth-grid-valign,
+    $direction              = $nth-grid-direction,
+    $legacy                 = $nth-grid-legacy,
+    $debug                  = $nth-grid-debug,
+    $debug-background-color = $nth-grid-debug-background-color,
+    $debug-text-color       = $nth-grid-debug-text-color,
+    $overlay                = $nth-grid-overlay,
+    $overlay-column-color   = $nth-grid-overlay-column-color,
+    $overlay-margin-color   = $nth-grid-overlay-margin-color,
+    $overlay-text-color     = $nth-grid-overlay-text-color,
+    $warnings               = $nth-grid-warnings)
+
+    // Variables
+    // -------------------------------------------------------------------------
+    // Rounding
+    $nth-rounding = 5
+
+    // Default values
+    $auto-width          = null
+    $calc                = null
+    $columns-ratio       = ()
+    $columns-unit        = ()
+    $grid-col-ratio      = 0
+    $grid-col-width      = null
+    $grid-width          = null
+    $order-offsets       = ()
+    $total-columns       = 0
+    $total-ratio-columns = 0
+    $total-unit-columns  = 0
+
+    // Extract values from lists
+    $gutter-h = length($gutter) == 2 ? _nthStripZeroUnit($gutter[1]) : _nthStripZeroUnit($gutter)
+    $gutter-v = length($gutter) == 2 ? _nthStripZeroUnit($gutter[0]) : _nthStripZeroUnit($gutter)
+    $margin-h = length($margin) == 2 ? _nthStripZeroUnit($margin[1]) : _nthStripZeroUnit($margin)
+    $margin-v = length($margin) == 2 ? _nthStripZeroUnit($margin[0]) : _nthStripZeroUnit($margin)
+
+    // Direction
+    $dir-left = $direction == rtl ? right : left
+    $dir-right = $direction == rtl ? left : right
+
+    // Store selector for warnings
+    $selector = selector()
+
+    // Ratio- and unit-based column lists
+    for $col in $columns
+        if unit($col) == ''
+            push($columns-ratio, $col)
+        else
+            push($columns-unit, $col)
+
+    // Total column count
+    $total-ratio-columns = length($columns-ratio) == 1 ? $columns-ratio[0] : length($columns-ratio)
+    $total-unit-columns  = length($columns-unit)
+    $total-columns       = $total-ratio-columns + $total-unit-columns
+
+    // Grid ratio
+    $grid-col-ratio = $total-ratio-columns == 1 ? $total-ratio-columns : sum($columns-ratio)
+
+    // Grid checks
+    $grid-units    = _nthConcat($columns-unit, $gutter, $margin)
+    $isMatched     = _nthIsUnitMatch(_nthConcat($width, $grid-units))
+    $isMatchedGrid = $total-ratio-columns == 0 && _nthIsUnitMatch($grid-units) ? true : false
+    $isPercentGrid = _nthIsUnitMatch($grid-units, '%')
+
+    // Calc() required?
+    $calc = ($isMatched || $isMatchedGrid || $isPercentGrid) ? false : true
+
+    // Grid container auto width
+    if $total-ratio-columns == 0
+        // Calc() required
+        if $calc
+            $grid-gutters   = $gutter-h > 0 ? $gutter-h * ($total-columns - 1) : ''
+            $grid-margins   = $margin-h > 0 ? $margin-h * 2 : ''
+            $grid-unit-cols = _nthIsUnitMatch($columns-unit) ? sum($columns-unit) : join(' + ', $columns-unit)
+
+            // Matched gutter & margin units
+            if $gutter-h > 0 && $margin-h > 0 && _nthIsUnitMatch($grid-gutters $grid-margins)
+                $auto-width = '' + $grid-unit-cols + ' + ' + sum($grid-gutters $grid-margins)
+            // Matched column and gutter units
+            else if $gutter-h > 0 && _nthIsUnitMatch($grid-unit-cols $grid-gutters)
+                $auto-width = '' + sum($grid-unit-cols $grid-gutters) + ' + ' + $grid-margins
+            // Matched column and margin units
+            else if $margin-h > 0 && _nthIsUnitMatch($grid-unit-cols $grid-margins)
+                $auto-width = '' + sum($grid-unit-cols $grid-margins) + ' + ' + $grid-gutters
+            // No match
+            else
+                $auto-width = '' + $grid-unit-cols
+
+                // Add gutters
+                if $gutter-h > 0
+                    $auto-width += ' + ' + $grid-gutters
+
+                // Add margins
+                if $margin-h > 0
+                    $auto-width += ' + ' + $grid-margins
+        // Calc() not required
+        else
+            $auto-width = sum($columns-unit)
+            $auto-width = $auto-width + $gutter-h * ($total-columns - 1)
+            $auto-width = $auto-width + $margin-h * 2
+
+    // Ratio grid width - Calc() required
+    // FIX: 99.99% for sub-pixel rendering fix (e.g. IE9, Chrome < 38)
+    if $calc
+        // Single unit-based column
+        if length($columns-unit) == 1
+            $grid-width = '99.99% - ' + $columns-unit
+        // Multiple unit-based columns
+        else if length($columns-unit) > 1
+            // Matched units
+            if _nthIsUnitMatch($columns-unit)
+                $grid-width = '99.99% - ' + sum($columns-unit)
+            // Mixed units
+            else
+                $grid-width = '99.99% - (' + join(' + ', $columns-unit) + ')'
+        // No unit-based columns
+        else
+            $grid-width = 99.99%
+
+    // Ratio grid width - Calc() not required
+    else
+        if $isMatched && unit($width) != '%' && $total-unit-columns > 0
+            $grid-width = $width
+
+            // Subtract unit-based column values from width
+            for $col in $columns-unit
+                $grid-width -= $col
+        else if $isPercentGrid && $total-unit-columns > 0
+            $grid-width = 100%
+
+            // Subtract unit-based column values from width
+            for $col in $columns-unit
+                $grid-width -= $col
+        else
+            $grid-width = 100%
+
+    // Ratio-based column width
+    if $total-ratio-columns > 0
+        // Calc() required
+        if $calc
+            $grid-gutters = $gutter-h * ($total-columns - 1)
+            $grid-margins = $margin-h * 2
+
+            // Matched unit gutter and margin
+            if $gutter-h > 0 && $margin-h > 0 && _nthIsUnitMatch($gutter-h $margin-h)
+                $grid-col-width = '' + $grid-width + ' - ' + sum($grid-gutters $grid-margins)
+            // Matched column and gutter units
+            else if $gutter-h > 0 && _nthIsUnitMatch($grid-width $grid-gutters)
+                $grid-col-width = '' + ($grid-width - $grid-gutters)
+
+                if $grid-margins > 0
+                    $grid-col-width = '' + $grid-col-width + ' - ' + $grid-margins
+            // Matched column and margin units
+            else if $margin-h > 0 && _nthIsUnitMatch($grid-width $grid-margins)
+                $grid-col-width = '' + ($grid-width - $grid-margins)
+
+                if $grid-gutters > 0
+                    $grid-col-width = '' + $grid-col-width + ' - ' + $grid-gutters
+            // Mixed unit gutter and margin
+            else
+                $grid-gutters   = $gutter-h > 0 ? ' - ' + $grid-gutters : ''
+                $grid-margins   = $margin-h > 0 ? ' - ' + $grid-margins : ''
+                $grid-col-width = '' + $grid-width + $grid-gutters + $grid-margins
+
+            // Divide by grid ratio
+            $grid-col-width = '(' + $grid-col-width + ') / ' + $grid-col-ratio
+        // Calc() not required
+        else
+            $grid-gutters = 0
+            $grid-margins = 0
+
+            // Calculate gutters
+            if $gutter-h > 0
+                $grid-gutters = $gutter-h * ($total-columns - 1)
+
+            // Calculate margins
+            if $margin-h > 0
+                $grid-margins = $margin-h * 2
+
+            // Divide by grid ratio
+            $grid-col-width = ($grid-width - $grid-gutters - $grid-margins) / $grid-col-ratio
+    // No ratio-based columns
+    else
+        $grid-col-width = 0
+
+    // Grid Container
+    // -------------------------------------------------------------------------
+    display: block
+
+    if $legacy
+        // IE7 double padding fix
+        *display: inline-block
+
+    if $legacy and $order
+        // IE7 relative position fix
+        *position: relative
+
+    // Box sizing
+    if $total-ratio-columns == 0
+        // Allow for borders when auto-width has been applied
+        box-sizing: content-box
+    else
+        box-sizing: border-box
+
+    // Flexbox
+    if $eqheight || $valign == top || $valign == center || $valign == middle || $valign == bottom
+        display: -webkit-box
+        display: -webkit-flex
+        display: -ms-flexbox
+        display: flex
+        -webkit-flex-wrap: wrap
+        -ms-flex-wrap: wrap
+        flex-wrap: wrap
+
+        // Equal-height columns
+        if $eqheight
+            // Legacy warning
+            if $legacy and $warnings
+                warn('NTH-GRID: "' + $selector + '" requires flexbox support for equal-height columns. This feature is not supported by legacy browsers.')
+
+        // Vertical alignment
+        if not $eqheight
+            // Legacy warning
+            if $legacy and $warnings
+                warn('NTH-GRID: "' + $selector + '" requires flexbox support for vertical alignment. This feature is not supported by legacy browsers.')
+
+            if $valign == top
+                -webkit-box-align: start
+                -webkit-align-items: flex-start
+                -ms-flex-align: start
+                align-items: flex-start
+            else if $valign == center || $valign == middle
+                -webkit-box-align: center
+                -webkit-align-items: center
+                -ms-flex-align: center
+                align-items: center
+            else if $valign == bottom
+                -webkit-box-align: end
+                -webkit-align-items: flex-end
+                -ms-flex-align: end
+                align-items: flex-end
+
+        // Direction
+        if $direction == rtl
+            -webkit-box-orient: horizontal
+            -webkit-box-direction: reverse
+            -webkit-flex-direction: row-reverse
+            -ms-flex-direction: row-reverse
+            flex-direction: row-reverse
+
+    // Width
+    if $total-ratio-columns == 0 and $calc
+        width: 'calc(%s)' % unquote($auto-width)
+    else if $total-ratio-columns == 0
+        _nth-rem(width, $auto-width, $legacy)
+    else if $width != 100%
+        _nth-rem(width, $width, $legacy)
+    else
+        width: auto
+
+    // Centering
+    if $center
+        margin-right: auto
+        margin-left: auto
+    else
+        margin-right: 0
+        margin-left: 0
+
+    // Clearfix
+    &:after
+        content: ''
+        display: table
+        clear: both
+
+    // Grid Columns
+    // -------------------------------------------------------------------------
+    // Legacy warning
+    if $legacy and $warnings
+        warn('NTH-GRID: "' + $selector + '" requires calc() support. This grid will not render properly in legacy browsers.')
+
+    > *
+        display: block
+        box-sizing: border-box
+
+        // Rules & Resets
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // All Columns
+        &:nth-child(1n)
+            float: $dir-left
+            clear: none
+            position: static
+            {$dir-left}: auto
+            margin-{$dir-right}: 0
+
+            // Gutter - Vertical
+            _nth-rem(margin-top, $gutter-v, $legacy)
+
+            // Gutter - Horizontal
+            _nth-rem('margin-' + $dir-left, $gutter-h, $legacy)
+
+            if $legacy
+                // IE7 float fix
+                *display: inline
+                *float: none
+                *vertical-align: top
+                *zoom: 1
+
+        // All columns in first row
+        &:nth-child(-n + {$total-columns})
+            // Margin - Vertical
+            _nth-rem(margin-top, $margin-v, $legacy)
+
+        if $legacy and $margin-h == 0
+            // Last column in each row
+            &:nth-child({$total-columns}n)
+                // IE7 sub-pixel rounding fix
+                *margin-{$dir-right}: -2px
+
+        // First column each row
+        &:nth-child({$total-columns}n + 1)
+            clear: $dir-left
+
+            // Margin - Horizontal
+            _nth-rem('margin-' + $dir-left, $margin-h, $legacy)
+
+        // All columns in last row
+        &:nth-last-child(-n + {$total-columns})
+            // Margin - Vertical
+            // Calc used to target modern browsers because Selectivizr does
+            // not properly match this selector using NWMatcher (it does match
+            // properly with jQuery). Entire row must be targeted to ensure
+            // proper alignment when vertical alignment option is used.
+            if $margin-v == 0
+                margin-bottom: 0
+            else
+                margin-bottom: 'calc(%s)' % $margin-v
+
+        if $legacy
+            // Last child serving as "last row" for selectivir compatibility.
+            // Only one element in the last row is needed for vertical margin
+            // since vertical alignment (via flexbox) is not an issue.
+            &:last-child
+                // Margin - Horizontal
+                _nth-rem(margin-bottom, $margin-v, $legacy)
+
+        // Width: Unit-based column(s) only
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        if length($columns-ratio) == 0
+            for $column-val, $i in $columns
+                &:nth-child({$total-columns}n + {$i + 1})
+                    _nth-rem(width, $column-val, $legacy)
+
+                    // Grid overlay
+                    _nth-overlay($column-val, $overlay)
+
+        // Width: Single ratio-based value
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        else if length($columns-ratio) == 1
+            // Ratio-based column
+            &:nth-child(1n)
+                // Calc() required
+                if $calc
+                    width: 'calc(%s)' % unquote($grid-col-width)
+
+                    // Grid overlay
+                    _nth-overlay(unquote('1/' + $grid-col-ratio + ' (calc)'), $overlay)
+                // Calc() not required
+                else
+                    _nth-rem(width, round($grid-col-width, $nth-rounding), $legacy)
+
+                    // Grid overlay
+                    $round = round($grid-col-width, 2)
+                    _nth-overlay(unquote('1/' + $grid-col-ratio + ' (' + $round + ')'), $overlay)
+
+            // Unit-based column(s)
+            if length($columns-unit) > 0
+                // Get index of ratio-based value
+                for $col, $i in $columns
+                    if $col == $total-ratio-columns
+                        $ratio-col-index = $i
+
+                // Unit-based column(s)
+                for $column-val, $i in $columns
+                    if $column-val != $total-ratio-columns
+                        $nth-col = $i + 1 > $ratio-col-index ? ($i + $total-ratio-columns) : ($i + 1)
+
+                        &:nth-child({$total-columns}n + {$nth-col})
+                            _nth-rem(width, $column-val, $legacy)
+
+                            // Grid overlay
+                            _nth-overlay($column-val, $overlay)
+
+        // Width: Mutiple ratio-based values
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        else
+            for $column-val, $i in $columns
+                &:nth-child({$total-columns}n + {$i + 1})
+                    // Ratio-based columns
+                    if unit($column-val) == ''
+                        // Calc() required
+                        if $calc
+                            width: 'calc(%s)' % unquote('(' + $grid-col-width + ') * ' + $column-val)
+
+                            // Grid overlay
+                            _nth-overlay(unquote('' + $column-val + '/' + $grid-col-ratio + ' (calc)'), $overlay)
+
+                        // Calc() not required
+                        else
+                            $column-width = $grid-col-width * $column-val
+
+                            _nth-rem(width, round($column-width, $nth-rounding), $legacy)
+
+                            // Grid overlay
+                            $round = round($column-width, 2)
+                            _nth-overlay(unquote('' + $column-val  + '/' + $grid-col-ratio + ' (' + $round + ')'), $overlay)
+
+                    // Unit-based columns
+                    else
+                        _nth-rem(width, $column-val, $legacy)
+
+                        // Grid overlay
+                        _nth-overlay($column-val, $overlay)
+
+        // Order
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // Invalid order
+        if $order and length($order) > $total-columns
+            warn('NTH-GRID: "' + $selector + '" order (' + $order + ') exceeds total column count of ' + $total-columns + ' for columns (' + $columns + '). Order not applied.')
+        // Valid order
+        else if $order
+            // Expand single ratio-value column to multi-column
+            // Ex: nth-grid(6) /* $columns-normalized: 1 1 1 1 1 1 */
+            $columns-normalized = ()
+
+            if length($columns-ratio) == 1
+                for $val in $columns
+                    // Single ratio-based value
+                    if unit($val) == ''
+                        for $i in (1..$val)
+                            push($columns-normalized, 1)
+                    // Other values
+                    else
+                        push($columns-normalized, $val)
+            else
+                $columns-normalized = $columns
+
+            // Loop through the order
+            for $i in 1..length($order)
+                $order-val = $order[$i - 1]
+
+                // Get offset of the order column value in the original column layout
+                // Ex: Column 3 offset in original $columns
+                $columns-offset = _nthOffset(
+                    $column: $order-val,
+                    $calc: $calc,
+                    $columns: $columns-normalized,
+                    $gutter-h: $gutter-h,
+                    $grid-col-width: $grid-col-width
+                )
+                // Get offsets of the order column number in the ordered column layout
+                // Ex: Column 3 offset in $order 3 2 1 (1st position)
+                $order-offset = _nthOffset(
+                    $column: $i,
+                    $calc: $calc,
+                    $columns: $columns-normalized,
+                    $gutter-h: $gutter-h,
+                    $grid-col-width: $grid-col-width,
+                    $order: $order
+                )
+
+                // Set final offset value
+                if $order-offset != $columns-offset
+                    // Calc() required
+                    if $calc
+                        if $order-offset == 0
+                            $offset = '0px - (' + $columns-offset + ')'
+                        else if $columns-offset == 0
+                            $offset = $order-offset
+                        else
+                            $offset = '(' + $order-offset + ') - (' + $columns-offset + ')'
+                    // Calc() not required
+                    else
+                        // Work around for Stylus percentage math bug
+                        // Bug: 0 - 50% = 0% (Stylus assumes "0 minus 50% of 0")
+                        // Fix: 0% - 50% = -50% (when units match, math is correct)
+                        if unit($columns-offset) == '%' or unit($order-offset) == '%' {
+                            $offset = unit(unit($order-offset, '') - unit($columns-offset, ''), '%')
+                        }
+                        else {
+                            $offset = $order-offset - $columns-offset
+                        }
+                else
+                    $offset = false
+
+                // warn('$offset: ' + $offset + ', $order-offset: ' + $order-offset + ', $columns-offset: ' + $columns-offset)
+
+                // Add offest to list
+                push($order-offsets, $offset)
+
+                // Apply offset if needed
+                if $offset
+                    &:nth-child({$total-columns}n + {$order-val})
+                        position: relative
+
+                        if $calc
+                            {$dir-left}: 'calc(%s)' % unquote($offset)
+                        else
+                            _nth-rem($dir-left, round($offset, $nth-rounding))
+
+    // Overlay
+    // -------------------------------------------------------------------------
+    if $overlay
+        $overlay-font-size = 14px
+
+        /* Nth-Grid Overlay */
+        position: relative
+        visibility: visible !important
+        background: $overlay-margin-color !important
+
+        > *
+            /* Nth-Grid Overlay */
+            position: relative !important
+            min-height: ($overlay-font-size * 3) !important
+            background: $overlay-column-color !important
+            color: transparent !important
+
+            &:before
+                /* Nth-Grid Overlay */
+                position: absolute !important
+                top: 0 !important
+                bottom: 0 !important
+                left: 0 !important
+                right: 0 !important
+                height: $overlay-font-size !important
+                width: 100% !important
+                margin: auto !important
+                color: $overlay-text-color !important
+                font-size: $overlay-font-size !important
+                text-align: center !important
+                line-height: 1 !important
+
+            > *
+                /* Nth-Grid Overlay */
+                visibility: hidden !important
+
+    // Debug
+    // -------------------------------------------------------------------------
+    if $debug
+        &:before
+            $content-hash = {
+                '$columns            ': $columns,
+                '$gutter             ': $gutter,
+                '$margin             ': $margin,
+                '$width              ': $width,
+                '$order              ': $order,
+                '$center             ': $center,
+                '$eqheight           ': $eqheight,
+                '$legacy             ': '' + $legacy + '\A',
+                '$auto-width         ': $auto-width,
+                '$calc               ': $calc,
+                '$columns-ratio      ': $columns-ratio,
+                '$columns-unit       ': $columns-unit,
+                '$grid-col-ratio     ': $grid-col-ratio,
+                '$grid-col-width     ': $grid-col-width,
+                '$grid-width         ': $grid-width,
+                '$order-offsets      ': $order-offsets,
+                '$total-columns      ': $total-columns,
+                '$total-ratio-columns': $total-ratio-columns,
+                '$total-unit-columns ': $total-unit-columns
+            }
+            $content-str = ''
+
+            // Iterate over hash key/values to generate content string
+            for $key, $value in $content-hash
+                $content-str += $key + ': ' + $value + '\A'
+
+            /* Nth-Grid Debug */
+            content: $content-str !important
+            display: block !important
+            flex-basis: 100% !important
+            overflow: hidden !important
+            padding: 1em !important
+            background: $debug-background-color !important
+            color: $debug-text-color !important
+            font-family: "Lucida Console", "Consolas", Monaco, monospace !important
+            font-size: 12px !important
+            line-height: 1.4 !important
+            text-align: left !important
+            white-space: pre !important

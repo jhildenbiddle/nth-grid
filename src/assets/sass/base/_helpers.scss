@@ -1,0 +1,38 @@
+// Base - Helpers
+// =============================================================================
+%clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+%no-tap-highlight {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+%vertical-center {
+    &:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        margin-right: -0.25em;
+        vertical-align: middle;
+    }
+
+    > * {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+// Hide element while making it readable for screen readers
+%visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}

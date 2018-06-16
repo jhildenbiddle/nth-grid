@@ -1,0 +1,253 @@
+// Section - Wny Nth-Grid
+// =============================================================================
+#about {
+    > ul {
+        margin: 0;
+        padding: 0;
+
+        > * {
+            padding: $fixed-space-v $fluid-space-h;
+            border-bottom: 1px solid #ccc;
+
+            &:last-child {
+                padding-bottom: $fixed-space-v;
+            }
+        }
+
+        // Tablet
+        @media (min-width: 60em) {
+            @include nth-grid(
+                $columns : 2,
+                $eqheight: true
+            );
+
+            > * {
+                padding: 5%;
+                border: none;
+            }
+
+            > *:nth-child(n+3) {
+                border-top: 1px solid #ccc;
+            }
+
+            > *:nth-child(2n-1) {
+                border-right: 1px solid #ccc;
+            }
+        }
+    }
+
+    li {
+        list-style: none;
+    }
+
+    // Frames
+    // -------------------------------------------------------------------------
+    .frame-app {
+        margin-top: 2em;
+    }
+
+    .browser {
+        @keyframes browser-resize {
+            0%, 100% {
+                width: 100%;
+            }
+            50% {
+                width: 80%;
+            }
+        }
+
+        // width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        will-change: width;
+        animation: browser-resize 2s infinite paused;;
+
+        &:hover {
+            animation-play-state: running;
+        }
+
+        .content {
+            padding: 1.5em;
+        }
+
+        .grid1 {
+            @include nth-grid(
+                $columns: 3,
+                $gutter: 2%,
+                $margin: 0 2%,
+                $overlay: true,
+                $overlay-column-color  : #3023ae,
+                $overlay-margin-color  : #c6bfff
+            );
+        }
+
+        .grid2 {
+            @include nth-grid(
+                $columns: 6em 1,
+                $gutter: 10px,
+                $margin: 10px,
+                $eqheight: true,
+                $overlay: true,
+                $overlay-column-color  : #7c48c3,
+                $overlay-margin-color  : #dabfff
+            );
+
+            margin: 0.75em 0;
+        }
+
+        .grid2-1 {
+            @include nth-grid(
+                $columns: 2,
+                $gutter: 3px 10px,
+                $overlay: true,
+                $overlay-column-color  : #c86dd7,
+                $overlay-margin-color  : #f8c7ff
+            );
+        }
+
+        .grid3 {
+            @include nth-grid(
+                $columns: 50px 10% 1 5em 50px,
+                $gutter: 1%,
+                $overlay: true,
+                $overlay-column-color  : #5b8cc3,
+                $overlay-margin-color  : #bfddff
+            );
+        }
+    }
+
+    .editor {
+        %editor-tab-active {
+            border-top: 3px solid #2196f3;
+            color: #fff;
+        }
+
+        %editor-tab-focus {
+            outline: 1px dotted #2196f3;
+            outline-offset: 2px;
+        }
+
+        @include tabs-css(
+            $content-path       : '+ *',
+            $label-path         : '~ .lang',
+            $label-active-extend: '%editor-tab-active',
+            $label-focus-extend : '%editor-tab-focus'
+        );
+
+        // Override Prism.js theme
+        pre {
+            margin: 0;
+            padding: 1.5em;
+            border-radius: 0;
+        }
+
+        .lang {
+            padding: 0 1.5em;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: right;
+            color: #999;
+
+            label,
+            span {
+                display: inline-block;
+                padding: 0.35em 0.5em;
+            }
+
+            span.active {
+                @extend %tab-lang-label-active;
+            }
+        }
+    }
+
+    // Support Chart
+    // -------------------------------------------------------------------------
+    .support {
+        @include nth-grid(
+            $columns: 48px 1,
+            $gutter: 1.5em 20px
+        );
+
+        position: relative;
+        margin-top: 3em;
+
+        .chrome,
+        .firefox,
+        .ie,
+        .safari {
+            margin-top: 0.25em;
+
+            > * {
+                padding-top: 0.5em;
+                border-top: 4px solid #ccc;
+
+                &:hover {
+                    cursor: help;
+                }
+            }
+        }
+
+        .chrome {
+            @include nth-grid(
+                $columns: 2 4 4,
+                $gutter: 4px
+            );
+        }
+
+        .firefox {
+            @include nth-grid(
+                $columns: 3 3 4,
+                $gutter: 4px
+            );
+        }
+
+        .ie {
+            @include nth-grid(
+                $columns: 6 1 3,
+                $gutter: 4px
+            );
+        }
+
+        .safari {
+            @include nth-grid(
+                $columns: 1 6 3,
+                $gutter: 4px
+            );
+        }
+
+        .dateline {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: -1px;
+                border-right: 1px dotted #ccc;
+            }
+
+            &:after {
+                @extend small;
+
+                content: '2006 to present';
+                position: absolute;
+                top: -1.5em;
+                right: 0;
+                color: #999;
+            }
+        }
+
+        .support-good {
+            border-color: #4db849;
+        }
+
+        .support-better {
+            border-color: $nthgrid-light;
+        }
+
+        .support-best {
+            border-color: $nthgrid-dark;
+            border-image: linear-gradient(to right, $nthgrid-light, $nthgrid-dark);
+            border-image-width: 4px 0 0 0;
+            border-image-slice: 1;
+        }
+    }
+}

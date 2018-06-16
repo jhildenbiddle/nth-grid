@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="John Hildenbiddle">
+    <meta name="description" content="Nth-Grid client-side CSS compilation test page using Less.js">
+    <title>Nth-Grid - Less.js Test</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet/less" href="assets/less/grids-less.less">
+
+    <!--[if lte IE 8]>
+    <script src="assets/js/vendor-legacy.js"></script>
+    <![endif]-->
+
+    <!--[if gte IE 9]>  <!-- -->
+    <script src="assets/js/vendor/less.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="less">
+    <nav>
+        <h1>Nth-Grid - Less.js Test</h1>
+    </nav>
+
+    <!--[if lte IE 8]>
+    <div class="banner warning">
+        <i><span></span></i>
+        <p>
+            Less.js does not support client-side rendering in legacy browsers
+        </p>
+    </div>
+    <![endif]-->
+
+    <!--[if gte IE 9]>  <!-- -->
+    <div class="banner info">
+        <i><span></span></i>
+        <p>
+            <strong>Note:</strong>
+            Less.js will not process .less files if this page is viewed
+            locally or served using the Nth-Grid dev server.
+        </p>
+    </div>
+    <![endif]-->
+
+    <main>
+        <section class="less">
+            {{> grids-html @root}}
+        </section>
+    </main>
+</body>
+</html>

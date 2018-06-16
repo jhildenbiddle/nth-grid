@@ -1,0 +1,87 @@
+// Components - Frame: Application
+// =============================================================================
+$_frame-editor-background: #272822 !default;
+$_frame-editor-text      : #fff !default;
+
+.frame-app {
+    border-radius: 6px;
+    box-shadow: 0 3px 12px -1px rgba(0, 0, 0, 0.2);
+
+    .top {
+        position: relative;
+        height: 24px;
+        background: #ccc;
+        border: 1px solid #c7c7c7;
+        border-bottom-color: #969696;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.8);
+        background-image: linear-gradient(to bottom, #ebebeb, #d9d9d9);
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ebebeb', EndColorStr='#d9d9d9')";
+
+        .buttons {
+            display: inline-block;
+
+            &, &:before, &:after {
+                position: absolute;
+                height: 12px;
+                width: 12px;
+                border-size: 1px solid #999;
+                border-radius: 50%;
+            }
+
+            top: 50%;
+            left: 34px;
+            margin-top: -6px;
+            border: 1px solid #e1a120;
+            background: #ffbd30;
+
+            &:before, &:after {
+                content: '';
+                top: -1px;
+            }
+
+            &:before {
+                left: -21px;
+                border: 1px solid #e14440;
+                background: #ff5f57;
+            }
+
+            &:after {
+                left: 19px;
+                border: 1px solid #22ab29;
+                background: #27ca41;
+            }
+        }
+    }
+
+    .content {
+        border: 1px solid #c7c7c7;
+        border-top: none;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    // Web browser
+    &.browser {
+        .top {
+            height: 36px;
+        }
+    }
+
+    // Code editor
+    &.editor {
+        background: $_frame-editor-background;
+        color: $_frame-editor-text;
+
+        pre {
+            margin: 0;
+            padding: 1.5em;
+            border-radius: 0;
+        }
+
+        .content {
+            border-color: $_frame-editor-background;
+        }
+    }
+}

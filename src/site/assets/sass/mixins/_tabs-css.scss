@@ -1,0 +1,107 @@
+// Mixin - CSS Tabs
+// Author: John Hildenbiddle
+// =============================================================================
+
+// Variables
+// -----------------------------------------------------------------------------
+$_tabs-css-count                : 4     !default; // Total tab count
+$_tabs-css-content-path         : '+ *' !default; // From <input> element
+$_tabs-css-label-path           : '~'   !default; // From <input> element
+$_tabs-css-content-active-extend: null  !default; // Active state extend name
+$_tabs-css-content-active-map   : ()    !default; // Active state rule map
+$_tabs-css-label-active-extend  : null  !default; // Active state extend name
+$_tabs-css-label-active-map     : ()    !default; // Active state rule map
+$_tabs-css-label-focus-extend   : null  !default; // Focus state extend name
+$_tabs-css-label-focus-map      : ()    !default; // Focus state rule map
+
+// Mixin
+// -----------------------------------------------------------------------------
+@mixin tabs-css(
+    $count                : $_tabs-css-count,
+    $content-path         : $_tabs-css-content-path,
+    $label-path           : $_tabs-css-label-path,
+    $content-active-extend: $_tabs-css-content-active-extend,
+    $content-active-map   : $_tabs-css-content-active-map,
+    $label-active-extend  : $_tabs-css-label-active-extend,
+    $label-active-map     : $_tabs-css-label-active-map,
+    $label-focus-extend   : $_tabs-css-label-focus-extend,
+    $label-focus-map      : $_tabs-css-label-focus-map ) {
+
+    // Vars (internal)
+    $set-content-active: if($content-active-extend != null or $content-active-map != null, true, false);
+    $set-label-active  : if($label-active-extend != null or $label-active-map != null, true, false);
+    $set-label-focus   : if($label-focus-extend != null or $label-focus-map != null, true, false);
+
+    // CSS Tabs
+    input[id^="tab-"] {
+        appearance: none;
+
+        // Visually hidden
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+
+        & #{$content-path} {
+            display: none;
+        }
+
+        &:checked {
+            & #{$content-path} {
+                display: block;
+
+                // Content active state rules
+                @if $set-content-active {
+                    @if $content-active-extend {
+                        @extend #{$content-active-extend};
+                    }
+                    @each $prop, $value in $content-active-map {
+                        #{$prop}: $value;
+                    }
+                }
+            }
+        }
+    }
+
+    // Label active/focus rules
+    @if $set-label-active or $set-label-focus {
+        %_label-active-map {
+            @each $prop, $value in $label-active-map {
+                #{$prop}: $value;
+            }
+        }
+        %_label-focus-map {
+            @each $prop, $value in $label-focus-map {
+                #{$prop}: $value;
+            }
+        }
+
+        @for $i from 1 through $count {
+            input[id^="tab-"]:nth-of-type(#{$i}) {
+                // Label active state rules
+                @if $set-label-active != null {
+                    &:checked #{$label-path} label[for^="tab-"]:nth-of-type(#{$i}) {
+                        @if $label-active-extend {
+                            @extend #{$label-active-extend};
+                        }
+                        @extend %_label-active-map !optional;
+                    }
+                }
+
+                // Label focus state rules
+                @if $set-label-focus != null {
+                    &:focus #{$label-path} label[for^="tab-"]:nth-of-type(#{$i}) {
+                        @if $label-focus-extend {
+                            @extend #{$label-focus-extend};
+                        }
+                        @extend %_label-focus-map !optional;
+                    }
+                }
+            }
+        }
+    }
+}

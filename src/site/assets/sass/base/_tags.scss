@@ -1,0 +1,60 @@
+// Base - Tags
+// =============================================================================
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+
+body {
+    background: $body-bg;
+    color: $text-color-main;
+    scroll-behavior: smooth;
+}
+
+a {
+    position: relative;
+    color: $nthgrid-base;
+    text-decoration: none;
+
+    // Underline
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        width: 100%;
+        border-bottom: 1px dotted lighten($nthgrid-base, 25%);
+    }
+
+    &:focus {
+        outline: 1px dotted $nthgrid-base;
+        outline-offset: 2px;
+    }
+
+    &:hover:before {
+        bottom: -2px;
+        border-bottom: 2px solid $nthgrid-base;
+    }
+}
+
+img {
+    // Remove 3px margin below images
+    display: block;
+}
+
+label {
+    cursor: pointer;
+}
+
+main {
+    section {
+        min-height: 100vh;
+    }
+}
+
+section {
+    position: relative;
+}
+
+select {
+    cursor: pointer;
+}
