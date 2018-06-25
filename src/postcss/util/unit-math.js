@@ -4,6 +4,15 @@ import getNumber from './get-number';
 import getUnit   from './get-unit';
 
 
+// Functions
+// =============================================================================
+// Calculates string as mathematical expression. Used instead of eval to avoid
+// console warning on compilation.
+function stringMath(expression) {
+    return new Function('return ' + expression)();
+}
+
+
 // Exports
 // =============================================================================
 // Allows for basic math on string lengths (numbers with with units)
@@ -38,11 +47,10 @@ export default function(arr, operator) {
     }
 
     // Cleanse operator
-    // operator = operator.trim().replace(/[^\+\-\*\/().\d\s]/g, '');
     operator = operator.trim().replace(/[^+\-*/().\d\s]/g, '');
 
-    // Return result
-    const result = nums.length ? eval(nums.join(operator)).toString().concat(finalUnit) : 0; // jshint ignore:line
+    // Calculate result
+    const result = nums.length ? stringMath(nums.join(operator)).toString().concat(finalUnit) : 0; // jshint ignore:line
 
     // Convert zero to number
     return Number(result) === 0 ? 0 : result;

@@ -40,6 +40,10 @@ function getUnit(value, falseValue) {
     }
 }
 
+function stringMath(expression) {
+    return new Function("return " + expression)();
+}
+
 function unitMath(arr, operator) {
     let finalUnit = "";
     const nums = [];
@@ -59,7 +63,7 @@ function unitMath(arr, operator) {
         nums.push(num);
     }
     operator = operator.trim().replace(/[^+\-*/().\d\s]/g, "");
-    const result = nums.length ? eval(nums.join(operator)).toString().concat(finalUnit) : 0;
+    const result = nums.length ? stringMath(nums.join(operator)).toString().concat(finalUnit) : 0;
     return Number(result) === 0 ? 0 : result;
 }
 
