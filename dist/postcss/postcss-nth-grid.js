@@ -932,12 +932,13 @@ var index = postcss.plugin("postcss-nth-grid", options => {
                     settings[key] = arr.length > 1 ? arr : arr[0];
                 });
                 const grid = new Grid(settings, options);
-                const selectorContainer = nthRule.clone({
+                const selectorContainer = nthRule.cloneAfter({
                     selector: "nth-grid-output"
-                }).removeAll().moveAfter(nthRule);
+                }).removeAll();
                 const siblingContainer = nthRule.clone({
                     selector: "nth-grid-sibling-output"
-                }).removeAll().moveAfter(nthRule.parent);
+                }).removeAll();
+                nthRule.parent.after(siblingContainer);
                 gridContainer(grid, nthSelector, selectorContainer, siblingContainer);
                 gridColumns(grid, nthSelector, selectorContainer, siblingContainer);
                 gridOverlay(grid, nthSelector, selectorContainer, siblingContainer);
@@ -958,7 +959,7 @@ var index = postcss.plugin("postcss-nth-grid", options => {
                 [ selectorContainer, siblingContainer ].forEach(function(container) {
                     container.each(function(node) {
                         node.source = nthRule.source;
-                        node.moveBefore(container);
+                        container.before(node);
                     });
                     container.remove();
                 });

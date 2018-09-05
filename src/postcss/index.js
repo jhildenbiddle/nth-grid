@@ -61,7 +61,7 @@ export default postcss.plugin('postcss-nth-grid', options => {
 
                 // Nth-Grid Variables
                 // -------------------------------------------------------------
-                // Add semicolon to last declarations
+                // Add semicolon to last declaration
                 nthRule.parent.raws.semicolon = true;
 
                 // Loop through nth-grid declaration and update settings
@@ -84,14 +84,14 @@ export default postcss.plugin('postcss-nth-grid', options => {
                 // 'append' instead of 'insert' and ensure new css content is
                 // added in the correct order and respect the position of the
                 // declarations that proceed the nth-grid block.
-                const selectorContainer = nthRule.clone({ selector: 'nth-grid-output' })
-                    .removeAll()
-                    .moveAfter(nthRule);
+                const selectorContainer = nthRule.cloneAfter({ selector: 'nth-grid-output' })
+                    .removeAll();
 
                 // Create placeholder rule for all generated css
                 const siblingContainer = nthRule.clone({ selector: 'nth-grid-sibling-output' })
-                    .removeAll()
-                    .moveAfter(nthRule.parent);
+                    .removeAll();
+
+                nthRule.parent.after(siblingContainer);
 
                 // Nth-Grid CSS
                 // -------------------------------------------------------------
@@ -121,7 +121,7 @@ export default postcss.plugin('postcss-nth-grid', options => {
                         // Set each node's source to the nthRule source
                         node.source = nthRule.source;
                         // Move the node
-                        node.moveBefore(container);
+                        container.before(node);
                     });
                     // Remove the container
                     container.remove();
