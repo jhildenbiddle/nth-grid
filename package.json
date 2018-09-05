@@ -79,7 +79,7 @@
     "build:sass-demo": "node-sass --output-style expanded demo/src/sass -o build/demo --include-path dist",
     "build:sass-grids": "node-sass --output-style expanded build/demo -o build/demo --include-path dist",
     "build:sass-mixin": "cpx './src/**/*.scss' ./dist && replace-in-file ./dist/**/*.scss --configFile ./replace.config.js",
-    "build:sassdoc": "sassdoc ./dist/sass -d ./docs/sassdoc",
+    "build:sassdoc": "sassdoc ./dist/sass -d ./docs/sassdoc -c ./sassdoc.config.json",
     "build:stylus-grids": "stylus build/demo -o build/demo --include dist",
     "build:stylus-mixin": "cpx './src/**/*.styl' ./dist && replace-in-file ./dist/**/*.styl --configFile ./replace.config.js",
     "clean": "rimraf build/* dist/* docs/sassdoc/*",
@@ -98,7 +98,7 @@
     "watch:sass-demo": "nodemon -w demo/src/sass -w dist/sass -e scss -x run-s build:sass-demo",
     "watch:sass-grids": "nodemon -w build/demo -w dist/sass -e scss -x run-s build:sass-grids",
     "watch:sass-mixin": "nodemon -w src/sass -e scss -x run-s build:sass-mixin",
-    "watch:sassdoc": "nodemon -w dist/sass -e scss -x run-s build:sassdoc",
+    "watch:sassdoc": "nodemon -w dist/sass -w sassdoc.config.json -e scss -x run-s build:sassdoc",
     "watch:stylus-grids": "nodemon -w build/demo -w dist/stylus -e styl -x run-s build:stylus-grids",
     "watch:stylus-mixin": "nodemon -w src/stylus -e styl -x run-s build:stylus-mixin"
   }

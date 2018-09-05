@@ -101,6 +101,7 @@ $nth-grid-warnings              : true !default;
 // Functions (Private)
 // =============================================================================
 /// Compares list units, ignoring zero values
+/// @access private
 /// @param {List} $list
 /// @param {String} $matchUnit [unit of first item in $list]
 /// @returns {Boolean}
@@ -139,6 +140,7 @@ $nth-grid-warnings              : true !default;
 }
 
 /// Converts list to string with an (optional) separator ignoring empty strings
+/// @access private
 /// @param {List} $list
 /// @param {String} $separator [none]
 /// @returns {String}
@@ -168,6 +170,7 @@ $nth-grid-warnings              : true !default;
 /// Note that IE9 truncates css values after 128 characters. Grid columms
 /// that require an offset using a calc() string longer than this will
 /// not render properly.
+/// @access private
 /// @param {Number} $column - The column number to process
 /// @param {Boolean} $calc - Calc() required for offset
 /// @param {List} $columns - Grid columns
@@ -278,6 +281,7 @@ $nth-grid-warnings              : true !default;
 }
 
 /// Rounds value to an (optionally) specified number of decimals
+/// @access private
 /// @param {Length | Number} $val
 /// @param {Number} $decimals [2]
 /// @returns {Length | Number}
@@ -295,6 +299,7 @@ $nth-grid-warnings              : true !default;
 }
 
 /// Removes unit from value
+/// @access private
 /// @param {Length} $val
 /// @returns {Number}
 /// @example scss
@@ -304,6 +309,7 @@ $nth-grid-warnings              : true !default;
 }
 
 /// Removes unit from value if value is zero
+/// @access private
 /// @param {Length} $val
 /// @returns {Length | Number}
 /// @example scss
@@ -319,6 +325,7 @@ $nth-grid-warnings              : true !default;
 }
 
 /// Adds all numbers in list
+/// @access private
 /// @param {List} $list
 /// @param {Boolean} $force [false] - Sum even if units do not match
 /// @returns {Length | Number}
@@ -351,6 +358,7 @@ $nth-grid-warnings              : true !default;
 // Mixins (Private)
 // =============================================================================
 /// Renders pseudo content as column overlay
+/// @access private
 /// @param {String} $content - Content to display
 /// @param {Boolean} $overlay [$nth-grid-overlay] - Check for overlay enable/disable
 ///
@@ -367,6 +375,7 @@ $nth-grid-warnings              : true !default;
 }
 
 /// Converts rem-to-px fallback for legacy browsers
+/// @access private
 /// @param {String} $property - CSS property (margin, padding, etc.)
 /// @param {Length} $val - CSS value to process
 /// @param {Boolean} $legacy [$nth-grid-legacy] - Include pixel values for
