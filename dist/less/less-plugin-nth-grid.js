@@ -31,6 +31,9 @@
             return unit;
         }
     }
+    function stringMath(expression) {
+        return new Function("return " + expression)();
+    }
     function unitMath(arr, operator) {
         var finalUnit = "";
         var nums = [];
@@ -49,8 +52,8 @@
             }
             nums.push(num);
         }
-        operator = operator.trim().replace(/[^+\-*/().\d\s]/g, "");
-        var result = nums.length ? eval(nums.join(operator)).toString().concat(finalUnit) : 0;
+        operator = operator.trim().replace(/[^+\-*\/().\d\s]/g, "");
+        var result = nums.length ? stringMath(nums.join(operator)).toString().concat(finalUnit) : 0;
         return Number(result) === 0 ? 0 : result;
     }
     function getOrderOffset(settings, column, order) {
