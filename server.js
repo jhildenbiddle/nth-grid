@@ -33,5 +33,16 @@ browserSync.init({
     serveStatic: [
         './demo/static',
         './dist'
-    ]
+    ],
+    snippetOptions: {
+        // Prevent injection of browser-sync-client.js in IE < 9.
+        // Allows browsersync to serve pages to older versions of IE without
+        // errors, but requires manual refreshing pages to view changes.
+        rule: {
+            match: /<\/body>/i,
+            fn: function (snippet, match, x) {
+                return `<!--[if gt IE 8]><!-- -->${snippet}${match}<![endif]-->`;
+            }
+        }
+    }
 });
