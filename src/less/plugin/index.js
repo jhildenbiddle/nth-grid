@@ -44,11 +44,11 @@ const api = {
         return false;
     },
     // Creates Grid instance
-    'nth-grid': function(columns, gutter, margin, width, order) {
+    'nth-grid': function(columns, gap, margin, width, order) {
         // Convert Less tree objects to standard JavaScript types
         settings = {
             columns: toArray(columns),
-            gutter : toArray(gutter),
+            gap    : toArray(gap),
             margin : toArray(margin),
             width  : toValue(width),
             order  : order.type === 'Expression' ? toArray(order) : false

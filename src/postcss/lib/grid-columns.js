@@ -59,10 +59,10 @@ export default function gridColumns(grid, nthSelector, selectorContainer, siblin
         { prop: 'position', value: 'static' },
         { prop: grid.dir_left, value: 'auto' },
         { prop: 'margin-' + grid.dir_right, value: '0' },
-        // Gutter - Vertical
-        { prop: 'margin-top', value: grid.gutter_v },
-        // Gutter - Horizontal
-        { prop: 'margin-' + grid.dir_left, value: grid.gutter_h }
+        // Gap - Vertical
+        { prop: 'margin-top', value: grid.gap_v },
+        // Gap - Horizontal
+        { prop: 'margin-' + grid.dir_left, value: grid.gap_h }
     );
 
     if (grid.legacy === true) {

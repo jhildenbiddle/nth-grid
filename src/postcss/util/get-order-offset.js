@@ -17,10 +17,10 @@ export default function(settings, column, order) {
 
         // Calc() required
         if (settings.calc) {
-            // Store sibling ratio column and gutter counts.
+            // Store sibling ratio column and gap counts.
             // Used to generate the shortest possible calc() strings
             const offset_vals       = [];
-            let sibling_gutters     = 0;
+            let sibling_gaps        = 0;
             let sibling_ratio_cols  = 0;
             const sibling_unit_cols = [];
 
@@ -34,9 +34,9 @@ export default function(settings, column, order) {
                     sibling_val = settings.columns_normalized[i];
                 }
 
-                // Gutter
-                if (settings.gutter_h !== 0) {
-                    sibling_gutters += 1;
+                // Gap
+                if (settings.gap_h !== 0) {
+                    sibling_gaps += 1;
                 }
 
                 // Ratio-based value
@@ -64,13 +64,13 @@ export default function(settings, column, order) {
                 offset_vals.push(sibling_unit_cols.join(' + '));
             }
 
-            // Gutter offset
-            if (sibling_gutters > 0) {
-                if (sibling_gutters === 1) {
-                    offset_vals.push(settings.gutter_h);
+            // Gap offset
+            if (sibling_gaps > 0) {
+                if (sibling_gaps === 1) {
+                    offset_vals.push(settings.gap_h);
                 }
                 else {
-                    offset_vals.push('(' + settings.gutter_h + ' * ' + sibling_gutters + ')');
+                    offset_vals.push('(' + settings.gap_h + ' * ' + sibling_gaps + ')');
                 }
             }
 
@@ -96,11 +96,11 @@ export default function(settings, column, order) {
                     const grid_col_width = settings.grid_col_width;
 
                     column_width = unitMath([grid_col_width, sibling_val], ' * ');
-                    offset       = unitMath([offset, column_width, settings.gutter_h], ' + ');
+                    offset       = unitMath([offset, column_width, settings.gap_h], ' + ');
                 }
                 // Add unit-based value
                 else {
-                    column_width = unitMath([sibling_val, settings.gutter_h], ' + ');
+                    column_width = unitMath([sibling_val, settings.gap_h], ' + ');
                     offset       = unitMath([offset, column_width], ' + ');
                 }
             }

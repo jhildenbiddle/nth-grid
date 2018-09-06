@@ -73,7 +73,7 @@ function getOrderOffset(settings, column, order) {
         let sibling_val;
         if (settings.calc) {
             const offset_vals = [];
-            let sibling_gutters = 0;
+            let sibling_gaps = 0;
             let sibling_ratio_cols = 0;
             const sibling_unit_cols = [];
             for (i = 0; i < column - 1; i++) {
@@ -82,8 +82,8 @@ function getOrderOffset(settings, column, order) {
                 } else {
                     sibling_val = settings.columns_normalized[i];
                 }
-                if (settings.gutter_h !== 0) {
-                    sibling_gutters += 1;
+                if (settings.gap_h !== 0) {
+                    sibling_gaps += 1;
                 }
                 if (Number(sibling_val)) {
                     sibling_ratio_cols += Number(sibling_val);
@@ -101,11 +101,11 @@ function getOrderOffset(settings, column, order) {
             if (sibling_unit_cols.length > 0) {
                 offset_vals.push(sibling_unit_cols.join(" + "));
             }
-            if (sibling_gutters > 0) {
-                if (sibling_gutters === 1) {
-                    offset_vals.push(settings.gutter_h);
+            if (sibling_gaps > 0) {
+                if (sibling_gaps === 1) {
+                    offset_vals.push(settings.gap_h);
                 } else {
-                    offset_vals.push("(" + settings.gutter_h + " * " + sibling_gutters + ")");
+                    offset_vals.push("(" + settings.gap_h + " * " + sibling_gaps + ")");
                 }
             }
             offset = offset_vals.join(" + ");
@@ -120,9 +120,9 @@ function getOrderOffset(settings, column, order) {
                 if (Number(sibling_val)) {
                     const grid_col_width = settings.grid_col_width;
                     column_width = unitMath([ grid_col_width, sibling_val ], " * ");
-                    offset = unitMath([ offset, column_width, settings.gutter_h ], " + ");
+                    offset = unitMath([ offset, column_width, settings.gap_h ], " + ");
                 } else {
-                    column_width = unitMath([ sibling_val, settings.gutter_h ], " + ");
+                    column_width = unitMath([ sibling_val, settings.gap_h ], " + ");
                     offset = unitMath([ offset, column_width ], " + ");
                 }
             }
@@ -157,7 +157,7 @@ function Grid(settings, options) {
     }
     const defaults = {
         columns: [ 1 ],
-        gutter: 0,
+        gap: 0,
         margin: 0,
         center: true,
         eqheight: false,
@@ -185,7 +185,7 @@ function Grid(settings, options) {
         grid_col_ratio: 0,
         grid_col_width: 0,
         grid_width: null,
-        gutter_h: 0,
+        gap_h: 0,
         columns_normalized: [],
         margin_h: 0,
         order_offsets: [],
@@ -210,8 +210,8 @@ function Grid(settings, options) {
     }
     settings.columns = settings.columns instanceof Array ? settings.columns : [ settings.columns ];
     settings.order = settings.order instanceof Array ? settings.order : settings.order !== false ? [ settings.order ] : settings.order;
-    settings.gutter_h = settings.gutter instanceof Array ? settings.gutter[1] || settings.gutter[0] : settings.gutter;
-    settings.gutter_v = settings.gutter instanceof Array ? settings.gutter[0] : settings.gutter;
+    settings.gap_h = settings.gap instanceof Array ? settings.gap[1] || settings.gap[0] : settings.gap;
+    settings.gap_v = settings.gap instanceof Array ? settings.gap[0] : settings.gap;
     settings.margin_h = settings.margin instanceof Array ? settings.margin[1] || settings.margin[0] : settings.margin;
     settings.margin_v = settings.margin instanceof Array ? settings.margin[0] : settings.margin;
     settings.dir_left = settings.direction === "rtl" ? "right" : "left";
@@ -228,7 +228,7 @@ function Grid(settings, options) {
     settings.total_ratio_columns = settings.columns_ratio.length === 1 ? settings.columns_ratio[0] : settings.columns_ratio.length;
     settings.total_unit_columns = settings.columns_unit.length;
     settings.total_columns = settings.total_ratio_columns + settings.total_unit_columns;
-    let grid_gutters = unitMath([ settings.gutter_h, settings.total_columns - 1 ], " * "), grid_margins = unitMath([ settings.margin_h, 2 ], " * ");
+    let grid_gaps = unitMath([ settings.gap_h, settings.total_columns - 1 ], " * "), grid_margins = unitMath([ settings.margin_h, 2 ], " * ");
     if (settings.columns_ratio.length === 1) {
         settings.grid_col_ratio = settings.columns_ratio[0];
     } else {
@@ -237,23 +237,23 @@ function Grid(settings, options) {
             settings.grid_col_ratio += settings.columns_ratio[i];
         }
     }
-    const isMatched = isUnitMatch([].concat(settings.width).concat(settings.columns_unit).concat(settings.gutter).concat(settings.margin));
-    const isMatchedGrid = settings.columns_ratio.length === 0 && isUnitMatch([].concat(settings.columns_unit).concat(settings.gutter).concat(settings.margin));
-    const isPercentGrid = isUnitMatch([].concat(settings.columns_unit).concat(settings.gutter).concat(settings.margin), "%");
+    const isMatched = isUnitMatch([].concat(settings.width).concat(settings.columns_unit).concat(settings.gap).concat(settings.margin));
+    const isMatchedGrid = settings.columns_ratio.length === 0 && isUnitMatch([].concat(settings.columns_unit).concat(settings.gap).concat(settings.margin));
+    const isPercentGrid = isUnitMatch([].concat(settings.columns_unit).concat(settings.gap).concat(settings.margin), "%");
     settings.calc = !(isMatched || isMatchedGrid || isPercentGrid);
     if (settings.columns_ratio.length === 0) {
         if (settings.calc) {
             const grid_unit_cols = isUnitMatch(settings.columns_unit) ? unitMath(settings.columns_unit, " + ") : settings.columns_unit.join(" + ");
-            if (settings.gutter_h !== 0 && settings.margin_h !== 0 && isUnitMatch([ grid_gutters, grid_margins ])) {
-                settings.auto_width = grid_unit_cols + " + " + unitMath([ grid_gutters, grid_margins ], " + ");
-            } else if (settings.gutter_h !== 0 && isUnitMatch([ grid_unit_cols, grid_gutters ])) {
-                settings.auto_width = unitMath([ grid_unit_cols, grid_gutters ], " + ") + " + " + (settings.margin_h !== 0 ? grid_margins : "");
+            if (settings.gap_h !== 0 && settings.margin_h !== 0 && isUnitMatch([ grid_gaps, grid_margins ])) {
+                settings.auto_width = grid_unit_cols + " + " + unitMath([ grid_gaps, grid_margins ], " + ");
+            } else if (settings.gap_h !== 0 && isUnitMatch([ grid_unit_cols, grid_gaps ])) {
+                settings.auto_width = unitMath([ grid_unit_cols, grid_gaps ], " + ") + " + " + (settings.margin_h !== 0 ? grid_margins : "");
             } else if (settings.margin_h !== 0 && isUnitMatch([ grid_unit_cols, grid_margins ])) {
-                settings.auto_width = unitMath([ grid_unit_cols, grid_margins ], " + ") + " + " + (settings.gutter_h !== 0 ? grid_gutters : "");
+                settings.auto_width = unitMath([ grid_unit_cols, grid_margins ], " + ") + " + " + (settings.gap_h !== 0 ? grid_gaps : "");
             } else {
                 settings.auto_width = grid_unit_cols;
-                if (settings.gutter_h !== 0) {
-                    settings.auto_width += " + " + grid_gutters;
+                if (settings.gap_h !== 0) {
+                    settings.auto_width += " + " + grid_gaps;
                 }
                 if (settings.margin_h !== 0) {
                     settings.auto_width += " + " + grid_margins;
@@ -261,7 +261,7 @@ function Grid(settings, options) {
             }
         } else {
             settings.auto_width = unitMath(settings.columns_unit, " + ");
-            settings.auto_width = unitMath([ settings.auto_width, grid_gutters, grid_margins ], " + ");
+            settings.auto_width = unitMath([ settings.auto_width, grid_gaps, grid_margins ], " + ");
         }
     }
     if (settings.calc) {
@@ -293,26 +293,26 @@ function Grid(settings, options) {
     }
     if (settings.total_ratio_columns > 0) {
         if (settings.calc) {
-            if (settings.gutter_h !== 0 && settings.margin_h !== 0 && isUnitMatch([ settings.gutter_h, settings.margin_h ])) {
-                settings.grid_col_width = settings.grid_width + " - " + unitMath([ grid_gutters, grid_margins ], " + ");
-            } else if (settings.gutter_h !== 0 && isUnitMatch([ settings.grid_width, grid_gutters ])) {
-                settings.grid_col_width = unitMath([ settings.grid_width, grid_gutters ], " - ");
+            if (settings.gap_h !== 0 && settings.margin_h !== 0 && isUnitMatch([ settings.gap_h, settings.margin_h ])) {
+                settings.grid_col_width = settings.grid_width + " - " + unitMath([ grid_gaps, grid_margins ], " + ");
+            } else if (settings.gap_h !== 0 && isUnitMatch([ settings.grid_width, grid_gaps ])) {
+                settings.grid_col_width = unitMath([ settings.grid_width, grid_gaps ], " - ");
                 if (grid_margins !== 0) {
                     settings.grid_col_width += " - " + grid_margins;
                 }
             } else if (settings.margin_h !== 0 && isUnitMatch([ settings.grid_width, grid_margins ])) {
                 settings.grid_col_width = unitMath([ settings.grid_width, grid_margins ], " - ");
-                if (grid_gutters !== 0) {
-                    settings.grid_col_width += " - " + grid_gutters;
+                if (grid_gaps !== 0) {
+                    settings.grid_col_width += " - " + grid_gaps;
                 }
             } else {
-                grid_gutters = settings.gutter_h !== 0 ? " - " + grid_gutters : "";
+                grid_gaps = settings.gap_h !== 0 ? " - " + grid_gaps : "";
                 grid_margins = settings.margin_h !== 0 ? " - " + grid_margins : "";
-                settings.grid_col_width = settings.grid_width + grid_gutters + grid_margins;
+                settings.grid_col_width = settings.grid_width + grid_gaps + grid_margins;
             }
             settings.grid_col_width = "(" + settings.grid_col_width + ") / " + settings.grid_col_ratio;
         } else {
-            settings.grid_col_width = unitMath([ settings.grid_width, grid_gutters, grid_margins ], " - ");
+            settings.grid_col_width = unitMath([ settings.grid_width, grid_gaps, grid_margins ], " - ");
             settings.grid_col_width = unitMath([ settings.grid_col_width, settings.grid_col_ratio ], " / ");
         }
     }
@@ -419,10 +419,10 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
         value: "0"
     }, {
         prop: "margin-top",
-        value: grid.gutter_v
+        value: grid.gap_v
     }, {
         prop: "margin-" + grid.dir_left,
-        value: grid.gutter_h
+        value: grid.gap_h
     });
     if (grid.legacy === true) {
         newRule.append({
@@ -751,7 +751,7 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
 
 function gridDebug(grid, nthSelector, selectorContainer, siblingContainer) {
     if (grid.debug) {
-        const debugContent = [ "columns            : " + grid.columns, "gutter             : " + grid.gutter, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "center             : " + grid.center, "eqheight           : " + grid.eqheight, "legacy             : " + grid.legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
+        const debugContent = [ "columns            : " + grid.columns, "gap                : " + grid.gap, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "center             : " + grid.center, "eqheight           : " + grid.eqheight, "legacy             : " + grid.legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
         siblingContainer.append(postcss.rule({
             selector: appendSelectors(nthSelector, ":before")
         }).append({

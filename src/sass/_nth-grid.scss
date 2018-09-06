@@ -21,10 +21,10 @@
 /// @type Number | List
 /// @see nth-grid
 $nth-grid-columns               : 1 !default;
-/// Default Nth-Grid `gutter` setting.
+/// Default Nth-Grid `gap` setting.
 /// @type Length | List
 /// @see nth-grid
-$nth-grid-gutter                : 0 !default;
+$nth-grid-gap                   : 0 !default;
 /// Default Nth-Grid `margin` setting.
 /// @type Length | List
 /// @see nth-grid
@@ -174,7 +174,7 @@ $nth-grid-warnings              : true !default;
 /// @param {Number} $column - The column number to process
 /// @param {Boolean} $calc - Calc() required for offset
 /// @param {List} $columns - Grid columns
-/// @param {Length} $gutter-h - Grid gutter (horizontal)
+/// @param {Length} $gap-h - Grid gap (horizontal)
 /// @param {Number | String} $grid-col-width - Width of a ratio-based column.
 /// Number for non-calc(), String for calc().
 /// @param {List} $order [false] - Alternate order of columns
@@ -182,17 +182,17 @@ $nth-grid-warnings              : true !default;
 /// @example scss
 ///   $test: _nthGetOrderOffset(3, true, 1 1 1, 1%, 33.33%);        /* Column 3 @ 3 */
 ///   $test: _nthGetOrderOffset(3, true, 1 1 1, 1%, 33.33%, 3 2 1); /* Column 3 @ 1 */
-@function _nthGetOrderOffset($column, $calc, $columns, $gutter-h, $grid-col-width, $order: false) {
+@function _nthGetOrderOffset($column, $calc, $columns, $gap-h, $grid-col-width, $order: false) {
     $offset: 0;
 
     // Only columns following the first need offset calculated
     @if $column > 1 {
         // Calc() required
         @if $calc {
-            // Store sibling ratio column and gutter counts.
+            // Store sibling ratio column and gap counts.
             // Used to generate the shortest possible calc() strings
             $offset-vals       : ();
-            $sibling-gutters   : 0;
+            $sibling-gaps      : 0;
             $sibling-ratio-cols: 0;
             $sibling-unit-cols : ();
 
@@ -208,9 +208,9 @@ $nth-grid-warnings              : true !default;
                     $sibling-val: nth($columns, $i);
                 }
 
-                // Gutter
-                @if $gutter-h != 0 {
-                    $sibling-gutters: $sibling-gutters + 1;
+                // Gap
+                @if $gap-h != 0 {
+                    $sibling-gaps: $sibling-gaps + 1;
                 }
 
                 // Ratio-based value
@@ -238,13 +238,13 @@ $nth-grid-warnings              : true !default;
                 $offset-vals: append($offset-vals, _nthJoinToString($sibling-unit-cols, ' + '));
             }
 
-            // Gutter offset
-            @if $sibling-gutters > 0 {
-                @if $sibling-gutters == 1 {
-                    $offset-vals: append($offset-vals, $gutter-h);
+            // Gap offset
+            @if $sibling-gaps > 0 {
+                @if $sibling-gaps == 1 {
+                    $offset-vals: append($offset-vals, $gap-h);
                 }
                 @else {
-                    $offset-vals: append($offset-vals, '(#{$gutter-h} * #{$sibling-gutters})');
+                    $offset-vals: append($offset-vals, '(#{$gap-h} * #{$sibling-gaps})');
                 }
             }
 
@@ -267,11 +267,11 @@ $nth-grid-warnings              : true !default;
 
                 // Add ratio-based value
                 @if unitless($sibling-val) {
-                    $offset: $offset + ($grid-col-width * $sibling-val) + $gutter-h;
+                    $offset: $offset + ($grid-col-width * $sibling-val) + $gap-h;
                 }
                 // Add unit-based value
                 @else {
-                    $offset: $offset + $sibling-val + $gutter-h;
+                    $offset: $offset + $sibling-val + $gap-h;
                 }
             }
         }
@@ -411,8 +411,8 @@ $nth-grid-warnings              : true !default;
 /// Sets the column count, width and order for each grid row. All grids can be
 /// fixed- or fluid-width, determined by the width of container element.
 ///
-/// @param {Length | List} $gutter [0]
-/// Sets the vertical gutters (between rows) and horizontal gutters (between
+/// @param {Length | List} $gap [0]
+/// Sets the vertical gaps (between rows) and horizontal gaps (between
 /// columns).
 ///
 /// @param {Length | List} $margin [0]
@@ -478,7 +478,7 @@ $nth-grid-warnings              : true !default;
 /// configuration is defined that is not compatible with legacy browsers.
 ///
 /// @see $nth-grid-columns
-/// @see $nth-grid-gutter
+/// @see $nth-grid-gap
 /// @see $nth-grid-margin
 /// @see $nth-grid-center
 /// @see $nth-grid-eqheight
@@ -538,7 +538,7 @@ $nth-grid-warnings              : true !default;
 ///   .myclass {
 ///       .nth-grid(
 ///           $columns: 1 2 3,  // 3 asymmetric colums: 1/6, 2/6, 3/6 of $width
-///           $gutter: 1%,      // 1% horizontal and vertical column gutters
+///           $gap: 1%,         // 1% horizontal and vertical column gaps
 ///           $margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
 ///           $width: 960px,    // Fixed 960px container
 ///           $order: 3 1 2,    // Column order
@@ -553,7 +553,7 @@ $nth-grid-warnings              : true !default;
 ///   }
 @mixin nth-grid(
     $columns               : $nth-grid-columns,
-    $gutter                : $nth-grid-gutter,
+    $gap                   : $nth-grid-gap,
     $margin                : $nth-grid-margin,
     $width                 : 100%,
     $order                 : false,
@@ -590,8 +590,8 @@ $nth-grid-warnings              : true !default;
     $total-unit-columns : 0;
 
     // Extract values from lists
-    $gutter-h: if(length($gutter) == 2, _nthStripZeroUnit(nth($gutter, 2)), _nthStripZeroUnit($gutter));
-    $gutter-v: if(length($gutter) == 2, _nthStripZeroUnit(nth($gutter, 1)), _nthStripZeroUnit($gutter));
+    $gap-h   : if(length($gap) == 2, _nthStripZeroUnit(nth($gap, 2)), _nthStripZeroUnit($gap));
+    $gap-v   : if(length($gap) == 2, _nthStripZeroUnit(nth($gap, 1)), _nthStripZeroUnit($gap));
     $margin-h: if(length($margin) == 2, _nthStripZeroUnit(nth($margin, 2)), _nthStripZeroUnit($margin));
     $margin-v: if(length($margin) == 2, _nthStripZeroUnit(nth($margin, 1)), _nthStripZeroUnit($margin));
 
@@ -623,7 +623,7 @@ $nth-grid-warnings              : true !default;
     $grid-col-ratio: if($total-ratio-columns == 1, $total-ratio-columns, _nthSum($columns-ratio));
 
     // Grid checks
-    $grid-units   : join($columns-unit, join($gutter, $margin));
+    $grid-units   : join($columns-unit, join($gap, $margin));
     $isMatched    : _nthIsUnitMatch(join($width, $grid-units));
     $isMatchedGrid: if($total-ratio-columns == 0 and _nthIsUnitMatch($grid-units), true, false);
     $isPercentGrid: _nthIsUnitMatch($grid-units, '%');
@@ -635,29 +635,29 @@ $nth-grid-warnings              : true !default;
     @if $total-ratio-columns == 0 {
         // Calc() required
         @if $calc {
-            $grid-gutters  : if($gutter-h > 0, $gutter-h * ($total-columns - 1), 0);
+            $grid-gaps     : if($gap-h > 0, $gap-h * ($total-columns - 1), 0);
             $grid-margins  : if($margin-h > 0, $margin-h * 2, 0);
             $grid-unit-cols: if(_nthIsUnitMatch($columns-unit), _nthSum($columns-unit), _nthJoinToString($columns-unit,' + '));
 
-            // Matched gutter & margin units
-            @if $gutter-h > 0 and $margin-h > 0 and _nthIsUnitMatch($grid-gutters $grid-margins) {
-                $auto-width: '#{$grid-unit-cols} + #{_nthSum($grid-gutters $grid-margins)}';
+            // Matched gap & margin units
+            @if $gap-h > 0 and $margin-h > 0 and _nthIsUnitMatch($grid-gaps $grid-margins) {
+                $auto-width: '#{$grid-unit-cols} + #{_nthSum($grid-gaps $grid-margins)}';
             }
-            // Matched column and gutter units
-            @else if $gutter-h > 0 and _nthIsUnitMatch($grid-unit-cols $grid-gutters) {
-                $auto-width: '#{$grid-unit-cols + $grid-gutters} + #{$grid-margins}';
+            // Matched column and gap units
+            @else if $gap-h > 0 and _nthIsUnitMatch($grid-unit-cols $grid-gaps) {
+                $auto-width: '#{$grid-unit-cols + $grid-gaps} + #{$grid-margins}';
             }
             // Matched column and margin units
             @else if $margin-h > 0 and _nthIsUnitMatch($grid-unit-cols $grid-margins) {
-                $auto-width: '#{$grid-unit-cols + $grid-margins} + #{$grid-gutters}';
+                $auto-width: '#{$grid-unit-cols + $grid-margins} + #{$grid-gaps}';
             }
             // No match
             @else {
                 $auto-width: '#{$grid-unit-cols}';
 
-                // Add gutters
-                @if $gutter-h > 0 {
-                    $auto-width: '#{$auto-width} + #{$grid-gutters}';
+                // Add gaps
+                @if $gap-h > 0 {
+                    $auto-width: '#{$auto-width} + #{$grid-gaps}';
                 }
 
                 // Add margins
@@ -669,7 +669,7 @@ $nth-grid-warnings              : true !default;
         // Calc() not required
         @else {
             $auto-width: _nthSum($columns-unit);
-            $auto-width: $auto-width + ($gutter-h * ($total-columns - 1));
+            $auto-width: $auto-width + ($gap-h * ($total-columns - 1));
             $auto-width: $auto-width + ($margin-h * 2);
         }
     }
@@ -716,16 +716,16 @@ $nth-grid-warnings              : true !default;
     @if $total-ratio-columns > 0 {
         // Calc() required
         @if $calc {
-            $grid-gutters: $gutter-h * ($total-columns - 1);
+            $grid-gaps   : $gap-h * ($total-columns - 1);
             $grid-margins: $margin-h * 2;
 
-            // Matched unit gutter and margin
-            @if $gutter-h > 0 and $margin-h > 0 and _nthIsUnitMatch($gutter-h $margin-h) {
-                $grid-col-width: '#{$grid-width} - #{$grid-gutters + $grid-margins}';
+            // Matched unit gap and margin
+            @if $gap-h > 0 and $margin-h > 0 and _nthIsUnitMatch($gap-h $margin-h) {
+                $grid-col-width: '#{$grid-width} - #{$grid-gaps + $grid-margins}';
             }
-            // Matched column and gutter units
-            @else if $gutter-h > 0 and _nthIsUnitMatch($grid-width $grid-gutters) {
-                $grid-col-width: '#{$grid-width - $grid-gutters}';
+            // Matched column and gap units
+            @else if $gap-h > 0 and _nthIsUnitMatch($grid-width $grid-gaps) {
+                $grid-col-width: '#{$grid-width - $grid-gaps}';
 
                 @if ($grid-margins > 0) {
                     $grid-col-width: '#{$grid-col-width} - #{$grid-margins}';
@@ -735,15 +735,15 @@ $nth-grid-warnings              : true !default;
             @else if $margin-h > 0 and _nthIsUnitMatch($grid-width $grid-margins) {
                 $grid-col-width: '#{$grid-width - $grid-margins}';
 
-                @if ($grid-gutters > 0) {
-                    $grid-col-width: '#{$grid-col-width} - #{$grid-gutters}';
+                @if ($grid-gaps > 0) {
+                    $grid-col-width: '#{$grid-col-width} - #{$grid-gaps}';
                 }
             }
-            // Mixed unit gutter and margin
+            // Mixed unit gap and margin
             @else {
-                $grid-gutters  : if($gutter-h > 0, ' - #{$grid-gutters}', '');
+                $grid-gaps     : if($gap-h > 0, ' - #{$grid-gaps}', '');
                 $grid-margins  : if($margin-h > 0, ' - #{$grid-margins}', '');
-                $grid-col-width: '#{$grid-width}#{$grid-gutters}#{$grid-margins}';
+                $grid-col-width: '#{$grid-width}#{$grid-gaps}#{$grid-margins}';
             }
 
             // Divide by grid ratio
@@ -751,12 +751,12 @@ $nth-grid-warnings              : true !default;
         }
         // Calc() not required
         @else {
-            $grid-gutters: 0;
+            $grid-gaps   : 0;
             $grid-margins: 0;
 
-            // Calculate gutters
-            @if $gutter-h > 0 {
-                $grid-gutters: $gutter-h * ($total-columns - 1);
+            // Calculate gaps
+            @if $gap-h > 0 {
+                $grid-gaps: $gap-h * ($total-columns - 1);
             }
 
             // Calculate margins
@@ -765,7 +765,7 @@ $nth-grid-warnings              : true !default;
             }
 
             // Divide by grid ratio
-            $grid-col-width: ($grid-width - $grid-gutters - $grid-margins) / $grid-col-ratio;
+            $grid-col-width: ($grid-width - $grid-gaps - $grid-margins) / $grid-col-ratio;
         }
     }
     // No ratio-based columns
@@ -902,11 +902,11 @@ $nth-grid-warnings              : true !default;
             #{$dir-left}: auto;
             margin-#{$dir-right}: 0;
 
-            // Gutter - Vertical
-            @include _nth-rem(margin-top, $gutter-v, $legacy);
+            // Gap - Vertical
+            @include _nth-rem(margin-top, $gap-v, $legacy);
 
-            // Gutter - Horizontal
-            @include _nth-rem(margin-#{$dir-left}, $gutter-h, $legacy);
+            // Gap - Horizontal
+            @include _nth-rem(margin-#{$dir-left}, $gap-h, $legacy);
 
             @if $legacy {
                 // IE7 float fix
@@ -1108,7 +1108,7 @@ $nth-grid-warnings              : true !default;
                     $column        : $order-val,
                     $calc          : $calc,
                     $columns       : $columns-normalized,
-                    $gutter-h      : $gutter-h,
+                    $gap-h         : $gap-h,
                     $grid-col-width: $grid-col-width
                 );
                 // Get offsets of the order column number from the ordered column layout
@@ -1117,7 +1117,7 @@ $nth-grid-warnings              : true !default;
                     $column        : $i,
                     $calc          : $calc,
                     $columns       : $columns-normalized,
-                    $gutter-h      : $gutter-h,
+                    $gap-h         : $gap-h,
                     $grid-col-width: $grid-col-width,
                     $order         : $order
                 );
@@ -1209,7 +1209,7 @@ $nth-grid-warnings              : true !default;
             /* Nth-Grid Debug */
             content: '' +
                        '$columns            : #{$columns}'
-                '\A' + '$gutter             : #{$gutter}'
+                '\A' + '$gap                : #{$gap}'
                 '\A' + '$margin             : #{$margin}'
                 '\A' + '$width              : #{$width}'
                 '\A' + '$order              : #{$order}'

@@ -205,7 +205,7 @@ section {
     main {
         @include nth-grid(
             $columns: 4,
-            $gutter : 2%
+            $gap    : 2%
         );
 
         h2 {

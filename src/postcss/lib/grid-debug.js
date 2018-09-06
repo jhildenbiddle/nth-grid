@@ -11,7 +11,7 @@ export default function gridDebug(grid, nthSelector, selectorContainer, siblingC
     if (grid.debug) {
         const debugContent = [
             'columns            : ' + grid.columns,
-            'gutter             : ' + grid.gutter,
+            'gap                : ' + grid.gap,
             'margin             : ' + grid.margin,
             'width              : ' + grid.width,
             'order              : ' + grid.order,

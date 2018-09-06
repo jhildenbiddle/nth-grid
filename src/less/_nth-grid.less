@@ -8,7 +8,7 @@
 // =============================================================================
 // Layout
 @nth-grid-columns               : 1;
-@nth-grid-gutter                : 0;
+@nth-grid-gap                   : 0;
 @nth-grid-margin                : 0;
 @nth-grid-center                : true;
 @nth-grid-eqheight              : false;
@@ -37,7 +37,7 @@
 // =============================================================================
 .nth-grid(
     @columns               : @nth-grid-columns,
-    @gutter                : @nth-grid-gutter,
+    @gap                   : @nth-grid-gap,
     @margin                : @nth-grid-margin,
     @width                 : 100%,
     @order                 : false,
@@ -60,7 +60,7 @@
     @plugin 'less-plugin-nth-grid.js';
 
     // Initialize plugin
-    @init: nth-grid(@columns, @gutter, @margin, @width, @order);
+    @init: nth-grid(@columns, @gap, @margin, @width, @order);
 
     .warning() when not (@init) {
         nth-warn('NTH-GRID: Plugin not loaded. Make sure _nth-grid.less.js is in the same directory as _nth-grid.less');
@@ -97,15 +97,15 @@
     .dir-vars();
 
     // Extract values from lists
-    .gutter-vars() when (length(@gutter) = 2) {
-        @gutter-h: extract(@gutter, 2);
-        @gutter-v: extract(@gutter, 1);
+    .gap-vars() when (length(@gap) = 2) {
+        @gap-h: extract(@gap, 2);
+        @gap-v: extract(@gap, 1);
     }
-    .gutter-vars() when (length(@gutter) = 1) {
-        @gutter-h: @gutter;
-        @gutter-v: @gutter;
+    .gap-vars() when (length(@gap) = 1) {
+        @gap-h: @gap;
+        @gap-v: @gap;
     }
-    .gutter-vars();
+    .gap-vars();
 
     .margin-vars() when (length(@margin) = 2) {
         @margin-h: extract(@margin, 2);
@@ -285,11 +285,11 @@
             @{dir-left}: auto;
             margin-@{dir-right}: 0;
 
-            // Gutter - Vertical
-            .rem(margin-top, @gutter-v);
+            // Gap - Vertical
+            .rem(margin-top, @gap-v);
 
-            // Gutter - Horizontal
-            .rem(~'margin-@{dir-left}', @gutter-h);
+            // Gap - Horizontal
+            .rem(~'margin-@{dir-left}', @gap-h);
 
             .legacy() when (@legacy) {
                 // IE7 float fix
@@ -557,7 +557,7 @@
             /* Nth-Grid Debug */
             content:
                 '@columns            : @{columns}\A'
-                '@gutter             : @{gutter}\A'
+                '@gap                : @{gap}\A'
                 '@margin             : @{margin}\A'
                 '@width              : @{width}\A'
                 '@order              : @{order}\A'

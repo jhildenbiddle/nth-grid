@@ -8,7 +8,7 @@
 // =============================================================================
 // Layout
 $nth-grid-columns                ?= 1
-$nth-grid-gutter                 ?= 0
+$nth-grid-gap                    ?= 0
 $nth-grid-margin                 ?= 0
 $nth-grid-center                 ?= true
 $nth-grid-eqheight               ?= false
@@ -63,17 +63,17 @@ _nthJoinToString($list, $separator = '')
 /// Note that IE9 truncates css values after 128 characters. Grid columms
 /// that require an offset using a calc() string longer than this will
 /// not render properly.
-_nthOffset($column, $calc, $columns, $gutter-h, $grid-col-width, $order = false)
+_nthOffset($column, $calc, $columns, $gap-h, $grid-col-width, $order = false)
     $offset = 0
 
     // Only columns following the first need offset calculated
     if $column > 1
         // Calc() required
         if $calc
-            // Store sibling ratio column and gutter counts.
+            // Store sibling ratio column and gap counts.
             // Used to generate the shortest possible calc() strings
             $offset-vals        = ()
-            $sibling-gutters    = 0
+            $sibling-gaps       = 0
             $sibling-ratio-cols = 0
             $sibling-unit-cols  = ()
 
@@ -85,9 +85,9 @@ _nthOffset($column, $calc, $columns, $gutter-h, $grid-col-width, $order = false)
                 else
                     $sibling-val = $columns[$i - 1]
 
-                // Gutter
-                if $gutter-h != 0
-                    $sibling-gutters += 1
+                // Gap
+                if $gap-h != 0
+                    $sibling-gaps += 1
 
                 // Ratio-based value
                 if unit($sibling-val) == ''
@@ -107,12 +107,12 @@ _nthOffset($column, $calc, $columns, $gutter-h, $grid-col-width, $order = false)
             if length($sibling-unit-cols) > 0
                 push($offset-vals, _nthJoinToString($sibling-unit-cols, ' + '))
 
-            // Gutter offset
-            if $sibling-gutters > 0
-                if $sibling-gutters == 1
-                    push($offset-vals, $gutter-h)
+            // Gap offset
+            if $sibling-gaps > 0
+                if $sibling-gaps == 1
+                    push($offset-vals, $gap-h)
                 else
-                    push($offset-vals, '(' + $gutter-h + ' * ' + $sibling-gutters + ')')
+                    push($offset-vals, '(' + $gap-h + ' * ' + $sibling-gaps + ')')
 
             // Final offset
             $offset = _nthJoinToString($offset-vals, ' + ')
@@ -133,17 +133,17 @@ _nthOffset($column, $calc, $columns, $gutter-h, $grid-col-width, $order = false)
                         // Bug: 0 + 50% = 0% (Stylus assumes "0 plus 50% of 0")
                         // Fix: 0% + 50% = 50% (when units match, math is correct)
                         // http://stackoverflow.com/questions/13976079/stylus-adding-percentages
-                        $offset = unit($offset, '%') + ($grid-col-width * $sibling-val) + $gutter-h
+                        $offset = unit($offset, '%') + ($grid-col-width * $sibling-val) + $gap-h
                     else
-                        $offset += ($grid-col-width * $sibling-val) + $gutter-h
+                        $offset += ($grid-col-width * $sibling-val) + $gap-h
                 // Add unit-based value
                 else
                     if unit($sibling-val) == '%'
                         // Work around for Stylus percentage math bug
                         // (See above. Can't add percentage to default $offset value of 0)
-                        $offset = unit($offset, '%') + $sibling-val + $gutter-h
+                        $offset = unit($offset, '%') + $sibling-val + $gap-h
                     else
-                        $offset += $sibling-val + $gutter-h
+                        $offset += $sibling-val + $gap-h
 
     return $offset
 
@@ -199,8 +199,8 @@ _nth-rem($property, $val, $legacy = $nth-grid-legacy)
 // Mixins (Public)
 // =============================================================================
 nth-grid(
-    $columns                 = $nth-grid-columns,
-    $gutter                 = $nth-grid-gutter,
+    $columns                = $nth-grid-columns,
+    $gap                    = $nth-grid-gap,
     $margin                 = $nth-grid-margin,
     $width                  = 100%,
     $order                  = false,
@@ -237,13 +237,13 @@ nth-grid(
     $total-unit-columns  = 0
 
     // Extract values from lists
-    $gutter-h = length($gutter) == 2 ? _nthStripZeroUnit($gutter[1]) : _nthStripZeroUnit($gutter)
-    $gutter-v = length($gutter) == 2 ? _nthStripZeroUnit($gutter[0]) : _nthStripZeroUnit($gutter)
+    $gap-h    = length($gap) == 2 ? _nthStripZeroUnit($gap[1]) : _nthStripZeroUnit($gap)
+    $gap-v    = length($gap) == 2 ? _nthStripZeroUnit($gap[0]) : _nthStripZeroUnit($gap)
     $margin-h = length($margin) == 2 ? _nthStripZeroUnit($margin[1]) : _nthStripZeroUnit($margin)
     $margin-v = length($margin) == 2 ? _nthStripZeroUnit($margin[0]) : _nthStripZeroUnit($margin)
 
     // Direction
-    $dir-left = $direction == rtl ? right : left
+    $dir-left  = $direction == rtl ? right : left
     $dir-right = $direction == rtl ? left : right
 
     // Store selector for warnings
@@ -265,7 +265,7 @@ nth-grid(
     $grid-col-ratio = $total-ratio-columns == 1 ? $total-ratio-columns : sum($columns-ratio)
 
     // Grid checks
-    $grid-units    = _nthConcat($columns-unit, $gutter, $margin)
+    $grid-units    = _nthConcat($columns-unit, $gap, $margin)
     $isMatched     = _nthIsUnitMatch(_nthConcat($width, $grid-units))
     $isMatchedGrid = $total-ratio-columns == 0 && _nthIsUnitMatch($grid-units) ? true : false
     $isPercentGrid = _nthIsUnitMatch($grid-units, '%')
@@ -277,26 +277,26 @@ nth-grid(
     if $total-ratio-columns == 0
         // Calc() required
         if $calc
-            $grid-gutters   = $gutter-h > 0 ? $gutter-h * ($total-columns - 1) : ''
+            $grid-gaps      = $gap-h > 0 ? $gap-h * ($total-columns - 1) : ''
             $grid-margins   = $margin-h > 0 ? $margin-h * 2 : ''
             $grid-unit-cols = _nthIsUnitMatch($columns-unit) ? sum($columns-unit) : join(' + ', $columns-unit)
 
-            // Matched gutter & margin units
-            if $gutter-h > 0 && $margin-h > 0 && _nthIsUnitMatch($grid-gutters $grid-margins)
-                $auto-width = '' + $grid-unit-cols + ' + ' + sum($grid-gutters $grid-margins)
-            // Matched column and gutter units
-            else if $gutter-h > 0 && _nthIsUnitMatch($grid-unit-cols $grid-gutters)
-                $auto-width = '' + sum($grid-unit-cols $grid-gutters) + ' + ' + $grid-margins
+            // Matched gap & margin units
+            if $gap-h > 0 && $margin-h > 0 && _nthIsUnitMatch($grid-gaps $grid-margins)
+                $auto-width = '' + $grid-unit-cols + ' + ' + sum($grid-gaps $grid-margins)
+            // Matched column and gap units
+            else if $gap-h > 0 && _nthIsUnitMatch($grid-unit-cols $grid-gaps)
+                $auto-width = '' + sum($grid-unit-cols $grid-gaps) + ' + ' + $grid-margins
             // Matched column and margin units
             else if $margin-h > 0 && _nthIsUnitMatch($grid-unit-cols $grid-margins)
-                $auto-width = '' + sum($grid-unit-cols $grid-margins) + ' + ' + $grid-gutters
+                $auto-width = '' + sum($grid-unit-cols $grid-margins) + ' + ' + $grid-gaps
             // No match
             else
                 $auto-width = '' + $grid-unit-cols
 
-                // Add gutters
-                if $gutter-h > 0
-                    $auto-width += ' + ' + $grid-gutters
+                // Add gaps
+                if $gap-h > 0
+                    $auto-width += ' + ' + $grid-gaps
 
                 // Add margins
                 if $margin-h > 0
@@ -304,7 +304,7 @@ nth-grid(
         // Calc() not required
         else
             $auto-width = sum($columns-unit)
-            $auto-width = $auto-width + $gutter-h * ($total-columns - 1)
+            $auto-width = $auto-width + $gap-h * ($total-columns - 1)
             $auto-width = $auto-width + $margin-h * 2
 
     // Ratio grid width - Calc() required
@@ -346,15 +346,15 @@ nth-grid(
     if $total-ratio-columns > 0
         // Calc() required
         if $calc
-            $grid-gutters = $gutter-h * ($total-columns - 1)
+            $grid-gaps    = $gap-h * ($total-columns - 1)
             $grid-margins = $margin-h * 2
 
-            // Matched unit gutter and margin
-            if $gutter-h > 0 && $margin-h > 0 && _nthIsUnitMatch($gutter-h $margin-h)
-                $grid-col-width = '' + $grid-width + ' - ' + sum($grid-gutters $grid-margins)
-            // Matched column and gutter units
-            else if $gutter-h > 0 && _nthIsUnitMatch($grid-width $grid-gutters)
-                $grid-col-width = '' + ($grid-width - $grid-gutters)
+            // Matched unit gap and margin
+            if $gap-h > 0 && $margin-h > 0 && _nthIsUnitMatch($gap-h $margin-h)
+                $grid-col-width = '' + $grid-width + ' - ' + sum($grid-gaps $grid-margins)
+            // Matched column and gap units
+            else if $gap-h > 0 && _nthIsUnitMatch($grid-width $grid-gaps)
+                $grid-col-width = '' + ($grid-width - $grid-gaps)
 
                 if $grid-margins > 0
                     $grid-col-width = '' + $grid-col-width + ' - ' + $grid-margins
@@ -362,31 +362,31 @@ nth-grid(
             else if $margin-h > 0 && _nthIsUnitMatch($grid-width $grid-margins)
                 $grid-col-width = '' + ($grid-width - $grid-margins)
 
-                if $grid-gutters > 0
-                    $grid-col-width = '' + $grid-col-width + ' - ' + $grid-gutters
-            // Mixed unit gutter and margin
+                if $grid-gaps > 0
+                    $grid-col-width = '' + $grid-col-width + ' - ' + $grid-gaps
+            // Mixed unit gap and margin
             else
-                $grid-gutters   = $gutter-h > 0 ? ' - ' + $grid-gutters : ''
+                $grid-gaps      = $gap-h > 0 ? ' - ' + $grid-gaps : ''
                 $grid-margins   = $margin-h > 0 ? ' - ' + $grid-margins : ''
-                $grid-col-width = '' + $grid-width + $grid-gutters + $grid-margins
+                $grid-col-width = '' + $grid-width + $grid-gaps + $grid-margins
 
             // Divide by grid ratio
             $grid-col-width = '(' + $grid-col-width + ') / ' + $grid-col-ratio
         // Calc() not required
         else
-            $grid-gutters = 0
+            $grid-gaps    = 0
             $grid-margins = 0
 
-            // Calculate gutters
-            if $gutter-h > 0
-                $grid-gutters = $gutter-h * ($total-columns - 1)
+            // Calculate gaps
+            if $gap-h > 0
+                $grid-gaps = $gap-h * ($total-columns - 1)
 
             // Calculate margins
             if $margin-h > 0
                 $grid-margins = $margin-h * 2
 
             // Divide by grid ratio
-            $grid-col-width = ($grid-width - $grid-gutters - $grid-margins) / $grid-col-ratio
+            $grid-col-width = ($grid-width - $grid-gaps - $grid-margins) / $grid-col-ratio
     // No ratio-based columns
     else
         $grid-col-width = 0
@@ -500,11 +500,11 @@ nth-grid(
             {$dir-left}: auto
             margin-{$dir-right}: 0
 
-            // Gutter - Vertical
-            _nth-rem(margin-top, $gutter-v, $legacy)
+            // Gap - Vertical
+            _nth-rem(margin-top, $gap-v, $legacy)
 
-            // Gutter - Horizontal
-            _nth-rem('margin-' + $dir-left, $gutter-h, $legacy)
+            // Gap - Horizontal
+            _nth-rem('margin-' + $dir-left, $gap-h, $legacy)
 
             if $legacy
                 // IE7 float fix
@@ -662,7 +662,7 @@ nth-grid(
                     $column: $order-val,
                     $calc: $calc,
                     $columns: $columns-normalized,
-                    $gutter-h: $gutter-h,
+                    $gap-h: $gap-h,
                     $grid-col-width: $grid-col-width
                 )
                 // Get offsets of the order column number in the ordered column layout
@@ -671,7 +671,7 @@ nth-grid(
                     $column: $i,
                     $calc: $calc,
                     $columns: $columns-normalized,
-                    $gutter-h: $gutter-h,
+                    $gap-h: $gap-h,
                     $grid-col-width: $grid-col-width,
                     $order: $order
                 )
@@ -757,7 +757,7 @@ nth-grid(
         &:before
             $content-hash = {
                 '$columns            ': $columns,
-                '$gutter             ': $gutter,
+                '$gap                ': $gap,
                 '$margin             ': $margin,
                 '$width              ': $width,
                 '$order              ': $order,

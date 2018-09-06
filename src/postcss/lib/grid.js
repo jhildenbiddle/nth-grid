@@ -21,7 +21,7 @@ export default function Grid(settings, options) {
     const defaults = {
         // Layout
         columns               : [1],
-        gutter                : 0,
+        gap                   : 0,
         margin                : 0,
         center                : true,
         eqheight              : false,
@@ -57,7 +57,7 @@ export default function Grid(settings, options) {
         grid_col_ratio        : 0,
         grid_col_width        : 0,
         grid_width            : null,
-        gutter_h              : 0,
+        gap_h                 : 0,
         columns_normalized    : [],
         margin_h              : 0,
         order_offsets         : [],
@@ -93,9 +93,9 @@ export default function Grid(settings, options) {
     settings.columns = settings.columns instanceof Array ? settings.columns : [settings.columns];
     settings.order = settings.order instanceof Array ? settings.order : settings.order !== false ? [settings.order] : settings.order;
 
-    // Extract horizontal gutter and margin from arrays
-    settings.gutter_h = settings.gutter instanceof Array ? (settings.gutter[1] || settings.gutter[0]) : settings.gutter;
-    settings.gutter_v = settings.gutter instanceof Array ? settings.gutter[0] : settings.gutter;
+    // Extract horizontal gap and margin from arrays
+    settings.gap_h = settings.gap instanceof Array ? (settings.gap[1] || settings.gap[0]) : settings.gap;
+    settings.gap_v = settings.gap instanceof Array ? settings.gap[0] : settings.gap;
     settings.margin_h = settings.margin instanceof Array ? (settings.margin[1] || settings.margin[0]) : settings.margin;
     settings.margin_v = settings.margin instanceof Array ? settings.margin[0] : settings.margin;
 
@@ -125,8 +125,8 @@ export default function Grid(settings, options) {
     settings.total_unit_columns  = settings.columns_unit.length;
     settings.total_columns       = settings.total_ratio_columns + settings.total_unit_columns;
 
-    // Calculate combined grid gutter and margin
-    let grid_gutters = unitMath([settings.gutter_h, (settings.total_columns - 1)], ' * '),
+    // Calculate combined grid gap and margin
+    let grid_gaps = unitMath([settings.gap_h, (settings.total_columns - 1)], ' * '),
         grid_margins = unitMath([settings.margin_h, 2], ' * ');
 
     // Grid ratio
@@ -146,19 +146,19 @@ export default function Grid(settings, options) {
     const isMatched = isUnitMatch([]
         .concat(settings.width)
         .concat(settings.columns_unit)
-        .concat(settings.gutter)
+        .concat(settings.gap)
         .concat(settings.margin));
 
     // All all grid units matched?
     const isMatchedGrid = settings.columns_ratio.length === 0 && isUnitMatch([]
         .concat(settings.columns_unit)
-        .concat(settings.gutter)
+        .concat(settings.gap)
         .concat(settings.margin));
 
     // Are all grid values percent?
     const isPercentGrid = isUnitMatch([]
         .concat(settings.columns_unit)
-        .concat(settings.gutter)
+        .concat(settings.gap)
         .concat(settings.margin), '%');
 
     // Calc() required?
@@ -170,25 +170,25 @@ export default function Grid(settings, options) {
         if (settings.calc) {
             const grid_unit_cols = isUnitMatch(settings.columns_unit) ? unitMath(settings.columns_unit, ' + ') : settings.columns_unit.join(' + ');
 
-            // Matched gutter & margin units
-            if (settings.gutter_h !== 0 && settings.margin_h !== 0 && isUnitMatch([grid_gutters, grid_margins])) {
-                settings.auto_width = grid_unit_cols + ' + ' + unitMath([grid_gutters, grid_margins], ' + ');
+            // Matched gap & margin units
+            if (settings.gap_h !== 0 && settings.margin_h !== 0 && isUnitMatch([grid_gaps, grid_margins])) {
+                settings.auto_width = grid_unit_cols + ' + ' + unitMath([grid_gaps, grid_margins], ' + ');
             }
-            // Matched column and gutter units
-            else if (settings.gutter_h !== 0 && isUnitMatch([grid_unit_cols, grid_gutters])) {
-                settings.auto_width = unitMath([grid_unit_cols, grid_gutters], ' + ') + ' + ' + (settings.margin_h !== 0 ? grid_margins : '');
+            // Matched column and gap units
+            else if (settings.gap_h !== 0 && isUnitMatch([grid_unit_cols, grid_gaps])) {
+                settings.auto_width = unitMath([grid_unit_cols, grid_gaps], ' + ') + ' + ' + (settings.margin_h !== 0 ? grid_margins : '');
             }
             // Matched column and margin units
             else if (settings.margin_h !== 0 && isUnitMatch([grid_unit_cols, grid_margins])) {
-                settings.auto_width = unitMath([grid_unit_cols, grid_margins], ' + ') + ' + ' + (settings.gutter_h !== 0 ? grid_gutters : '');
+                settings.auto_width = unitMath([grid_unit_cols, grid_margins], ' + ') + ' + ' + (settings.gap_h !== 0 ? grid_gaps : '');
             }
             // No match
             else {
                 settings.auto_width = grid_unit_cols;
 
-                // Add gutters
-                if (settings.gutter_h !== 0) {
-                    settings.auto_width += ' + ' + grid_gutters;
+                // Add gaps
+                if (settings.gap_h !== 0) {
+                    settings.auto_width += ' + ' + grid_gaps;
                 }
 
                 // Add margins
@@ -202,8 +202,8 @@ export default function Grid(settings, options) {
             // Unit-based columns
             settings.auto_width = unitMath(settings.columns_unit, ' + ');
 
-            // Add gutters and margins
-            settings.auto_width = unitMath([settings.auto_width, grid_gutters, grid_margins], ' + ');
+            // Add gaps and margins
+            settings.auto_width = unitMath([settings.auto_width, grid_gaps, grid_margins], ' + ');
         }
     }
 
@@ -257,13 +257,13 @@ export default function Grid(settings, options) {
     if (settings.total_ratio_columns > 0) {
         // Calc() required
         if (settings.calc) {
-            // Matched gutter and margin units
-            if (settings.gutter_h !== 0 && settings.margin_h !== 0 && isUnitMatch([settings.gutter_h, settings.margin_h])) {
-                settings.grid_col_width = settings.grid_width + ' - ' + unitMath([grid_gutters, grid_margins], ' + ');
+            // Matched gap and margin units
+            if (settings.gap_h !== 0 && settings.margin_h !== 0 && isUnitMatch([settings.gap_h, settings.margin_h])) {
+                settings.grid_col_width = settings.grid_width + ' - ' + unitMath([grid_gaps, grid_margins], ' + ');
             }
-            // Matched column and gutter units
-            else if (settings.gutter_h !== 0 && isUnitMatch([settings.grid_width, grid_gutters])) {
-                settings.grid_col_width = unitMath([settings.grid_width, grid_gutters], ' - ');
+            // Matched column and gap units
+            else if (settings.gap_h !== 0 && isUnitMatch([settings.grid_width, grid_gaps])) {
+                settings.grid_col_width = unitMath([settings.grid_width, grid_gaps], ' - ');
 
                 if (grid_margins !== 0) {
                     settings.grid_col_width += ' - ' + grid_margins;
@@ -273,16 +273,16 @@ export default function Grid(settings, options) {
             else if (settings.margin_h !== 0 && isUnitMatch([settings.grid_width, grid_margins])) {
                 settings.grid_col_width = unitMath([settings.grid_width, grid_margins], ' - ');
 
-                if (grid_gutters !== 0) {
-                    settings.grid_col_width += ' - ' + grid_gutters;
+                if (grid_gaps !== 0) {
+                    settings.grid_col_width += ' - ' + grid_gaps;
                 }
             }
             // No match
             else {
-                grid_gutters = settings.gutter_h !== 0 ? ' - ' + grid_gutters : '';
+                grid_gaps = settings.gap_h !== 0 ? ' - ' + grid_gaps : '';
                 grid_margins = settings.margin_h !== 0 ? ' - ' + grid_margins : '';
 
-                settings.grid_col_width = settings.grid_width + grid_gutters + grid_margins;
+                settings.grid_col_width = settings.grid_width + grid_gaps + grid_margins;
             }
 
             // Divide by grid ratio
@@ -290,8 +290,8 @@ export default function Grid(settings, options) {
         }
         // Calc() not required
         else {
-            // Calculate grid width without gutters and margins
-            settings.grid_col_width = unitMath([settings.grid_width, grid_gutters, grid_margins], ' - ');
+            // Calculate grid width without gaps and margins
+            settings.grid_col_width = unitMath([settings.grid_width, grid_gaps, grid_margins], ' - ');
 
             // Divide by grid ratio
             settings.grid_col_width = unitMath([settings.grid_col_width, settings.grid_col_ratio], ' / ');
