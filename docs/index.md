@@ -187,7 +187,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              @order: 3 1 2,    // Column order
              @center: true,    // Centered grid
              @eqheight: false, // Equal-height columns
-             @valign: false,   // Vertical column alignment
              @direction: ltr,  // Grid direction
              @legacy: false,   // Legacy browser support (IE7/8)
              @debug: false,    // Debug information displayed above grid
@@ -216,7 +215,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              $order: 3 1 2,    // Column order
              $center: true,    // Centered grid
              $eqheight: false, // Equal-height columns
-             $valign: false,   // Vertical column alignment
              $direction: ltr,  // Grid direction
              $legacy: false,   // Legacy browser support (IE7/8)
              $debug: false,    // Debug information displayed above grid
@@ -244,7 +242,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              $order: 3 1 2,    // Column order
              $center: true,    // Centered grid
              $eqheight: false, // Equal-height columns
-             $valign: false,   // Vertical column alignment
              $direction: ltr,  // Grid direction
              $legacy: false,   // Legacy browser support (IE7/8)
              $debug: false,    // Debug information displayed above grid
@@ -272,7 +269,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              order: 3 1 2;    /* Column order */
              center: true;    /* Centered grid */
              eqheight: false; /* Equal-height columns */
-             valign: false;   /* Vertical column alignment */
              direction: ltr;  /* Grid direction */
              legacy: false;   /* Legacy browser support (IE7/8) */
              debug: false;    /* Debug information displayed above grid */
@@ -294,7 +290,6 @@ Nth-Grid provides global options for changing the default values used for most g
 @nth-grid-margin                : 0;
 @nth-grid-center                : true;
 @nth-grid-eqheight              : false;
-@nth-grid-valign                : false;
 @nth-grid-direction             : ltr;
 @nth-grid-legacy                : false;
 
@@ -323,7 +318,6 @@ $nth-grid-gutter                : 0;
 $nth-grid-margin                : 0;
 $nth-grid-center                : true;
 $nth-grid-eqheight              : false;
-$nth-grid-valign                : false;
 $nth-grid-direction             : ltr;
 $nth-grid-legacy                : false;
 
@@ -352,7 +346,6 @@ $nth-grid-gutter                 = 0
 $nth-grid-margin                 = 0
 $nth-grid-center                 = true
 $nth-grid-eqheight               = false
-$nth-grid-valign                 = false
 $nth-grid-direction              = ltr
 $nth-grid-legacy                 = false
 
@@ -389,7 +382,6 @@ Note the PostCSS-specific  `remove-globals` option. When this option is set to `
     --nth-grid-margin                : 0;
     --nth-grid-center                : true;
     --nth-grid-eqheight              : false;
-    --nth-grid-valign                : false;
     --nth-grid-direction             : ltr;
     --nth-grid-legacy                : false;
 
@@ -425,7 +417,6 @@ gulp.task('css', function () {
         'margin'                : 0,
         'center'                : true,
         'eqheight'              : false,
-        'valign'                : false,
         'direction'             : 'ltr',
         'legacy'                : false,
 
@@ -470,7 +461,6 @@ Examples below are provided for the Sass/SCSS mixin, but the syntax is similar f
 - [order](#order)
 - [center](#center)
 - [eqheight](#eqheight)
-- [valign](#valign)
 - [direction](#direction)
 - [legacy](#legacy)
 - [debug](#debug)
@@ -742,25 +732,6 @@ Sets the direction of the grid layout to support left-to-right (default) or righ
       .nth-grid(
           // ...
           $direction: rtl  // Sets right-to-left column flow
-      );
-  }
-  ```
-
-### valign
-
-*Default:* `false`
-
-Sets the vertical alignment of columns on each row.
-
-- Accepts `top`, `middle`, `bottom` or `false`.
-
-  ``` scss
-  // Sass (SCSS)
-  // A grid with columns vertically aligned in the middle of each row
-  .myclass {
-      .nth-grid(
-          // ...
-          $valign: middle
       );
   }
   ```

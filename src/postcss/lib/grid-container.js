@@ -35,7 +35,7 @@ export default function gridContainer(grid, nthSelector, selectorContainer, sibl
     }
 
     // Flexbox
-    if (grid.eqheight === true || grid.valign === 'top' || grid.valign === 'center' || grid.valign === 'middle' || grid.valign === 'bottom') {
+    if (grid.eqheight === true) {
         selectorContainer.append(
             { prop: 'display', value: '-webkit-box' },
             { prop: 'display', value: '-webkit-flex' },
@@ -52,38 +52,6 @@ export default function gridContainer(grid, nthSelector, selectorContainer, sibl
             if (grid.legacy === true && grid.warnings === true) {
                 // eslint-disable-next-line
                 console.warn(`NTH-GRID: "${nthSelector}" requires flexbox support for equal-height columns. This feature is not supported by legacy browsers.`);
-            }
-        }
-        // Vertical alignment
-        else {
-            // Legacy warning
-            if (grid.legacy === true && grid.warnings === true) {
-                // eslint-disable-next-line
-                console.warn(`NTH-GRID: "${nthSelector}" requires flexbox support for vertical alignment. This feature is not supported by legacy browsers.`);
-            }
-            if (grid.valign === 'top') {
-                selectorContainer.append(
-                    { prop: '-webkit-box-align', value: 'start' },
-                    { prop: '-webkit-align-items', value: 'flex-start' },
-                    { prop: '-ms-flex-align', value: 'start' },
-                    { prop: 'align-items', value: 'flex-start' }
-                );
-            }
-            if (grid.valign === 'center' || grid.valign === 'middle') {
-                selectorContainer.append(
-                    { prop: '-webkit-box-align', value: 'center' },
-                    { prop: '-webkit-align-items', value: 'center' },
-                    { prop: '-ms-flex-align', value: 'center' },
-                    { prop: 'align-items', value: 'center' }
-                );
-            }
-            if (grid.valign === 'bottom') {
-                selectorContainer.append(
-                    { prop: '-webkit-box-align', value: 'end' },
-                    { prop: '-webkit-align-items', value: 'flex-end' },
-                    { prop: '-ms-flex-align', value: 'end' },
-                    { prop: 'align-items', value: 'flex-end' }
-                );
             }
         }
 

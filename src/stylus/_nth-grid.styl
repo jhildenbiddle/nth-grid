@@ -12,7 +12,6 @@ $nth-grid-gap                    ?= 0
 $nth-grid-margin                 ?= 0
 $nth-grid-center                 ?= true
 $nth-grid-eqheight               ?= false
-$nth-grid-valign                 ?= false
 $nth-grid-direction              ?= ltr
 $nth-grid-legacy                 ?= false
 
@@ -206,7 +205,6 @@ nth-grid(
     $order                  = false,
     $center                 = $nth-grid-center,
     $eqheight               = $nth-grid-eqheight,
-    $valign                 = $nth-grid-valign,
     $direction              = $nth-grid-direction,
     $legacy                 = $nth-grid-legacy,
     $debug                  = $nth-grid-debug,
@@ -411,7 +409,7 @@ nth-grid(
         box-sizing: border-box
 
     // Flexbox
-    if $eqheight || $valign == top || $valign == center || $valign == middle || $valign == bottom
+    if $eqheight
         display: -webkit-box
         display: -webkit-flex
         display: -ms-flexbox
@@ -425,28 +423,6 @@ nth-grid(
             // Legacy warning
             if $legacy and $warnings
                 warn('NTH-GRID: "' + $selector + '" requires flexbox support for equal-height columns. This feature is not supported by legacy browsers.')
-
-        // Vertical alignment
-        if not $eqheight
-            // Legacy warning
-            if $legacy and $warnings
-                warn('NTH-GRID: "' + $selector + '" requires flexbox support for vertical alignment. This feature is not supported by legacy browsers.')
-
-            if $valign == top
-                -webkit-box-align: start
-                -webkit-align-items: flex-start
-                -ms-flex-align: start
-                align-items: flex-start
-            else if $valign == center || $valign == middle
-                -webkit-box-align: center
-                -webkit-align-items: center
-                -ms-flex-align: center
-                align-items: center
-            else if $valign == bottom
-                -webkit-box-align: end
-                -webkit-align-items: flex-end
-                -ms-flex-align: end
-                align-items: flex-end
 
         // Direction
         if $direction == rtl

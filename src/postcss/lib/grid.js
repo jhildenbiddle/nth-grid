@@ -25,7 +25,6 @@ export default function Grid(settings, options) {
         margin                : 0,
         center                : true,
         eqheight              : false,
-        valign                : false,
         direction             : 'ltr',
         legacy                : false,
 

@@ -10,7 +10,6 @@
         "default": {
             "center"        : true,
             "eqheight"      : false,
-            "valign"        : false,
             "direction"     : "ltr",
             "legacy"        : true,
             "overlay"       : false,
@@ -210,24 +209,6 @@
                 }
             }
         },
-        "grid-nocalc-valign": {
-            "title"  : "Vertically-Aligned Columns",
-            "elms" : 6,
-            "content": [
-                "<div style=\"line-height: 10vw;\">1</div>",
-                "<div style=\"line-height: 7.5vw;\">2</div>",
-                "<div style=\"line-height: 5vw;\">3</div>",
-                "<div style=\"line-height: 10vw;\">4</div>",
-                "<div style=\"line-height: 7.5vw;\">5</div>",
-                "<div style=\"line-height: 5vw;\">6</div>"
-            ],
-            "props"  : {
-                "columns": "3",
-                "gap"    : "1%",
-                "margin" : "1%",
-                "valign" : "middle"
-            }
-        },
 
 
 
@@ -397,7 +378,7 @@
                 "direction": "rtl"
             }
         },
-        "grid-calc-nested": {
+        "grid-calc-nested-eqheight": {
             "title": "CALC: Nested Grids & Equal-Height Columns",
             "elms" : 6,
             "props": {

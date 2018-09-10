@@ -161,7 +161,6 @@ function Grid(settings, options) {
         margin: 0,
         center: true,
         eqheight: false,
-        valign: false,
         direction: "ltr",
         legacy: false,
         debug: false,
@@ -611,7 +610,7 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
             value: "border-box"
         });
     }
-    if (grid.eqheight === true || grid.valign === "top" || grid.valign === "center" || grid.valign === "middle" || grid.valign === "bottom") {
+    if (grid.eqheight === true) {
         selectorContainer.append({
             prop: "display",
             value: "-webkit-box"
@@ -637,55 +636,6 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
         if (grid.eqheight === true) {
             if (grid.legacy === true && grid.warnings === true) {
                 console.warn(`NTH-GRID: "${nthSelector}" requires flexbox support for equal-height columns. This feature is not supported by legacy browsers.`);
-            }
-        } else {
-            if (grid.legacy === true && grid.warnings === true) {
-                console.warn(`NTH-GRID: "${nthSelector}" requires flexbox support for vertical alignment. This feature is not supported by legacy browsers.`);
-            }
-            if (grid.valign === "top") {
-                selectorContainer.append({
-                    prop: "-webkit-box-align",
-                    value: "start"
-                }, {
-                    prop: "-webkit-align-items",
-                    value: "flex-start"
-                }, {
-                    prop: "-ms-flex-align",
-                    value: "start"
-                }, {
-                    prop: "align-items",
-                    value: "flex-start"
-                });
-            }
-            if (grid.valign === "center" || grid.valign === "middle") {
-                selectorContainer.append({
-                    prop: "-webkit-box-align",
-                    value: "center"
-                }, {
-                    prop: "-webkit-align-items",
-                    value: "center"
-                }, {
-                    prop: "-ms-flex-align",
-                    value: "center"
-                }, {
-                    prop: "align-items",
-                    value: "center"
-                });
-            }
-            if (grid.valign === "bottom") {
-                selectorContainer.append({
-                    prop: "-webkit-box-align",
-                    value: "end"
-                }, {
-                    prop: "-webkit-align-items",
-                    value: "flex-end"
-                }, {
-                    prop: "-ms-flex-align",
-                    value: "end"
-                }, {
-                    prop: "align-items",
-                    value: "flex-end"
-                });
             }
         }
         if (grid.direction === "rtl") {
