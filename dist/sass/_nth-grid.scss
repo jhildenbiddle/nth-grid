@@ -21,30 +21,37 @@
 /// @type Number | List
 /// @see nth-grid
 $nth-grid-columns               : 1 !default;
+///
 /// Default Nth-Grid `gap` setting.
 /// @type Length | List
 /// @see nth-grid
 $nth-grid-gap                   : 0 !default;
+///
 /// Default Nth-Grid `margin` setting.
 /// @type Length | List
 /// @see nth-grid
 $nth-grid-margin                : 0 !default;
+///
 /// Default Nth-Grid `center` setting.
 /// @type Boolean
 /// @see nth-grid
 $nth-grid-center                : true !default;
+///
 /// Default Nth-Grid `eqheight` setting.
 /// @type Boolean
 /// @see nth-grid
 $nth-grid-eqheight              : false !default;
+///
 /// Default Nth-Grid `valign` setting.
 /// @type String
 /// @see nth-grid
 $nth-grid-valign                : false !default;
+///
 /// Default Nth-Grid `direction` setting.
 /// @type String
 /// @see nth-grid
 $nth-grid-direction             : ltr !default;
+///
 /// Default Nth-Grid `legacy` setting.
 /// @type Boolean
 /// @see nth-grid
@@ -56,10 +63,12 @@ $nth-grid-legacy                : false !default;
 /// @type Boolean
 /// @see nth-grid
 $nth-grid-debug                 : false !default;
+///
 /// Default Nth-Grid `debug-background-color` setting.
 /// @type String
 /// @see nth-grid
 $nth-grid-debug-background-color: #000 !default;
+///
 /// Default Nth-Grid `debug-text-color` setting.
 /// @type String
 /// @see nth-grid
@@ -71,14 +80,17 @@ $nth-grid-debug-text-color      : #ccc !default;
 /// @type Boolean
 /// @see nth-grid
 $nth-grid-overlay               : false !default;
+///
 /// Default Nth-Grid `ovelay-column-color` setting.
 /// @type String
 /// @see nth-grid
 $nth-grid-overlay-column-color  : #7c48c3 !default;
+///
 /// Default Nth-Grid `ovelay-margin-color` setting.
 /// @type String
 /// @see nth-grid
 $nth-grid-overlay-margin-color  : #dabfff !default;
+///
 /// Default Nth-Grid `ovelay-text-color` setting.
 /// @type String
 /// @see nth-grid
@@ -91,6 +103,7 @@ $nth-grid-overlay-text-color    : #fff !default;
 /// from the browser default.
 /// @type Number | Length
 $nth-grid-rem-base              : 16 !default;
+///
 /// Default Nth-Grid `warnings` setting.
 /// @type Boolean
 /// @see nth-grid
