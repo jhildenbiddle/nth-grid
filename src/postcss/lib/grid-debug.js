@@ -16,7 +16,6 @@ export default function gridDebug(grid, nthSelector, selectorContainer, siblingC
             'width              : ' + grid.width,
             'order              : ' + grid.order,
             'center             : ' + grid.center,
-            'eqheight           : ' + grid.eqheight,
             'legacy             : ' + grid.legacy + '\\A ',
             'auto_width         : ' + grid.auto_width,
             'calc               : ' + grid.calc,

@@ -37,11 +37,6 @@ $nth-grid-margin                : 0 !default;
 /// @see nth-grid
 $nth-grid-center                : true !default;
 ///
-/// Default Nth-Grid `eqheight` setting.
-/// @type Boolean
-/// @see nth-grid
-$nth-grid-eqheight              : false !default;
-///
 /// Default Nth-Grid `direction` setting.
 /// @type String
 /// @see nth-grid
@@ -437,9 +432,6 @@ $nth-grid-warnings              : true !default;
 /// Sets the position of grids that are less than 100% of the width of their
 /// container.
 ///
-/// @param {Boolean} $eqheight [false]
-/// Sets columns on each row to match the height of the largest column.
-///
 /// @param {String} $direction [ltr]
 /// Sets the direction of the grid layout to support left-to-right (default) or
 /// right-to-left layouts. This sets the flow of grid columns but not the flow
@@ -486,7 +478,6 @@ $nth-grid-warnings              : true !default;
 /// @see $nth-grid-gap
 /// @see $nth-grid-margin
 /// @see $nth-grid-center
-/// @see $nth-grid-eqheight
 /// @see $nth-grid-direction
 /// @see $nth-grid-legacy
 /// @see $nth-grid-overlay
@@ -547,7 +538,6 @@ $nth-grid-warnings              : true !default;
 ///           $width: 960px,    // Fixed 960px container
 ///           $order: 3 1 2,    // Column order
 ///           $center: true,    // Centered grid
-///           $eqheight: false, // Equal-height columns
 ///           $direction: ltr,  // Grid direction
 ///           $legacy: true,    // Legacy browser support (IE7/8)
 ///           $debug: false,    // Debug information displayed above grid
@@ -561,7 +551,6 @@ $nth-grid-warnings              : true !default;
     $width                 : 100%,
     $order                 : false,
     $center                : $nth-grid-center,
-    $eqheight              : $nth-grid-eqheight,
     $direction             : $nth-grid-direction,
     $legacy                : $nth-grid-legacy,
     $debug                 : $nth-grid-debug,
@@ -796,32 +785,6 @@ $nth-grid-warnings              : true !default;
     }
     @else {
         box-sizing: border-box;
-    }
-
-    // Flexbox
-    @if $eqheight {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-wrap: wrap;
-            -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
-
-        // Equal-height columns
-        @if $eqheight and $legacy and $warnings {
-            // Legacy warning
-            @warn 'NTH-GRID: "#{$selector}" requires flexbox support for equal-height columns. This feature is not supported by legacy browsers.';
-        }
-
-        // Direction
-        @if $direction == rtl {
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: reverse;
-            -webkit-flex-direction: row-reverse;
-            -ms-flex-direction: row-reverse;
-            flex-direction: row-reverse;
-        }
     }
 
     // Width
@@ -1188,7 +1151,6 @@ $nth-grid-warnings              : true !default;
                 '\A' + '$width              : #{$width}'
                 '\A' + '$order              : #{$order}'
                 '\A' + '$center             : #{$center}'
-                '\A' + '$eqheight           : #{$eqheight}'
                 '\A' + '$legacy             : #{$legacy}'
                 '\A' +
                 '\A' + '$auto-width         : #{$auto-width}'

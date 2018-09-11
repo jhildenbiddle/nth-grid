@@ -186,7 +186,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              @width: 960px,    // Fixed 960px container
              @order: 3 1 2,    // Column order
              @center: true,    // Centered grid
-             @eqheight: false, // Equal-height columns
              @direction: ltr,  // Grid direction
              @legacy: false,   // Legacy browser support (IE7/8)
              @debug: false,    // Debug information displayed above grid
@@ -214,7 +213,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              $width: 960px,    // Fixed 960px container
              $order: 3 1 2,    // Column order
              $center: true,    // Centered grid
-             $eqheight: false, // Equal-height columns
              $direction: ltr,  // Grid direction
              $legacy: false,   // Legacy browser support (IE7/8)
              $debug: false,    // Debug information displayed above grid
@@ -241,7 +239,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              $width: 960px,    // Fixed 960px container
              $order: 3 1 2,    // Column order
              $center: true,    // Centered grid
-             $eqheight: false, // Equal-height columns
              $direction: ltr,  // Grid direction
              $legacy: false,   // Legacy browser support (IE7/8)
              $debug: false,    // Debug information displayed above grid
@@ -268,7 +265,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              width: 960px;    /* Fixed 960px container */
              order: 3 1 2;    /* Column order */
              center: true;    /* Centered grid */
-             eqheight: false; /* Equal-height columns */
              direction: ltr;  /* Grid direction */
              legacy: false;   /* Legacy browser support (IE7/8) */
              debug: false;    /* Debug information displayed above grid */
@@ -289,7 +285,6 @@ Nth-Grid provides global options for changing the default values used for most g
 @nth-grid-gutter                : 0;
 @nth-grid-margin                : 0;
 @nth-grid-center                : true;
-@nth-grid-eqheight              : false;
 @nth-grid-direction             : ltr;
 @nth-grid-legacy                : false;
 
@@ -317,7 +312,6 @@ $nth-grid-columns               : 1;
 $nth-grid-gutter                : 0;
 $nth-grid-margin                : 0;
 $nth-grid-center                : true;
-$nth-grid-eqheight              : false;
 $nth-grid-direction             : ltr;
 $nth-grid-legacy                : false;
 
@@ -345,7 +339,6 @@ $nth-grid-columns                = 1
 $nth-grid-gutter                 = 0
 $nth-grid-margin                 = 0
 $nth-grid-center                 = true
-$nth-grid-eqheight               = false
 $nth-grid-direction              = ltr
 $nth-grid-legacy                 = false
 
@@ -381,7 +374,6 @@ Note the PostCSS-specific  `remove-globals` option. When this option is set to `
     --nth-grid-gutter                : 0;
     --nth-grid-margin                : 0;
     --nth-grid-center                : true;
-    --nth-grid-eqheight              : false;
     --nth-grid-direction             : ltr;
     --nth-grid-legacy                : false;
 
@@ -416,7 +408,6 @@ gulp.task('css', function () {
         'gutter'                : 0,
         'margin'                : 0,
         'center'                : true,
-        'eqheight'              : false,
         'direction'             : 'ltr',
         'legacy'                : false,
 
@@ -460,7 +451,6 @@ Examples below are provided for the Sass/SCSS mixin, but the syntax is similar f
 - [width](#width)
 - [order](#order)
 - [center](#center)
-- [eqheight](#eqheight)
 - [direction](#direction)
 - [legacy](#legacy)
 - [debug](#debug)
@@ -693,25 +683,6 @@ Sets the position of grids that are less than 100% of the width of their contain
           // ...
           $width: 80%,
           $center: false
-      );
-  }
-  ```
-
-### eqheight
-
-*Default:* `false`
-
-Sets columns on each row to match the height of the largest column.
-
-- Accepts `true` or `false`.
-
-  ``` scss
-  // Sass (SCSS)
-  // A grid with equal-height columns on each row
-  .myclass {
-      .nth-grid(
-          // ...
-          $eqheight: true
       );
   }
   ```

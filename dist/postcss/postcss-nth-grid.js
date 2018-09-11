@@ -160,7 +160,6 @@ function Grid(settings, options) {
         gap: 0,
         margin: 0,
         center: true,
-        eqheight: false,
         direction: "ltr",
         legacy: false,
         debug: false,
@@ -610,53 +609,6 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
             value: "border-box"
         });
     }
-    if (grid.eqheight === true) {
-        selectorContainer.append({
-            prop: "display",
-            value: "-webkit-box"
-        }, {
-            prop: "display",
-            value: "-webkit-flex"
-        }, {
-            prop: "display",
-            value: "-ms-flexbox"
-        }, {
-            prop: "display",
-            value: "flex"
-        }, {
-            prop: "-webkit-flex-wrap",
-            value: "wrap"
-        }, {
-            prop: "-ms-flex-wrap",
-            value: "wrap"
-        }, {
-            prop: "flex-wrap",
-            value: "wrap"
-        });
-        if (grid.eqheight === true) {
-            if (grid.legacy === true && grid.warnings === true) {
-                console.warn(`NTH-GRID: "${nthSelector}" requires flexbox support for equal-height columns. This feature is not supported by legacy browsers.`);
-            }
-        }
-        if (grid.direction === "rtl") {
-            selectorContainer.append({
-                prop: "-webkit-box-orient",
-                value: "horizontal"
-            }, {
-                prop: "-webkit-box-direction",
-                value: "reverse"
-            }, {
-                prop: "-webkit-flex-direction",
-                value: "row-reverse"
-            }, {
-                prop: "-ms-flex-direction",
-                value: "row-reverse"
-            }, {
-                prop: "flex-direction",
-                value: "row-reverse"
-            });
-        }
-    }
     if (grid.total_ratio_columns === 0 && grid.calc === true) {
         selectorContainer.append({
             prop: "width",
@@ -701,7 +653,7 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
 
 function gridDebug(grid, nthSelector, selectorContainer, siblingContainer) {
     if (grid.debug) {
-        const debugContent = [ "columns            : " + grid.columns, "gap                : " + grid.gap, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "center             : " + grid.center, "eqheight           : " + grid.eqheight, "legacy             : " + grid.legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
+        const debugContent = [ "columns            : " + grid.columns, "gap                : " + grid.gap, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "center             : " + grid.center, "legacy             : " + grid.legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
         siblingContainer.append(postcss.rule({
             selector: appendSelectors(nthSelector, ":before")
         }).append({

@@ -34,39 +34,6 @@ export default function gridContainer(grid, nthSelector, selectorContainer, sibl
         selectorContainer.append({ prop: 'box-sizing', value: 'border-box' });
     }
 
-    // Flexbox
-    if (grid.eqheight === true) {
-        selectorContainer.append(
-            { prop: 'display', value: '-webkit-box' },
-            { prop: 'display', value: '-webkit-flex' },
-            { prop: 'display', value: '-ms-flexbox' },
-            { prop: 'display', value: 'flex' },
-            { prop: '-webkit-flex-wrap', value: 'wrap' },
-            { prop: '-ms-flex-wrap', value: 'wrap' },
-            { prop: 'flex-wrap', value: 'wrap' }
-        );
-
-        // Equal-height columns
-        if (grid.eqheight === true) {
-            // Legacy warning
-            if (grid.legacy === true && grid.warnings === true) {
-                // eslint-disable-next-line
-                console.warn(`NTH-GRID: "${nthSelector}" requires flexbox support for equal-height columns. This feature is not supported by legacy browsers.`);
-            }
-        }
-
-        // Direction
-        if (grid.direction === 'rtl') {
-            selectorContainer.append(
-                { prop: '-webkit-box-orient', value: 'horizontal' },
-                { prop: '-webkit-box-direction', value: 'reverse' },
-                { prop: '-webkit-flex-direction', value: 'row-reverse' },
-                { prop: '-ms-flex-direction', value: 'row-reverse' },
-                { prop: 'flex-direction', value: 'row-reverse' }
-            );
-        }
-    }
-
     // Width
     if (grid.total_ratio_columns === 0 && grid.calc === true) {
         selectorContainer.append({ prop: 'width', value: 'calc(' + grid.auto_width + ')' });
