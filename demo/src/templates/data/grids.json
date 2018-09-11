@@ -4,16 +4,15 @@
             "remove-globals": true
         },
         "private": {
-            "width"         : "95%",
-            "order"         : false
+            "width": "95%",
+            "order": false
         },
         "default": {
-            "center"        : true,
-            "direction"     : "ltr",
-            "legacy"        : true,
-            "overlay"       : false,
-            "debug"         : false,
-            "warnings"      : false
+            "direction": "ltr",
+            "legacy"   : true,
+            "overlay"  : false,
+            "debug"    : false,
+            "warnings" : false
         }
     },
     "grids": {

@@ -10,7 +10,6 @@
 $nth-grid-columns                ?= 1
 $nth-grid-gap                    ?= 0
 $nth-grid-margin                 ?= 0
-$nth-grid-center                 ?= true
 $nth-grid-direction              ?= ltr
 $nth-grid-legacy                 ?= false
 
@@ -202,7 +201,6 @@ nth-grid(
     $margin                 = $nth-grid-margin,
     $width                  = 100%,
     $order                  = false,
-    $center                 = $nth-grid-center,
     $direction              = $nth-grid-direction,
     $legacy                 = $nth-grid-legacy,
     $debug                  = $nth-grid-debug,
@@ -415,14 +413,6 @@ nth-grid(
         _nth-rem(width, $width, $legacy)
     else
         width: auto
-
-    // Centering
-    if $center
-        margin-right: auto
-        margin-left: auto
-    else
-        margin-right: 0
-        margin-left: 0
 
     // Clearfix
     &:after
@@ -711,7 +701,6 @@ nth-grid(
                 '$margin             ': $margin,
                 '$width              ': $width,
                 '$order              ': $order,
-                '$center             ': $center,
                 '$legacy             ': '' + $legacy + '\A',
                 '$auto-width         ': $auto-width,
                 '$calc               ': $calc,

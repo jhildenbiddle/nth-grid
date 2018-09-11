@@ -159,7 +159,6 @@ function Grid(settings, options) {
         columns: [ 1 ],
         gap: 0,
         margin: 0,
-        center: true,
         direction: "ltr",
         legacy: false,
         debug: false,
@@ -630,13 +629,6 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
             value: "auto"
         });
     }
-    selectorContainer.append({
-        prop: "margin-right",
-        value: grid.center === true ? "auto" : 0
-    }, {
-        prop: "margin-left",
-        value: grid.center === true ? "auto" : 0
-    });
     siblingContainer.append(postcss.rule({
         selector: appendSelectors(nthSelector, ":after")
     }).append({
@@ -653,7 +645,7 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
 
 function gridDebug(grid, nthSelector, selectorContainer, siblingContainer) {
     if (grid.debug) {
-        const debugContent = [ "columns            : " + grid.columns, "gap                : " + grid.gap, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "center             : " + grid.center, "legacy             : " + grid.legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
+        const debugContent = [ "columns            : " + grid.columns, "gap                : " + grid.gap, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "legacy             : " + grid.legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
         siblingContainer.append(postcss.rule({
             selector: appendSelectors(nthSelector, ":before")
         }).append({

@@ -146,7 +146,6 @@
             columns: [ 1 ],
             gap: 0,
             margin: 0,
-            center: true,
             direction: "ltr",
             legacy: false,
             debug: false,

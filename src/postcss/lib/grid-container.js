@@ -48,12 +48,6 @@ export default function gridContainer(grid, nthSelector, selectorContainer, sibl
         selectorContainer.append({ prop: 'width', value: 'auto' });
     }
 
-    // Centering
-    selectorContainer.append (
-        { prop: 'margin-right', value: grid.center === true ? 'auto' : 0 },
-        { prop: 'margin-left', value: grid.center === true ? 'auto' : 0 }
-    );
-
     // Clearfix
     siblingContainer.append(
         postcss.rule(

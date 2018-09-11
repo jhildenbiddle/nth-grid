@@ -185,7 +185,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              @margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
              @width: 960px,    // Fixed 960px container
              @order: 3 1 2,    // Column order
-             @center: true,    // Centered grid
              @direction: ltr,  // Grid direction
              @legacy: false,   // Legacy browser support (IE7/8)
              @debug: false,    // Debug information displayed above grid
@@ -212,7 +211,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              $margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
              $width: 960px,    // Fixed 960px container
              $order: 3 1 2,    // Column order
-             $center: true,    // Centered grid
              $direction: ltr,  // Grid direction
              $legacy: false,   // Legacy browser support (IE7/8)
              $debug: false,    // Debug information displayed above grid
@@ -238,7 +236,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              $margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
              $width: 960px,    // Fixed 960px container
              $order: 3 1 2,    // Column order
-             $center: true,    // Centered grid
              $direction: ltr,  // Grid direction
              $legacy: false,   // Legacy browser support (IE7/8)
              $debug: false,    // Debug information displayed above grid
@@ -264,7 +261,6 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
              margin: 0 1%;    /* 0% horizontal, 1% vertical grid margins */
              width: 960px;    /* Fixed 960px container */
              order: 3 1 2;    /* Column order */
-             center: true;    /* Centered grid */
              direction: ltr;  /* Grid direction */
              legacy: false;   /* Legacy browser support (IE7/8) */
              debug: false;    /* Debug information displayed above grid */
@@ -284,7 +280,6 @@ Nth-Grid provides global options for changing the default values used for most g
 @nth-grid-columns               : 1;
 @nth-grid-gutter                : 0;
 @nth-grid-margin                : 0;
-@nth-grid-center                : true;
 @nth-grid-direction             : ltr;
 @nth-grid-legacy                : false;
 
@@ -311,7 +306,6 @@ Nth-Grid provides global options for changing the default values used for most g
 $nth-grid-columns               : 1;
 $nth-grid-gutter                : 0;
 $nth-grid-margin                : 0;
-$nth-grid-center                : true;
 $nth-grid-direction             : ltr;
 $nth-grid-legacy                : false;
 
@@ -338,7 +332,6 @@ $nth-grid-warnings              : true;
 $nth-grid-columns                = 1
 $nth-grid-gutter                 = 0
 $nth-grid-margin                 = 0
-$nth-grid-center                 = true
 $nth-grid-direction              = ltr
 $nth-grid-legacy                 = false
 
@@ -373,7 +366,6 @@ Note the PostCSS-specific  `remove-globals` option. When this option is set to `
     --nth-grid-columns               : 1;
     --nth-grid-gutter                : 0;
     --nth-grid-margin                : 0;
-    --nth-grid-center                : true;
     --nth-grid-direction             : ltr;
     --nth-grid-legacy                : false;
 
@@ -407,7 +399,6 @@ gulp.task('css', function () {
         'columns'               : 1,
         'gutter'                : 0,
         'margin'                : 0,
-        'center'                : true,
         'direction'             : 'ltr',
         'legacy'                : false,
 
@@ -450,7 +441,6 @@ Examples below are provided for the Sass/SCSS mixin, but the syntax is similar f
 - [margin](#margin)
 - [width](#width)
 - [order](#order)
-- [center](#center)
 - [direction](#direction)
 - [legacy](#legacy)
 - [debug](#debug)
@@ -663,26 +653,6 @@ Sets the column presentation order.
           // Column 1 is moved to the second position
           // Column 2 is moved to the third position
           $order: 3 1 2
-      );
-  }
-  ```
-
-### center
-
-*Default:* `true`
-
-Sets the position of grids that are less than 100% of the width of their container.
-
-- Accepts `true` or `false`.
-
-  ``` scss
-  // Sass (SCSS)
-  // A non-centered grid that is 80% of the width of the .myclass container
-  .myclass {
-      .nth-grid(
-          // ...
-          $width: 80%,
-          $center: false
       );
   }
   ```

@@ -32,11 +32,6 @@ $nth-grid-gap                   : 0 !default;
 /// @see nth-grid
 $nth-grid-margin                : 0 !default;
 ///
-/// Default Nth-Grid `center` setting.
-/// @type Boolean
-/// @see nth-grid
-$nth-grid-center                : true !default;
-///
 /// Default Nth-Grid `direction` setting.
 /// @type String
 /// @see nth-grid
@@ -428,10 +423,6 @@ $nth-grid-warnings              : true !default;
 /// @param {List} $order [false]
 /// Sets the column presentation order.
 ///
-/// @param {Boolean} $center [true]
-/// Sets the position of grids that are less than 100% of the width of their
-/// container.
-///
 /// @param {String} $direction [ltr]
 /// Sets the direction of the grid layout to support left-to-right (default) or
 /// right-to-left layouts. This sets the flow of grid columns but not the flow
@@ -477,7 +468,6 @@ $nth-grid-warnings              : true !default;
 /// @see $nth-grid-columns
 /// @see $nth-grid-gap
 /// @see $nth-grid-margin
-/// @see $nth-grid-center
 /// @see $nth-grid-direction
 /// @see $nth-grid-legacy
 /// @see $nth-grid-overlay
@@ -537,7 +527,6 @@ $nth-grid-warnings              : true !default;
 ///           $margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
 ///           $width: 960px,    // Fixed 960px container
 ///           $order: 3 1 2,    // Column order
-///           $center: true,    // Centered grid
 ///           $direction: ltr,  // Grid direction
 ///           $legacy: true,    // Legacy browser support (IE7/8)
 ///           $debug: false,    // Debug information displayed above grid
@@ -550,7 +539,6 @@ $nth-grid-warnings              : true !default;
     $margin                : $nth-grid-margin,
     $width                 : 100%,
     $order                 : false,
-    $center                : $nth-grid-center,
     $direction             : $nth-grid-direction,
     $legacy                : $nth-grid-legacy,
     $debug                 : $nth-grid-debug,
@@ -799,16 +787,6 @@ $nth-grid-warnings              : true !default;
     }
     @else {
         width: auto;
-    }
-
-    // Centering
-    @if $center {
-        margin-right: auto;
-        margin-left: auto;
-    }
-    @else {
-        margin-right: 0;
-        margin-left: 0;
     }
 
     // Clearfix
@@ -1150,7 +1128,6 @@ $nth-grid-warnings              : true !default;
                 '\A' + '$margin             : #{$margin}'
                 '\A' + '$width              : #{$width}'
                 '\A' + '$order              : #{$order}'
-                '\A' + '$center             : #{$center}'
                 '\A' + '$legacy             : #{$legacy}'
                 '\A' +
                 '\A' + '$auto-width         : #{$auto-width}'

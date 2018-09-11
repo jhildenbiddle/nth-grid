@@ -15,7 +15,6 @@ export default function gridDebug(grid, nthSelector, selectorContainer, siblingC
             'margin             : ' + grid.margin,
             'width              : ' + grid.width,
             'order              : ' + grid.order,
-            'center             : ' + grid.center,
             'legacy             : ' + grid.legacy + '\\A ',
             'auto_width         : ' + grid.auto_width,
             'calc               : ' + grid.calc,

@@ -160,6 +160,9 @@ section {
 // All Grids
 // -----------------------------------------------------------------------------
 [class*="grid-"] {
+    margin-right: auto;
+    margin-left: auto;
+
     // Responsive images in grid containers
     img {
         display: block;
