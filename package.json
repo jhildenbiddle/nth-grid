@@ -92,7 +92,7 @@
     "watch:hbs": "nodemon -w demo/src/templates -e hbs,js,json -x run-s build:hbs",
     "watch:less-grids": "nodemon -w build/demo -w dist/less -e js,less -x run-s build:less-grids",
     "watch:less-mixin": "nodemon -w src/less -e less -x run-s build:less-mixin",
-    "watch:less-plugin": "nodemon -w src/less/plugin -x run-s build:less-plugin",
+    "watch:less-plugin": "nodemon -w src/less/plugin -w src/postcss -x run-s build:less-plugin",
     "watch:postcss-grids": "nodemon -w build/demo -e pcss -x run-s build:postcss-grids",
     "watch:postcss-plugin": "nodemon -w src/postcss -x run-s build:postcss-plugin build:postcss-grids",
     "watch:sass-demo": "nodemon -w demo/src/sass -w dist/sass -e scss -x run-s build:sass-demo",
