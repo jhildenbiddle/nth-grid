@@ -18,6 +18,7 @@
     "flexbox",
     "gap",
     "grid",
+    "gutter",
     "legacy",
     "less",
     "mixin",
