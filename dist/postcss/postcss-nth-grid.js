@@ -160,7 +160,10 @@ function Grid(settings, options) {
         gap: 0,
         margin: 0,
         direction: "ltr",
-        legacy: false,
+        flex: true,
+        flex_legacy: true,
+        float: false,
+        float_legacy: false,
         debug: false,
         debug_background_color: "#000",
         debug_text_color: "#ccc",
@@ -385,57 +388,55 @@ function overlayContent(grid, selector, container, content) {
 
 function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
     let newRule;
-    if (grid.legacy === true && grid.calc === true && grid.warnings === true) {
+    if (grid.float_legacy && grid.calc && grid.warnings) {
         console.warn(`NTH-GRID: "${nthSelector}" requires calc() support. This grid will not render properly in legacy browsers.`);
     }
-    siblingContainer.append(postcss.rule({
-        selector: appendSelectors(nthSelector, " > *")
-    }).append({
-        prop: "display",
-        value: "block"
-    }, {
-        prop: "box-sizing",
-        value: "border-box"
-    }));
     newRule = postcss.rule({
         selector: appendSelectors(nthSelector, " > *:nth-child(1n)")
     }).append({
-        prop: "float",
-        value: grid.dir_left
-    }, {
-        prop: "clear",
-        value: "none"
+        prop: "box-sizing",
+        value: "border-box"
     }, {
         prop: "position",
         value: "static"
     }, {
         prop: grid.dir_left,
         value: "auto"
-    }, {
-        prop: "margin-" + grid.dir_right,
-        value: "0"
-    }, {
+    });
+    if (grid.float) {
+        newRule.append({
+            prop: "float",
+            value: grid.dir_left
+        }, {
+            prop: "clear",
+            value: "none"
+        }, {
+            prop: "margin-" + grid.dir_right,
+            value: "0"
+        });
+        if (grid.float_legacy) {
+            newRule.append({
+                prop: "*display",
+                value: "inline"
+            }, {
+                prop: "*float",
+                value: "none"
+            }, {
+                prop: "*vertical-align",
+                value: "top"
+            }, {
+                prop: "*zoom",
+                value: "1"
+            });
+        }
+    }
+    newRule.append({
         prop: "margin-top",
         value: grid.gap_v
     }, {
         prop: "margin-" + grid.dir_left,
         value: grid.gap_h
     });
-    if (grid.legacy === true) {
-        newRule.append({
-            prop: "*display",
-            value: "inline"
-        }, {
-            prop: "*float",
-            value: "none"
-        }, {
-            prop: "*vertical-align",
-            value: "top"
-        }, {
-            prop: "*zoom",
-            value: "1"
-        });
-    }
     siblingContainer.append(newRule);
     siblingContainer.append(postcss.rule({
         selector: appendSelectors(nthSelector, " > *:nth-child(-n + " + grid.total_columns + ")")
@@ -443,7 +444,7 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
         prop: "margin-top",
         value: grid.margin_v
     }));
-    if (grid.legacy === true && grid.margin_h === 0) {
+    if (grid.float && grid.float_legacy && grid.margin_h === 0) {
         siblingContainer.append(postcss.rule({
             selector: appendSelectors(nthSelector, " > *:nth-child(" + grid.total_columns + "n)")
         }).append({
@@ -451,15 +452,20 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
             value: "-2px"
         }));
     }
-    siblingContainer.append(postcss.rule({
+    newRule = postcss.rule({
         selector: appendSelectors(nthSelector, " > *:nth-child(" + grid.total_columns + "n + 1)")
-    }).append({
-        prop: "clear",
-        value: grid.dir_left
-    }, {
+    });
+    if (grid.float) {
+        newRule.append({
+            prop: "clear",
+            value: grid.dir_left
+        });
+    }
+    newRule.append({
         prop: "margin-" + grid.dir_left,
         value: grid.margin_h
-    }));
+    });
+    siblingContainer.append(newRule);
     newRule = postcss.rule({
         selector: appendSelectors(nthSelector, " > *:nth-last-child(-n + " + grid.total_columns + ")")
     });
@@ -475,7 +481,7 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
         });
     }
     siblingContainer.append(newRule);
-    if (grid.legacy === true) {
+    if (grid.float && grid.float_legacy) {
         siblingContainer.append(postcss.rule({
             selector: appendSelectors(nthSelector, " > *:last-child")
         }).append({
@@ -559,7 +565,7 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
         });
     }
     if (grid.order && grid.order.length > grid.total_columns) {
-        if (grid.warnings === true) {
+        if (grid.warnings) {
             console.warn(`NTH-GRID: "${nthSelector}" order [${grid.order}] exceeds total column count of ${grid.total_columns} for columns [${grid.columns}]. Order not applied.`);
         }
     } else if (grid.order_offsets.length) {
@@ -581,21 +587,79 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
 }
 
 function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
-    selectorContainer.append({
-        prop: "display",
-        value: "block"
-    });
-    if (grid.legacy === true) {
+    if (grid.float) {
         selectorContainer.append({
-            prop: "*display",
-            value: "inline-block"
+            prop: "display",
+            value: "block"
         });
+        if (grid.float_legacy) {
+            selectorContainer.append({
+                prop: "*display",
+                value: "inline-block"
+            });
+        }
+        if (grid.order) {
+            selectorContainer.append({
+                prop: "*position",
+                value: "relative"
+            });
+        }
     }
-    if (grid.legacy === true && grid.order) {
+    if (grid.flex) {
+        if (grid.flex_legacy) {
+            selectorContainer.append({
+                prop: "display",
+                value: "-webkit-box"
+            }, {
+                prop: "display",
+                value: "-ms-flexbox"
+            });
+        }
         selectorContainer.append({
-            prop: "*position",
-            value: "relative"
+            prop: "display",
+            value: "flex"
         });
+        if (grid.flex_legacy) {
+            selectorContainer.append({
+                prop: "-ms-flex-wrap",
+                value: "wrap"
+            });
+        }
+        selectorContainer.append({
+            prop: "flex-wrap",
+            value: "wrap"
+        });
+        if (grid.flex_legacy) {
+            selectorContainer.append({
+                prop: "-webkit-box-align",
+                value: "start"
+            }, {
+                prop: "-ms-flex-align",
+                value: "start"
+            });
+        }
+        selectorContainer.append({
+            prop: "align-items",
+            value: "flex-start"
+        });
+        if (grid.direction === "rtl") {
+            if (grid.flex_legacy) {
+                selectorContainer.append({
+                    prop: "-webkit-box-orient",
+                    value: "horizontal"
+                }, {
+                    prop: "-webkit-box-direction",
+                    value: "reverse"
+                }, {
+                    prop: "-ms-flex-direction",
+                    value: "row-reverse"
+                });
+            }
+            selectorContainer.append({
+                prop: "flex-direction",
+                value: "row-reverse"
+            });
+        }
     }
     if (grid.total_ratio_columns === 0) {
         selectorContainer.append({
@@ -608,7 +672,7 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
             value: "border-box"
         });
     }
-    if (grid.total_ratio_columns === 0 && grid.calc === true) {
+    if (grid.total_ratio_columns === 0 && grid.calc) {
         selectorContainer.append({
             prop: "width",
             value: "calc(" + grid.auto_width + ")"
@@ -629,23 +693,25 @@ function gridContainer(grid, nthSelector, selectorContainer, siblingContainer) {
             value: "auto"
         });
     }
-    siblingContainer.append(postcss.rule({
-        selector: appendSelectors(nthSelector, ":after")
-    }).append({
-        prop: "content",
-        value: "''"
-    }, {
-        prop: "display",
-        value: "table"
-    }, {
-        prop: "clear",
-        value: "both"
-    }));
+    if (grid.float) {
+        siblingContainer.append(postcss.rule({
+            selector: appendSelectors(nthSelector, ":after")
+        }).append({
+            prop: "content",
+            value: "''"
+        }, {
+            prop: "display",
+            value: "table"
+        }, {
+            prop: "clear",
+            value: "both"
+        }));
+    }
 }
 
 function gridDebug(grid, nthSelector, selectorContainer, siblingContainer) {
     if (grid.debug) {
-        const debugContent = [ "columns            : " + grid.columns, "gap                : " + grid.gap, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "legacy             : " + grid.legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
+        const debugContent = [ "columns            : " + grid.columns, "gap                : " + grid.gap, "margin             : " + grid.margin, "width              : " + grid.width, "order              : " + grid.order, "direction          : " + grid.direction, "flex               : " + grid.flex, "flex-legacy        : " + grid.flex_legacy, "float              : " + grid.float, "float-legacy       : " + grid.float_legacy + "\\A ", "auto_width         : " + grid.auto_width, "calc               : " + grid.calc, "columns_ratio      : " + grid.columns_ratio, "columns_unit       : " + grid.columns_unit, "grid_col_ratio     : " + grid.grid_col_ratio, "grid_col_width     : " + grid.grid_col_width, "grid_width         : " + grid.grid_width, "order_offsets      : " + grid.order_offsets, "total_columns      : " + grid.total_columns, "total_ratio_columns: " + grid.total_ratio_columns, "total_unit_columns : " + grid.total_unit_columns ].join("\\A ");
         siblingContainer.append(postcss.rule({
             selector: appendSelectors(nthSelector, ":before")
         }).append({
@@ -837,7 +903,7 @@ var index = postcss.plugin("postcss-nth-grid", options => {
                 gridColumns(grid, nthSelector, selectorContainer, siblingContainer);
                 gridOverlay(grid, nthSelector, selectorContainer, siblingContainer);
                 gridDebug(grid, nthSelector, selectorContainer, siblingContainer);
-                if (grid.legacy) {
+                if (grid.float_legacy) {
                     [ selectorContainer, siblingContainer ].forEach(function(container) {
                         container.walk(function(node) {
                             if (node.value && getUnit(node.value) === "rem") {

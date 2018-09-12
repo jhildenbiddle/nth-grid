@@ -2,7 +2,13 @@
 
 Nth-Grid is a lightweight and semantic CSS grid system available for [Less](http://lesscss.org/), [Sass](http://sass-lang.com/), [Stylus](http://stylus-lang.com/) and [PostCSS](https://github.com/postcss/postcss). The purpose of Nth-Grid is to provide a versatile grid-based layout system that balances simplicity and flexibility while addressing commonly criticized aspects of other grid systems.
 
-------
+---
+
+### TODO
+
+- [ ] Add `flex`, `flex-legacy`, `float`, and `float-legacy` documentation
+
+---
 
 - [Why Nth-Grid?](#why-nth-grid)
 - [Features](#features)
@@ -16,7 +22,7 @@ Nth-Grid is a lightweight and semantic CSS grid system available for [Less](http
 - [FAQ](#faq)
 - [License](#license)
 
-------
+---
 
 ## Why Nth-Grid
 

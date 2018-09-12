@@ -102,7 +102,7 @@ export default postcss.plugin('postcss-nth-grid', options => {
                 gridDebug(grid, nthSelector, selectorContainer, siblingContainer);
 
                 // Convert rem values to px for legacy browsers
-                if (grid.legacy) {
+                if (grid.float_legacy) {
                     // Loop through containers
                     [selectorContainer, siblingContainer].forEach(function(container) {
                         container.walk(function(node) {

@@ -13,13 +13,11 @@
     "url": "https://github.com/jhildenbiddle/nth-grid/issues"
   },
   "keywords": [
-    "columns",
     "css",
     "flex",
     "flexbox",
+    "gap",
     "grid",
-    "html",
-    "layout",
     "legacy",
     "less",
     "mixin",
@@ -27,6 +25,7 @@
     "postcss",
     "postcss-plugin",
     "sass",
+    "sassdoc",
     "scss",
     "semantic",
     "stylus"

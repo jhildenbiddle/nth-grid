@@ -11,7 +11,10 @@ $nth-grid-columns                ?= 1
 $nth-grid-gap                    ?= 0
 $nth-grid-margin                 ?= 0
 $nth-grid-direction              ?= ltr
-$nth-grid-legacy                 ?= false
+$nth-grid-flex                   ?= true
+$nth-grid-flex-legacy            ?= true
+$nth-grid-float                  ?= false
+$nth-grid-float-legacy           ?= false
 
 // Debug
 $nth-grid-debug                  ?= false
@@ -186,7 +189,7 @@ _nth-overlay($content, $overlay = $nth-grid-overlay)
             content: '"%s" !important' % $content
 
 // Converts rem-to-px fallback for legacy browsers
-_nth-rem($property, $val, $legacy = $nth-grid-legacy)
+_nth-rem($property, $val, $legacy = $nth-grid-float-legacy)
     if $legacy and typeof($val) == 'unit' and unit($val) == 'rem'
         {$property}: unit($val * $nth-grid-rem-base, 'px')
     {$property}: $val
@@ -202,7 +205,10 @@ nth-grid(
     $width                  = 100%,
     $order                  = false,
     $direction              = $nth-grid-direction,
-    $legacy                 = $nth-grid-legacy,
+    $flex                   = $nth-grid-flex,
+    $flex-legacy            = $nth-grid-flex-legacy,
+    $float                  = $nth-grid-float,
+    $float-legacy           = $nth-grid-float-legacy,
     $debug                  = $nth-grid-debug,
     $debug-background-color = $nth-grid-debug-background-color,
     $debug-text-color       = $nth-grid-debug-text-color,
@@ -387,15 +393,38 @@ nth-grid(
 
     // Grid Container
     // -------------------------------------------------------------------------
-    display: block
+    // Float
+    if $float
+        display: block
 
-    if $legacy
-        // IE7 double padding fix
-        *display: inline-block
+        if $float-legacy
+            // IE7 double padding fix
+            *display: inline-block
 
-    if $legacy and $order
-        // IE7 relative position fix
-        *position: relative
+            if $order
+                // IE7 relative position fix
+                *position: relative
+
+    // Flex
+    if $flex
+        if $flex-legacy
+            display: -webkit-box;
+            display: -ms-flexbox;
+        display: flex;
+        if $flex-legacy
+            -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        if $flex-legacy
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+        align-items: flex-start;
+
+        if $direction == rtl
+            if $flex-legacy
+                -webkit-box-orient: horizontal;
+                -webkit-box-direction: reverse;
+                -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
 
     // Box sizing
     if $total-ratio-columns == 0
@@ -408,57 +437,58 @@ nth-grid(
     if $total-ratio-columns == 0 and $calc
         width: 'calc(%s)' % unquote($auto-width)
     else if $total-ratio-columns == 0
-        _nth-rem(width, $auto-width, $legacy)
+        _nth-rem(width, $auto-width, $float-legacy)
     else if $width != 100%
-        _nth-rem(width, $width, $legacy)
+        _nth-rem(width, $width, $float-legacy)
     else
         width: auto
 
     // Clearfix
-    &:after
-        content: ''
-        display: table
-        clear: both
+    if $float
+        &:after
+            content: ''
+            display: table
+            clear: both
 
-    // Grid Columns
+    // Columns
     // -------------------------------------------------------------------------
     // Legacy warning
-    if $legacy and $warnings
+    if $float-legacy and $warnings
         warn('NTH-GRID: "' + $selector + '" requires calc() support. This grid will not render properly in legacy browsers.')
 
     > *
-        display: block
-        box-sizing: border-box
-
         // Rules & Resets
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // All Columns
         &:nth-child(1n)
-            float: $dir-left
-            clear: none
+            box-sizing: border-box
             position: static
             {$dir-left}: auto
-            margin-{$dir-right}: 0
+
+            if $float
+                float: $dir-left
+                clear: none
+                margin-{$dir-right}: 0
+
+                if $float-legacy
+                    // IE7 float fix
+                    *display: inline
+                    *float: none
+                    *vertical-align: top
+                    *zoom: 1
 
             // Gap - Vertical
-            _nth-rem(margin-top, $gap-v, $legacy)
+            _nth-rem(margin-top, $gap-v, $float-legacy)
 
             // Gap - Horizontal
-            _nth-rem('margin-' + $dir-left, $gap-h, $legacy)
-
-            if $legacy
-                // IE7 float fix
-                *display: inline
-                *float: none
-                *vertical-align: top
-                *zoom: 1
+            _nth-rem('margin-' + $dir-left, $gap-h, $float-legacy)
 
         // All columns in first row
         &:nth-child(-n + {$total-columns})
             // Margin - Vertical
-            _nth-rem(margin-top, $margin-v, $legacy)
+            _nth-rem(margin-top, $margin-v, $float-legacy)
 
-        if $legacy and $margin-h == 0
+        if $float and $float-legacy and $margin-h == 0
             // Last column in each row
             &:nth-child({$total-columns}n)
                 // IE7 sub-pixel rounding fix
@@ -466,10 +496,11 @@ nth-grid(
 
         // First column each row
         &:nth-child({$total-columns}n + 1)
-            clear: $dir-left
+            if $float
+                clear: $dir-left
 
             // Margin - Horizontal
-            _nth-rem('margin-' + $dir-left, $margin-h, $legacy)
+            _nth-rem('margin-' + $dir-left, $margin-h, $float-legacy)
 
         // All columns in last row
         &:nth-last-child(-n + {$total-columns})
@@ -483,20 +514,20 @@ nth-grid(
             else
                 margin-bottom: 'calc(%s)' % $margin-v
 
-        if $legacy
+        if $float and $float-legacy
             // Last child serving as "last row" for selectivir compatibility.
             // Only one element in the last row is needed for vertical margin
             // since vertical alignment (via flexbox) is not an issue.
             &:last-child
                 // Margin - Horizontal
-                _nth-rem(margin-bottom, $margin-v, $legacy)
+                _nth-rem(margin-bottom, $margin-v, $float-legacy)
 
         // Width: Unit-based column(s) only
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         if length($columns-ratio) == 0
             for $column-val, $i in $columns
                 &:nth-child({$total-columns}n + {$i + 1})
-                    _nth-rem(width, $column-val, $legacy)
+                    _nth-rem(width, $column-val, $float-legacy)
 
                     // Grid overlay
                     _nth-overlay($column-val, $overlay)
@@ -514,7 +545,7 @@ nth-grid(
                     _nth-overlay(unquote('1/' + $grid-col-ratio + ' (calc)'), $overlay)
                 // Calc() not required
                 else
-                    _nth-rem(width, round($grid-col-width, $nth-rounding), $legacy)
+                    _nth-rem(width, round($grid-col-width, $nth-rounding), $float-legacy)
 
                     // Grid overlay
                     $round = round($grid-col-width, 2)
@@ -533,7 +564,7 @@ nth-grid(
                         $nth-col = $i + 1 > $ratio-col-index ? ($i + $total-ratio-columns) : ($i + 1)
 
                         &:nth-child({$total-columns}n + {$nth-col})
-                            _nth-rem(width, $column-val, $legacy)
+                            _nth-rem(width, $column-val, $float-legacy)
 
                             // Grid overlay
                             _nth-overlay($column-val, $overlay)
@@ -556,7 +587,7 @@ nth-grid(
                         else
                             $column-width = $grid-col-width * $column-val
 
-                            _nth-rem(width, round($column-width, $nth-rounding), $legacy)
+                            _nth-rem(width, round($column-width, $nth-rounding), $float-legacy)
 
                             // Grid overlay
                             $round = round($column-width, 2)
@@ -564,7 +595,7 @@ nth-grid(
 
                     // Unit-based columns
                     else
-                        _nth-rem(width, $column-val, $legacy)
+                        _nth-rem(width, $column-val, $float-legacy)
 
                         // Grid overlay
                         _nth-overlay($column-val, $overlay)
@@ -701,7 +732,11 @@ nth-grid(
                 '$margin             ': $margin,
                 '$width              ': $width,
                 '$order              ': $order,
-                '$legacy             ': '' + $legacy + '\A',
+                '$direction          ': $direction,
+                '$flex               ': '' + $flex,
+                '$flex-legacy        ': '' + $flex-legacy,
+                '$float              ': '' + $float,
+                '$float-legacy       ': '' + $float-legacy + '\A',
                 '$auto-width         ': $auto-width,
                 '$calc               ': $calc,
                 '$columns-ratio      ': $columns-ratio,

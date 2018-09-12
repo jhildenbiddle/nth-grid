@@ -8,11 +8,14 @@
             "order": false
         },
         "default": {
-            "direction": "ltr",
-            "legacy"   : true,
-            "overlay"  : false,
-            "debug"    : false,
-            "warnings" : false
+            "direction"   : "ltr",
+            "flex"        : true,
+            "flex-legacy" : true,
+            "float"       : true,
+            "float-legacy": true,
+            "overlay"     : false,
+            "debug"       : false,
+            "warnings"    : false
         }
     },
     "grids": {

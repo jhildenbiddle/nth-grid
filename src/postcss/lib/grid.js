@@ -24,7 +24,10 @@ export default function Grid(settings, options) {
         gap                   : 0,
         margin                : 0,
         direction             : 'ltr',
-        legacy                : false,
+        flex                  : true,
+        flex_legacy           : true,
+        float                 : false,
+        float_legacy          : false,
 
         // Debug
         debug                 : false,

@@ -33,47 +33,45 @@ export default function gridColumns(grid, nthSelector, selectorContainer, siblin
     let newRule;
 
     // Legacy warning
-    if (grid.legacy === true && grid.calc === true && grid.warnings ===  true) {
+    if (grid.float_legacy && grid.calc && grid.warnings) {
         // eslint-disable-next-line
         console.warn(`NTH-GRID: "${nthSelector}" requires calc() support. This grid will not render properly in legacy browsers.`);
     }
 
-    // All columns (low specificity)
-    // -------------------------------------------------------------------------
-    siblingContainer.append(
-        postcss.rule(
-            { selector: appendSelectors(nthSelector, ' > *') }
-        ).append(
-            { prop: 'display', value: 'block' },
-            { prop: 'box-sizing', value: 'border-box' }
-        )
-    );
-
-    // All columns (nth specificity)
+    // All columns
     // -------------------------------------------------------------------------
     newRule = postcss.rule(
         { selector: appendSelectors(nthSelector, ' > *:nth-child(1n)') }
     ).append(
-        { prop: 'float', value: grid.dir_left },
-        { prop: 'clear', value: 'none' },
+        { prop: 'box-sizing', value: 'border-box' },
         { prop: 'position', value: 'static' },
-        { prop: grid.dir_left, value: 'auto' },
-        { prop: 'margin-' + grid.dir_right, value: '0' },
+        { prop: grid.dir_left, value: 'auto' }
+    );
+
+    if (grid.float) {
+        newRule.append(
+            { prop: 'float', value: grid.dir_left },
+            { prop: 'clear', value: 'none' },
+            { prop: 'margin-' + grid.dir_right, value: '0' }
+        );
+
+        if (grid.float_legacy) {
+            // IE7 float fix
+            newRule.append(
+                { prop: '*display', value: 'inline' },
+                { prop: '*float', value: 'none' },
+                { prop: '*vertical-align', value: 'top' },
+                { prop: '*zoom', value: '1' }
+            );
+        }
+    }
+
+    newRule.append(
         // Gap - Vertical
         { prop: 'margin-top', value: grid.gap_v },
         // Gap - Horizontal
         { prop: 'margin-' + grid.dir_left, value: grid.gap_h }
     );
-
-    if (grid.legacy === true) {
-        // IE7 float fix
-        newRule.append(
-            { prop: '*display', value: 'inline' },
-            { prop: '*float', value: 'none' },
-            { prop: '*vertical-align', value: 'top' },
-            { prop: '*zoom', value: '1' }
-        );
-    }
 
     siblingContainer.append(newRule);
 
@@ -87,7 +85,7 @@ export default function gridColumns(grid, nthSelector, selectorContainer, siblin
         )
     );
 
-    if (grid.legacy === true && grid.margin_h === 0) {
+    if (grid.float && grid.float_legacy && grid.margin_h === 0) {
         siblingContainer.append(
             // Last column in each row
             postcss.rule(
@@ -101,14 +99,19 @@ export default function gridColumns(grid, nthSelector, selectorContainer, siblin
 
     // First column each row
     // -------------------------------------------------------------------------
-    siblingContainer.append(
-        postcss.rule(
-            { selector: appendSelectors(nthSelector, ' > *:nth-child(' + grid.total_columns + 'n + 1)') }
-        ).append(
-            { prop: 'clear', value: grid.dir_left },
-            { prop: 'margin-' + grid.dir_left, value: grid.margin_h }
-        )
+    newRule = postcss.rule(
+        { selector: appendSelectors(nthSelector, ' > *:nth-child(' + grid.total_columns + 'n + 1)') }
     );
+
+    if (grid.float) {
+        newRule.append(
+            { prop: 'clear', value: grid.dir_left }
+        );
+    }
+
+    newRule.append({ prop: 'margin-' + grid.dir_left, value: grid.margin_h });
+
+    siblingContainer.append(newRule);
 
     // All columns in last row
     // -------------------------------------------------------------------------
@@ -134,7 +137,7 @@ export default function gridColumns(grid, nthSelector, selectorContainer, siblin
 
     siblingContainer.append(newRule);
 
-    if (grid.legacy === true) {
+    if (grid.float && grid.float_legacy) {
         // Last child serving as "last row" for selectivir compatibility.
         // Only one element in the last row is needed for vertical margin
         // since vertical alignment (via flexbox) is not an issue.
@@ -275,7 +278,7 @@ export default function gridColumns(grid, nthSelector, selectorContainer, siblin
     // -------------------------------------------------------------------------
     // Invalid order
     if (grid.order && grid.order.length > grid.total_columns) {
-        if (grid.warnings ===  true) {
+        if (grid.warnings) {
             // eslint-disable-next-line
             console.warn(`NTH-GRID: "${nthSelector}" order [${grid.order}] exceeds total column count of ${grid.total_columns} for columns [${grid.columns}]. Order not applied.`);
         }

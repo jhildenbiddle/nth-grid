@@ -11,7 +11,10 @@
 @nth-grid-gap                   : 0;
 @nth-grid-margin                : 0;
 @nth-grid-direction             : ltr;
-@nth-grid-legacy                : false;
+@nth-grid-flex                  : true;
+@nth-grid-flex-legacy           : true;
+@nth-grid-float                 : false;
+@nth-grid-float-legacy          : false;
 
 // Debug
 @nth-grid-debug                 : false;
@@ -39,7 +42,10 @@
     @width                 : 100%,
     @order                 : false,
     @direction             : @nth-grid-direction,
-    @legacy                : @nth-grid-legacy,
+    @flex                  : @nth-grid-flex,
+    @flex-legacy           : @nth-grid-flex-legacy,
+    @float                 : @nth-grid-float,
+    @float-legacy          : @nth-grid-float-legacy,
     @debug                 : @nth-grid-debug,
     @debug-background-color: @nth-grid-debug-background-color,
     @debug-text-color      : @nth-grid-debug-text-color,
@@ -130,7 +136,7 @@
         }
         .val();
 
-        .legacy() when (@legacy) and (isnumber(@val)) and (get-unit(@val) = rem) {
+        .legacy() when (@float-legacy) and (isnumber(@val)) and (get-unit(@val) = rem) {
             @{property}: unit((@val * @nth-grid-rem-base), px);
         }
         .legacy() {
@@ -141,19 +147,60 @@
 
     // Grid Container
     // -------------------------------------------------------------------------
-    display: block;
+    .float() when (@float) {
+        display: block;
 
-    .display() when (@legacy) {
-        // IE7 dobule padding fix
-        *display: inline-block;
-    }
-    .display();
+        .legacy() when (@float-legacy) {
+            // IE7 dobule padding fix
+            *display: inline-block;
 
-    .position() when (@legacy) and not (@order = false) {
-        // IE7 relative position fix
-        *position: relative;
+            .position() when not (@order = false) {
+                // IE7 relative position fix
+                *position: relative;
+            }
+            .position();
+        }
+        .legacy();
     }
-    .position();
+    .float();
+
+    .flex() when (@flex) {
+        .legacy-display() when (@flex-legacy) {
+            display: -webkit-box;
+            display: -ms-flexbox;
+        }
+        .legacy-display();
+
+        display: flex;
+
+        .legacy-wrap() when (@flex-legacy) {
+            -ms-flex-wrap: wrap;
+        }
+        .legacy-wrap();
+
+        flex-wrap: wrap;
+
+        .legacy-align() when (@flex-legacy) {
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+        }
+        .legacy-align();
+
+        align-items: flex-start;
+
+        .direction() when (@direction = rtl) {
+            .legacy() when (@flex-legacy) {
+                -webkit-box-orient: horizontal;
+                -webkit-box-direction: reverse;
+                   -ms-flex-direction: row-reverse;
+            }
+            .legacy();
+
+            flex-direction: row-reverse;
+        }
+        .direction();
+    }
+    .flex();
 
     // Box sizing
     .box-sizing() when (@total-ratio-columns = 0) {
@@ -181,48 +228,53 @@
     .width();
 
     // Clearfix
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
+    .clearfix() when (@float) {
+        &:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
     }
+    .clearfix();
 
     // Columns
     // -------------------------------------------------------------------------
     // Legacy warning
-    .warning() when (@legacy) and (@calc) and (@warnings) {
+    .warning() when (@float-legacy) and (@calc) and (@warnings) {
         nth-warn('NTH-GRID: Calc() support required for grid columns. This grid will not render properly in legacy browsers.');
     }
     .warning();
 
     > * {
-        display: block;
-        box-sizing: border-box;
-
         // Rules & Resets
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // All Columns
         &:nth-child(1n) {
-            float: @dir-left;
-            clear: none;
+            box-sizing: border-box;
             position: static;
             @{dir-left}: auto;
-            margin-@{dir-right}: 0;
+
+            .float() when (@float) {
+                float: @dir-left;
+                clear: none;
+                margin-@{dir-right}: 0;
+
+                .legacy() when (@float-legacy) {
+                    // IE7 float fix
+                    *display: inline;
+                    *float: none;
+                    *vertical-align: top;
+                    *zoom: 1;
+                }
+                .legacy();
+            }
+            .float();
 
             // Gap - Vertical
             .rem(margin-top, @gap-v);
 
             // Gap - Horizontal
             .rem(~'margin-@{dir-left}', @gap-h);
-
-            .legacy() when (@legacy) {
-                // IE7 float fix
-                *display: inline;
-                *float: none;
-                *vertical-align: top;
-                *zoom: 1;
-            }
-            .legacy();
         }
 
         // All columns in first row
@@ -231,7 +283,7 @@
             .rem(margin-top, @margin-v);
         }
 
-        .legacy-subpixel() when (@legacy) and (@margin-h = 0) {
+        .legacy-subpixel() when (@float) and (@float-legacy) and (@margin-h = 0) {
             // Last column in each row
             &:nth-child(@{total-columns}n) {
                 // IE7 sub-pixel rounding fix
@@ -242,7 +294,10 @@
 
         // First column each row
         &:nth-child(@{total-columns}n + 1) {
-            clear: @dir-left;
+            .float() when (@float) {
+                clear: @dir-left;
+            }
+            .float();
 
             // Margin - Horizontal
             .rem(~'margin-@{dir-left}', @margin-h);
@@ -264,7 +319,7 @@
             .margin-bottom();
         }
 
-        .legacy-margin-v() when (@legacy) {
+        .legacy-margin-v() when (@float) and (@float-legacy) {
             // Last child serving as "last row" for selectivir compatibility.
             // Only one element in the last row is needed for vertical margin
             // since vertical alignment (via flexbox) is not an issue.
@@ -485,7 +540,11 @@
                 '@margin             : @{margin}\A'
                 '@width              : @{width}\A'
                 '@order              : @{order}\A'
-                '@legacy             : @{legacy}\A'
+                '@direction          : @{direction}\A'
+                '@flex               : @{flex}\A'
+                '@flex-legacy        : @{flex-legacy}\A'
+                '@float              : @{float}\A'
+                '@float-legacy       : @{float-legacy}\A'
                 '\A'
                 '@auto-width         : @{auto-width}\A'
                 '@calc               : @{calc}\A'

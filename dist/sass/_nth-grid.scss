@@ -37,10 +37,25 @@ $nth-grid-margin                : 0 !default;
 /// @see nth-grid
 $nth-grid-direction             : ltr !default;
 ///
-/// Default Nth-Grid `legacy` setting.
+/// Default Nth-Grid `flex` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-legacy                : false !default;
+$nth-grid-flex                  : true !default;
+///
+/// Default Nth-Grid `flex-legacy` setting.
+/// @type Boolean
+/// @see nth-grid
+$nth-grid-flex-legacy           : true !default;
+///
+/// Default Nth-Grid `float` setting.
+/// @type Boolean
+/// @see nth-grid
+$nth-grid-float                 : false !default;
+///
+/// Default Nth-Grid `float-legacy` setting.
+/// @type Boolean
+/// @see nth-grid
+$nth-grid-float-legacy          : false !default;
 
 // Debug
 // -----------------------------------------------------------------------------
@@ -328,11 +343,11 @@ $nth-grid-warnings              : true !default;
 /// @param {Boolean} $force [false] - Sum even if units do not match
 /// @returns {Length | Number}
 /// @example scss
-///   $test: _nthSum(1 2 3);             /* 6 */
-///   $test: _nthSum(1px 2 3);           /* 6px */
-///   $test: _nthSum(1px 2px 3px);       /* 6px */
-///   $test: _nthSum(1px 2px 3%);        /* Error - incompatible units */
-///   $test: _nthSum(1px 2px 3%, true);  /* 6 - forced */
+///   $test: _nthSum(1 2 3);            /* 6 */
+///   $test: _nthSum(1px 2 3);          /* 6px */
+///   $test: _nthSum(1px 2px 3px);      /* 6px */
+///   $test: _nthSum(1px 2px 3%);       /* Error - incompatible units */
+///   $test: _nthSum(1px 2px 3%, true); /* 6 - forced */
 @function _nthSum($list, $force: false) {
     $sum: 0;
 
@@ -376,7 +391,7 @@ $nth-grid-warnings              : true !default;
 /// @access private
 /// @param {String} $property - CSS property (margin, padding, etc.)
 /// @param {Length} $val - CSS value to process
-/// @param {Boolean} $legacy [$nth-grid-legacy] - Include pixel values for
+/// @param {Boolean} $legacy [$nth-grid-float-legacy] - Include pixel values for
 /// legacy browsers
 ///
 /// @example scss - SCSS
@@ -390,7 +405,7 @@ $nth-grid-warnings              : true !default;
 ///     padding: 16px !important; /* Legacy */
 ///     padding: 1rem !important; /* Native */
 ///   }
-@mixin _nth-rem($property, $val, $legacy: $nth-grid-legacy) {
+@mixin _nth-rem($property, $val, $legacy: $nth-grid-float-legacy) {
     @if $legacy and type-of($val) == number and unit($val) == 'rem' {
         $base: _nthStripUnit($nth-grid-rem-base);
         $num : _nthStripUnit($val);
@@ -430,10 +445,21 @@ $nth-grid-warnings              : true !default;
 /// `dir="rtl"` to an HTML element or adding a `direction: rtl;` rule in
 /// your CSS.
 ///
-/// @param {Boolean} $legacy [false]
-/// Sets legacy compatibility mode. Setting this option to `true` will result in
-/// additional CSS being generated for IE7/8 compatibility. It is not necessary
-/// to set this option for IE9+.
+/// @param {Boolean} $flex [true]
+/// Flexbox-based grid
+///
+/// @param {Boolean} $flex-legacy [true]
+/// Sets legacy compatibility mode for flexbox-based grids. Setting this option
+/// to `true` will result in additional CSS being generated for older browsers
+/// that support vendor-prefixed and "tweener" flexbox syntax.
+///
+/// @param {Boolean} $float [false]
+/// Float-based grid
+///
+/// @param {Boolean} $float-legacy [false]
+/// Sets legacy compatibility mode for float-based grids. Setting this option to
+/// `true` will result in additional CSS being generated for IE7/8
+/// compatibility. It is not necessary to set this option for IE9+.
 ///
 /// @param {Boolean} $debug [false]
 /// Sets the display of grid debug information. Debug information is displayed
@@ -462,18 +488,21 @@ $nth-grid-warnings              : true !default;
 ///
 /// @param {Boolean} $warnings [true]
 /// Sets the output of grid layout warnings during compilation. Compilation
-/// warnings are generated when `legacy` is set to `true` and a grid
+/// warnings are generated when `float-legacy` is set to `true` and a grid
 /// configuration is defined that is not compatible with legacy browsers.
 ///
 /// @see $nth-grid-columns
 /// @see $nth-grid-gap
 /// @see $nth-grid-margin
 /// @see $nth-grid-direction
-/// @see $nth-grid-legacy
-/// @see $nth-grid-overlay
+/// @see $nth-grid-flex
+/// @see $nth-grid-flex-legacy
+/// @see $nth-grid-float
+/// @see $nth-grid-float-legacy
 /// @see $nth-grid-debug
 /// @see $nth-grid-debug-background-color
 /// @see $nth-grid-debug-text-color
+/// @see $nth-grid-overlay
 /// @see $nth-grid-overlay-column-color
 /// @see $nth-grid-overlay-margin-color
 /// @see $nth-grid-overlay-text-color
@@ -482,32 +511,32 @@ $nth-grid-warnings              : true !default;
 ///
 /// @example markup - HTML
 ///   <!--
-///       Example 1: We'll define a three column grid on the <main> element.
-///       Since this element has three child elements, this will produce a grid
-///       with one row.
+///     Example 1: We'll define a three column grid on the <main> element.
+///     Since this element has three child elements, this will produce a grid
+///     with one row.
 ///   -->
 ///   <main>
-///       <div>1</div>
-///       <div>2</div>
-///       <div>3</div>
+///     <div>1</div>
+///     <div>2</div>
+///     <div>3</div>
 ///   </div>
 ///
 ///   <!--
-///       Example 2: We'll define a *different* three column grid on the .myClass
-///       element. Since this element has *six* child elements, this will produce
-///       a grid with two rows. Adding additional child elements will create
-///       additional rows, each with three columns.
+///     Example 2: We'll define a *different* three column grid on the .myClass
+///     element. Since this element has *six* child elements, this will produce
+///     a grid with two rows. Adding additional child elements will create
+///     additional rows, each with three columns.
 ///   -->
 ///   <div class="myclass">
-///       <!-- Row 1 -->
-///       <div>1</div>
-///       <div>2</div>
-///       <div>3</div>
-///       <!-- Row 2 -->
-///       <div>4</div>
-///       <div>5</div>
-///       <div>6</div>
-///       <!-- Add elements for additional rows... -->
+///     <!-- Row 1 -->
+///     <div>1</div>
+///     <div>2</div>
+///     <div>3</div>
+///     <!-- Row 2 -->
+///     <div>4</div>
+///     <div>5</div>
+///     <div>6</div>
+///     <!-- Add elements for additional rows... -->
 ///   </div>
 ///
 /// @example scss - SCSS
@@ -516,22 +545,25 @@ $nth-grid-warnings              : true !default;
 ///
 ///   // Minimal grid settings
 ///   main {
-///       .nth-grid(3);         // 3 symmetric colums, each 1/3 of <main> width
+///     .nth-grid(3); // 3 symmetric colums, each 1/3 of <main> width
 ///   }
 ///
 ///   // All grid settings
 ///   .myclass {
-///       .nth-grid(
-///           $columns: 1 2 3,  // 3 asymmetric colums: 1/6, 2/6, 3/6 of $width
-///           $gap: 1%,         // 1% horizontal and vertical column gaps
-///           $margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
-///           $width: 960px,    // Fixed 960px container
-///           $order: 3 1 2,    // Column order
-///           $direction: ltr,  // Grid direction
-///           $legacy: true,    // Legacy browser support (IE7/8)
-///           $debug: false,    // Debug information displayed above grid
-///           $overlay: false   // Grid column overlay
-///       );
+///     .nth-grid(
+///       $columns     : 1 2 3, // 3 asymmetric colums: 1/6, 2/6, 3/6 of $width
+///       $gap         : 1%,    // 1% horizontal and vertical column gaps
+///       $margin      : 0 1%,  // 0% horizontal, 1% vertical grid margins
+///       $width       : 960px, // Fixed 960px container
+///       $order       : 3 1 2, // Column order
+///       $direction   : ltr,   // Grid direction
+///       $flex        : true,  // Flexbox-based grid
+///       $flex-legacy : true,  // Legacy flexbox support (IE10+)
+///       $float       : false, // Float-based grid
+///       $float-legacy: false, // Legacy float support (IE7/8)
+///       $debug       : false, // Debug information displayed above grid
+///       $overlay     : false  // Grid column overlay
+///     );
 ///   }
 @mixin nth-grid(
     $columns               : $nth-grid-columns,
@@ -540,7 +572,10 @@ $nth-grid-warnings              : true !default;
     $width                 : 100%,
     $order                 : false,
     $direction             : $nth-grid-direction,
-    $legacy                : $nth-grid-legacy,
+    $flex                  : $nth-grid-flex,
+    $flex-legacy           : $nth-grid-flex-legacy,
+    $float                 : $nth-grid-float,
+    $float-legacy          : $nth-grid-float-legacy,
     $debug                 : $nth-grid-debug,
     $debug-background-color: $nth-grid-debug-background-color,
     $debug-text-color      : $nth-grid-debug-text-color,
@@ -754,16 +789,38 @@ $nth-grid-warnings              : true !default;
 
     // Grid Container
     // -------------------------------------------------------------------------
-    display: block;
+    // Float
+    @if $float {
+        display: block;
 
-    @if $legacy {
-        // IE7 double padding fix
-        *display: inline-block;
+        @if $float-legacy {
+            // IE7 double padding fix
+            *display: inline-block;
+
+            @if $order {
+                // IE7 relative position fix
+                *position: relative;
+            }
+        }
     }
 
-    @if $legacy and $order {
-        // IE7 relative position fix
-        *position: relative;
+    // Flex
+    @if $flex {
+        display: if($flex-legacy, -webkit-box, null);
+        display: if($flex-legacy, -ms-flexbox, null);
+        display: flex;
+        -ms-flex-wrap: if($flex-legacy, wrap, null);
+            flex-wrap: wrap;
+        -webkit-box-align: if($flex-legacy, start, null);
+        -ms-flex-align: if($flex-legacy, start, null);
+            align-items: flex-start;
+
+        @if $direction == rtl {
+            -webkit-box-orient: if($flex-legacy, horizontal, null);
+            -webkit-box-direction: if($flex-legacy, reverse, null);
+               -ms-flex-direction: if($flex-legacy, row-reverse, null);
+                   flex-direction: row-reverse;
+        }
     }
 
     // Box sizing
@@ -780,65 +837,68 @@ $nth-grid-warnings              : true !default;
         width: calc(#{$auto-width});
     }
     @else if $total-ratio-columns == 0 {
-        @include _nth-rem(width, $auto-width, $legacy);
+        @include _nth-rem(width, $auto-width, $float-legacy);
     }
     @else if $width != 100% {
-        @include _nth-rem(width, $width, $legacy);
+        @include _nth-rem(width, $width, $float-legacy);
     }
     @else {
         width: auto;
     }
 
     // Clearfix
-    &:after {
-        content: '';
-        display: table;
-        clear: both;
+    @if $float {
+        &:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
     }
 
     // Columns
     // -------------------------------------------------------------------------
     // Legacy warning
-    @if $legacy and $calc and $warnings {
+    @if $float-legacy and $calc and $warnings {
         @warn 'NTH-GRID: "#{$selector}" requires calc() support. This grid will not render properly in legacy browsers.';
     }
 
     > * {
-        display: block;
-        box-sizing: border-box;
-
         // Rules & Resets
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // All Columns
         &:nth-child(1n) {
-            float: $dir-left;
-            clear: none;
+            box-sizing: border-box;
             position: static;
             #{$dir-left}: auto;
-            margin-#{$dir-right}: 0;
+
+            @if $float {
+                float: $dir-left;
+                clear: none;
+                margin-#{$dir-right}: 0;
+
+                @if $float-legacy {
+                    // IE7 float fix
+                    *display: inline;
+                    *float: none;
+                    *vertical-align: top;
+                    *zoom: 1;
+                }
+            }
 
             // Gap - Vertical
-            @include _nth-rem(margin-top, $gap-v, $legacy);
+            @include _nth-rem(margin-top, $gap-v, $float-legacy);
 
             // Gap - Horizontal
-            @include _nth-rem(margin-#{$dir-left}, $gap-h, $legacy);
-
-            @if $legacy {
-                // IE7 float fix
-                *display: inline;
-                *float: none;
-                *vertical-align: top;
-                *zoom: 1;
-            }
+            @include _nth-rem(margin-#{$dir-left}, $gap-h, $float-legacy);
         }
 
         // All columns in first row
         &:nth-child(-n + #{$total-columns}) {
             // Margin - Vertical
-            @include _nth-rem(margin-top, $margin-v, $legacy);
+            @include _nth-rem(margin-top, $margin-v, $float-legacy);
         }
 
-        @if $legacy and $margin-h == 0 {
+        @if $float and $float-legacy and $margin-h == 0 {
             // Last column in each row
             &:nth-child(#{$total-columns}n) {
                 // IE7 sub-pixel rounding fix
@@ -851,10 +911,12 @@ $nth-grid-warnings              : true !default;
 
         // First column each row
         &:nth-child(#{$total-columns}n + 1) {
-            clear: $dir-left;
+            @if $float {
+                clear: $dir-left;
+            }
 
             // Margin - Horizontal
-            @include _nth-rem(margin-#{$dir-left}, $margin-h, $legacy);
+            @include _nth-rem(margin-#{$dir-left}, $margin-h, $float-legacy);
         }
 
         // All columns in last row
@@ -872,13 +934,13 @@ $nth-grid-warnings              : true !default;
             }
         }
 
-        @if $legacy {
+        @if $float and $float-legacy {
             // Last child serving as "last row" for selectivir compatibility.
             // Only one element in the last row is needed for vertical margin
             // since vertical alignment (via flexbox) is not an issue.
             &:last-child {
                 // Margin - Horizontal
-                @include _nth-rem(margin-bottom, $margin-v, $legacy);
+                @include _nth-rem(margin-bottom, $margin-v, $float-legacy);
             }
         }
 
@@ -889,7 +951,7 @@ $nth-grid-warnings              : true !default;
                 $column-val: nth($columns, $i);
 
                 &:nth-child(#{$total-columns}n + #{$i}) {
-                    @include _nth-rem(width, $column-val, $legacy);
+                    @include _nth-rem(width, $column-val, $float-legacy);
 
                     // Grid overlay
                     @include _nth-overlay($column-val, $overlay);
@@ -911,7 +973,7 @@ $nth-grid-warnings              : true !default;
                 }
                 // Calc() not required
                 @else {
-                    @include _nth-rem(width, _nthRound($grid-col-width, $nth-rounding), $legacy);
+                    @include _nth-rem(width, _nthRound($grid-col-width, $nth-rounding), $float-legacy);
 
                     // Grid overlay
                     $round: _nthRound($grid-col-width);
@@ -932,7 +994,7 @@ $nth-grid-warnings              : true !default;
                         $nth-col: if($i > $ratio-col-index, ($i - 1) + $total-ratio-columns, $i);
 
                         &:nth-child(#{$total-columns}n + #{$nth-col}) {
-                            @include _nth-rem(width, $column-val, $legacy);
+                            @include _nth-rem(width, $column-val, $float-legacy);
 
                             // Grid overlay
                             @include _nth-overlay($column-val, $overlay);
@@ -962,7 +1024,7 @@ $nth-grid-warnings              : true !default;
                         @else {
                             $column-width: $grid-col-width * $column-val;
 
-                            @include _nth-rem(width, _nthRound($column-width, $nth-rounding), $legacy);
+                            @include _nth-rem(width, _nthRound($column-width, $nth-rounding), $float-legacy);
 
                             // Grid overlay
                             $round: _nthRound($column-width);
@@ -971,7 +1033,7 @@ $nth-grid-warnings              : true !default;
                     }
                     // Unit-based columns
                     @else {
-                        @include _nth-rem(width, $column-val, $legacy);
+                        @include _nth-rem(width, $column-val, $float-legacy);
 
                         // Grid overlay
                         @include _nth-overlay($column-val, $overlay);
@@ -1128,7 +1190,11 @@ $nth-grid-warnings              : true !default;
                 '\A' + '$margin             : #{$margin}'
                 '\A' + '$width              : #{$width}'
                 '\A' + '$order              : #{$order}'
-                '\A' + '$legacy             : #{$legacy}'
+                '\A' + '$direction          : #{$direction}'
+                '\A' + '$flex               : #{$flex-legacy}'
+                '\A' + '$flex-legacy        : #{$flex-legacy}'
+                '\A' + '$float              : #{$float-legacy}'
+                '\A' + '$float-legacy       : #{$float-legacy}'
                 '\A' +
                 '\A' + '$auto-width         : #{$auto-width}'
                 '\A' + '$calc               : #{$calc}'
