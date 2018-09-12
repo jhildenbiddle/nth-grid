@@ -27,7 +27,7 @@ function onwarn(warning) {
 // =============================================================================
 // Output
 const entryFile  = path.resolve(__dirname, 'src', 'postcss', 'index.js');
-const outputFile = path.resolve(__dirname, 'dist', 'postcss', `postcss-${pkg.name}.js`);
+const outputFile = path.resolve(__dirname, 'dist', 'postcss', 'index.js');
 
 // Banner
 const bannerData = [

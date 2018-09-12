@@ -1,4 +1,4 @@
-const nthgrid = require('./dist/postcss/postcss-nth-grid.js');
+const nthgrid = require('./dist/postcss/index.js');
 
 module.exports = {
     map    : false,

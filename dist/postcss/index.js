@@ -930,4 +930,4 @@ var index = postcss.plugin("postcss-nth-grid", options => {
 });
 
 module.exports = index;
-//# sourceMappingURL=postcss-nth-grid.js.map
+//# sourceMappingURL=index.js.map
