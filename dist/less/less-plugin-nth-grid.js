@@ -43,7 +43,7 @@
             if (num !== 0) {
                 if (unit.length) {
                     if (finalUnit.length && unit !== finalUnit) {
-                        console.log("NTH-GRID: Incompatible unitMath() arguments: " + arr);
+                        console.log("NTH-GRID: Incompatible unitMath() arguments: ".concat(arr));
                         return 0;
                     } else {
                         finalUnit = unit;
@@ -57,9 +57,9 @@
         return Number(result) === 0 ? 0 : result;
     }
     function getOrderOffset(settings, column, order) {
-        var offset = 0, i = void 0;
+        var offset = 0, i;
         if (column > 1) {
-            var sibling_val = void 0;
+            var sibling_val;
             if (settings.calc) {
                 var offset_vals = [];
                 var sibling_gaps = 0;
@@ -99,7 +99,7 @@
                 }
                 offset = offset_vals.join(" + ");
             } else {
-                var column_width = void 0;
+                var column_width;
                 for (i = 0; i < column - 1; i++) {
                     if (order) {
                         sibling_val = settings.columns_normalized[order[i] - 1];
@@ -203,7 +203,7 @@
         settings.margin_v = settings.margin instanceof Array ? settings.margin[0] : settings.margin;
         settings.dir_left = settings.direction === "rtl" ? "right" : "left";
         settings.dir_right = settings.direction === "rtl" ? "left" : "right";
-        var i = void 0;
+        var i;
         for (i = 0; i < settings.columns.length; i++) {
             var val = settings.columns[i];
             if (Number(val)) {
@@ -354,7 +354,7 @@
         } else if (obj.type === "Expression") {
             toArray(obj);
         } else {
-            console.log("Unknown type: " + obj.type + " Returning value: " + obj.value);
+            console.log("Unknown type: ".concat(obj.type, " Returning value: ").concat(obj.value));
             console.log(JSON.stringify(obj));
             return obj;
         }
@@ -396,14 +396,14 @@
             return new tree.Anonymous(value);
         }
     }
-    var settings = void 0;
+    var settings;
     var api = {
         "nth-log": function nthLog(lessTreeObj) {
-            console.log("Nth-Grid: " + lessTreeObj.value);
+            console.log("Nth-Grid: ".concat(lessTreeObj.value));
             return false;
         },
         "nth-warn": function nthWarn(lessTreeObj) {
-            console.warn("Nth-Grid: " + lessTreeObj.value);
+            console.warn("Nth-Grid: ".concat(lessTreeObj.value));
             return false;
         },
         "nth-grid": function nthGrid(columns, gap, margin, width, order) {
@@ -422,7 +422,7 @@
             if (key in settings) {
                 return toTree(settings[key]);
             } else {
-                console.log("NTH-GRID: " + key + " is not a valid key.");
+                console.log("NTH-GRID: ".concat(key, " is not a valid key."));
             }
         }
     };

@@ -49,15 +49,12 @@ const pluginSettings = {
         babelrc: false,
         exclude: ['node_modules/**'],
         presets: [
-            ['env', {
+            ['@babel/env', {
                 modules: false,
                 targets: {
                     browsers: ['ie >= 9']
                 }
             }]
-        ],
-        plugins: [
-            'external-helpers'
         ]
     },
     terser: {
