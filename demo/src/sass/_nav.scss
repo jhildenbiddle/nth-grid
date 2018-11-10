@@ -42,7 +42,7 @@ input##{$_nav-id} {
     z-index: $_nav-z-index + 1;
     top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: calc(100vw - #{$_nav-drawer-width});
     margin: 0;
     padding: 0;
@@ -273,7 +273,7 @@ nav {
         z-index: 1;
         top: 0;
         left: 0;
-        height: 100vh;
+        height: 100%;
         width: 100vw;
         background: $_nav-overlay-color;
         opacity: 0;
@@ -304,7 +304,7 @@ nav {
         top: 0;
         #{$_nav-location}: 0 - $_nav-drawer-width;
         overflow: auto;
-        height: 100vh;
+        height: 100%;
         width: $_nav-drawer-width;
         background: $_nav-bar-background;
         text-align: center;
