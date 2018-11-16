@@ -1,5 +1,12 @@
 # Nth-Grid
 
+[![NPM](https://img.shields.io/npm/v/nth-grid.svg?style=flat-square)](https://www.npmjs.com/package/nth-grid)
+[![Build Status](https://img.shields.io/travis/jhildenbiddle/nth-grid.svg?style=flat-square)](https://travis-ci.org/jhildenbiddle/nth-grid)
+[![Codacy](https://img.shields.io/codacy/grade/5d967da1e518489aac42d99b87088671.svg?style=flat-square)](https://www.codacy.com/app/jhildenbiddle/nth-grid?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jhildenbiddle/nth-grid&amp;utm_campaign=Badge_Grade)
+[![Codecov](https://img.shields.io/codecov/c/github/jhildenbiddle/nth-grid.svg?style=flat-square)](https://codecov.io/gh/jhildenbiddle/nth-grid)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/jhildenbiddle/nth-grid/blob/master/LICENSE)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fjhildenbiddle%2Fnth-grid&hashtags=css,developers,frontend,javascript)
+
 Nth-Grid is a lightweight and semantic CSS grid system available for [Less](http://lesscss.org/), [Sass](http://sass-lang.com/), [Stylus](http://stylus-lang.com/) and [PostCSS](https://github.com/postcss/postcss). The purpose of Nth-Grid is to provide a versatile grid-based layout system that balances simplicity and flexibility while addressing commonly criticized aspects of other grid systems.
 
 ---
@@ -7,20 +14,6 @@ Nth-Grid is a lightweight and semantic CSS grid system available for [Less](http
 ### TODO
 
 - [ ] Add `flex`, `flex-legacy`, `float`, and `float-legacy` documentation
-
----
-
-- [Why Nth-Grid?](#why-nth-grid)
-- [Features](#features)
-- [Installation](#installation)
-- [Quick start](#quick-start)
-- [Global Options](#global-options)
-- [Grid Settings](#grid-settings)
-- [Legacy Browsers](#legacy-browsers)
-- [SassDoc Integration](#sassdoc-integration)
-- [Compatibility Notes](#compatibility-notes)
-- [FAQ](#faq)
-- [License](#license)
 
 ---
 
@@ -34,7 +27,7 @@ There are [many](https://github.com/search?l=CSS&q=grid&type=Repositories&utf8=%
 
 - **Custom grids without limitations**
 
-  Nth-Grid provides a level of flexibility that no other CSS grid system offers: display multiple custom grids on the same page, combine fixed and fluid columns in the same grid, add fixed gutters and margins to fluid grids, create single and multi-row grids, nest custom grids within custom grids, reorder columns, create equal height or vertically-aligned columns, change the grid direction for RTL layouts, and modify any grid setting on-the-fly in your responsive layouts. Nth-Grid handles all of this with a single mixin in your CSS using familiar grid concepts and terminology.
+  Nth-Grid provides a level of flexibility that no other CSS grid system offers: display multiple custom grids on the same page, combine fixed and fluid columns in the same grid, add fixed gaps and margins to fluid grids, create single and multi-row grids, nest custom grids within custom grids, reorder columns, create equal height or vertically-aligned columns, change the grid direction for RTL layouts, and modify any grid setting on-the-fly in your responsive layouts. Nth-Grid handles all of this with a single mixin in your CSS using familiar grid concepts and terminology.
 
 - **Semantic grids without CSS classes**
 
@@ -71,7 +64,7 @@ There are [many](https://github.com/search?l=CSS&q=grid&type=Repositories&utf8=%
 - Responsive grids
 - Symmetric and asymmetric grids
 - Multi-row and modular grids
-- Fixed, fluid or fixed & fluid columns, gutters and margins
+- Fixed, fluid or fixed & fluid columns, gaps and margins
 - Column ordering
 - Equal-height columns
 - Vertically-aligned columns
@@ -106,25 +99,27 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
 
 1. Import the Nth-Grid mixin into your Less, Sass or Stylus file. For PostCSS, add the Nth-Grid plugin to your list of PostCSS processors. The path to the Nth-Grid files will depend on the [installation](#installation) method used.
 
-   **Less**
+   <!-- tabs:start -->
+
+   ##### **Less**
 
    ``` css
    @import "path/to/nth-grid/dist/less/_nth-grid";
    ```
 
-   **Sass**
+   ##### **Sass**
 
    ``` css
    @import "path/to/nth-grid/dist/sass/_nth-grid";
    ```
 
-   **Stylus**
+   ##### **Stylus**
 
    ``` css
    @import "path/to/nth-grid/dist/stylus/_nth-grid"
    ```
 
-   **PostCSS**
+   ##### **PostCSS**
 
    Below is an example of how to use the Nth-Grid PostCSS plugin with [Node.js](https://nodejs.org/en/) and [Gulp](http://gulpjs.com/). For information on how to use PostCSS other build tools, refer to the [PostCSS documentation](https://github.com/postcss/postcss).
 
@@ -143,7 +138,9 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
    });
    ```
 
-2. Create your HTML markup. Nth-Grid requires a grid container element and treats all direct descendants are grid columns.
+   <!-- tabs:end -->
+
+1. Create your HTML markup. Nth-Grid requires a grid container element and treats all direct descendants are grid columns.
 
    **Example 1:** We'll define a three column grid on the `<main>` element. Since this element has three child elements, this will produce a grid with one row.
 
@@ -171,9 +168,11 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
    </div>
    ```
 
-3. Apply the Nth-Grid mixin to the grid container elements. The mixin will generate the CSS styles needed for the grid container and all of its direct descendants. Examples are provided below to demonstrate the Nth-Grid syntax for each CSS processor.
+1. Apply the Nth-Grid mixin to the grid container elements. The mixin will generate the CSS styles needed for the grid container and all of its direct descendants. Examples are provided below to demonstrate the Nth-Grid syntax for each CSS processor.
 
-   **Less**
+   <!-- tabs:start -->
+
+   ##### **Less**
 
    ``` less
      // Minimal grid settings
@@ -187,7 +186,7 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
      .myclass {
          .nth-grid(
              @columns: 1 2 3,  // 3 asymmetric columns: 1/6, 2/6, 3/6 of @width
-             @gutter: 1%,      // 1% horizontal and vertical column gutters
+             @gap: 1%,      // 1% horizontal and vertical column gaps
              @margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
              @width: 960px,    // Fixed 960px container
              @order: 3 1 2,    // Column order
@@ -199,7 +198,7 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
      }
    ```
 
-   **Sass (SCSS)**
+   ##### **Sass (SCSS)**
 
    ``` scss
      // Minimal grid settings
@@ -213,7 +212,7 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
      .myclass {
          .nth-grid(
              $columns: 1 2 3,  // 3 asymmetric columns: 1/6, 2/6, 3/6 of $width
-             $gutter: 1%,      // 1% horizontal and vertical column gutters
+             $gap: 1%,      // 1% horizontal and vertical column gaps
              $margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
              $width: 960px,    // Fixed 960px container
              $order: 3 1 2,    // Column order
@@ -225,7 +224,7 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
      }
    ```
 
-     **Stylus**
+   ##### **Stylus**
 
    ``` stylus
      // Minimal grid settings
@@ -238,7 +237,7 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
      .myclass
          .nth-grid(
              $columns: 1 2 3,  // 3 asymmetric columns: 1/6, 2/6, 3/6 of $width
-             $gutter: 1%,      // 1% horizontal and vertical column gutters
+             $gap: 1%,      // 1% horizontal and vertical column gaps
              $margin: 0 1%,    // 0% horizontal, 1% vertical grid margins
              $width: 960px,    // Fixed 960px container
              $order: 3 1 2,    // Column order
@@ -249,7 +248,7 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
          )
    ```
 
-     **PostCSS**
+   ##### **PostCSS**
 
    ``` css
      /* Minimal grid settings */
@@ -263,7 +262,7 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
      .myclass {
          nth-grid(
              columns: 1 2 3;  /* 3 asymmetric columns: 1/6, 2/6, 3/6 of width argument */
-             gutter: 1%;      /* 1% horizontal and vertical column gutters */
+             gap: 1%;      /* 1% horizontal and vertical column gaps */
              margin: 0 1%;    /* 0% horizontal, 1% vertical grid margins */
              width: 960px;    /* Fixed 960px container */
              order: 3 1 2;    /* Column order */
@@ -275,6 +274,8 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
      }
    ```
 
+   <!-- tabs:end -->
+
 ## Global Options
 
 Nth-Grid provides global options for changing the default values used for most grid settings. Global options for each CSS processor are listed below along with their default values. Details for each option are available in the [Grid Settings](#grid-settings) section.
@@ -284,7 +285,7 @@ Nth-Grid provides global options for changing the default values used for most g
 ``` less
 // Layout settings
 @nth-grid-columns               : 1;
-@nth-grid-gutter                : 0;
+@nth-grid-gap                : 0;
 @nth-grid-margin                : 0;
 @nth-grid-direction             : ltr;
 @nth-grid-legacy                : false;
@@ -310,7 +311,7 @@ Nth-Grid provides global options for changing the default values used for most g
 ``` scss
 // Layout settings
 $nth-grid-columns               : 1;
-$nth-grid-gutter                : 0;
+$nth-grid-gap                : 0;
 $nth-grid-margin                : 0;
 $nth-grid-direction             : ltr;
 $nth-grid-legacy                : false;
@@ -336,7 +337,7 @@ $nth-grid-warnings              : true;
 ``` stylus
 // Layout settings
 $nth-grid-columns                = 1
-$nth-grid-gutter                 = 0
+$nth-grid-gap                 = 0
 $nth-grid-margin                 = 0
 $nth-grid-direction              = ltr
 $nth-grid-legacy                 = false
@@ -370,7 +371,7 @@ Note the PostCSS-specific  `remove-globals` option. When this option is set to `
 :root {
     /* Layout settings */
     --nth-grid-columns               : 1;
-    --nth-grid-gutter                : 0;
+    --nth-grid-gap                : 0;
     --nth-grid-margin                : 0;
     --nth-grid-direction             : ltr;
     --nth-grid-legacy                : false;
@@ -403,7 +404,7 @@ gulp.task('css', function () {
     var options = {
         // Layout settings
         'columns'               : 1,
-        'gutter'                : 0,
+        'gap'                : 0,
         'margin'                : 0,
         'direction'             : 'ltr',
         'legacy'                : false,
@@ -441,19 +442,6 @@ gulp.task('css', function () {
 Nth-Grid provides many grid settings, but you only need to specify the settings needed for your layout. If a setting is not specified, Nth-Grid will use default value listed in the [Global Options](#global-options) section.
 
 Examples below are provided for the Sass/SCSS mixin, but the syntax is similar for other processors. See the [Quick Start](#quick-start) section for syntax variations between for Less, Sass, Stylus and PostCSS.
-
-- [columns](#columns)
-- [gutter](#gutter)
-- [margin](#margin)
-- [width](#width)
-- [order](#order)
-- [direction](#direction)
-- [legacy](#legacy)
-- [debug](#debug)
-- [overlay](#overlay)
-- [rem-base](#rem-base) *(Global)*
-- [remove-globals](#remove-globals) *(Global / PostCSS only)*
-- [warnings](#warnings)
 
 ### columns
 
@@ -553,36 +541,36 @@ Sets the column count, width and order for each grid row. All grids can be fixed
   }
   ```
 
-### gutter
+### gap
 
 *Default:* `0`
 
-Sets the vertical gutters (between rows) and horizontal gutters (between columns).
+Sets the vertical gaps (between rows) and horizontal gaps (between columns).
 
-- Accepts a unit value for *matched* horizontal and vertical gutters.
+- Accepts a unit value for *matched* horizontal and vertical gaps.
 
   ``` scss
   // Sass (SCSS)
-  // A grid with a matched gutters
+  // A grid with a matched gaps
   .myclass {
       .nth-grid(
           // ...
-          // Vertical and horizontal gutters = 2%
-          $gutter: 2%
+          // Vertical and horizontal gaps = 2%
+          $gap: 2%
       );
   }
   ```
 
-- Accepts a space-separated list of unit values as *mixed* horizontal and vertical gutters.
+- Accepts a space-separated list of unit values as *mixed* horizontal and vertical gaps.
 
 ``` scss
   // Sass (SCSS)
-  // A grid with a mixed gutters
+  // A grid with a mixed gaps
   .myclass {
       .nth-grid(
           // ...
-          // Vertical gutters = 0, horizontal gutters = 10px
-          $gutter: 0 10px
+          // Vertical gaps = 0, horizontal gaps = 10px
+          $gap: 0 10px
       );
   }
 ```
@@ -827,10 +815,10 @@ Nth-Grid uses a variety of CSS features to render grid layouts, some of which ar
 
 **Grid Configurations**
 
-- Grid columns set to a single, *unitless* value. Requires percentage-based gutter and margin values.
-- Grid columns set to a list of *unitless* values. Requires percentage-based gutter and margin values.
-- Grid columns set to a list of *matched-unit* values. Requires similarly matched-unit gutter and margin values.
-- Grid columns set to a list of *unit- and unitless* values. Requires percentage-based column, gutter and margin values.
+- Grid columns set to a single, *unitless* value. Requires percentage-based gap and margin values.
+- Grid columns set to a list of *unitless* values. Requires percentage-based gap and margin values.
+- Grid columns set to a list of *matched-unit* values. Requires similarly matched-unit gap and margin values.
+- Grid columns set to a list of *unit- and unitless* values. Requires percentage-based column, gap and margin values.
 - Column ordering
 - Grid direction
 - Grid overlay
@@ -840,7 +828,7 @@ Nth-Grid uses a variety of CSS features to render grid layouts, some of which ar
 The following grid configurations are not supported by legacy browsers due to lack of CSS [calc() values](http://caniuse.com/#feat=calc) and [flexbox](http://caniuse.com/#feat=flexbox) support:
 
 - Grid columns set to a list of *mixed-unit* values
-- Grid columns, gutter, and margin values with *mixed* units.
+- Grid columns, gap, and margin values with *mixed* units.
 - Equal-height columns
 - Vertically-aligned columns
 
@@ -858,7 +846,7 @@ For more information on SassDoc, please visit http://sassdoc.com.
 
 **Internet Explorer 9**
 
-- **CSS Calc() Limitations:** IE9 supports CSS calc() values up to 128 characters and will truncate values that exceed this length. Grids that require calc() values larger than 128 characters will therefore render incorrectly in this browser. This typically isn't an issue, although long calc() values can be generated when using the `order` setting with grids that contain a mix of fixed- and fluid-width columns, gutters and margins.
+- **CSS Calc() Limitations:** IE9 supports CSS calc() values up to 128 characters and will truncate values that exceed this length. Grids that require calc() values larger than 128 characters will therefore render incorrectly in this browser. This typically isn't an issue, although long calc() values can be generated when using the `order` setting with grids that contain a mix of fixed- and fluid-width columns, gaps and margins.
 
 **Internet Explorer 7/8**
 
@@ -897,17 +885,14 @@ A native CSS [grid layout module](http://dev.w3.org/csswg/css-grid-1/) is coming
 
   Go for it! The only ask is that you consider contributing to the main Nth-Grid project before releasing a separate version to the public. This will improve Nth-Grid for everyone and help avoid the potential confusion caused by having multiple Nth-Grid repos available.
 
+## Contact
 
+- Create a [Github issue](https://github.com/jhildenbiddle/nth-grid/issues) for bug reports, feature requests, or questions
+- Follow [@jhildenbiddle](https://twitter.com/jhildenbiddle) for announcements
+- Add a ⭐️ [star on GitHub](https://github.com/jhildenbiddle/nth-grid) or ❤️ [tweet](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fjhildenbiddle%2Fnth-grid&hashtags=css,developers,frontend,javascript) to support the project!
 
 ## License
 
-**The MIT License (MIT)**
+This project is licensed under the MIT License. See the [MIT LICENSE](https://github.com/jhildenbiddle/nth-grid/blob/master/LICENSE) for details.
 
-Copyright (c) 2016 @jhildenbiddle
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
+Copyright (c) 2018 John Hildenbiddle ([@jhildenbiddle](https://twitter.com/jhildenbiddle))
