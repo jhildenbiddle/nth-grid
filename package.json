@@ -86,7 +86,7 @@
     "serve": "node server.js",
     "start": "run-p watch serve",
     "test": "mocha tests",
-    "version": "run-s test prepare && git add -A dist",
+    "version": "run-s prepare test && git add -A dist",
     "watch": "npm-run-all build -p watch:*-mixin watch:*-plugin watch:hbs watch:*-grids watch:sass-demo watch:sassdoc",
     "watch:hbs": "nodemon -w demo/src/templates -e hbs,js,json -x run-s build:hbs",
     "watch:less-grids": "nodemon -w build/demo -w dist/less -e js,less -x run-s build:less-grids",
