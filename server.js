@@ -5,9 +5,9 @@ const compression = require('compression');
 
 browserSync.init({
     files: [
-        './build/demo/**/*.*',
-        './demo/static/**/*.*',
-        './docs/**/*.*'
+        './build/demo/**/*',
+        './demo/static/**/*',
+        './docs/**/*'
     ],
     ghostMode: {
         clicks: false,
@@ -20,20 +20,19 @@ browserSync.init({
     reloadDebounce: 500,
     server: {
         baseDir: [
-            './build/demo'
+            './docs'
         ],
         middleware: [
             compression()
         ],
         routes: {
-            '/docs'             : './docs',
-            '/docs/CHANGELOG.md': './CHANGELOG.md',
-            '/sassdoc'          : './docs/sassdoc'
+            '/demo'        : './build/demo',
+            '/CHANGELOG.md': './CHANGELOG.md'
         }
     },
     serveStatic: [
         './demo/static',
-        './dist'
+        { route: '/demo', dir: './dist' }
     ],
     snippetOptions: {
         // Prevent injection of browser-sync-client.js in IE < 9.
