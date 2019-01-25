@@ -8,4 +8,5 @@
 - Legacy browser support (IE9+)
 
 [Get Started](#main)
+[SassDocs](/sassdoc ':ignore')
 [GitHub](https://github.com/jhildenbiddle/nth-grid)
