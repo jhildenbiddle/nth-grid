@@ -26,8 +26,9 @@ browserSync.init({
             compression()
         ],
         routes: {
-            '/docs': './docs',
-            '/sassdoc': './docs/sassdoc',
+            '/docs'             : './docs',
+            '/docs/CHANGELOG.md': './CHANGELOG.md',
+            '/sassdoc'          : './docs/sassdoc'
         }
     },
     serveStatic: [
@@ -44,5 +45,12 @@ browserSync.init({
                 return `<!--[if gt IE 8]><!-- -->${snippet}${match}<![endif]-->`;
             }
         }
-    }
+    },
+    rewriteRules: [
+        // Replace CDN URLs with local paths
+        {
+            match  : /https:\/\/cdn\.jsdelivr\.net\/npm\/nth-grid@1/g,
+            replace: ''
+        }
+    ]
 });
