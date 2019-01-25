@@ -103,19 +103,19 @@ git clone https://github.com/jhildenbiddle/nth-grid.git
 
    ##### **Less**
 
-   ``` css
+   ```less
    @import "path/to/nth-grid/dist/less/_nth-grid";
    ```
 
    ##### **Sass**
 
-   ``` css
+   ```scss
    @import "path/to/nth-grid/dist/sass/_nth-grid";
    ```
 
    ##### **Stylus**
 
-   ``` css
+   ```stylus
    @import "path/to/nth-grid/dist/stylus/_nth-grid"
    ```
 
