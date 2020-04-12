@@ -1,15 +1,18 @@
 const pkg = require('./package.json');
 
+const currentYear = (new Date()).getFullYear();
+const releaseYear = 2020;
+
 module.exports = {
-    from : [
+    from: [
         /@@copyright/g,
         /@@description/g,
         /@@homepage/g,
         /@@license/g,
         /@@version/g
     ],
-    to   : [
-        `(c) ${(new Date()).getFullYear()} ${pkg.author}`,
+    to: [
+        `(c) ${releaseYear}${currentYear === releaseYear ? '' : '-' + currentYear} ${pkg.author}`,
         pkg.description,
         pkg.homepage,
         `${pkg.license} license`,

@@ -12,29 +12,21 @@ import resolve    from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 
 
-// Functions
-// =============================================================================
-// Disable circular dependency warnings
-function onwarn(warning) {
-    if (warning.code !== 'CIRCULAR_DEPENDENCY') {
-        // eslint-disable-next-line
-        console.error(`(!) ${warning.message}`);
-    }
-}
-
-
 // Settings
 // =============================================================================
+// Copyright
+const currentYear = (new Date()).getFullYear();
+const releaseYear = 2020;
+
 // Output
 const entryFile  = path.resolve(__dirname, 'src', 'less', 'plugin', 'index.js');
 const outputFile = path.resolve(__dirname, 'dist', 'less', `less-plugin-${pkg.name}.js`);
 
 // Banner
 const bannerData = [
-    `${pkg.name}`,
-    `v${pkg.version}`,
+    `${pkg.name} v${pkg.version}`,
     `${pkg.homepage}`,
-    `(c) ${(new Date()).getFullYear()} ${pkg.author}`,
+    `(c) ${releaseYear}${currentYear === releaseYear ? '' : '-' + currentYear} ${pkg.author}`,
     `${pkg.license} license`
 ];
 
@@ -97,7 +89,13 @@ const config = {
     watch: {
         clearScreen: false
     },
-    onwarn: onwarn
+    onwarn(warning) {
+        // Disable circular dependency warnings
+        if (warning.code !== 'CIRCULAR_DEPENDENCY') {
+            // eslint-disable-next-line
+            console.error(`(!) ${warning.message}`);
+        }
+    }
 };
 
 // Formats
