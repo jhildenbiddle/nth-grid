@@ -1,8 +1,7 @@
 /*!
- * nth-grid
- * v0.0.0
+ * nth-grid v0.0.0
  * https://github.com/jhildenbiddle/nth-grid
- * (c) 2019 John Hildenbiddle
+ * (c) 2020 John Hildenbiddle
  * MIT license
  */
 (function() {
@@ -52,7 +51,7 @@
             }
             nums.push(num);
         }
-        operator = operator.trim().replace(/[^+\-*\/().\d\s]/g, "");
+        operator = operator.trim().replace(/[^+\-*/().\d\s]/g, "");
         var result = nums.length ? stringMath(nums.join(operator)).toString().concat(finalUnit) : 0;
         return Number(result) === 0 ? 0 : result;
     }

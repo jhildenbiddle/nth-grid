@@ -1,8 +1,7 @@
 /*!
- * nth-grid
- * v0.0.0
+ * nth-grid v0.0.0
  * https://github.com/jhildenbiddle/nth-grid
- * (c) 2019 John Hildenbiddle
+ * (c) 2020 John Hildenbiddle
  * MIT license
  */
 "use strict";
@@ -62,7 +61,7 @@ function unitMath(arr, operator) {
         }
         nums.push(num);
     }
-    operator = operator.trim().replace(/[^+\-*\/().\d\s]/g, "");
+    operator = operator.trim().replace(/[^+\-*/().\d\s]/g, "");
     const result = nums.length ? stringMath(nums.join(operator)).toString().concat(finalUnit) : 0;
     return Number(result) === 0 ? 0 : result;
 }
@@ -357,9 +356,9 @@ function Grid(settings, options) {
 }
 
 function appendSelectors(selectorList, appendText) {
-    return selectorList.split(",").map(function(selector) {
+    return selectorList.split(",").map((function(selector) {
         return selector.trim() + appendText;
-    });
+    }));
 }
 
 function round(val, decimals) {
@@ -374,9 +373,9 @@ function round(val, decimals) {
 
 function overlayContent(grid, selector, container, content) {
     if (grid.overlay) {
-        const selectorBefore = selector.map(function(sel) {
+        const selectorBefore = selector.map((function(sel) {
             return sel.trim() + ":before";
-        });
+        }));
         container.append(postcss.rule({
             selector: selectorBefore
         }).append({
@@ -490,7 +489,7 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
         }));
     }
     if (grid.columns_ratio.length === 0) {
-        grid.columns.forEach(function(columnVal, i) {
+        grid.columns.forEach((function(columnVal, i) {
             i++;
             newRule = postcss.rule({
                 selector: appendSelectors(nthSelector, " > *:nth-child(" + grid.total_columns + "n + " + i + ")")
@@ -500,7 +499,7 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
             });
             siblingContainer.append(newRule);
             overlayContent(grid, newRule.selector, siblingContainer, columnVal);
-        });
+        }));
     } else if (grid.columns_ratio.length === 1) {
         newRule = postcss.rule({
             selector: appendSelectors(nthSelector, " > *:nth-child(1n)")
@@ -519,7 +518,7 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
             overlayContent(grid, newRule.selector, siblingContainer, "1/" + grid.grid_col_ratio + " (" + round(grid.grid_col_width, 2) + ")");
         }
         if (grid.columns_unit.length > 0) {
-            grid.columns.forEach(function(columnVal, i) {
+            grid.columns.forEach((function(columnVal, i) {
                 columnVal = Number(columnVal) || columnVal;
                 if (columnVal !== grid.total_ratio_columns) {
                     const nthCol = i > grid.columns.indexOf(grid.total_ratio_columns) ? i + grid.total_ratio_columns : i + 1;
@@ -532,10 +531,10 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
                     siblingContainer.append(newRule);
                     overlayContent(grid, newRule.selector, siblingContainer, columnVal);
                 }
-            });
+            }));
         }
     } else {
-        grid.columns.forEach(function(columnVal, i) {
+        grid.columns.forEach((function(columnVal, i) {
             i++;
             const newRule = postcss.rule({
                 selector: appendSelectors(nthSelector, " > *:nth-child(" + grid.total_columns + "n + " + i + ")")
@@ -562,14 +561,14 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
                 }));
                 overlayContent(grid, newRule.selector, siblingContainer, columnVal);
             }
-        });
+        }));
     }
     if (grid.order && grid.order.length > grid.total_columns) {
         if (grid.warnings) {
             console.warn(`NTH-GRID: "${nthSelector}" order [${grid.order}] exceeds total column count of ${grid.total_columns} for columns [${grid.columns}]. Order not applied.`);
         }
     } else if (grid.order_offsets.length) {
-        grid.order_offsets.forEach(function(offset, i) {
+        grid.order_offsets.forEach((function(offset, i) {
             const orderVal = grid.order[i];
             if (offset !== 0) {
                 siblingContainer.append(postcss.rule({
@@ -582,7 +581,7 @@ function gridColumns(grid, nthSelector, selectorContainer, siblingContainer) {
                     value: grid.calc ? "calc(" + offset + ")" : round(offset)
                 }));
             }
-        });
+        }));
     }
 }
 
@@ -857,23 +856,23 @@ var index = postcss.plugin("postcss-nth-grid", options => {
     const NTH_GLOBAL_PREFIX = "--nth-grid-";
     const NTH_SELECTOR = "nth-grid";
     return function(css) {
-        css.walkRules(function(rule) {
+        css.walkRules((function(rule) {
             if (rule.selector === ":root") {
-                rule.walkDecls(function(decl) {
+                rule.walkDecls((function(decl) {
                     if (decl.prop.indexOf(NTH_GLOBAL_PREFIX) === 0) {
                         const key = decl.prop.replace(NTH_GLOBAL_PREFIX, "").replace(/-/g, "_");
-                        const arr = decl.value.split(" ").map(function(val) {
+                        const arr = decl.value.split(" ").map((function(val) {
                             return normalize(val);
-                        });
+                        }));
                         options[key] = arr.length > 1 ? arr : arr[0];
                     }
-                });
+                }));
                 if (options.remove_globals) {
-                    rule.walkDecls(function(decl) {
+                    rule.walkDecls((function(decl) {
                         if (decl.prop.indexOf(NTH_GLOBAL_PREFIX) === 0) {
                             decl.remove();
                         }
-                    });
+                    }));
                     if (rule.nodes.length === 0) {
                         rule.remove();
                     }
@@ -884,13 +883,13 @@ var index = postcss.plugin("postcss-nth-grid", options => {
                 const nthSelector = nthRule.parent.selector;
                 const settings = {};
                 nthRule.parent.raws.semicolon = true;
-                nthRule.walkDecls(function(decl) {
+                nthRule.walkDecls((function(decl) {
                     const key = decl.prop.replace(/-/g, "_");
-                    const arr = decl.value.split(" ").map(function(val) {
+                    const arr = decl.value.split(" ").map((function(val) {
                         return normalize(val);
-                    });
+                    }));
                     settings[key] = arr.length > 1 ? arr : arr[0];
-                });
+                }));
                 const grid = new Grid(settings, options);
                 const selectorContainer = nthRule.cloneAfter({
                     selector: "nth-grid-output"
@@ -904,8 +903,8 @@ var index = postcss.plugin("postcss-nth-grid", options => {
                 gridOverlay(grid, nthSelector, selectorContainer, siblingContainer);
                 gridDebug(grid, nthSelector, selectorContainer, siblingContainer);
                 if (grid.float_legacy) {
-                    [ selectorContainer, siblingContainer ].forEach(function(container) {
-                        container.walk(function(node) {
+                    [ selectorContainer, siblingContainer ].forEach((function(container) {
+                        container.walk((function(node) {
                             if (node.value && getUnit(node.value) === "rem") {
                                 const pxVal = getNumber(node.value) * grid.rem_base + "px";
                                 node.parent.insertBefore(node, node.clone({
@@ -913,19 +912,19 @@ var index = postcss.plugin("postcss-nth-grid", options => {
                                     value: pxVal
                                 }));
                             }
-                        });
-                    });
+                        }));
+                    }));
                 }
-                [ selectorContainer, siblingContainer ].forEach(function(container) {
-                    container.each(function(node) {
+                [ selectorContainer, siblingContainer ].forEach((function(container) {
+                    container.each((function(node) {
                         node.source = nthRule.source;
                         container.before(node);
-                    });
+                    }));
                     container.remove();
-                });
+                }));
                 nthRule.remove();
             }
-        });
+        }));
     };
 });
 
