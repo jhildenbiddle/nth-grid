@@ -1,7 +1,7 @@
 const pkg = require('./package.json');
 
 const currentYear = (new Date()).getFullYear();
-const releaseYear = 2020;
+const releaseYear = 2015;
 
 module.exports = {
     from: [

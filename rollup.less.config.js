@@ -2,7 +2,7 @@
 // =============================================================================
 const path = require('path');
 
-import babel      from 'rollup-plugin-babel';
+import { babel }  from '@rollup/plugin-babel';
 import commonjs   from '@rollup/plugin-commonjs';
 import { eslint } from 'rollup-plugin-eslint';
 import json       from '@rollup/plugin-json';
@@ -16,7 +16,7 @@ import { terser } from 'rollup-plugin-terser';
 // =============================================================================
 // Copyright
 const currentYear = (new Date()).getFullYear();
-const releaseYear = 2020;
+const releaseYear = 2015;
 
 // Output
 const entryFile  = path.resolve(__dirname, 'src', 'less', 'plugin', 'index.js');
@@ -40,6 +40,7 @@ const pluginSettings = {
     babel: {
         babelrc: false,
         exclude: ['node_modules/**'],
+        babelHelpers: 'bundled',
         presets: [
             ['@babel/env', {
                 modules: false,

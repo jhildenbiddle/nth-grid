@@ -1,7 +1,7 @@
 /*!
  * nth-grid v0.0.0
  * https://github.com/jhildenbiddle/nth-grid
- * (c) 2020 John Hildenbiddle
+ * (c) 2015-2021 John Hildenbiddle
  * MIT license
  */
 (function() {
