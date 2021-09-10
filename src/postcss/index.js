@@ -8,23 +8,20 @@ import gridContainer from './lib/grid-container';
 import gridDebug     from './lib/grid-debug';
 import gridOverlay   from './lib/grid-overlay';
 import normalize     from './util/normalize';
-import postcss       from 'postcss';
 
 
 // Exports
 // =============================================================================
-// Entry point for PostCSS plugin
-export default postcss.plugin('postcss-nth-grid', options => {
-    options = options || {};
-
+const nthGrid = (options = {}) => {
     const NTH_GLOBAL_PREFIX = '--nth-grid-';
-    const NTH_SELECTOR      = 'nth-grid';
 
-    return function(css) {
-        // Loop through rules and find all global settings in root element(s)
-        css.walkRules(function(rule) {
-            // Global options
+    return {
+        postcssPlugin: 'postcss-nth-grid',
+        Rule(rule, postcss) {
+            // Options stored in :root
             if (rule.selector === ':root') {
+                const removeDecls = [];
+
                 rule.walkDecls(function(decl) {
                     if (decl.prop.indexOf(NTH_GLOBAL_PREFIX) === 0) {
                         const key = decl.prop.replace(NTH_GLOBAL_PREFIX, '').replace(/-/g, '_');
@@ -34,17 +31,14 @@ export default postcss.plugin('postcss-nth-grid', options => {
 
                         // Add to options object
                         options[key] = arr.length > 1 ? arr : arr[0];
+                        removeDecls.push(decl);
                     }
                 });
 
                 // Remove options
                 if (options.remove_globals) {
                     // Remove declarations
-                    rule.walkDecls(function(decl) {
-                        if (decl.prop.indexOf(NTH_GLOBAL_PREFIX) === 0) {
-                            decl.remove();
-                        }
-                    });
+                    removeDecls.forEach(decl => decl.remove());
 
                     // Remove root element if empty
                     if (rule.nodes.length === 0) {
@@ -53,8 +47,8 @@ export default postcss.plugin('postcss-nth-grid', options => {
                 }
             }
 
-            // Nth-Grid blocks
-            if (rule.selector === NTH_SELECTOR) {
+            // Grids
+            if (rule.selector === 'nth-grid') {
                 const nthRule     = rule;
                 const nthSelector = nthRule.parent.selector;
                 const settings    = {};
@@ -84,11 +78,13 @@ export default postcss.plugin('postcss-nth-grid', options => {
                 // 'append' instead of 'insert' and ensure new css content is
                 // added in the correct order and respect the position of the
                 // declarations that proceed the nth-grid block.
-                const selectorContainer = nthRule.cloneAfter({ selector: 'nth-grid-output' })
+                const selectorContainer = nthRule
+                    .cloneAfter({ selector: 'nth-grid-output' })
                     .removeAll();
 
                 // Create placeholder rule for all generated css
-                const siblingContainer = nthRule.clone({ selector: 'nth-grid-sibling-output' })
+                const siblingContainer = nthRule
+                    .clone({ selector: 'nth-grid-sibling-output' })
                     .removeAll();
 
                 nthRule.parent.after(siblingContainer);
@@ -130,6 +126,10 @@ export default postcss.plugin('postcss-nth-grid', options => {
                 // Remove nth-grid block
                 nthRule.remove();
             }
-        });
+        }
     };
-});
+};
+
+nthGrid.postcss = true;
+
+export default nthGrid;

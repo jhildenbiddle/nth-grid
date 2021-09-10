@@ -855,13 +855,13 @@ function normalize(val) {
     }
 }
 
-var index = postcss__default["default"].plugin("postcss-nth-grid", (options => {
-    options = options || {};
+const nthGrid = (options = {}) => {
     const NTH_GLOBAL_PREFIX = "--nth-grid-";
-    const NTH_SELECTOR = "nth-grid";
-    return function(css) {
-        css.walkRules((function(rule) {
+    return {
+        postcssPlugin: "postcss-nth-grid",
+        Rule(rule, postcss) {
             if (rule.selector === ":root") {
+                const removeDecls = [];
                 rule.walkDecls((function(decl) {
                     if (decl.prop.indexOf(NTH_GLOBAL_PREFIX) === 0) {
                         const key = decl.prop.replace(NTH_GLOBAL_PREFIX, "").replace(/-/g, "_");
@@ -869,20 +869,17 @@ var index = postcss__default["default"].plugin("postcss-nth-grid", (options => {
                             return normalize(val);
                         }));
                         options[key] = arr.length > 1 ? arr : arr[0];
+                        removeDecls.push(decl);
                     }
                 }));
                 if (options.remove_globals) {
-                    rule.walkDecls((function(decl) {
-                        if (decl.prop.indexOf(NTH_GLOBAL_PREFIX) === 0) {
-                            decl.remove();
-                        }
-                    }));
+                    removeDecls.forEach((decl => decl.remove()));
                     if (rule.nodes.length === 0) {
                         rule.remove();
                     }
                 }
             }
-            if (rule.selector === NTH_SELECTOR) {
+            if (rule.selector === "nth-grid") {
                 const nthRule = rule;
                 const nthSelector = nthRule.parent.selector;
                 const settings = {};
@@ -928,9 +925,11 @@ var index = postcss__default["default"].plugin("postcss-nth-grid", (options => {
                 }));
                 nthRule.remove();
             }
-        }));
+        }
     };
-}));
+};
 
-module.exports = index;
+nthGrid.postcss = true;
+
+module.exports = nthGrid;
 //# sourceMappingURL=index.js.map

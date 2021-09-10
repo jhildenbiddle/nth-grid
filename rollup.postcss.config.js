@@ -107,6 +107,7 @@ const config = {
 // CommonJS
 const cjs = merge({}, config, {
     output: {
+        exports: 'default',
         format: 'cjs'
     },
     plugins: [
