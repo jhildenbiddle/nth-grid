@@ -1,0 +1,9 @@
+.grid-calc-fluid-middle-multiratio {
+    @include nth-grid(
+        $width: 95%,
+        $order: false,
+        $columns: 1 10% 2,
+        $gap: 0.5rem,
+        $margin: 0.5rem
+    );
+}

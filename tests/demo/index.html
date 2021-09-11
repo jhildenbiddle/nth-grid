@@ -1,0 +1,1505 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nth-Grid Demo</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="grids-less.css">
+
+    <!--[if gte IE 9]>  <!-- -->
+    <link rel="stylesheet" href="grids-pcss.css">
+    <link rel="stylesheet" href="grids-scss.css">
+    <link rel="stylesheet" href="grids-styl.css">
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+    <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="compare">
+
+    <!--[if gte IE 9]>  <!-- -->
+    <input type="checkbox" id="nav-toggle" autocomplete="off">
+    <label for="nav-toggle">
+        <i><span></span></i>
+    </label>
+    <nav>
+        <h1>Nth-Grid</h1>
+        <ul>
+            <li><a href="#compare">Compare</a></li>
+            <li><a href="#less">Less</a></li>
+            <li><a href="#pcss">PostCSS</a></li>
+            <li><a href="#scss">Sass</a></li>
+            <li><a href="#styl">Stylus</a></li>
+        </ul>
+    </nav>
+    <![endif]-->
+
+    <main>
+        <section class="less">
+            <h2>Single ratio value</h2>
+            <div class="grid-nocalc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without gaps</h2>
+            <div class="grid-nocalc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without margins</h2>
+            <div class="grid-nocalc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Multiple ratio values</h2>
+            <div class="grid-nocalc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns</h2>
+            <div class="grid-nocalc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Column Order</h2>
+            <div class="grid-nocalc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Direction (RTL)</h2>
+            <div class="grid-nocalc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Nested Grids</h2>
+            <div class="grid-nocalc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value</h2>
+            <div class="grid-calc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without gaps</h2>
+            <div class="grid-calc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without margins</h2>
+            <div class="grid-calc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Multiple ratio values</h2>
+            <div class="grid-calc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns</h2>
+            <div class="grid-calc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + single ratio value</h2>
+            <div class="grid-calc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + single ratio value</h2>
+            <div class="grid-calc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-calc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + single ratio value</h2>
+            <div class="grid-calc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + single ratio value</h2>
+            <div class="grid-calc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Column Order</h2>
+            <div class="grid-calc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Direction (RTL)</h2>
+            <div class="grid-calc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Nested Grids</h2>
+            <div class="grid-calc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+        </section>
+
+        <!--[if gt IE 8]>  <!-- -->
+        <section class="pcss">
+            <h2>Single ratio value</h2>
+            <div class="grid-nocalc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without gaps</h2>
+            <div class="grid-nocalc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without margins</h2>
+            <div class="grid-nocalc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Multiple ratio values</h2>
+            <div class="grid-nocalc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns</h2>
+            <div class="grid-nocalc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Column Order</h2>
+            <div class="grid-nocalc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Direction (RTL)</h2>
+            <div class="grid-nocalc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Nested Grids</h2>
+            <div class="grid-nocalc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value</h2>
+            <div class="grid-calc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without gaps</h2>
+            <div class="grid-calc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without margins</h2>
+            <div class="grid-calc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Multiple ratio values</h2>
+            <div class="grid-calc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns</h2>
+            <div class="grid-calc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + single ratio value</h2>
+            <div class="grid-calc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + single ratio value</h2>
+            <div class="grid-calc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-calc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + single ratio value</h2>
+            <div class="grid-calc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + single ratio value</h2>
+            <div class="grid-calc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Column Order</h2>
+            <div class="grid-calc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Direction (RTL)</h2>
+            <div class="grid-calc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Nested Grids</h2>
+            <div class="grid-calc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+        </section>
+
+        <section class="scss">
+            <h2>Single ratio value</h2>
+            <div class="grid-nocalc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without gaps</h2>
+            <div class="grid-nocalc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without margins</h2>
+            <div class="grid-nocalc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Multiple ratio values</h2>
+            <div class="grid-nocalc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns</h2>
+            <div class="grid-nocalc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Column Order</h2>
+            <div class="grid-nocalc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Direction (RTL)</h2>
+            <div class="grid-nocalc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Nested Grids</h2>
+            <div class="grid-nocalc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value</h2>
+            <div class="grid-calc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without gaps</h2>
+            <div class="grid-calc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without margins</h2>
+            <div class="grid-calc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Multiple ratio values</h2>
+            <div class="grid-calc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns</h2>
+            <div class="grid-calc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + single ratio value</h2>
+            <div class="grid-calc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + single ratio value</h2>
+            <div class="grid-calc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-calc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + single ratio value</h2>
+            <div class="grid-calc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + single ratio value</h2>
+            <div class="grid-calc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Column Order</h2>
+            <div class="grid-calc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Direction (RTL)</h2>
+            <div class="grid-calc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Nested Grids</h2>
+            <div class="grid-calc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+        </section>
+
+        <section class="styl">
+            <h2>Single ratio value</h2>
+            <div class="grid-nocalc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without gaps</h2>
+            <div class="grid-nocalc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Single ratio value without margins</h2>
+            <div class="grid-nocalc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Multiple ratio values</h2>
+            <div class="grid-nocalc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns</h2>
+            <div class="grid-nocalc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-nocalc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + single ratio value</h2>
+            <div class="grid-nocalc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-nocalc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Column Order</h2>
+            <div class="grid-nocalc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Direction (RTL)</h2>
+            <div class="grid-nocalc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>Nested Grids</h2>
+            <div class="grid-nocalc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value</h2>
+            <div class="grid-calc-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without gaps</h2>
+            <div class="grid-calc-singleratio-nogap">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Single ratio value without margins</h2>
+            <div class="grid-calc-singleratio-nomargin">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Multiple ratio values</h2>
+            <div class="grid-calc-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns</h2>
+            <div class="grid-calc-fixed">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + single ratio value</h2>
+            <div class="grid-calc-fixed-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + single ratio value</h2>
+            <div class="grid-calc-fixed-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fixed-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fixed columns (first and last) + single ratio value</h2>
+            <div class="grid-calc-fixed-firstlast-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + single ratio value</h2>
+            <div class="grid-calc-fluid-first-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + single ratio value</h2>
+            <div class="grid-calc-fluid-last-singleratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (first) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-first-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (middle) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-middle-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Fluid column (last) + multiple ratio values</h2>
+            <div class="grid-calc-fluid-last-multiratio">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Column Order</h2>
+            <div class="grid-calc-order">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Direction (RTL)</h2>
+            <div class="grid-calc-rtl">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            <h2>CALC: Nested Grids</h2>
+            <div class="grid-calc-nested">
+                <div>
+                    <div class="grid-n">
+                        <div>1</div>
+                        <div>2</div>
+                        <div>3</div>
+                        <div>4</div>
+                        <div>5</div>
+                        <div>6</div>
+                    </div>
+                </div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+        </section>
+        <![endif]-->
+    </main>
+
+    <!-- JavaScript -->
+    <!--[if lte IE 8]>
+    <script src="https://unpkg.com/nwmatcher"></script>
+    <script src="https://unpkg.com/selectivizr2"></script>
+    <![endif]-->
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nth-Grid (Less.js)</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet/less" href="grids-less.less">
+
+    <!-- IE9+ required for Less in browser -->
+    <!--[if gte IE 9]>  <!-- -->
+    <script src="https://unpkg.com/less/dist/less.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="less">
+    <nav>
+        <h1>Nth-Grid</h1>
+        <ul>
+            <li>Less.js (client-side)</li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="less">
+            {{> grids-html this}}
+        </section>
+    </main>
+</body>
+</html>

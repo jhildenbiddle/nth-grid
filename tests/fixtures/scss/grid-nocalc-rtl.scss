@@ -1,0 +1,10 @@
+.grid-nocalc-rtl {
+    @include nth-grid(
+        $width: 95%,
+        $order: false,
+        $columns: 3,
+        $gap: 1%,
+        $margin: 1%,
+        $direction: rtl
+    );
+}

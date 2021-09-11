@@ -1,0 +1,10 @@
+.grid-nocalc-fixed-first-multiratio {
+    @include nth-grid(
+        
+        $order: false,
+        $columns: 5rem 1 2,
+        $gap: 0.5rem,
+        $margin: 0.5rem,
+        $width: 14rem
+    );
+}

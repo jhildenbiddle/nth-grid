@@ -1,0 +1,11 @@
+@import "less/_nth-grid";
+
+{{!-- Global Options --}}
+{{#each options}}
+@nth-grid-{{@key}}: {{this}};
+{{/each}}
+
+{{!-- Styles --}}
+.less {
+    {{> grid-less this}}
+}

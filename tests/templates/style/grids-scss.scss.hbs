@@ -1,0 +1,11 @@
+@import "sass/_nth-grid";
+
+{{!-- Nth-Grid Globals --}}
+{{#each options}}
+$nth-grid-{{@key}}: {{this}};
+{{/each}}
+
+{{!-- Styles --}}
+.sass {
+    {{> grid-scss this}}
+}

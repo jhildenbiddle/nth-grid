@@ -1,0 +1,26 @@
+{{#each grids}}
+{{#if title ~}}
+<h2>{{title}}</h2>
+{{/if ~}}
+<div class="{{@key}}">
+    {{!-- Nested grids --}}
+    {{#if grids}}
+    <div>
+        {{> grids-html this}}
+    </div>
+    {{#repeat (math elms '-' 1) start=2}}
+    <div>{{@index}}</div>
+    {{/repeat}}
+    {{!-- Content grids --}}
+    {{else if content}}
+    {{#repeat elms start=0}}
+    <div>{{{lookup ../content @index}}}{{#unless (lookup ../content @index)}}&nbsp;{{/unless}}</div>
+    {{/repeat}}
+    {{!-- Standard grids --}}
+    {{else}}
+    {{#repeat elms start=1}}
+    <div>{{@index}}</div>
+    {{/repeat ~}}
+    {{/if}}
+</div>
+{{/each}}

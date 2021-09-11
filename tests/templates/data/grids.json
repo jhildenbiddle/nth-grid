@@ -1,0 +1,397 @@
+{
+    "defaults": {
+        "width": "95%",
+        "order": false
+    },
+    "options": {
+        "direction"     : "ltr",
+        "flex"          : true,
+        "flex-legacy"   : true,
+        "float"         : true,
+        "float-legacy"  : true,
+        "overlay"       : false,
+        "debug"         : false,
+        "warnings"      : false,
+        "remove-globals": true
+    },
+    "grids": {
+        "grid-nocalc-singleratio": {
+            "title": "Single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "1%",
+                "margin" : "1%"
+            }
+        },
+        "grid-nocalc-singleratio-nogap": {
+            "title": "Single ratio value without gaps",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "0",
+                "margin" : "1%"
+            }
+        },
+        "grid-nocalc-singleratio-nomargin": {
+            "title": "Single ratio value without margins",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "1%",
+                "margin" : "0"
+            }
+        },
+        "grid-nocalc-multiratio": {
+            "title": "Multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 2 3",
+                "gap"    : "1%",
+                "margin" : "1%"
+            }
+        },
+
+        "grid-nocalc-fixed": {
+            "title": "Fixed columns",
+            "elms" : 6,
+            "props": {
+                "columns": "3rem 4rem 5rem",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-nocalc-fixed-first-singleratio": {
+            "title": "Fixed column (first) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "5rem 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem",
+                "width"  : "14rem"
+            }
+        },
+        "grid-nocalc-fixed-last-singleratio": {
+            "title": "Fixed column (last) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "2 5rem",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem",
+                "width"  : "14rem"
+            }
+        },
+        "grid-nocalc-fixed-first-multiratio": {
+            "title": "Fixed column (first) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "5rem 1 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem",
+                "width"  : "14rem"
+            }
+        },
+        "grid-nocalc-fixed-middle-multiratio": {
+            "title": "Fixed column (middle) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 5rem 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem",
+                "width"  : "14rem"
+            }
+        },
+        "grid-nocalc-fixed-last-multiratio": {
+            "title": "Fixed column (last) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 2 5rem",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem",
+                "width"  : "14rem"
+            }
+        },
+        "grid-nocalc-fixed-firstlast-singleratio": {
+            "title": "Fixed columns (first and last) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "2.5rem 1 2.5rem",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem",
+                "width"  : "14rem"
+            }
+        },
+
+        "grid-nocalc-fluid-first-singleratio": {
+            "title": "Fluid column (first) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "10% 2",
+                "gap"    : "1%",
+                "margin" : "1%"
+            }
+        },
+        "grid-nocalc-fluid-last-singleratio": {
+            "title": "Fluid column (last) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "2 10%",
+                "gap"    : "1%",
+                "margin" : "1%"
+            }
+        },
+        "grid-nocalc-fluid-first-multiratio": {
+            "title": "Fluid column (first) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "10% 1 2",
+                "gap"    : "1%",
+                "margin" : "1%"
+            }
+        },
+        "grid-nocalc-fluid-middle-multiratio": {
+            "title": "Fluid column (middle) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 10% 2",
+                "gap"    : "1%",
+                "margin" : "1%"
+            }
+        },
+        "grid-nocalc-fluid-last-multiratio": {
+            "title": "Fluid column (last) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 2 10%",
+                "gap"    : "1%",
+                "margin" : "1%"
+            }
+        },
+        "grid-nocalc-order": {
+            "title": "Column Order",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "1%",
+                "margin" : "1%",
+                "order"  : "2 3 1"
+            }
+        },
+        "grid-nocalc-rtl": {
+            "title": "Direction (RTL)",
+            "elms" : 6,
+            "props": {
+                "columns"  : "3",
+                "gap"      : "1%",
+                "margin"   : "1%",
+                "direction": "rtl"
+            }
+        },
+        "grid-nocalc-nested": {
+            "title": "Nested Grids",
+            "elms" : 6,
+            "props": {
+                "columns" : "3",
+                "gap"     : "1%",
+                "margin"  : "1%"
+            },
+            "grids": {
+                "grid-n": {
+                    "elms" : 6,
+                    "props": {
+                        "columns": "1 2 3",
+                        "gap"    : "1%"
+                    }
+                }
+            }
+        },
+
+
+
+        "grid-calc-singleratio": {
+            "title": "CALC: Single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-singleratio-nogap": {
+            "title": "CALC: Single ratio value without gaps",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "0",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-singleratio-nomargin": {
+            "title": "CALC: Single ratio value without margins",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "0.5rem",
+                "margin" : "0"
+            }
+        },
+        "grid-calc-multiratio": {
+            "title": "CALC: Multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 2 3",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+
+        "grid-calc-fixed": {
+            "title": "CALC: Fixed columns",
+            "elms" : 6,
+            "props": {
+                "columns": "48px 64px 80px",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fixed-first-singleratio": {
+            "title": "CALC: Fixed column (first) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "100px 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fixed-last-singleratio": {
+            "title": "CALC: Fixed column (last) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "2 100px",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fixed-first-multiratio": {
+            "title": "CALC: Fixed column (first) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "100px 1 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fixed-middle-multiratio": {
+            "title": "CALC: Fixed column (middle) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 100px 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fixed-last-multiratio": {
+            "title": "CALC: Fixed column (last) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 2 100px",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fixed-firstlast-singleratio": {
+            "title": "CALC: Fixed columns (first and last) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "100px 1 100px",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+
+        "grid-calc-fluid-first-singleratio": {
+            "title": "CALC: Fluid column (first) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "10% 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fluid-last-singleratio": {
+            "title": "CALC: Fluid column (last) + single ratio value",
+            "elms" : 6,
+            "props": {
+                "columns": "2 10%",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fluid-first-multiratio": {
+            "title": "CALC: Fluid column (first) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "10% 1 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fluid-middle-multiratio": {
+            "title": "CALC: Fluid column (middle) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 10% 2",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-fluid-last-multiratio": {
+            "title": "CALC: Fluid column (last) + multiple ratio values",
+            "elms" : 6,
+            "props": {
+                "columns": "1 2 10%",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem"
+            }
+        },
+        "grid-calc-order": {
+            "title": "CALC: Column Order",
+            "elms" : 6,
+            "props": {
+                "columns": "3",
+                "gap"    : "0.5rem",
+                "margin" : "0.5rem",
+                "order"  : "2 3 1"
+            }
+        },
+        "grid-calc-rtl": {
+            "title": "CALC: Direction (RTL)",
+            "elms" : 6,
+            "props": {
+                "columns"  : "3",
+                "gap"   : "0.5rem",
+                "margin"   : "0.5rem",
+                "direction": "rtl"
+            }
+        },
+        "grid-calc-nested": {
+            "title": "CALC: Nested Grids",
+            "elms" : 6,
+            "props": {
+                "columns" : "3",
+                "gap"     : "0.5rem",
+                "margin"  : "0.5rem"
+            },
+            "grids": {
+                "grid-n": {
+                    "elms" : 6,
+                    "props": {
+                        "columns": "3",
+                        "gap"    : "0.5rem",
+                        "margin" : "0"
+                    }
+                }
+            }
+        }
+    }
+}

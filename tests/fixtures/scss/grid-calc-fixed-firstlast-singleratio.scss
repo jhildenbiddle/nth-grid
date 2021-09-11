@@ -1,0 +1,9 @@
+.grid-calc-fixed-firstlast-singleratio {
+    @include nth-grid(
+        $width: 95%,
+        $order: false,
+        $columns: 100px 1 100px,
+        $gap: 0.5rem,
+        $margin: 0.5rem
+    );
+}

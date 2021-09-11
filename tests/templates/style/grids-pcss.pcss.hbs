@@ -1,0 +1,13 @@
+{{#if options}}
+:root {
+    {{!-- Global Options --}}
+    {{#each options}}
+    --nth-grid-{{@key}}: {{this}};
+    {{/each}}
+}
+{{/if}}
+
+{{!-- Styles --}}
+.postcss {
+    {{> grid-pcss this}}
+}

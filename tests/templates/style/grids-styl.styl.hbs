@@ -1,0 +1,10 @@
+@import "stylus/_nth-grid";
+
+{{!-- Nth-Grid Globals --}}
+{{#each options}}
+$nth-grid-{{@key}} = {{this}};
+{{/each}}
+
+{{!-- Styles --}}
+.stylus
+    {{> grid-styl this}}

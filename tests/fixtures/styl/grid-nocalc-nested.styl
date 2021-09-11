@@ -1,0 +1,14 @@
+.grid-nocalc-nested
+    nth-grid(
+        $width: 95%,
+        $order: false,
+        $columns: 3,
+        $gap: 1%,
+        $margin: 1%
+    )
+    .grid-n
+        nth-grid(
+            $order: false,
+            $columns: 1 2 3,
+            $gap: 1%
+        )
