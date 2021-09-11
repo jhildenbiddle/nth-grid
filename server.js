@@ -5,8 +5,8 @@ const compression = require('compression');
 
 browserSync.init({
     files: [
-        './build/demo/**/*',
-        './demo/static/**/*',
+        './demo/**/*',
+        './demo/src/static/**/*',
         './docs/**/*'
     ],
     ghostMode: {
@@ -26,12 +26,12 @@ browserSync.init({
             compression()
         ],
         routes: {
-            '/demo'        : './build/demo',
+            '/demo'        : './demo',
             '/CHANGELOG.md': './CHANGELOG.md'
         }
     },
     serveStatic: [
-        './demo/static',
+        './demo/src/static',
         { route: '/demo', dir: './dist' }
     ],
     snippetOptions: {
