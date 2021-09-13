@@ -86,19 +86,19 @@
     "clean": "rimraf demo/* dist/* docs/sassdoc/* tests/fixtures/*",
     "prepare": "run-s build",
     "serve": "nodemon -q server.js",
-    "start": "run-s build watch serve",
+    "start": "npm-run-all -s build -p watch serve",
     "test": "mocha tests",
     "version": "run-s prepare test && git add -A dist",
     "watch": "run-p watch:demo:* watch:dist:* watch:sassdoc",
+    "watch:demo:hbs": "nodemon -C -q -w src/templates -e '*' -x run-p build:demo build:fixtures",
     "watch:demo:less": "nodemon -C -q -w demo -e less -x run-s build:demo:less",
     "watch:demo:postcss": "nodemon -C -q -w demo -e pcss -x run-s build:demo:postcss",
     "watch:demo:sass": "nodemon -C -q -w demo -e scss -x run-s build:demo:sass",
     "watch:demo:stylus": "nodemon -C -q -w demo -e styl -x run-s build:demo:stylus",
-    "watch:dist:hbs": "nodemon -C -q -w src/templates -x run-p build:demo build:fixtures",
-    "watch:dist:less": "nodemon -C -q -w src/less -x run-s build:dist:less",
-    "watch:dist:postcss": "nodemon -C -q -w src/postcss -x run-s build:dist:postcss build:dist:less",
-    "watch:dist:sass": "nodemon -C -q -w src/sass -x run-s build:dist:sass",
-    "watch:dist:stylus": "nodemon -C -q -w src/stylus -x run-s build:dist:stylus",
-    "watch:sassdoc": "nodemon -C -q -w src/sass -x run-s build:sassdoc"
+    "watch:dist:less": "nodemon -C -q -w src/less -e '*' -x run-s build:dist:less",
+    "watch:dist:postcss": "nodemon -C -q -w src/postcss -e '*' -x run-s build:dist:postcss build:dist:less",
+    "watch:dist:sass": "nodemon -C -q -w src/sass -e '*' -x run-s build:dist:sass",
+    "watch:dist:stylus": "nodemon -C -q -w src/stylus -e '*' -x run-s build:dist:stylus",
+    "watch:sassdoc": "nodemon -C -q -w src/sass -e '*' -x run-s build:sassdoc"
   }
 }

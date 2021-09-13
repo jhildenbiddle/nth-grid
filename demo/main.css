@@ -262,15 +262,15 @@ nav a {
   color: #466DA9;
   border-color: #466DA9;
 }
-.postcss nav a[href="#postcss"] {
+.pcss nav a[href="#pcss"] {
   color: #dd3735;
   border-color: #dd3735;
 }
-.sass nav a[href="#sass"] {
+.scss nav a[href="#scss"] {
   color: #c6538c;
   border-color: #c6538c;
 }
-.stylus nav a[href="#stylus"] {
+.styl nav a[href="#styl"] {
   color: #ff6347;
   border-color: #ff6347;
 }
@@ -294,15 +294,15 @@ section > [class*=grid-] {
   display: block;
 }
 
-.postcss section.postcss {
+.pcss section.pcss {
   display: block;
 }
 
-.sass section.sass {
+.scss section.scss {
   display: block;
 }
 
-.stylus section.stylus {
+.styl section.styl {
   display: block;
 }
 
@@ -344,31 +344,31 @@ section.less [class*=grid-] > *, section.less [class*=grid-] [class*=grid-] > * 
 section.less [class*=grid-] > *:before, section.less [class*=grid-] [class*=grid-] > *:before {
   color: #fff !important;
 }
-section.postcss [class*=grid-], section.postcss [class*=grid-] [class*=grid-] {
+section.pcss [class*=grid-], section.pcss [class*=grid-] [class*=grid-] {
   background-color: #e89190 !important;
 }
-section.postcss [class*=grid-] > *, section.postcss [class*=grid-] [class*=grid-] > * {
+section.pcss [class*=grid-] > *, section.pcss [class*=grid-] [class*=grid-] > * {
   background: #dd3735 !important;
 }
-section.postcss [class*=grid-] > *:before, section.postcss [class*=grid-] [class*=grid-] > *:before {
+section.pcss [class*=grid-] > *:before, section.pcss [class*=grid-] [class*=grid-] > *:before {
   color: #fff !important;
 }
-section.sass [class*=grid-], section.sass [class*=grid-] [class*=grid-] {
+section.scss [class*=grid-], section.scss [class*=grid-] [class*=grid-] {
   background-color: #dca3bf !important;
 }
-section.sass [class*=grid-] > *, section.sass [class*=grid-] [class*=grid-] > * {
+section.scss [class*=grid-] > *, section.scss [class*=grid-] [class*=grid-] > * {
   background: #c6538c !important;
 }
-section.sass [class*=grid-] > *:before, section.sass [class*=grid-] [class*=grid-] > *:before {
+section.scss [class*=grid-] > *:before, section.scss [class*=grid-] [class*=grid-] > *:before {
   color: #fff !important;
 }
-section.stylus [class*=grid-], section.stylus [class*=grid-] [class*=grid-] {
+section.styl [class*=grid-], section.styl [class*=grid-] [class*=grid-] {
   background-color: #fdbbaf !important;
 }
-section.stylus [class*=grid-] > *, section.stylus [class*=grid-] [class*=grid-] > * {
+section.styl [class*=grid-] > *, section.styl [class*=grid-] [class*=grid-] > * {
   background: #ff6347 !important;
 }
-section.stylus [class*=grid-] > *:before, section.stylus [class*=grid-] [class*=grid-] > *:before {
+section.styl [class*=grid-] > *:before, section.styl [class*=grid-] [class*=grid-] > *:before {
   color: #fff !important;
 }
 

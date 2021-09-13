@@ -10,7 +10,7 @@ $nth-grid-debug: false;
 $nth-grid-warnings: false;
 $nth-grid-remove-globals: true;
 
-.sass {
+.scss {
     .grid-nocalc-singleratio {
         @include nth-grid(
             $width: 95%,
