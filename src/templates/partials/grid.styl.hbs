@@ -1,5 +1,5 @@
 {{#each grids}}
-.{{@key}}
+{{#if ../parentSelector}}{{../parentSelector}} {{/if}}.{{@key}}
     nth-grid(
         {{!-- Private globals --}}
         {{#if @root.defaults}}

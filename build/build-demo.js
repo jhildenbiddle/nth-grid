@@ -17,9 +17,9 @@ const demoTask = {
     jobs: {
         html: '../src/templates/pages/**/*.hbs',
         less: '../src/templates/style/**/*.less.hbs',
-        pcss: '../src/templates/style/**/*.pcss.hbs',
-        scss: '../src/templates/style/**/*.scss.hbs',
-        styl: '../src/templates/style/**/*.styl.hbs'
+        postcss: '../src/templates/style/**/*.pcss.hbs',
+        sass: '../src/templates/style/**/*.scss.hbs',
+        stylus: '../src/templates/style/**/*.styl.hbs'
     }
 };
 

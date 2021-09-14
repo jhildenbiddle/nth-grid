@@ -15,10 +15,10 @@ const fixturesTask = {
     data: require('../src/templates/data/grids.json'),
     dest: '../tests/fixtures/',
     jobs: {
-        less: '../src/templates/partials/**/*-less.hbs',
-        pcss: '../src/templates/partials/**/*-pcss.hbs',
-        scss: '../src/templates/partials/**/*-scss.hbs',
-        styl: '../src/templates/partials/**/*-styl.hbs'
+        less: '../src/templates/partials/**/*.less.hbs',
+        postcss: '../src/templates/partials/**/*.pcss.hbs',
+        sass: '../src/templates/partials/**/*.scss.hbs',
+        stylus: '../src/templates/partials/**/*.styl.hbs'
     }
 };
 

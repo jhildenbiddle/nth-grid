@@ -6,7 +6,7 @@
     {{!-- Nested grids --}}
     {{#if grids}}
     <div>
-        {{> grids-html this}}
+        {{> grids.html this}}
     </div>
     {{#repeat (math elms '-' 1) start=2}}
     <div>{{@index}}</div>

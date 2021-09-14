@@ -123,7 +123,7 @@ $nth-grid-warnings              : true !default;
 ///   $test: _nthIsUnitMatch(1px 0%);  /* true (0 value is ignored) */
 ///   $test: _nthIsUnitMatch(1px 2%);  /* false */
 @function _nthIsUnitMatch($list, $matchUnit: null) {
-    // Return false if value os not a valid length (e.g. calc)
+    // Return false if value is not a valid length (e.g. calc)
     @if type-of(nth($list, 1)) != 'number' {
         @return false;
     }
@@ -135,7 +135,7 @@ $nth-grid-warnings              : true !default;
     @for $i from 1 through length($list) {
         $val: nth($list, $i);
 
-        // Return false if value os not a valid length (e.g. calc)
+        // Return false if value is not a valid length (e.g. calc)
         @if type-of($val) != 'number' {
             @return false;
         }

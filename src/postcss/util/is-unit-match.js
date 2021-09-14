@@ -8,7 +8,7 @@ import getUnit   from './get-unit';
 // =============================================================================
 // Compare units of array items, ignoring zero values w/o units
 export default function(arr, matchUnit) {
-    // Return false if value os not a valid length (e.g. calc)
+    // Return false if value is not a valid length (e.g. calc)
     if (!getNumber(arr[0]) && !getUnit(arr[0])) {
         return false;
     }
