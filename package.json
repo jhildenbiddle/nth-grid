@@ -61,7 +61,7 @@
     "rollup": "^2.6.0",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.39.2",
+    "sass": "^1.40.1",
     "sassdoc": "^2.5.1",
     "stylus": "^0.55.0"
   },
