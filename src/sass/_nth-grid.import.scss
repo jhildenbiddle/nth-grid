@@ -1,7 +1,7 @@
-// Nth-Grid v0.0.0
-// https://github.com/jhildenbiddle/nth-grid
-// (c) 2015-2021 John Hildenbiddle
-// MIT license
+// Nth-Grid @@version
+// @@homepage
+// @@copyright
+// @@license
 
 // =============================================================================
 // SassDoc Annotations - http://sassdoc.com
@@ -9,11 +9,8 @@
 ////
 /// @author John Hildenbiddle
 /// @group nth-grid
-/// @link https://github.com/jhildenbiddle/nth-grid
+/// @link @@homepage
 ////
-@use "sass:list";
-@use "sass:math";
-@use "sass:meta";
 
 // =============================================================================
 // Global Options
@@ -23,49 +20,49 @@
 /// Default Nth-Grid `columns` setting.
 /// @type Number | List
 /// @see nth-grid
-$nth-grid-columns: 1 !default;
+$nth-grid-columns               : 1 !default;
 ///
 /// Default Nth-Grid `gap` setting.
 /// @type Length | List
 /// @see nth-grid
-$nth-grid-gap: 0 !default;
+$nth-grid-gap                   : 0 !default;
 ///
 /// Default Nth-Grid `margin` setting.
 /// @type Length | List
 /// @see nth-grid
-$nth-grid-margin: 0 !default;
+$nth-grid-margin                : 0 !default;
 ///
 /// Default Nth-Grid `direction` setting.
 /// @type String
 /// @see nth-grid
-$nth-grid-direction: ltr !default;
+$nth-grid-direction             : ltr !default;
 ///
 /// Default Nth-Grid `flex` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-flex: true !default;
+$nth-grid-flex                  : true !default;
 ///
 /// Default Nth-Grid `flex-legacy` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-flex-legacy: true !default;
+$nth-grid-flex-legacy           : true !default;
 ///
 /// Default Nth-Grid `float` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-float: false !default;
+$nth-grid-float                 : false !default;
 ///
 /// Default Nth-Grid `float-legacy` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-float-legacy: false !default;
+$nth-grid-float-legacy          : false !default;
 
 // Debug
 // -----------------------------------------------------------------------------
 /// Default Nth-Grid `debug` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-debug: false !default;
+$nth-grid-debug                 : false !default;
 ///
 /// Default Nth-Grid `debug-background-color` setting.
 /// @type String
@@ -75,29 +72,29 @@ $nth-grid-debug-background-color: #000 !default;
 /// Default Nth-Grid `debug-text-color` setting.
 /// @type String
 /// @see nth-grid
-$nth-grid-debug-text-color: #ccc !default;
+$nth-grid-debug-text-color      : #ccc !default;
 
 // Overlay
 // -----------------------------------------------------------------------------
 /// Default Nth-Grid `ovelay` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-overlay: false !default;
+$nth-grid-overlay               : false !default;
 ///
 /// Default Nth-Grid `ovelay-column-color` setting.
 /// @type String
 /// @see nth-grid
-$nth-grid-overlay-column-color: #7c48c3 !default;
+$nth-grid-overlay-column-color  : #7c48c3 !default;
 ///
 /// Default Nth-Grid `ovelay-margin-color` setting.
 /// @type String
 /// @see nth-grid
-$nth-grid-overlay-margin-color: #dabfff !default;
+$nth-grid-overlay-margin-color  : #dabfff !default;
 ///
 /// Default Nth-Grid `ovelay-text-color` setting.
 /// @type String
 /// @see nth-grid
-$nth-grid-overlay-text-color: #fff !default;
+$nth-grid-overlay-text-color    : #fff !default;
 
 // Compilation
 // -----------------------------------------------------------------------------
@@ -105,12 +102,12 @@ $nth-grid-overlay-text-color: #fff !default;
 /// is only necessary when the font size of the root element has been changed
 /// from the browser default.
 /// @type Number | Length
-$nth-grid-rem-base: 16 !default;
+$nth-grid-rem-base              : 16 !default;
 ///
 /// Default Nth-Grid `warnings` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-warnings: true !default;
+$nth-grid-warnings              : true !default;
 
 
 // =============================================================================
@@ -127,24 +124,24 @@ $nth-grid-warnings: true !default;
 ///   $test: _nthIsUnitMatch(1px 2%);  /* false */
 @function _nthIsUnitMatch($list, $matchUnit: null) {
     // Return false if value is not a valid length (e.g. calc)
-    @if meta.type-of(list.nth($list, 1)) != 'number' {
+    @if type-of(nth($list, 1)) != 'number' {
         @return false;
     }
     // Get matching unit from first item if unspecified
     @else if $matchUnit == null {
-        $matchUnit: math.unit(list.nth($list, 1));
+        $matchUnit: unit(nth($list, 1));
     }
 
-    @for $i from 1 through list.length($list) {
-        $val: list.nth($list, $i);
+    @for $i from 1 through length($list) {
+        $val: nth($list, $i);
 
         // Return false if value is not a valid length (e.g. calc)
-        @if meta.type-of($val) != 'number' {
+        @if type-of($val) != 'number' {
             @return false;
         }
         @else {
-            $num : math.div($val, $val * 0 + 1);
-            $unit: math.unit($val);
+            $num : $val / ($val * 0 + 1);
+            $unit: unit($val);
 
             @if $num != 0 and $unit != $matchUnit {
                 @return false;
@@ -167,7 +164,7 @@ $nth-grid-warnings: true !default;
     $str: '';
 
     @each $item in $list {
-       $item: meta.inspect($item);
+       $item: inspect($item);
 
         @if $item != '' {
             @if $str == '' {
@@ -218,10 +215,10 @@ $nth-grid-warnings: true !default;
 
                 // Get sibling values from $columns-normalized or $order
                 @if $order != false {
-                    $sibling-val: list.nth($columns, list.nth($order, $i));
+                    $sibling-val: nth($columns, nth($order, $i));
                 }
                 @else {
-                    $sibling-val: list.nth($columns, $i);
+                    $sibling-val: nth($columns, $i);
                 }
 
                 // Gap
@@ -230,37 +227,37 @@ $nth-grid-warnings: true !default;
                 }
 
                 // Ratio-based value
-                @if math.is-unitless($sibling-val) {
+                @if unitless($sibling-val) {
                     $sibling-ratio-cols: $sibling-ratio-cols + $sibling-val;
                 }
                 // Unit-based value
                 @else {
-                    $sibling-unit-cols: list.append($sibling-unit-cols, $sibling-val);
+                    $sibling-unit-cols: append($sibling-unit-cols, $sibling-val);
                 }
             }
 
             // Ratio offset
             @if $sibling-ratio-cols > 0 {
                 @if $sibling-ratio-cols == 1 {
-                    $offset-vals: list.append($offset-vals, $grid-col-width);
+                    $offset-vals: append($offset-vals, $grid-col-width);
                 }
                 @else {
-                    $offset-vals: list.append($offset-vals, '((#{$grid-col-width}) * #{$sibling-ratio-cols})');
+                    $offset-vals: append($offset-vals, '((#{$grid-col-width}) * #{$sibling-ratio-cols})');
                 }
             }
 
             // Unit offset
-            @if list.length($sibling-unit-cols) > 0 {
-                $offset-vals: list.append($offset-vals, _nthJoinToString($sibling-unit-cols, ' + '));
+            @if length($sibling-unit-cols) > 0 {
+                $offset-vals: append($offset-vals, _nthJoinToString($sibling-unit-cols, ' + '));
             }
 
             // Gap offset
             @if $sibling-gaps > 0 {
                 @if $sibling-gaps == 1 {
-                    $offset-vals: list.append($offset-vals, $gap-h);
+                    $offset-vals: append($offset-vals, $gap-h);
                 }
                 @else {
-                    $offset-vals: list.append($offset-vals, '(#{$gap-h} * #{$sibling-gaps})');
+                    $offset-vals: append($offset-vals, '(#{$gap-h} * #{$sibling-gaps})');
                 }
             }
 
@@ -275,14 +272,14 @@ $nth-grid-warnings: true !default;
 
                 // Get sibling values from $columns-normalized or $order
                 @if $order != false {
-                    $sibling-val: list.nth($columns, list.nth($order, $i));
+                    $sibling-val: nth($columns, nth($order, $i));
                 }
                 @else {
-                    $sibling-val: list.nth($columns, $i);
+                    $sibling-val: nth($columns, $i);
                 }
 
                 // Add ratio-based value
-                @if math.is-unitless($sibling-val) {
+                @if unitless($sibling-val) {
                     $offset: $offset + ($grid-col-width * $sibling-val) + $gap-h;
                 }
                 // Add unit-based value
@@ -311,7 +308,7 @@ $nth-grid-warnings: true !default;
         $pow: $pow * 10;
     }
 
-    @return math.div(math.round($val * $pow), $pow);
+    @return round($val * $pow) / $pow;
 }
 
 /// Removes unit from value
@@ -321,7 +318,7 @@ $nth-grid-warnings: true !default;
 /// @example scss
 ///   $test: _nthStripUnit(100px); /* 100 */
 @function _nthStripUnit($val) {
-    @return math.div($val, $val * 0 + 1);
+    @return $val / ($val * 0 + 1);
 }
 
 /// Removes unit from value if value is zero
@@ -355,9 +352,9 @@ $nth-grid-warnings: true !default;
     $sum: 0;
 
     @each $val in $list {
-        @if meta.type-of($val) == number {
-            @if $force and math.unit($val) {
-                $val: math.div($val, $val * 0 + 1);
+        @if type-of($val) == number {
+            @if $force and unit($val) {
+                $val: $val / ($val * 0 + 1);
                 $sum: $sum + $val;
             }
             @else {
@@ -409,7 +406,7 @@ $nth-grid-warnings: true !default;
 ///     padding: 1rem !important; /* Native */
 ///   }
 @mixin _nth-rem($property, $val, $legacy: $nth-grid-float-legacy) {
-    @if $legacy and meta.type-of($val) == number and math.unit($val) == 'rem' {
+    @if $legacy and type-of($val) == number and unit($val) == 'rem' {
         $base: _nthStripUnit($nth-grid-rem-base);
         $num : _nthStripUnit($val);
 
@@ -607,10 +604,10 @@ $nth-grid-warnings: true !default;
     $total-unit-columns : 0;
 
     // Extract values from lists
-    $gap-h   : if(list.length($gap) == 2, _nthStripZeroUnit(list.nth($gap, 2)), _nthStripZeroUnit($gap));
-    $gap-v   : if(list.length($gap) == 2, _nthStripZeroUnit(list.nth($gap, 1)), _nthStripZeroUnit($gap));
-    $margin-h: if(list.length($margin) == 2, _nthStripZeroUnit(list.nth($margin, 2)), _nthStripZeroUnit($margin));
-    $margin-v: if(list.length($margin) == 2, _nthStripZeroUnit(list.nth($margin, 1)), _nthStripZeroUnit($margin));
+    $gap-h   : if(length($gap) == 2, _nthStripZeroUnit(nth($gap, 2)), _nthStripZeroUnit($gap));
+    $gap-v   : if(length($gap) == 2, _nthStripZeroUnit(nth($gap, 1)), _nthStripZeroUnit($gap));
+    $margin-h: if(length($margin) == 2, _nthStripZeroUnit(nth($margin, 2)), _nthStripZeroUnit($margin));
+    $margin-v: if(length($margin) == 2, _nthStripZeroUnit(nth($margin, 1)), _nthStripZeroUnit($margin));
 
     // Direction
     $dir-left: if($direction == rtl, right, left);
@@ -620,28 +617,28 @@ $nth-grid-warnings: true !default;
     $selector: &;
 
     // Ratio- and unit-based column lists
-    @for $i from 1 through list.length($columns) {
-        $col: list.nth($columns, $i);
+    @for $i from 1 through length($columns) {
+        $col: nth($columns, $i);
 
-        @if math.is-unitless($col) {
-            $columns-ratio: list.append($columns-ratio, $col);
+        @if unitless($col) {
+            $columns-ratio: append($columns-ratio, $col);
         }
         @else {
-            $columns-unit: list.append($columns-unit, $col);
+            $columns-unit: append($columns-unit, $col);
         }
     }
 
     // Total column count
-    $total-ratio-columns: if(list.length($columns-ratio) == 1, list.nth($columns-ratio, 1), list.length($columns-ratio));
-    $total-unit-columns : list.length($columns-unit);
+    $total-ratio-columns: if(length($columns-ratio) == 1, nth($columns-ratio, 1), length($columns-ratio));
+    $total-unit-columns : length($columns-unit);
     $total-columns      : $total-ratio-columns + $total-unit-columns;
 
     // Grid ratio
     $grid-col-ratio: if($total-ratio-columns == 1, $total-ratio-columns, _nthSum($columns-ratio));
 
     // Grid checks
-    $grid-units   : list.join($columns-unit, list.join($gap, $margin));
-    $isMatched    : _nthIsUnitMatch(list.join($width, $grid-units));
+    $grid-units   : join($columns-unit, join($gap, $margin));
+    $isMatched    : _nthIsUnitMatch(join($width, $grid-units));
     $isMatchedGrid: if($total-ratio-columns == 0 and _nthIsUnitMatch($grid-units), true, false);
     $isPercentGrid: _nthIsUnitMatch($grid-units, '%');
 
@@ -695,11 +692,11 @@ $nth-grid-warnings: true !default;
     // FIX: 99.99% for sub-pixel rendering fix (e.g. IE9, Chrome < 38)
     @if $calc {
         // Single unit-based column
-        @if list.length($columns-unit) == 1 {
+        @if length($columns-unit) == 1 {
             $grid-width: '99.99% - #{$columns-unit}';
         }
         // Multiple unit-based columns
-        @else if list.length($columns-unit) > 1 {
+        @else if length($columns-unit) > 1 {
             // Matched units
             @if _nthIsUnitMatch($columns-unit) {
                 $grid-width: '99.99% - #{_nthSum($columns-unit)}';
@@ -716,7 +713,7 @@ $nth-grid-warnings: true !default;
     }
     // Ratio grid width - Calc() not required
     @else {
-        @if $isMatched and math.unit($width) != '%' and $total-unit-columns > 0 {
+        @if $isMatched and unit($width) != '%' and $total-unit-columns > 0 {
             // Subtract unit-based column values from width
             $grid-width: $width - _nthSum($columns-unit);
         }
@@ -782,7 +779,7 @@ $nth-grid-warnings: true !default;
             }
 
             // Divide by grid ratio
-            $grid-col-width: math.div($grid-width - $grid-gaps - $grid-margins, $grid-col-ratio);
+            $grid-col-width: ($grid-width - $grid-gaps - $grid-margins) / $grid-col-ratio;
         }
     }
     // No ratio-based columns
@@ -949,9 +946,9 @@ $nth-grid-warnings: true !default;
 
         // Width: Unit-based column(s) only
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        @if list.length($columns-ratio) == 0 {
-            @for $i from 1 through list.length($columns) {
-                $column-val: list.nth($columns, $i);
+        @if length($columns-ratio) == 0 {
+            @for $i from 1 through length($columns) {
+                $column-val: nth($columns, $i);
 
                 &:nth-child(#{$total-columns}n + #{$i}) {
                     @include _nth-rem(width, $column-val, $float-legacy);
@@ -964,7 +961,7 @@ $nth-grid-warnings: true !default;
 
         // Width: Single ratio-based value
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-        @else if list.length($columns-ratio) == 1 {
+        @else if length($columns-ratio) == 1 {
             // Ratio-based column
             &:nth-child(1n) {
                 // Calc() required
@@ -985,13 +982,13 @@ $nth-grid-warnings: true !default;
             }
 
             // Unit-based column(s)
-            @if list.length($columns-unit) > 0 {
+            @if length($columns-unit) > 0 {
                 // Get index of ratio-based value
-                $ratio-col-index: list.index($columns, $total-ratio-columns);
+                $ratio-col-index: index($columns, $total-ratio-columns);
 
                 // Unit-based column(s)
-                @for $i from 1 through list.length($columns) {
-                    $column-val: list.nth($columns, $i);
+                @for $i from 1 through length($columns) {
+                    $column-val: nth($columns, $i);
 
                     @if $column-val != $total-ratio-columns {
                         $nth-col: if($i > $ratio-col-index, ($i - 1) + $total-ratio-columns, $i);
@@ -1010,12 +1007,12 @@ $nth-grid-warnings: true !default;
         // Width: Mutiple ratio-based values
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         @else {
-            @for $i from 1 through list.length($columns) {
-                $column-val: list.nth($columns, $i);
+            @for $i from 1 through length($columns) {
+                $column-val: nth($columns, $i);
 
                 &:nth-child(#{$total-columns}n + #{$i}) {
                     // Ratio-based columns
-                    @if math.is-unitless($column-val) {
+                    @if unitless($column-val) {
                         // Calc() required
                         @if $calc {
                             width: calc((#{$grid-col-width}) * #{$column-val});
@@ -1048,7 +1045,7 @@ $nth-grid-warnings: true !default;
         // Order
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // Invalid order
-        @if $order and list.length($order) > $total-columns {
+        @if $order and length($order) > $total-columns {
             @warn 'NTH-GRID: "#{$selector}" order (#{$order}) exceeds total column count of #{$total-columns} for columns (#{$columns}). Order not applied.';
         }
         // Valid order
@@ -1057,19 +1054,19 @@ $nth-grid-warnings: true !default;
             // Ex: nth-grid(6) /* $columns-normalized: 1 1 1 1 1 1 */
             $columns-normalized: ();
 
-            @if list.length($columns-ratio) == 1 {
-                @for $i from 1 through list.length($columns) {
-                    $val: list.nth($columns, $i);
+            @if length($columns-ratio) == 1 {
+                @for $i from 1 through length($columns) {
+                    $val: nth($columns, $i);
 
                     // Single ratio-based value
-                    @if math.is-unitless($val) {
+                    @if unitless($val) {
                         @for $j from 1 through $val {
-                            $columns-normalized: list.append($columns-normalized, 1);
+                            $columns-normalized: append($columns-normalized, 1);
                         }
                     }
                     // Other values
                     @else {
-                        $columns-normalized: list.append($columns-normalized, $val);
+                        $columns-normalized: append($columns-normalized, $val);
                     }
                 }
             }
@@ -1078,9 +1075,9 @@ $nth-grid-warnings: true !default;
             }
 
             // Loop through the order
-            @for $i from 1 through list.length($order) {
+            @for $i from 1 through length($order) {
                 $offset   : false;
-                $order-val: list.nth($order, $i);
+                $order-val: nth($order, $i);
 
                 // Get offset of the order column value from the original column layout
                 // Ex: Column 3 offset in original $columns
@@ -1123,7 +1120,7 @@ $nth-grid-warnings: true !default;
                 }
 
                 // Add offest to list
-                $order-offsets: list.append($order-offsets, $offset);
+                $order-offsets: append($order-offsets, $offset);
 
                 // Apply offset if needed
                 @if $offset {

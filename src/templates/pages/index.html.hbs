@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="grids-less.css">
 
     <!--[if gte IE 9]>  <!-- -->
-    <link rel="stylesheet" href="grids-pcss.css">
-    <link rel="stylesheet" href="grids-scss.css">
-    <link rel="stylesheet" href="grids-styl.css">
+    <link rel="stylesheet" href="grids-postcss.css">
+    <link rel="stylesheet" href="grids-sass-import.css">
+    <link rel="stylesheet" href="grids-sass-use.css">
+    <link rel="stylesheet" href="grids-stylus.css">
     <![endif]-->
 
     <!--[if lte IE 8]>
-    <script src="/js/html5shiv.min.js"></script>
+    <script src="/js/vendor/html5shiv.min.js"></script>
     <![endif]-->
 </head>
 
@@ -33,7 +34,8 @@
             <li><a href="#compare">Compare</a></li>
             <li><a href="#less">Less</a></li>
             <li><a href="#postcss">PostCSS</a></li>
-            <li><a href="#sass">Sass</a></li>
+            <li><a href="#sass-import">Sass <code>@import</code></a></li>
+            <li><a href="#sass-use">Sass <code>@use</code></a></li>
             <li><a href="#stylus">Stylus</a></li>
         </ul>
     </nav>
@@ -49,7 +51,11 @@
             {{> grids.html}}
         </section>
 
-        <section class="sass">
+        <section class="sass-import">
+            {{> grids.html}}
+        </section>
+
+        <section class="sass-use">
             {{> grids.html}}
         </section>
 
@@ -61,8 +67,8 @@
 
     <!-- JavaScript -->
     <!--[if lte IE 8]>
-    <script src="/js//nwmatcher.js"></script>
-    <script src="/js//selectivizr2.js"></script>
+    <script src="/js/vendor/nwmatcher.js"></script>
+    <script src="/js/vendor/selectivizr2.js"></script>
     <![endif]-->
     <script src="/js/main.js"></script>
 </body>

@@ -11,10 +11,11 @@ chai.use(require('chai-diff'));
 // =============================================================================
 describe('Diff nth-grid output', function() {
     const inputData = {
-        less   : fs.readFileSync('./build/demo/grids-less.css', 'utf-8'),
-        postcss: fs.readFileSync('./build/demo/grids-postcss.css', 'utf-8'),
-        sass   : fs.readFileSync('./build/demo/grids-sass.css', 'utf-8'),
-        stylus : fs.readFileSync('./build/demo/grids-stylus.css', 'utf-8')
+        less       : fs.readFileSync('./build/demo/grids-less.css', 'utf-8'),
+        postcss    : fs.readFileSync('./build/demo/grids-postcss.css', 'utf-8'),
+        "sass-use"   : fs.readFileSync('./build/demo/grids-sass-use.css', 'utf-8'),
+        "sass-import": fs.readFileSync('./build/demo/grids-sass-use.css', 'utf-8'),
+        stylus     : fs.readFileSync('./build/demo/grids-stylus.css', 'utf-8')
     };
     const truthKey = 'sass';
 

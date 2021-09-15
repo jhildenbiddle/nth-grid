@@ -4,15 +4,14 @@
         "order": false
     },
     "options": {
-        "direction"     : "ltr",
-        "flex"          : true,
-        "flex-legacy"   : true,
-        "float"         : true,
-        "float-legacy"  : true,
-        "overlay"       : false,
-        "debug"         : false,
-        "warnings"      : false,
-        "remove-globals": true
+        "direction"   : "ltr",
+        "flex"        : true,
+        "flex-legacy" : true,
+        "float"       : true,
+        "float-legacy": true,
+        "overlay"     : false,
+        "debug"       : false,
+        "warnings"    : false
     },
     "grids": {
         "grid-nocalc-singleratio": {

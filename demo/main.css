@@ -28,7 +28,7 @@ label[for=nav-toggle] {
   position: fixed;
   z-index: 2147483647;
   top: 2.5rem;
-  right: 30px;
+  right: 20px;
   margin: 0;
   padding: 0;
   white-space: nowrap;
@@ -105,7 +105,7 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  padding: 0 30px;
+  padding: 0 20px;
   background: #fff;
   height: 5rem;
 }
@@ -183,7 +183,7 @@ input#nav-toggle:checked ~ nav:after {
 
   nav > ul {
     top: 2.5rem;
-    right: 30px;
+    right: 20px;
     height: auto;
     width: auto;
     margin-top: -0.5em;
@@ -266,13 +266,23 @@ nav a {
   color: #dd3735;
   border-color: #dd3735;
 }
-.sass nav a[href="#sass"] {
+.sass-import nav a[href="#sass-import"] {
+  color: #c6538c;
+  border-color: #c6538c;
+}
+.sass-use nav a[href="#sass-use"] {
   color: #c6538c;
   border-color: #c6538c;
 }
 .stylus nav a[href="#stylus"] {
   color: #ff6347;
   border-color: #ff6347;
+}
+nav a code {
+  padding: 0.2em 0.35em;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.075);
+  font-size: 90%;
 }
 
 h2 {
@@ -298,7 +308,11 @@ section > [class*=grid-] {
   display: block;
 }
 
-.sass section.sass {
+.sass-import section.sass-import {
+  display: block;
+}
+
+.sass-use section.sass-use {
   display: block;
 }
 
@@ -353,13 +367,22 @@ section.postcss [class*=grid-] > *, section.postcss [class*=grid-] [class*=grid-
 section.postcss [class*=grid-] > *:before, section.postcss [class*=grid-] [class*=grid-] > *:before {
   color: #fff !important;
 }
-section.sass [class*=grid-], section.sass [class*=grid-] [class*=grid-] {
+section.sass-import [class*=grid-], section.sass-import [class*=grid-] [class*=grid-] {
   background-color: #dca3bf !important;
 }
-section.sass [class*=grid-] > *, section.sass [class*=grid-] [class*=grid-] > * {
+section.sass-import [class*=grid-] > *, section.sass-import [class*=grid-] [class*=grid-] > * {
   background: #c6538c !important;
 }
-section.sass [class*=grid-] > *:before, section.sass [class*=grid-] [class*=grid-] > *:before {
+section.sass-import [class*=grid-] > *:before, section.sass-import [class*=grid-] [class*=grid-] > *:before {
+  color: #fff !important;
+}
+section.sass-use [class*=grid-], section.sass-use [class*=grid-] [class*=grid-] {
+  background-color: #dca3bf !important;
+}
+section.sass-use [class*=grid-] > *, section.sass-use [class*=grid-] [class*=grid-] > * {
+  background: #c6538c !important;
+}
+section.sass-use [class*=grid-] > *:before, section.sass-use [class*=grid-] [class*=grid-] > *:before {
   color: #fff !important;
 }
 section.stylus [class*=grid-], section.stylus [class*=grid-] [class*=grid-] {
@@ -388,20 +411,20 @@ section.stylus [class*=grid-] > *:before, section.stylus [class*=grid-] [class*=
   box-sizing: border-box;
   position: static;
   left: auto;
-  margin-top: 2%;
-  margin-left: 2%;
+  margin-top: 1%;
+  margin-left: 1%;
 }
-.compare main > *:nth-child(-n+4) {
+.compare main > *:nth-child(-n+5) {
   margin-top: 0;
 }
-.compare main > *:nth-child(4n+1) {
+.compare main > *:nth-child(5n+1) {
   margin-left: 0;
 }
-.compare main > *:nth-last-child(-n+4) {
+.compare main > *:nth-last-child(-n+5) {
   margin-bottom: 0;
 }
 .compare main > *:nth-child(1n) {
-  width: 23.5%;
+  width: 19.2%;
 }
 .compare main h2 {
   position: absolute;

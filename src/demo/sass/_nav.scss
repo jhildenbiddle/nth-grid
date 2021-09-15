@@ -1,49 +1,49 @@
 // Layout - Navigation
 // =============================================================================
-$_nav-id                       : 'nav-toggle'             !default;
-$_nav-elm                      : 'ul'                     !default;
-$_nav-bar-autohide             : false                    !default;
-$_nav-bar-background           : #fff                     !default;
-$_nav-bar-height               : 5rem                     !default;
-$_nav-bar-padding              : 30px                     !default;
-$_nav-drawer-blur              : false                    !default;
-$_nav-drawer-breakpoint        : 48rem                    !default;
-$_nav-drawer-width             : 15rem                    !default;
-$_nav-icon-background          : transparent              !default;
-$_nav-icon-background-active   : $_nav-icon-background    !default;
-$_nav-icon-border              : 0                        !default;
-$_nav-icon-border-active       : $_nav-icon-border        !default;
-$_nav-icon-border-radius       : 0                        !default;
-$_nav-icon-border-radius-active: $_nav-icon-border-radius !default;
-$_nav-icon-color               : #000                     !default;
-$_nav-icon-color-active        : $_nav-icon-color         !default;
-$_nav-icon-padding             : 0                        !default;
-$_nav-icon-size                : 24px                     !default;
-$_nav-icon-transition-duration : 0.2s                     !default;
-$_nav-label-autohide           : true                     !default;
-$_nav-location                 : right                    !default;
-$_nav-overlay-color            : #000                     !default;
-$_nav-overlay-opacity          : 0.5                      !default;
-$_nav-transition-duration      : 0.5s                     !default;
-$_nav-z-index                  : 2147483646               !default;
+$id                       : 'nav-toggle' !default;
+$elm                      : 'ul' !default;
+$bar-autohide             : false !default;
+$bar-background           : #fff !default;
+$bar-height               : 5rem !default;
+$bar-padding              : 30px !default;
+$drawer-blur              : false !default;
+$drawer-breakpoint        : 48rem !default;
+$drawer-width             : 15rem !default;
+$icon-background          : transparent !default;
+$icon-background-active   : $icon-background !default;
+$icon-border              : 0 !default;
+$icon-border-active       : $icon-border !default;
+$icon-border-radius       : 0 !default;
+$icon-border-radius-active: $icon-border-radius !default;
+$icon-color               : #000 !default;
+$icon-color-active        : $icon-color !default;
+$icon-padding             : 0 !default;
+$icon-size                : 24px !default;
+$icon-transition-duration : 0.2s !default;
+$label-autohide           : true !default;
+$location                 : right !default;
+$overlay-color            : #000 !default;
+$overlay-opacity          : 0.5 !default;
+$transition-duration      : 0.5s !default;
+$z-index                  : 2147483646 !default;
 
 // Nav Drawer (Default)
 // -----------------------------------------------------------------------------
 // Toggles
-input##{$_nav-id},
-label[for="#{$_nav-id}"] {
+input##{$id},
+label[for="#{$id}"] {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 // Toggle overlay
-input##{$_nav-id} {
+input##{$id} {
     visibility: hidden;
     position: fixed;
-    z-index: $_nav-z-index + 1;
+    z-index: $z-index + 1;
     top: 0;
     left: 0;
     height: 100%;
-    width: calc(100vw - #{$_nav-drawer-width});
+    width: calc(100vw - #{$drawer-width});
     margin: 0;
     padding: 0;
     border: 0;
@@ -59,21 +59,21 @@ input##{$_nav-id} {
     }
 
     // Blur Effect
-    @if $_nav-drawer-blur == true {
+    @if $drawer-blur == true {
         & ~ *:not(label),
-        & ~ nav > :not(#{$_nav-elm}) {
+        & ~ nav > :not(#{$elm}) {
             filter: unset;
-            transition: filter $_nav-transition-duration;
+            transition: filter $transition-duration;
             will-change: filter;
         }
 
         &:checked {
             & ~ *,
-            & ~ nav > :not(#{$_nav-elm}) {
+            & ~ nav > :not(#{$elm}) {
                 filter: blur(4px);
             }
 
-            & ~ label[for="#{$_nav-id}"],
+            & ~ label[for="#{$id}"],
             & ~ nav {
                 filter: unset;
             }
@@ -88,13 +88,13 @@ input##{$_nav-id} {
 }
 
 // Toggle Icon & Label
-label[for="#{$_nav-id}"] {
+label[for="#{$id}"] {
     position: fixed;
-    z-index: $_nav-z-index + 1;
-    top: $_nav-bar-height / 2;
-    #{$_nav-location}: $_nav-bar-padding;
+    z-index: $z-index + 1;
+    top: $bar-height * 0.5;
+    #{$location}: $bar-padding;
     margin: 0;
-    padding: $_nav-icon-padding;
+    padding: $icon-padding;
     white-space: nowrap;
     cursor: pointer;
     appearance: none;
@@ -103,10 +103,10 @@ label[for="#{$_nav-id}"] {
     transition-property: filter opacity;
 
     // Auto-hide
-    @if $_nav-label-autohide == true {
+    @if $label-autohide == true {
         opacity: 1;
-        transition-delay: $_nav-transition-duration;
-        transition-duration: $_nav-transition-duration;
+        transition-delay: $transition-duration;
+        transition-duration: $transition-duration;
         will-change: opacity;
     }
 
@@ -122,15 +122,15 @@ label[for="#{$_nav-id}"] {
     // Icon
     i {
         display: inline-block;
-        height: $_nav-icon-size;
-        width: $_nav-icon-size;
+        height: $icon-size;
+        width: $icon-size;
         padding: 5px;
-        border: $_nav-icon-border;
-        border-radius: $_nav-icon-border-radius;
-        background: $_nav-icon-background;
+        border: $icon-border;
+        border-radius: $icon-border-radius;
+        background: $icon-background;
         font-size: 0;
         transition-property: background, border, transform;
-        transition-duration: $_nav-icon-transition-duration;
+        transition-duration: $icon-transition-duration;
         will-change: background, border, transform;
 
         // Label Spacing
@@ -148,8 +148,8 @@ label[for="#{$_nav-id}"] {
             margin-top: -2px;
 
             // Auto-hide
-            @if $_nav-label-autohide != true {
-                transition: background $_nav-icon-transition-duration;
+            @if $label-autohide != true {
+                transition: background $icon-transition-duration;
                 will-change: background;
             }
 
@@ -157,7 +157,7 @@ label[for="#{$_nav-id}"] {
             &:before,
             &:after {
                 height: 2px;
-                background: $_nav-icon-color;
+                background: $icon-color;
             }
 
             &:before,
@@ -170,7 +170,7 @@ label[for="#{$_nav-id}"] {
                 transform: rotate(0deg);
                 -ms-transform: rotate(0deg);
                 transition-property: top, bottom, transform;
-                transition-duration: $_nav-icon-transition-duration;
+                transition-duration: $icon-transition-duration;
                 will-change: top, bottom, transform;
             }
 
@@ -187,34 +187,34 @@ label[for="#{$_nav-id}"] {
     }
 
     // Active State
-    input##{$_nav-id}:checked ~ & {
-        @if $_nav-label-autohide == true {
+    input##{$id}:checked ~ & {
+        @if $label-autohide == true {
             visibility: hidden;
             opacity: 0;
             transition-delay: 0s;
-            transition-duration: $_nav-transition-duration / 2;
+            transition-duration: $transition-duration * 0.5;
         }
 
         // Icon
         i {
-            @if ($_nav-icon-background-active != $_nav-icon-background) {
-                background: $_nav-icon-background-active;
+            @if ($icon-background-active != $icon-background) {
+                background: $icon-background-active;
             }
-            @if ($_nav-icon-border-active != $_nav-icon-border) {
-                border: $_nav-icon-border-active;
+            @if ($icon-border-active != $icon-border) {
+                border: $icon-border-active;
             }
-            @if ($_nav-icon-border-radius-active != $_nav-icon-border-radius) {
-                border-radius: $_nav-icon-border-radius-active;
+            @if ($icon-border-radius-active != $icon-border-radius) {
+                border-radius: $icon-border-radius-active;
             }
 
-            @if $_nav-label-autohide != true {
+            @if $label-autohide != true {
                 & span {
                     background: transparent;
 
                     &:before,
                     &:after {
-                        @if ($_nav-icon-color-active != $_nav-icon-color) {
-                            background: $_nav-icon-color-active;
+                        @if ($icon-color-active != $icon-color) {
+                            background: $icon-color-active;
                         }
                     }
 
@@ -238,21 +238,21 @@ label[for="#{$_nav-id}"] {
 // Container
 nav {
     position: fixed;
-    z-index: $_nav-z-index;
+    z-index: $z-index;
     top: 0;
     left: 0;
     right: 0;
-    padding: 0 $_nav-bar-padding;
-    background: $_nav-bar-background;
+    padding: 0 $bar-padding;
+    background: $bar-background;
 
     // Auto-hide
-    @if $_nav-bar-autohide == true {
-        > *:not(#{$_nav-elm}) {
+    @if $bar-autohide == true {
+        > *:not(#{$elm}) {
             display: none;
         }
     }
     @else {
-        height: $_nav-bar-height;
+        height: $bar-height;
     }
 
     // Vertical centering element
@@ -275,10 +275,10 @@ nav {
         left: 0;
         height: 100%;
         width: 100vw;
-        background: $_nav-overlay-color;
+        background: $overlay-color;
         opacity: 0;
         transition-property: opacity, visibility;
-        transition-duration: $_nav-transition-duration;
+        transition-duration: $transition-duration;
         will-change: opacity, visibility;
     }
 
@@ -298,27 +298,27 @@ nav {
     }
 
     // Drawer
-    > #{$_nav-elm} {
+    > #{$elm} {
         position: fixed;
         z-index: 2;
         top: 0;
-        #{$_nav-location}: 0 - $_nav-drawer-width;
+        #{$location}: 0 - $drawer-width;
         overflow: auto;
         height: 100%;
-        width: $_nav-drawer-width;
-        background: $_nav-bar-background;
+        width: $drawer-width;
+        background: $bar-background;
         text-align: center;
         transition: transform;
-        transition-duration: $_nav-transition-duration;
+        transition-duration: $transition-duration;
         will-change: transform;
 
         > * {
             display: block;
             margin-top: 2em;
 
-            @if $_nav-label-autohide != true {
+            @if $label-autohide != true {
                 &:first-child {
-                    margin-top: $_nav-bar-height;
+                    margin-top: $bar-height;
                 }
             }
         }
@@ -329,17 +329,17 @@ nav {
     }
 
     // Active State
-    input##{$_nav-id}:checked ~ & {
+    input##{$id}:checked ~ & {
         // Drawer
-        > #{$_nav-elm} {
-            transform: if($_nav-location == left, translateX($_nav-drawer-width), translateX(0 - $_nav-drawer-width));
-            -ms-transform: if($_nav-location == left, translateX($_nav-drawer-width), translateX(0 - $_nav-drawer-width));
+        > #{$elm} {
+            transform: if($location == left, translateX($drawer-width), translateX(0 - $drawer-width));
+            -ms-transform: if($location == left, translateX($drawer-width), translateX(0 - $drawer-width));
         }
 
         // Visual Overlay
         &:after {
             visibility: visible;
-            opacity: $_nav-overlay-opacity;
+            opacity: $overlay-opacity;
         }
     }
 }
@@ -347,15 +347,15 @@ nav {
 
 // Nav Bar
 // -----------------------------------------------------------------------------
-@media (min-width: $_nav-drawer-breakpoint) {
+@media (min-width: $drawer-breakpoint) {
     // Toggle overlay
-    input##{$_nav-id} {
+    input##{$id} {
         display: none;
 
         // Active State
         &:checked {
             // Disable blur
-            @if $_nav-drawer-blur == true {
+            @if $drawer-blur == true {
                 & ~ *,
                 & ~ nav > * {
                     filter: unset !important;
@@ -366,25 +366,25 @@ nav {
     }
 
     // Toggle Icon & Label
-    label[for="#{$_nav-id}"] {
+    label[for="#{$id}"] {
         display: none;
     }
 
     // Container
     nav {
         // Auto-hide
-        @if $_nav-bar-autohide == true {
-            height: $_nav-bar-height;
+        @if $bar-autohide == true {
+            height: $bar-height;
 
-            > *:not(#{$_nav-elm}) {
+            > *:not(#{$elm}) {
                 display: inline-block;
             }
         }
 
         // Bar
-        > #{$_nav-elm} {
-            top: $_nav-bar-height / 2;
-            right: $_nav-bar-padding;
+        > #{$elm} {
+            top: $bar-height * 0.5;
+            right: $bar-padding;
             height: auto;
             width: auto;
             margin-top: -0.5em;
@@ -401,9 +401,9 @@ nav {
         }
 
         // Active State
-        input##{$_nav-id}:checked ~ & {
+        input##{$id}:checked ~ & {
             // Bar
-            > #{$_nav-elm} {
+            > #{$elm} {
                 transform: translateX(0);
                 -ms-transform: translateX(0);
             }

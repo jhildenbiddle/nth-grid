@@ -8,9 +8,8 @@ $nth-grid-float-legacy: true;
 $nth-grid-overlay: false;
 $nth-grid-debug: false;
 $nth-grid-warnings: false;
-$nth-grid-remove-globals: true;
 
-.sass .grid-nocalc-singleratio {
+.sass-import .grid-nocalc-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -19,7 +18,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-singleratio-nogap {
+.sass-import .grid-nocalc-singleratio-nogap {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -28,7 +27,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-singleratio-nomargin {
+.sass-import .grid-nocalc-singleratio-nomargin {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -37,7 +36,7 @@ $nth-grid-remove-globals: true;
         $margin: 0
     );
 }
-.sass .grid-nocalc-multiratio {
+.sass-import .grid-nocalc-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -46,7 +45,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-fixed {
+.sass-import .grid-nocalc-fixed {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -55,7 +54,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-nocalc-fixed-first-singleratio {
+.sass-import .grid-nocalc-fixed-first-singleratio {
     @include nth-grid(
         
         $order: false,
@@ -65,7 +64,7 @@ $nth-grid-remove-globals: true;
         $width: 14rem
     );
 }
-.sass .grid-nocalc-fixed-last-singleratio {
+.sass-import .grid-nocalc-fixed-last-singleratio {
     @include nth-grid(
         
         $order: false,
@@ -75,7 +74,7 @@ $nth-grid-remove-globals: true;
         $width: 14rem
     );
 }
-.sass .grid-nocalc-fixed-first-multiratio {
+.sass-import .grid-nocalc-fixed-first-multiratio {
     @include nth-grid(
         
         $order: false,
@@ -85,7 +84,7 @@ $nth-grid-remove-globals: true;
         $width: 14rem
     );
 }
-.sass .grid-nocalc-fixed-middle-multiratio {
+.sass-import .grid-nocalc-fixed-middle-multiratio {
     @include nth-grid(
         
         $order: false,
@@ -95,7 +94,7 @@ $nth-grid-remove-globals: true;
         $width: 14rem
     );
 }
-.sass .grid-nocalc-fixed-last-multiratio {
+.sass-import .grid-nocalc-fixed-last-multiratio {
     @include nth-grid(
         
         $order: false,
@@ -105,7 +104,7 @@ $nth-grid-remove-globals: true;
         $width: 14rem
     );
 }
-.sass .grid-nocalc-fixed-firstlast-singleratio {
+.sass-import .grid-nocalc-fixed-firstlast-singleratio {
     @include nth-grid(
         
         $order: false,
@@ -115,7 +114,7 @@ $nth-grid-remove-globals: true;
         $width: 14rem
     );
 }
-.sass .grid-nocalc-fluid-first-singleratio {
+.sass-import .grid-nocalc-fluid-first-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -124,7 +123,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-fluid-last-singleratio {
+.sass-import .grid-nocalc-fluid-last-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -133,7 +132,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-fluid-first-multiratio {
+.sass-import .grid-nocalc-fluid-first-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -142,7 +141,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-fluid-middle-multiratio {
+.sass-import .grid-nocalc-fluid-middle-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -151,7 +150,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-fluid-last-multiratio {
+.sass-import .grid-nocalc-fluid-last-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -160,7 +159,7 @@ $nth-grid-remove-globals: true;
         $margin: 1%
     );
 }
-.sass .grid-nocalc-order {
+.sass-import .grid-nocalc-order {
     @include nth-grid(
         $width: 95%,
         
@@ -170,7 +169,7 @@ $nth-grid-remove-globals: true;
         $order: 2 3 1
     );
 }
-.sass .grid-nocalc-rtl {
+.sass-import .grid-nocalc-rtl {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -180,7 +179,7 @@ $nth-grid-remove-globals: true;
         $direction: rtl
     );
 }
-.sass .grid-nocalc-nested {
+.sass-import .grid-nocalc-nested {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -196,7 +195,7 @@ $nth-grid-remove-globals: true;
         );
     }
 }
-.sass .grid-calc-singleratio {
+.sass-import .grid-calc-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -205,7 +204,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-singleratio-nogap {
+.sass-import .grid-calc-singleratio-nogap {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -214,7 +213,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-singleratio-nomargin {
+.sass-import .grid-calc-singleratio-nomargin {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -223,7 +222,7 @@ $nth-grid-remove-globals: true;
         $margin: 0
     );
 }
-.sass .grid-calc-multiratio {
+.sass-import .grid-calc-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -232,7 +231,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fixed {
+.sass-import .grid-calc-fixed {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -241,7 +240,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fixed-first-singleratio {
+.sass-import .grid-calc-fixed-first-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -250,7 +249,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fixed-last-singleratio {
+.sass-import .grid-calc-fixed-last-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -259,7 +258,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fixed-first-multiratio {
+.sass-import .grid-calc-fixed-first-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -268,7 +267,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fixed-middle-multiratio {
+.sass-import .grid-calc-fixed-middle-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -277,7 +276,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fixed-last-multiratio {
+.sass-import .grid-calc-fixed-last-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -286,7 +285,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fixed-firstlast-singleratio {
+.sass-import .grid-calc-fixed-firstlast-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -295,7 +294,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fluid-first-singleratio {
+.sass-import .grid-calc-fluid-first-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -304,7 +303,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fluid-last-singleratio {
+.sass-import .grid-calc-fluid-last-singleratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -313,7 +312,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fluid-first-multiratio {
+.sass-import .grid-calc-fluid-first-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -322,7 +321,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fluid-middle-multiratio {
+.sass-import .grid-calc-fluid-middle-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -331,7 +330,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-fluid-last-multiratio {
+.sass-import .grid-calc-fluid-last-multiratio {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -340,7 +339,7 @@ $nth-grid-remove-globals: true;
         $margin: 0.5rem
     );
 }
-.sass .grid-calc-order {
+.sass-import .grid-calc-order {
     @include nth-grid(
         $width: 95%,
         
@@ -350,7 +349,7 @@ $nth-grid-remove-globals: true;
         $order: 2 3 1
     );
 }
-.sass .grid-calc-rtl {
+.sass-import .grid-calc-rtl {
     @include nth-grid(
         $width: 95%,
         $order: false,
@@ -360,7 +359,7 @@ $nth-grid-remove-globals: true;
         $direction: rtl
     );
 }
-.sass .grid-calc-nested {
+.sass-import .grid-calc-nested {
     @include nth-grid(
         $width: 95%,
         $order: false,

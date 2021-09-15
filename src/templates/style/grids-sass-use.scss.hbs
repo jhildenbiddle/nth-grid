@@ -1,0 +1,9 @@
+@use "sass/_nth-grid" as * with (
+  {{!-- Nth-Grid Globals --}}
+  {{#each options}}
+  $nth-grid-{{@key}}: {{this}}{{#unless @last}},{{/unless}}
+  {{/each}}
+);
+
+{{!-- Styles --}}
+{{> grid.scss parentSelector=".sass-use"}}
