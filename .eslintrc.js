@@ -9,7 +9,9 @@ module.exports = {
         'eslint:recommended'
     ],
     'ignorePatterns': [
-        'dist'
+        'dist',
+        'docs/sassdoc',
+        'src/demo/static/js/vendor'
     ],
     'parserOptions': {
         'ecmaVersion': 2018,

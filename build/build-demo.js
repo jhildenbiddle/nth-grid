@@ -53,6 +53,7 @@ for (const jobType in demoTask.jobs) {
 
         fs.writeFile(outFilePath, outFileData, error => {
             if (error) {
+                // eslint-disable-next-line no-console
                 console.log(error);
             }
         });

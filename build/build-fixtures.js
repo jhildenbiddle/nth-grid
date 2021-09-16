@@ -57,6 +57,7 @@ for (const jobType in fixturesTask.jobs) {
 
             fs.writeFileSync(outFilePath, outFileData, error => {
                 if (error) {
+                    // eslint-disable-next-line no-console
                     console.log(error);
                 }
             });
