@@ -15,11 +15,11 @@ const demoTask = {
     data: require('../src/templates/data/grids.json'),
     dest: '../demo/',
     jobs: {
-        html: '../src/templates/pages/**/*.hbs',
-        less: '../src/templates/style/**/*.less.hbs',
+        html   : '../src/templates/pages/**/*.hbs',
+        less   : '../src/templates/style/**/*.less.hbs',
         postcss: '../src/templates/style/**/*.pcss.hbs',
-        sass: '../src/templates/style/**/*.scss.hbs',
-        stylus: '../src/templates/style/**/*.styl.hbs'
+        sass   : '../src/templates/style/**/*.scss.hbs',
+        stylus : '../src/templates/style/**/*.styl.hbs'
     }
 };
 
