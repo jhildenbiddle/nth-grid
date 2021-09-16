@@ -836,7 +836,7 @@ The following grid configurations are not supported by legacy browsers due to la
 
 Nth-Grid includes SassDoc-compatible comments in the Sass source code. This makes including Nth-Grid documentation in your own SassDoc-generated documentation as simple as including `path/to/_nth-grid.sass` in the list of Sass files to process.
 
-For more information on SassDoc, please visit http://sassdoc.com.
+For more information on SassDoc, please visit [sassdoc.com](http://sassdoc.com).
 
 ## Compatibility Notes
 
