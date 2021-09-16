@@ -1,7 +1,5 @@
-# Build
-coverage
-
 # Directories
+coverage
 node_modules
 
 # Files
