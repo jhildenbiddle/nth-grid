@@ -36,7 +36,7 @@ describe('sass @import snapshots', () => {
 });
 
 describe('sass @use snapshots', () => {
-    const fixtureCollection = getFixtures('sass/*.sass');
+    const fixtureCollection = getFixtures('sass/*.scss');
 
     fixtureCollection.forEach(fixture => {
         test(`${fixture.name}`, () => {
