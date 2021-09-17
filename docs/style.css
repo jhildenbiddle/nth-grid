@@ -1,0 +1,42 @@
+// Demo Grids (Nth-Grid output)
+// =============================================================================
+.less .content
+
+.grid-3col {
+}
+
+.grid-3col {
+  /* background: purple; */
+  color: purple;
+  border: 1px solid purple;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: auto;
+}
+
+.grid-3col > *:nth-child(1n) {
+  box-sizing: border-box;
+  position: static;
+  left: auto;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.grid-3col > *:nth-child(-n + 3) {
+  margin-top: 0;
+}
+
+.grid-3col > *:nth-child(3n + 1) {
+  margin-left: 0;
+}
+
+.grid-3col > *:nth-last-child(-n + 3) {
+  margin-bottom: 0;
+}
+
+.grid-3col > *:nth-child(1n) {
+  width: 33.33333%;
+}

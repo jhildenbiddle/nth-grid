@@ -6,9 +6,10 @@
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/nth-grid/badge)](https://www.jsdelivr.com/package/npm/nth-grid)
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fjhildenbiddle%2Fnth-grid&hashtags=css,developers,frontend,javascript)
 
-Nth-Grid is a lightweight and semantic CSS grid system available for [Less](http://lesscss.org/), [Sass](http://sass-lang.com/), [Stylus](http://stylus-lang.com/) and [PostCSS](https://github.com/postcss/postcss). The purpose of Nth-Grid is to provide a versatile grid-based layout system that balances simplicity and flexibility while addressing commonly criticized aspects of other grid systems.
+A lightweight and semantic CSS grid, flexbox, and float-based grid system available for Less, PostCSS, Sass, and Stylus.
 
-- [Homepage](https://jhildenbiddle.github.io/nth-grid) - Documentation and usage examples
+- [Documentation](https://jhildenbiddle.github.io/nth-grid/)
+- [SassDocs](https://jhildenbiddle.github.io/nth-grid/sassdoc) (Sass mixin)
 
 ## Contact
 
