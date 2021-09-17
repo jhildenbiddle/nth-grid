@@ -15,10 +15,10 @@ const demoData = require('../src/templates/data/grids.json');
 const demoDest = '../demo/';
 const demoJobs = {
     html   : '../src/templates/pages/**/*.hbs',
-    less   : '../src/templates/style/**/*.less.hbs',
-    postcss: '../src/templates/style/**/*.pcss.hbs',
-    sass   : '../src/templates/style/**/*.scss.hbs',
-    stylus : '../src/templates/style/**/*.styl.hbs'
+    less   : '../src/templates/partials/grids.less.hbs',
+    postcss: '../src/templates/partials/grids.pcss.hbs',
+    sass   : '../src/templates/partials/grids*.scss.hbs',
+    stylus : '../src/templates/partials/grids.styl.hbs'
 };
 
 
@@ -41,12 +41,12 @@ for (const jobName in demoJobs) {
         const fileData    = fs.readFileSync(filePath, 'utf-8');
         const template    = handlebars.compile(fileData, { strict: true });
         const outFileData = template(demoData);
-        const outFileName = path.parse(filePath).name;
+        const outFileName = path.parse(filePath).name.replace(/(^grids)/, `$1-${jobName}`);
         const outFilePath = path.resolve(outFileDir, outFileName);
 
         // console.log({
         //     outFilePath,
-        //     outFileData,
+        //     outFileData
         // });
 
         fs.writeFile(outFilePath, outFileData, error => {

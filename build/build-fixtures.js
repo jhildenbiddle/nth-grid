@@ -15,19 +15,19 @@ const fixtureData = require('../src/templates/data/grids.json');
 const fixtureDest = '../tests/fixtures/';
 const fixtureJobs = {
     less: {
-        path: '../src/templates/partials/**/*.less.hbs',
+        path: '../src/templates/partials/grid.less.hbs',
         ext: 'less'
     },
     postcss: {
-        path: '../src/templates/partials/**/*.pcss.hbs',
+        path: '../src/templates/partials/grid.pcss.hbs',
         ext: 'pcss'
     },
     sass   : {
-        path: '../src/templates/partials/**/*.scss.hbs',
+        path: '../src/templates/partials/grid.scss.hbs',
         ext: 'scss'
     },
     stylus : {
-        path: '../src/templates/partials/**/*.styl.hbs',
+        path: '../src/templates/partials/grid.styl.hbs',
         ext: 'styl'
     }
 };
@@ -40,13 +40,13 @@ registerHelpers('../src/templates/helpers/*.js', __dirname);
 registerPartials('../src/templates/partials/*.hbs', __dirname);
 
 // Fixtures
-for (const job in fixtureJobs) {
-    const jobPath = path.resolve(__dirname, fixtureJobs[job].path);
+for (const jobName in fixtureJobs) {
+    const jobPath = path.resolve(__dirname, fixtureJobs[jobName].path);
 
     glob.sync(jobPath).forEach(filePath => {
         const fileData   = fs.readFileSync(filePath, 'utf-8');
         const template   = handlebars.compile(fileData, { strict: true });
-        const outFileDir = path.resolve(__dirname, fixtureDest, job);
+        const outFileDir = path.resolve(__dirname, fixtureDest, jobName);
 
         if (!fs.existsSync(outFileDir)){
             mkdirp.sync(outFileDir);
@@ -59,7 +59,7 @@ for (const job in fixtureJobs) {
             jobData.grids = { [key]: jobData.grids[key] };
 
             const outFileData = template(jobData);
-            const outFileName = `${key}.${fixtureJobs[job].ext}`;
+            const outFileName = `${key}.${fixtureJobs[jobName].ext}`;
             const outFilePath = path.resolve(outFileDir, outFileName);
 
             // console.log({
