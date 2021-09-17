@@ -9,7 +9,7 @@ const sass        = require('sass');
 // Suite
 // =============================================================================
 describe('sass @import snapshots', () => {
-    const fixtureCollection = getFixtures('sass/*.sass');
+    const fixtureCollection = getFixtures('sass/*.scss');
 
     fixtureCollection.forEach(fixture => {
         test(`${fixture.name}`, () => {

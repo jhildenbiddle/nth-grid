@@ -11,16 +11,14 @@ const { registerPartials } = require('./helpers/register-hbs');
 
 // Settings
 // =============================================================================
-const demoTask = {
-    data: require('../src/templates/data/grids.json'),
-    dest: '../demo/',
-    jobs: {
-        html   : '../src/templates/pages/**/*.hbs',
-        less   : '../src/templates/style/**/*.less.hbs',
-        postcss: '../src/templates/style/**/*.pcss.hbs',
-        sass   : '../src/templates/style/**/*.scss.hbs',
-        stylus : '../src/templates/style/**/*.styl.hbs'
-    }
+const demoData = require('../src/templates/data/grids.json');
+const demoDest = '../demo/';
+const demoJobs = {
+    html   : '../src/templates/pages/**/*.hbs',
+    less   : '../src/templates/style/**/*.less.hbs',
+    postcss: '../src/templates/style/**/*.pcss.hbs',
+    sass   : '../src/templates/style/**/*.scss.hbs',
+    stylus : '../src/templates/style/**/*.styl.hbs'
 };
 
 
@@ -31,9 +29,9 @@ registerHelpers('../src/templates/helpers/*.js', __dirname);
 registerPartials('../src/templates/partials/*.hbs', __dirname);
 
 // Output
-for (const jobType in demoTask.jobs) {
-    const jobPath    = path.resolve(__dirname, demoTask.jobs[jobType]);
-    const outFileDir = path.resolve(__dirname, demoTask.dest);
+for (const jobName in demoJobs) {
+    const jobPath    = path.resolve(__dirname, demoJobs[jobName]);
+    const outFileDir = path.resolve(__dirname, demoDest);
 
     if (!fs.existsSync(outFileDir)){
         mkdirp.sync(outFileDir);
@@ -42,7 +40,7 @@ for (const jobType in demoTask.jobs) {
     glob.sync(jobPath).forEach(filePath => {
         const fileData    = fs.readFileSync(filePath, 'utf-8');
         const template    = handlebars.compile(fileData, { strict: true });
-        const outFileData = template(demoTask.data);
+        const outFileData = template(demoData);
         const outFileName = path.parse(filePath).name;
         const outFilePath = path.resolve(outFileDir, outFileName);
 

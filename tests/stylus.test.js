@@ -9,7 +9,7 @@ const util        = require('util');
 // Suite
 // =============================================================================
 describe('stylus snapshots', () => {
-    const fixtureCollection = getFixtures('stylus/*.stylus');
+    const fixtureCollection = getFixtures('stylus/*.styl');
     const stylusRender      = util.promisify(stylus.render);
 
     fixtureCollection.forEach(fixture => {

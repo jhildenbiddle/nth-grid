@@ -9,7 +9,7 @@ const nthGrid     = require('../dist/postcss');
 // Suite
 // =============================================================================
 describe('postcss snapshots', () => {
-    const fixtureCollection = getFixtures('postcss/*.postcss');
+    const fixtureCollection = getFixtures('postcss/*.pcss');
     const processer = postcss([nthGrid]);
 
     fixtureCollection.forEach(fixture => {

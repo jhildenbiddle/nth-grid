@@ -11,14 +11,24 @@ const { registerPartials } = require('./helpers/register-hbs');
 
 // Settings
 // =============================================================================
-const fixturesTask = {
-    data: require('../src/templates/data/grids.json'),
-    dest: '../tests/fixtures/',
-    jobs: {
-        less   : '../src/templates/partials/**/*.less.hbs',
-        postcss: '../src/templates/partials/**/*.pcss.hbs',
-        sass   : '../src/templates/partials/**/*.scss.hbs',
-        stylus : '../src/templates/partials/**/*.styl.hbs'
+const fixtureData = require('../src/templates/data/grids.json');
+const fixtureDest = '../tests/fixtures/';
+const fixtureJobs = {
+    less: {
+        path: '../src/templates/partials/**/*.less.hbs',
+        ext: 'less'
+    },
+    postcss: {
+        path: '../src/templates/partials/**/*.pcss.hbs',
+        ext: 'pcss'
+    },
+    sass   : {
+        path: '../src/templates/partials/**/*.scss.hbs',
+        ext: 'scss'
+    },
+    stylus : {
+        path: '../src/templates/partials/**/*.styl.hbs',
+        ext: 'styl'
     }
 };
 
@@ -30,24 +40,26 @@ registerHelpers('../src/templates/helpers/*.js', __dirname);
 registerPartials('../src/templates/partials/*.hbs', __dirname);
 
 // Fixtures
-for (const jobType in fixturesTask.jobs) {
-    const fixtureData = Object.assign({}, fixturesTask.data);
-    const jobPath     = path.resolve(__dirname, fixturesTask.jobs[jobType]);
+for (const job in fixtureJobs) {
+    const jobPath = path.resolve(__dirname, fixtureJobs[job].path);
 
     glob.sync(jobPath).forEach(filePath => {
         const fileData   = fs.readFileSync(filePath, 'utf-8');
         const template   = handlebars.compile(fileData, { strict: true });
-        const outFileDir = path.resolve(__dirname, fixturesTask.dest, jobType);
+        const outFileDir = path.resolve(__dirname, fixtureDest, job);
 
         if (!fs.existsSync(outFileDir)){
             mkdirp.sync(outFileDir);
         }
 
-        for (const key in fixturesTask.data.grids) {
-            fixtureData.grids = { [key]: fixturesTask.data.grids[key] };
+        for (const key in fixtureData.grids) {
+            const jobData = JSON.parse(JSON.stringify(fixtureData));
 
-            const outFileData = template(fixtureData);
-            const outFileName = `${key}.${jobType}`;
+            // Remove other grids
+            jobData.grids = { [key]: jobData.grids[key] };
+
+            const outFileData = template(jobData);
+            const outFileName = `${key}.${fixtureJobs[job].ext}`;
             const outFilePath = path.resolve(outFileDir, outFileName);
 
             // console.log({
