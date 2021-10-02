@@ -4,16 +4,16 @@
 [![GitHub Workflow Status (master)](https://img.shields.io/github/workflow/status/jhildenbiddle/nth-grid/Build%20&%20Test/master?label=checks&style=flat-square)](https://github.com/jhildenbiddle/nth-grid/actions?query=branch%3Amaster+)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/jhildenbiddle/nth-grid/blob/master/LICENSE)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/nth-grid/badge)](https://www.jsdelivr.com/package/npm/nth-grid)
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fjhildenbiddle%2Fnth-grid&hashtags=css,developers,frontend,javascript)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fjhildenbiddle%2Fnth-grid&hashtags=developers,frontend,css,less,postcss,sass,scss)
 
-A lightweight and semantic CSS grid, flexbox, and float-based grid system for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
+A lightweight and semantic CSS flexbox and float-based grid system for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
 
 - [Documentation](https://jhildenbiddle.github.io/nth-grid/)
 - [SassDocs](https://jhildenbiddle.github.io/nth-grid/sassdoc) (Sass mixin)
 
 ## Features
 
-- CSS `grid`, `flexbox`, and `float`-based grids
+- CSS `flexbox` and `float`-based grids
 - Clean and semantic markup without grid-specific class names
 - Simple, readable, easy-to-learn syntax
 - Fixed and/or fluid grids, columns, gaps and margins
@@ -920,11 +920,11 @@ A native CSS [grid layout module](http://dev.w3.org/csswg/css-grid-1/) is coming
 
   Go for it! The only ask is that you consider contributing to the main Nth-Grid project before releasing a separate version to the public. This will improve Nth-Grid for everyone and help avoid the potential confusion caused by having multiple Nth-Grid repos available.
 
-## Contact
+## Support
 
-- Create a [Github issue](https://github.com/jhildenbiddle/nth-grid/issues) for bug reports, feature requests, or questions
+- Create a 💬 [Github issue](https://github.com/jhildenbiddle/nth-grid/issues) for bug reports, feature requests, or questions
 - Follow [@jhildenbiddle](https://twitter.com/jhildenbiddle) for announcements
-- Add a ⭐️ [star on GitHub](https://github.com/jhildenbiddle/nth-grid) or ❤️ [tweet](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fjhildenbiddle%2Fnth-grid&hashtags=css,developers,frontend,javascript) to support the project!
+- Add a ⭐️ [star on GitHub](https://github.com/jhildenbiddle/nth-grid) or 🐦 [tweet](https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fjhildenbiddle%2Fnth-grid&hashtags=developers,frontend,css,less,postcss,sass,scss) to support the project!
 
 ## License
 
