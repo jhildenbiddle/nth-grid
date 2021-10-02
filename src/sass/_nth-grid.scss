@@ -449,7 +449,7 @@ $nth-grid-warnings: true !default;
 /// your CSS.
 ///
 /// @param {Boolean} $flex [true]
-/// Flexbox-based grid
+/// Generates flexbox-based grid CSS rules
 ///
 /// @param {Boolean} $flex-legacy [true]
 /// Sets legacy compatibility mode for flexbox-based grids. Setting this option
@@ -457,7 +457,7 @@ $nth-grid-warnings: true !default;
 /// that support vendor-prefixed and "tweener" flexbox syntax.
 ///
 /// @param {Boolean} $float [false]
-/// Float-based grid
+/// Generates float-based grid CSS rules
 ///
 /// @param {Boolean} $float-legacy [false]
 /// Sets legacy compatibility mode for float-based grids. Setting this option to
