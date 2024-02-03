@@ -1198,12 +1198,12 @@ $nth-grid-warnings              : true !default;
                 '\A' +
                 '\A' + '$auto-width         : #{$auto-width}'
                 '\A' + '$calc               : #{$calc}'
-                '\A' + '$columns-ratio      : #{$columns-ratio}'
-                '\A' + '$columns-unit       : #{$columns-unit}'
+                '\A' + '$columns-ratio      : #{if(list.length($columns-ratio)>0, $columns-ratio, 'none')}'
+                '\A' + '$columns-unit       : #{if(list.length($columns-unit)>0, $columns-unit, 'none')}'
                 '\A' + '$grid-col-ratio     : #{$grid-col-ratio}'
                 '\A' + '$grid-col-width     : #{$grid-col-width}'
                 '\A' + '$grid-width         : #{$grid-width}'
-                '\A' + '$order-offsets      : #{$order-offsets}'
+                '\A' + '$order-offsets      : #{if(list.length($order-offsets)>0, $order-offsets, 'none')}'
                 '\A' + '$total-columns      : #{$total-columns}'
                 '\A' + '$total-ratio-columns: #{$total-ratio-columns}'
                 '\A' + '$total-unit-columns : #{$total-unit-columns}' !important;
