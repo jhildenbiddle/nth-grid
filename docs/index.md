@@ -534,6 +534,8 @@ Nth-Grid for PostCSS provides two methods of defining global options:
 
 **PostCSS configuration**
 
+For configurations using `postcss.config.js`:
+
 ```javascript
 // Nth-Grid Global Options
 var config = {
@@ -563,6 +565,12 @@ var config = {
   'remove-globals'        : true,
   'warnings'              : true
 };
+
+module.exports = {
+  plugins: [
+    require('nth-grid')(config)
+  ]
+}
 ```
 
 <!-- tabs:end -->
@@ -609,12 +617,17 @@ Nth-Grid for PostCSS provides two methods of defining global options:
 
 **PostCSS configuration**
 
+For configurations using `postcss.config.js`:
+
 ```javascript
-// Nth-Grid Global Options
-var config = {
-  // ...
-  'rem-base': 16
-};
+module.exports = {
+  plugins: [
+    require('nth-grid')({
+      // Nth-Grid Global Options
+      'rem-base': 16
+    })
+  ]
+}
 ```
 
 <!-- tabs:end -->
@@ -663,12 +676,17 @@ Nth-Grid for PostCSS provides two methods of defining global options:
 
 **PostCSS configuration**
 
+For configurations using `postcss.config.js`:
+
 ```javascript
-// Nth-Grid Global Options
-var config = {
-  // ...
-  'remove-globals': true
-};
+module.exports = {
+  plugins: [
+    require('nth-grid')({
+      // Nth-Grid Global Options
+      'remove-globals': true
+    })
+  ]
+}
 ```
 
 <!-- tabs:end -->
