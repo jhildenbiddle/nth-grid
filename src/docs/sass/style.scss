@@ -1,0 +1,102 @@
+// Modules
+// =============================================================================
+@use "sass:color";
+@use "sass/nth-grid" as *;
+@use "device-frames.css";
+
+
+/* Output
+============================================================================= */
+output {
+  display: block;
+  margin-top: calc(-1.5em - 1px);
+  padding: var(--docsifytabs-content-padding);
+  border: 1px solid var(--docsifytabs-border-color, #ededed);
+}
+
+output > *:first-child {
+  margin-top: 0;
+}
+
+/* Grid Demos
+============================================================================= */
+.app-frame {
+  margin-bottom: 2.5rem;
+}
+
+[class*="grid-demo"] {
+  > * {
+    background: var(--theme-color);
+    color: #fff;
+    text-align: center;
+    padding: 0.25em 0.5em;
+  }
+
+  > :nth-child(odd) {
+    opacity: 0.5;
+  }
+}
+
+.grid-demo-columns-symmetric {
+  @include nth-grid(3);
+}
+
+.grid-demo-columns-asymmetric {
+  @include nth-grid(1 2 3);
+}
+
+.grid-demo-columns-fixed {
+  @include nth-grid($columns: 150px 150px);
+}
+
+.grid-demo-columns-mixed {
+  @include nth-grid($columns: 150px 1);
+}
+
+.grid-demo-debug {
+  @include nth-grid(
+    $columns: 3,
+    $gap: 2%,
+    $debug: true,
+  );
+}
+
+.grid-demo-gap {
+  @include nth-grid(3, 2%);
+}
+
+.grid-demo-overlay {
+  @include nth-grid(
+    $columns: 3,
+    $gap: 2%,
+    $overlay: true,
+  );
+}
+
+.grid-demo-usage1 {
+  @include nth-grid(3);
+}
+
+.grid-demo-usage2 {
+  @include nth-grid(
+    $columns: 3,
+    $gap: 2%
+  );
+}
+
+.grid-demo-usage-order {
+  @include nth-grid(
+    $columns: 3,
+    $gap: 2%,
+    $order: 3 1 2
+  );
+}
+
+.grid-demo-usage-troubleshooting {
+  @include nth-grid(
+    $columns: 3,
+    $gap: 2%,
+    $overlay: true,
+    $debug: true,
+  );
+}
