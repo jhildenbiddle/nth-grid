@@ -241,19 +241,6 @@
  *  MIT license
  */
 
-/* Output
-============================================================================= */
-output {
-  display: block;
-  margin-top: calc(-1.5em - 1px);
-  padding: var(--docsifytabs-content-padding);
-  border: 1px solid var(--docsifytabs-border-color, #ededed);
-}
-
-output > *:first-child {
-  margin-top: 0;
-}
-
 /* Grid Demos
 ============================================================================= */
 .app-frame {

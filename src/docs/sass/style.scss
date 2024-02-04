@@ -5,19 +5,6 @@
 @use "device-frames.css";
 
 
-/* Output
-============================================================================= */
-output {
-  display: block;
-  margin-top: calc(-1.5em - 1px);
-  padding: var(--docsifytabs-content-padding);
-  border: 1px solid var(--docsifytabs-border-color, #ededed);
-}
-
-output > *:first-child {
-  margin-top: 0;
-}
-
 /* Grid Demos
 ============================================================================= */
 .app-frame {
@@ -46,11 +33,11 @@ output > *:first-child {
 }
 
 .grid-demo-columns-fixed {
-  @include nth-grid($columns: 150px 150px);
+  @include nth-grid(150px 150px);
 }
 
 .grid-demo-columns-mixed {
-  @include nth-grid($columns: 150px 1);
+  @include nth-grid(150px 1);
 }
 
 .grid-demo-debug {
@@ -78,10 +65,7 @@ output > *:first-child {
 }
 
 .grid-demo-usage2 {
-  @include nth-grid(
-    $columns: 3,
-    $gap: 2%
-  );
+  @include nth-grid(3, 2%);
 }
 
 .grid-demo-usage-order {
