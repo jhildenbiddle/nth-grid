@@ -271,13 +271,8 @@ output > *:first-child {
 }
 
 .grid-demo-columns-symmetric {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -303,13 +298,8 @@ output > *:first-child {
 }
 
 .grid-demo-columns-asymmetric {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -341,13 +331,8 @@ output > *:first-child {
 }
 
 .grid-demo-columns-fixed {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: content-box;
   width: 300px;
@@ -376,13 +361,8 @@ output > *:first-child {
 }
 
 .grid-demo-columns-mixed {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -411,13 +391,8 @@ output > *:first-child {
 }
 
 .grid-demo-debug {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -443,7 +418,7 @@ output > *:first-child {
 }
 .grid-demo-debug:before {
   /* Nth-Grid Debug */
-  content: "$columns            : 3" "\a$gap                : 2%" "\a$margin             : 0" "\a$width              : 100%" "\a$order              : false" "\a$direction          : ltr" "\a$flex               : true" "\a$flex-legacy        : true" "\a$float              : false" "\a$float-legacy       : false" "\a\a$auto-width         : " "\a$calc               : false" "\a$columns-ratio      : 3" "\a$columns-unit       : none" "\a$grid-col-ratio     : 3" "\a$grid-col-width     : 32%" "\a$grid-width         : 100%" "\a$order-offsets      : none" "\a$total-columns      : 3" "\a$total-ratio-columns: 3" "\a$total-unit-columns : 0" !important;
+  content: "$columns            : 3" "\a$gap                : 2%" "\a$margin             : 0" "\a$width              : 100%" "\a$order              : false" "\a$direction          : ltr" "\a$flex               : true" "\a$flex-legacy        : false" "\a$float              : false" "\a$float-legacy       : false" "\a\a$auto-width         : " "\a$calc               : false" "\a$columns-ratio      : 3" "\a$columns-unit       : none" "\a$grid-col-ratio     : 3" "\a$grid-col-width     : 32%" "\a$grid-width         : 100%" "\a$order-offsets      : none" "\a$total-columns      : 3" "\a$total-ratio-columns: 3" "\a$total-unit-columns : 0" !important;
   display: block !important;
   flex-basis: 100% !important;
   overflow: hidden !important;
@@ -458,13 +433,8 @@ output > *:first-child {
 }
 
 .grid-demo-gap {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -490,13 +460,8 @@ output > *:first-child {
 }
 
 .grid-demo-overlay {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -555,13 +520,8 @@ output > *:first-child {
 }
 
 .grid-demo-usage1 {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -587,13 +547,8 @@ output > *:first-child {
 }
 
 .grid-demo-usage2 {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -619,13 +574,8 @@ output > *:first-child {
 }
 
 .grid-demo-usage-order {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -663,13 +613,8 @@ output > *:first-child {
 }
 
 .grid-demo-usage-troubleshooting {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
   box-sizing: border-box;
   width: auto;
@@ -728,7 +673,7 @@ output > *:first-child {
 }
 .grid-demo-usage-troubleshooting:before {
   /* Nth-Grid Debug */
-  content: "$columns            : 3" "\a$gap                : 2%" "\a$margin             : 0" "\a$width              : 100%" "\a$order              : false" "\a$direction          : ltr" "\a$flex               : true" "\a$flex-legacy        : true" "\a$float              : false" "\a$float-legacy       : false" "\a\a$auto-width         : " "\a$calc               : false" "\a$columns-ratio      : 3" "\a$columns-unit       : none" "\a$grid-col-ratio     : 3" "\a$grid-col-width     : 32%" "\a$grid-width         : 100%" "\a$order-offsets      : none" "\a$total-columns      : 3" "\a$total-ratio-columns: 3" "\a$total-unit-columns : 0" !important;
+  content: "$columns            : 3" "\a$gap                : 2%" "\a$margin             : 0" "\a$width              : 100%" "\a$order              : false" "\a$direction          : ltr" "\a$flex               : true" "\a$flex-legacy        : false" "\a$float              : false" "\a$float-legacy       : false" "\a\a$auto-width         : " "\a$calc               : false" "\a$columns-ratio      : 3" "\a$columns-unit       : none" "\a$grid-col-ratio     : 3" "\a$grid-col-width     : 32%" "\a$grid-width         : 100%" "\a$order-offsets      : none" "\a$total-columns      : 3" "\a$total-ratio-columns: 3" "\a$total-unit-columns : 0" !important;
   display: block !important;
   flex-basis: 100% !important;
   overflow: hidden !important;
