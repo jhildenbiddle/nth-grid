@@ -718,7 +718,9 @@ module.exports = {
 
 ### columns
 
-- Type: `number` or space-separated `list` of values
+- Type:
+  - A unitless `number` representing the quantity and width of ratio-based columns (e.g., `3`)
+  - A space-separated list of values, each representing a column's ratio-based or specified width (e.g., `1 2 3`, `150px 2 1`, `100px 10em 10%`)
 - Default: `1`
 
 Sets the column count, width and order for each grid row.
@@ -1270,6 +1272,37 @@ main {
 
 <!-- tabs:end -->
 
+**Output**
+
+```css
+main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: auto;
+}
+main > *:nth-child(1n) {
+  box-sizing: border-box;
+  position: static;
+  left: auto;
+  margin-top: 0;
+  margin-left: 0;
+}
+main > *:nth-child(-n+3) {
+  margin-top: 0;
+}
+main > *:nth-child(3n+1) {
+  margin-left: 0;
+}
+main > *:nth-last-child(-n+3) {
+  margin-bottom: 0;
+}
+main > *:nth-child(1n) {
+  width: 33.33333%;
+}
+```
+
 ### flex-legacy
 
 - Type: `boolean`
@@ -1326,12 +1359,139 @@ main {
 }
 ```
 
+<!-- tabs:end -->
+
+**Output**
+
+```css
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: auto;
+}
+main > *:nth-child(1n) {
+  box-sizing: border-box;
+  position: static;
+  left: auto;
+  margin-top: 0;
+  margin-left: 0;
+}
+main > *:nth-child(-n+3) {
+  margin-top: 0;
+}
+main > *:nth-child(3n+1) {
+  margin-left: 0;
+}
+main > *:nth-last-child(-n+3) {
+  margin-bottom: 0;
+}
+main > *:nth-child(1n) {
+  width: 33.33333%;
+}
+```
+
 ### float
 
 - Type: `boolean`
 - Default: `false`
 
 Generates float-based grid CSS rules
+
+<!-- tabs:start -->
+
+##### **Less**
+
+```less
+main {
+  .nth-grid(
+    @columns: 3,
+    @flex: false, // Optional
+    @float: true
+  );
+}
+```
+
+##### **Sass**
+
+```scss
+main {
+  @include nth-grid(
+    $columns: 3,
+    $flex: false, // Optional
+    $float: true
+  );
+}
+```
+
+##### **Stylus**
+
+```stylus
+main
+  nth-grid(
+    $columns: 3,
+    $flex: false, // Optional
+    $float: true
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  nth-grid {
+    columns: 3;
+    flex: false; /* Optional */
+    float: true;
+  };
+}
+```
+
+<!-- tabs:end -->
+
+**Output**
+
+```css
+main {
+  display: block;
+  box-sizing: border-box;
+  width: auto;
+}
+main:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+main > *:nth-child(1n) {
+  box-sizing: border-box;
+  position: static;
+  left: auto;
+  float: left;
+  clear: none;
+  margin-right: 0;
+  margin-top: 0;
+  margin-left: 0;
+}
+main > *:nth-child(-n+3) {
+  margin-top: 0;
+}
+main > *:nth-child(3n+1) {
+  clear: left;
+  margin-left: 0;
+}
+main > *:nth-last-child(-n+3) {
+  margin-bottom: 0;
+}
+main > *:nth-child(1n) {
+  width: 33.33333%;
+}
+```
 
 ### float-legacy
 
@@ -1340,12 +1500,118 @@ Generates float-based grid CSS rules
 
 Sets legacy compatibility mode for float-based grids. Setting this option to `true` will result in additional CSS being generated for IE7/8 compatibility. It is not necessary to set this option for IE9+.
 
+<!-- tabs:start -->
+
+##### **Less**
+
+```less
+main {
+  .nth-grid(
+    @columns: 3,
+    @flex: false, // Optional
+    @float: true,
+    @float-legacy: true
+  );
+}
+```
+
+##### **Sass**
+
+```scss
+main {
+  @include nth-grid(
+    $columns: 3,
+    $flex: false, // Optional
+    $float: true,
+    $float-legacy: true
+  );
+}
+```
+
+##### **Stylus**
+
+```stylus
+main
+  nth-grid(
+    $columns: 3,
+    $flex: false, // Optional
+    $float: true,
+    $float-legacy: true
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  nth-grid {
+    columns: 3;
+    flex: false, /* Optional */
+    float: true;
+    float-legacy: true;
+  };
+}
+```
+
+<!-- tabs:end -->
+
+**Output**
+
+```css
+main {
+  display: block;
+  *display: inline-block;
+  box-sizing: border-box;
+  width: auto;
+}
+main:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+main > *:nth-child(1n) {
+  box-sizing: border-box;
+  position: static;
+  left: auto;
+  float: left;
+  clear: none;
+  margin-right: 0;
+  *display: inline;
+  *float: none;
+  *vertical-align: top;
+  *zoom: 1;
+  margin-top: 0;
+  margin-left: 0;
+}
+main > *:nth-child(-n+3) {
+  margin-top: 0;
+}
+main > *:nth-child(3n) {
+  *margin-right: -2px;
+}
+main > *:nth-child(3n+1) {
+  clear: left;
+  margin-left: 0;
+}
+main > *:nth-last-child(-n+3) {
+  margin-bottom: 0;
+}
+main > *:last-child {
+  margin-bottom: 0;
+}
+main > *:nth-child(1n) {
+  width: 33.33333%;
+}
+```
+
 ### gap
 
-Sets the vertical gaps (between rows) and horizontal gaps (between columns). Grid gaps can be specified as:
+- Type:
+  - A single value for horizontal and vertical gaps (e.g., `2%`)
+  - A space-separated list of horizontal and vertical gap values (e.g., `0 10px`)
+- Default: `0`
 
-- A unit value for *matched* horizontal and vertical gaps (e.g., `2%`)
-- A space-separated list of unit values as horizontal and vertical gaps (e.g., `0 10px`)
+Sets the vertical gaps (between rows) and horizontal gaps (between columns). Grid gaps can be specified as:
 
 <!-- tabs:start -->
 
