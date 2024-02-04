@@ -1,5 +1,8 @@
 {
     "display": {
         "access": ["public"]
-    }
+    },
+    "exclude": [
+        "_nth-grid.import.scss"
+    ]
 }
