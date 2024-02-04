@@ -4,16 +4,16 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/jhildenbiddle/nth-grid/blob/master/LICENSE)
 [![Sponsor this project](https://img.shields.io/static/v1?style=flat-square&label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jhildenbiddle)
 
-A lightweight and semantic CSS flexbox and float-based grid system for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
+A lightweight, semantic, legacy-compatible CSS grid system for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
 
 ## Features
 
-- CSS flexbox and float-based grids
+- Flexbox and float-based grids
 - Semantic HTML without grid-specific class names
-- Simple, readable, easy-to-learn syntax
-- Fixed and/or fluid grids, columns, gaps and margins
+- Simple, easy-to-learn syntax
+- Fixed and/or fluid grids, columns, rows, gaps and margins
 - Symmetric and asymmetric grids
-- Column ordering
+- Adjustable column order independent of DOM order
 - LTR and RTL layouts
 - Grid overlays and debug information
 - [SassDoc](http://sassdoc.com/) integration
@@ -36,7 +36,7 @@ Nth-Grid provides all of the features expected of a modern CSS grid system while
 
 1. **Semantic grids without grid-specific CSS classes**
 
-   Many popular grid systems require adding CSS classes to your HTML markup for grid containers, rows, columns, ordering, nesting, responsive breakpoints, etc. The end result is markup littered with grid-specific CSS classes, adding unnecessary bloat and making changes a time-consuming challenge. Nth-Grid keeps your markup clean and the CSS for your grid-based layouts where it belongs: in your CSS, named and applied as you see fit.
+   Many popular grid systems require adding CSS classes to your HTML markup for grid containers, rows, columns, ordering, nesting, responsive breakpoints, etc. The end result is markup littered with grid-specific CSS classes, adding unnecessary bloat and making changes a time-consuming challenge. Nth-Grid keeps your markup clean and the CSS for your grid-based layouts where it belongs: in your CSS, named and applied as you prefer.
 
 1. **Native support for multiple CSS processors**
 
@@ -54,24 +54,9 @@ Nth-Grid provides all of the features expected of a modern CSS grid system while
 npm install nth-grid --save-dev
 ```
 
-**Git**
+**CDN**
 
-```bash
-# Clone repo
-git clone https://github.com/jhildenbiddle/nth-grid.git
-
-# Change directory
-cd nth-grid
-
-# Development (build & watch)
-npm start
-```
-
-The following resources are available during development:
-
-- Documentation: [http://localhost:3000](http://localhost:3000)
-- Grids Demo: [http://localhost:3000/demo/](http://localhost:3000/demo/)
-- SassDocs: [http://localhost:3000/sassdoc/](http://localhost:3000/sassdoc/)
+See [Setup](#setup) for details.
 
 ## Usage
 
@@ -83,29 +68,65 @@ Add the Nth-Grid mixin into your Less, Sass or Stylus file. The path to the mixi
 
 ##### **Less**
 
+**Local**
+
 ```less
 @import "path/to/nth-grid/dist/less/_nth-grid";
 ```
 
-##### **Sass**
+**CDN**
 
-Modern Sass (v1.33+ required): [`@use`](https://sass-lang.com/documentation/at-rules/use)
+Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below), [unpkg](https://unpkg.com/browse/mergician/), and other CDN services that auto-publish npm packages.
 
-```scss
-@use "path/to/nth-grid/dist/sass/_nth-grid" as *;
+```less
+@import "https://cdn.jsdelivr.net/npm/nth-grid@1/dist/less/_nth-grid";
 ```
 
-Legacy Sass (node-sass, libsass, Ruby Sass): [`@import`](https://sass-lang.com/documentation/at-rules/import)
+?> Note the `@` version lock in the URLs above. This prevents breaking changes in future releases from affecting your project and is therefore the safest method of loading dependencies from a CDN. When a new major version is released, you will need to manually update your CDN URLs by changing the version after the `@` symbol.
+
+##### **Sass**
+
+**Local**
 
 ```scss
+// Modern Sass (v1.33+ required)
+@use "path/to/nth-grid/dist/sass/_nth-grid" as *;
+
+// Legacy Sass (node-sass, libsass, Ruby Sass)
 @import "path/to/nth-grid/dist/sass/_nth-grid";
 ```
 
+**CDN**
+
+Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below), [unpkg](https://unpkg.com/browse/mergician/), and other CDN services that auto-publish npm packages.
+
+```scss
+// Modern Sass (v1.33+ required)
+@use "https://cdn.jsdelivr.net/npm/nth-grid@1/dist/sass/_nth-grid" as *;
+
+// Legacy Sass (node-sass, libsass, Ruby Sass)
+@import "https://cdn.jsdelivr.net/npm/nth-grid@1/dist/sass/_nth-grid";
+```
+
+?> Note the `@` version lock in the URLs above. This prevents breaking changes in future releases from affecting your project and is therefore the safest method of loading dependencies from a CDN. When a new major version is released, you will need to manually update your CDN URLs by changing the version after the `@` symbol.
+
 ##### **Stylus**
+
+**Local**
 
 ```stylus
 @import "path/to/nth-grid/dist/stylus/_nth-grid";
 ```
+
+**CDN**
+
+Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below), [unpkg](https://unpkg.com/browse/mergician/), and other CDN services that auto-publish npm packages.
+
+```stylus
+@import "https://cdn.jsdelivr.net/npm/nth-grid@1/dist/stylus/_nth-grid";
+```
+
+?> Note the `@` version lock in the URLs above. This prevents breaking changes in future releases from affecting your project and is therefore the safest method of loading dependencies from a CDN. When a new major version is released, you will need to manually update your CDN URLs by changing the version after the `@` symbol.
 
 ##### **PostCSS**
 
@@ -166,7 +187,9 @@ main
 
 ```css
 main {
-  nth-grid(3);
+  nth-grid {
+    columns: 3;
+  };
 }
 ```
 
@@ -238,10 +261,10 @@ main
 
 ```css
 main {
-  nth-grid(
+  nth-grid {
     columns: 3;
     gap: 2%;
-  );
+  };
 }
 ```
 
@@ -312,7 +335,7 @@ main
 
 ```css
 main {
-  nth-grid(
+  nth-grid {
     columns: 3;
     gap: 2%;
     /*
@@ -321,7 +344,7 @@ main {
       Column 2 is moved to the third position
     */
     order: 3 1 2;
-  );
+  };
 }
 ```
 
@@ -383,12 +406,12 @@ main
 
 ```css
 main {
-  nth-grid(
+  nth-grid {
     columns: 3;
     gap: 2%;
     overlay: true; /* display column width */
     debug: true;   /* display grid configuration */
-  );
+  };
 }
 ```
 
@@ -502,7 +525,7 @@ Nth-Grid for PostCSS provides two methods of defining global options:
 **CSS**
 
 ```css
-/* Nth-Grid global options in CSS */
+/* Nth-Grid global options */
 :root {
   /* Layout settings */
   --nth-grid-columns               : 1;
@@ -537,7 +560,7 @@ Nth-Grid for PostCSS provides two methods of defining global options:
 For configurations using `postcss.config.js`:
 
 ```javascript
-// Nth-Grid Global Options
+// Nth-Grid global options
 var config = {
   // Layout settings
   'columns'               : 1,
@@ -787,29 +810,11 @@ main
 
 ##### **PostCSS**
 
-A single *unitless* number:
-
 ```css
 main {
-  nth-grid(3); /* Columns: 1/3, 1/3, 1/3 */
-}
-```
-
-A space-separated list of values:
-
-```css
-main {
-  nth-grid(1 1 1); /* Columns: 1/3, 1/3, 1/3 */
-}
-```
-
-Specifying via `columns`:
-
-```css
-main {
-  nth-grid(
-    columns: 1 1 1;
-  );
+  nth-grid {
+    columns: 1 1 1; /* Columns: 1/3, 1/3, 1/3 */
+  };
 }
 ```
 
@@ -887,21 +892,11 @@ main
 
 ##### **PostCSS**
 
-Shorthand:
-
 ```css
 main {
-  nth-grid(1 2 3); /* Columns: 1/6, 2/6, 3/6 */
-}
-```
-
-Specifying via `columns`:
-
-```css
-main {
-  nth-grid(
-    columns: 1 2 3;
-  );
+  nth-grid {
+    columns: 1 2 3; /* Columns: 1/6, 2/6, 3/6 */
+  };
 }
 ```
 
@@ -979,21 +974,11 @@ main
 
 ##### **PostCSS**
 
-Shorthand:
-
 ```css
 main {
-  nth-grid(150px 150px);
-}
-```
-
-Specifying via `columns`:
-
-```css
-main {
-  nth-grid(
+  nth-grid {
     columns: 150px 150px;
-  );
+  };
 }
 ```
 
@@ -1070,21 +1055,11 @@ main
 
 ##### **PostCSS**
 
-Shorthand:
-
 ```css
 main {
-  nth-grid(150px 1);
-}
-```
-
-Specifying via `columns`:
-
-```css
-main {
-  nth-grid(
+  nth-grid {
     columns: 150px 1;
-  );
+  };
 }
 ```
 
@@ -1157,7 +1132,7 @@ main
 
 ```css
 main {
-  nth-grid(
+  nth-grid {
     columns: 3;
     gap: 2%;
     debug: true;
@@ -1165,7 +1140,7 @@ main {
     /* Debug styles (optional) */
     $debug-background-color: #000;
     $debug-text-color: #ccc;
-  );
+  };
 }
 ```
 
@@ -1196,7 +1171,7 @@ main {
 
   .nth-grid(
     // ...
-    direction: rtl  // Sets right-to-left column flow
+    @direction: rtl  // Sets right-to-left column flow
   );
 }
 ```
@@ -1230,12 +1205,12 @@ main
 
 ```css
 main {
-  direction: rtl // Sets right-to-left content flow
+  direction: rtl /* Sets right-to-left content flow */
 
-  nth-grid(
+  nth-grid {
     /* ... */
-    direction: rtl /* Sets right-to-left column flow */
-  );
+    direction: rtl; /* Sets right-to-left column flow */
+  };
 }
 ```
 
@@ -1246,7 +1221,54 @@ main {
 - Type: `boolean`
 - Default: `true`
 
-Generates flexbox-based grid CSS rules
+Generates flexbox-based grid CSS rules.
+
+<!-- tabs:start -->
+
+##### **Less**
+
+```less
+main {
+  .nth-grid(
+    @columns: 3,
+    @flex: true
+  );
+}
+```
+
+##### **Sass**
+
+```scss
+main {
+  @include nth-grid(
+    $columns: 3,
+    $flex: true
+  );
+}
+```
+
+##### **Stylus**
+
+```stylus
+main
+  nth-grid(
+    $columns: 3,
+    $flex: true
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  nth-grid {
+    columns: 3;
+    flex: true;
+  };
+}
+```
+
+<!-- tabs:end -->
 
 ### flex-legacy
 
@@ -1254,6 +1276,55 @@ Generates flexbox-based grid CSS rules
 - Default: `false`
 
 Sets legacy compatibility mode for flexbox-based grids. Setting this option to `true` will result in additional CSS being generated for older browsers that require vendor-prefixed and "tweener" flexbox syntax (e.g, IE10).
+
+<!-- tabs:start -->
+
+##### **Less**
+
+```less
+main {
+  .nth-grid(
+    @columns: 3,
+    @flex: true,
+    @flex-legacy: true
+  );
+}
+```
+
+##### **Sass**
+
+```scss
+main {
+  @include nth-grid(
+    $columns: 3,
+    $flex: true,
+    $flex-legacy: true
+  );
+}
+```
+
+##### **Stylus**
+
+```stylus
+main
+  nth-grid(
+    $columns: 3,
+    $flex: true,
+    $flex-legacy: true
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  nth-grid {
+    columns: 3;
+    flex: true;
+    flex-legacy: true;
+  };
+}
+```
 
 ### float
 
@@ -1341,22 +1412,12 @@ main
 
 ##### **PostCSS**
 
-Shorthand:
-
 ```css
 main {
-  nth-grid(3, 2%);
-}
-```
-
-Specifying [`columns`](#columns) and [`gap`](#gap):
-
-```css
-main {
-  nth-grid(
+  nth-grid {
     columns: 3;
     gap: 2%;
-  );
+  };
 }
 ```
 
@@ -1490,7 +1551,7 @@ main
 
 ```css
 main {
-  nth-grid(
+  nth-grid {
     columns: 3;
     gap: 2%;
     overlay: true;
@@ -1499,7 +1560,7 @@ main {
     overlay-column-color: #333;
     overlay-margin-color: #999;
     overlay-text-color: #fff;
-  );
+  };
 }
 ```
 
@@ -1591,6 +1652,23 @@ The following grid configurations are not supported by legacy browsers due to la
 Nth-Grid includes SassDoc-compatible comments in the Sass source code. This makes including Nth-Grid documentation in your own SassDoc-generated documentation as simple as including `path/to/_nth-grid.sass` in the list of Sass files to process.
 
 For more information on SassDoc, please visit [sassdoc.com](http://sassdoc.com).
+
+## Development
+
+```bash
+# Clone repo
+git clone https://github.com/jhildenbiddle/nth-grid.git
+
+# Change directory
+cd nth-grid
+
+# Development (build & watch)
+npm start
+```
+
+- Documentation: [http://localhost:3000](http://localhost:3000)
+- Grid Demos: [http://localhost:3000/demo/](http://localhost:3000/demo/)
+- SassDocs: [http://localhost:3000/sassdoc/](http://localhost:3000/sassdoc/)
 
 ## Sponsorship
 
