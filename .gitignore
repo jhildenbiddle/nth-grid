@@ -1,6 +1,7 @@
 # Directories
 coverage
 demo
+dist
 node_modules
 
 # Files
