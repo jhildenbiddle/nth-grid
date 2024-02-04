@@ -25,7 +25,7 @@ export default function Grid(settings, options) {
         margin                : 0,
         direction             : 'ltr',
         flex                  : true,
-        flex_legacy           : true,
+        flex_legacy           : false,
         float                 : false,
         float_legacy          : false,
 

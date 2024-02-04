@@ -45,7 +45,7 @@ $nth-grid-flex                  : true !default;
 /// Default Nth-Grid `flex-legacy` setting.
 /// @type Boolean
 /// @see nth-grid
-$nth-grid-flex-legacy           : true !default;
+$nth-grid-flex-legacy           : false !default;
 ///
 /// Default Nth-Grid `float` setting.
 /// @type Boolean
@@ -448,7 +448,7 @@ $nth-grid-warnings              : true !default;
 /// @param {Boolean} $flex [true]
 /// Generates flexbox-based grid CSS rules
 ///
-/// @param {Boolean} $flex-legacy [true]
+/// @param {Boolean} $flex-legacy [false]
 /// Sets legacy compatibility mode for flexbox-based grids. Setting this option
 /// to `true` will result in additional CSS being generated for older browsers
 /// that support vendor-prefixed and "tweener" flexbox syntax.
@@ -558,7 +558,7 @@ $nth-grid-warnings              : true !default;
 ///       $order       : 3 1 2, // Column order
 ///       $direction   : ltr,   // Grid direction
 ///       $flex        : true,  // Flexbox-based grid
-///       $flex-legacy : true,  // Legacy flexbox support (IE10+)
+///       $flex-legacy : false, // Legacy flexbox support (IE10+)
 ///       $float       : false, // Float-based grid
 ///       $float-legacy: false, // Legacy float support (IE7/8)
 ///       $debug       : false, // Debug information displayed above grid
