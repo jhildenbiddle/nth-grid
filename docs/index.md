@@ -5,7 +5,7 @@
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/nth-grid/badge)](https://www.jsdelivr.com/package/npm/nth-grid)
 [![Sponsor this project](https://img.shields.io/static/v1?style=flat-square&label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jhildenbiddle)
 
-A versatile semantic CSS grid system with legacy browser support for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
+Nth-Grid is a versatile semantic CSS grid system with legacy browser support for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
 
 !> The official [CSS Grid Layout Module](https://www.w3.org/TR/css-grid-1/) was finalized has been widely [supported](https://caniuse.com/?search=display%3A%20grid) in modern browsers since 2020. [Native CSS grids](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) offer a far better experience than grid systems like Nth-Grid for projects that do not require legacy browser support. For projects that do support legacy browsers, Nth-Grid remains an excellent choice for grid layouts.
 
