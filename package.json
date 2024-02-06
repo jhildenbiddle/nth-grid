@@ -2,7 +2,7 @@
   "name": "nth-grid",
   "version": "0.0.0",
   "author": "John Hildenbiddle",
-  "description": "A highly versatile semantic grid system with legacy browser support for Less, PostCSS, Sass, and Stylus.",
+  "description": "A versatile semantic grid system with legacy browser support for Less, PostCSS, Sass, and Stylus.",
   "license": "MIT",
   "homepage": "https://github.com/jhildenbiddle/nth-grid",
   "repository": {
