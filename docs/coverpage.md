@@ -7,6 +7,6 @@
 - Supports float, flexbox, and grid-based layouts
 - Legacy browser support (IE9+)
 
-[Get Started](index)
+[Get Started](#main) <!-- markdownlint-disable MD051 -->
 [SassDocs](/sassdoc ':ignore')
 [GitHub](https://github.com/jhildenbiddle/nth-grid)
