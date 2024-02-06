@@ -48,8 +48,8 @@ browserSync.init({
     rewriteRules: [
         // Replace CDN URLs with local paths
         {
-            match  : /https:\/\/cdn\.jsdelivr\.net\/npm\/nth-grid@1/g,
-            replace: ''
+            match: /https?.*\/CHANGELOG.md/g,
+            replace: '/CHANGELOG.md'
         }
     ]
 });
