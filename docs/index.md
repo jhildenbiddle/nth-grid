@@ -2,9 +2,10 @@
 
 [![NPM](https://img.shields.io/npm/v/nth-grid.svg?style=flat-square)](https://www.npmjs.com/package/nth-grid)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/jhildenbiddle/nth-grid/blob/master/LICENSE)
+[![jsDelivr](https://data.jsdelivr.com/v1/package/npm/nth-grid/badge)](https://www.jsdelivr.com/package/npm/nth-grid)
 [![Sponsor this project](https://img.shields.io/static/v1?style=flat-square&label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jhildenbiddle)
 
-A semantic, lightweight, legacy-compatible CSS grid system for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
+A highly versatile semantic grid system with legacy browser support for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
 
 !> Native [CSS grid layouts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) have been [supported](https://caniuse.com/?search=display%3A%20grid) in modern browsers since 2020 and offer a far better experience than custom grid systems like Nth-Grid. For projects that require legacy browser support, Nth-Grid remains an excellent choice for grid-based layouts.
 
@@ -78,7 +79,7 @@ Add the Nth-Grid mixin into your Less, Sass or Stylus file. The path to the mixi
 
 **CDN**
 
-Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below), [unpkg](https://unpkg.com/browse/mergician/), and other CDN services that auto-publish npm packages.
+Available on [jsdelivr](https://www.jsdelivr.com/package/npm/nth-grid) (below), [unpkg](https://unpkg.com/browse/nth-grid/), and other CDN services that auto-publish npm packages.
 
 ```less
 @import "https://cdn.jsdelivr.net/npm/nth-grid@1/dist/less/_nth-grid";
@@ -100,7 +101,7 @@ Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below),
 
 **CDN**
 
-Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below), [unpkg](https://unpkg.com/browse/mergician/), and other CDN services that auto-publish npm packages.
+Available on [jsdelivr](https://www.jsdelivr.com/package/npm/nth-grid) (below), [unpkg](https://unpkg.com/browse/nth-grid/), and other CDN services that auto-publish npm packages.
 
 ```scss
 // Modern Sass (v1.33+ required)
@@ -122,7 +123,7 @@ Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below),
 
 **CDN**
 
-Available on [jsdelivr](https://www.jsdelivr.com/package/npm/mergician) (below), [unpkg](https://unpkg.com/browse/mergician/), and other CDN services that auto-publish npm packages.
+Available on [jsdelivr](https://www.jsdelivr.com/package/npm/nth-grid) (below), [unpkg](https://unpkg.com/browse/nth-grid/), and other CDN services that auto-publish npm packages.
 
 ```stylus
 @import "https://cdn.jsdelivr.net/npm/nth-grid@1/dist/stylus/_nth-grid";
