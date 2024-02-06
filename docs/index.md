@@ -34,7 +34,7 @@ Nth-Grid provides all of the features expected of a modern CSS grid system while
 
 1. **Custom grids without limitations**
 
-   Nth-Grid provides a level of flexibility that no other CSS grid system offers: display multiple custom grids on the same page, combine fixed and fluid columns in the same grid, add fixed gaps and margins to fluid grids, create single and multi-row grids, nest custom grids within custom grids, reorder columns, create equal height or vertically-aligned columns, change the grid direction for RTL layouts, and modify any grid setting on-the-fly in your responsive layouts. Nth-Grid handles all of this with a single mixin in your CSS using familiar grid concepts and terminology.
+   Nth-Grid provides a level of flexibility that no other CSS grid system offers: display multiple custom grids on the same page, combine fixed and fluid columns in the same grid, add fixed gaps and margins to fluid grids, create single and multi-row grids, nest custom grids within custom grids, reorder columns, change the grid direction for RTL layouts, and modify any grid setting on-the-fly in your responsive layouts. Nth-Grid handles all of this with a single mixin in your CSS using familiar grid concepts and terminology.
 
 1. **Semantic grids without grid-specific CSS classes**
 
@@ -198,7 +198,7 @@ main {
 <!-- tabs:end -->
 
 <div class="app-frame mac centered">
-  <div class="grid-demo-usage-columns">
+  <div class="grid-demo-columns-symmetric">
     <div>Column 1</div>
     <div>Column 2</div>
     <div>Column 3</div>
@@ -273,7 +273,7 @@ main {
 <!-- tabs:end -->
 
 <div class="app-frame mac centered">
-  <div class="grid-demo-usage-rows">
+  <div class="grid-demo-gap">
     <!-- Row 1 -->
     <div>A</div>
     <div>B</div>
@@ -355,7 +355,7 @@ main {
 <!-- tabs:end -->
 
 <div class="app-frame mac centered">
-  <div class="grid-demo-usage-order">
+  <div class="grid-demo-order">
     <div>Column 1</div>
     <div>Column 2</div>
     <div>Column 3</div>
@@ -422,7 +422,7 @@ main {
 <!-- tabs:end -->
 
 <div class="app-frame mac centered">
-  <div class="grid-demo-usage-troubleshooting">
+  <div class="grid-demo-troubleshooting">
     <div>Column 1</div>
     <div>Column 2</div>
     <div>Column 3</div>
@@ -888,7 +888,7 @@ Shorthand:
 
 ```less
 main {
-  .nth-grid(150px 150px);
+  .nth-grid(100px 100px 100px);
 }
 ```
 
@@ -897,7 +897,7 @@ Specifying via `@columns`:
 ```less
 main {
   .nth-grid(
-    @columns: 150px 150px
+    @columns: 100px 100px 100px
   );
 }
 ```
@@ -908,7 +908,7 @@ Shorthand:
 
 ```scss
 main {
-  @include nth-grid(150px 150px);
+  @include nth-grid(100px 100px 100px);
 }
 ```
 
@@ -917,7 +917,7 @@ Specifying via `$columns`:
 ```scss
 main {
   @include nth-grid(
-    $columns: 150px 150px
+    $columns: 100px 100px 100px
   );
 }
 ```
@@ -928,7 +928,7 @@ Shorthand:
 
 ```stylus
 main
-  nth-grid(150px 150px)
+  nth-grid(100px 100px 100px)
 ```
 
 Specifying via `$columns`:
@@ -936,7 +936,7 @@ Specifying via `$columns`:
 ```stylus
 main
   nth-grid(
-    $columns: 150px 150px
+    $columns: 100px 100px 100px
   )
 ```
 
@@ -945,7 +945,7 @@ main
 ```css
 main {
   nth-grid {
-    columns: 150px 150px;
+    columns: 100px 100px 100px;
   };
 }
 ```
@@ -956,6 +956,7 @@ main {
   <div class="grid-demo-columns-fixed">
     <div>Column 1</div>
     <div>Column 2</div>
+    <div>Column 3</div>
   </div>
 </div>
 
@@ -969,7 +970,7 @@ Shorthand:
 
 ```less
 main {
-  .nth-grid(150px 1);
+  .nth-grid(150px 1 150px);
 }
 ```
 
@@ -978,7 +979,7 @@ Specifying via `@columns`:
 ```less
 main {
   .nth-grid(
-    @columns: 150px 1
+    @columns: 150px 1 150px
   );
 }
 ```
@@ -989,7 +990,7 @@ Shorthand:
 
 ```scss
 main {
-  @include nth-grid(150px 1);
+  @include nth-grid(150px 1 150px);
 }
 ```
 
@@ -998,7 +999,7 @@ Specifying via `$columns`:
 ```scss
 main {
   @include nth-grid(
-    $columns: 150px 1
+    $columns: 150px 1 150px
   );
 }
 ```
@@ -1009,7 +1010,7 @@ Shorthand:
 
 ```stylus
 main
-  nth-grid(150px 1)
+  nth-grid(150px 1 150px)
 ```
 
 Specifying via `$columns`:
@@ -1017,7 +1018,7 @@ Specifying via `$columns`:
 ```stylus
 main
   nth-grid(
-    $columns: 150px 1
+    $columns: 150px 1 150px
   )
 ```
 
@@ -1026,7 +1027,7 @@ main
 ```css
 main {
   nth-grid {
-    columns: 150px 1;
+    columns: 150px 1 150px;
   };
 }
 ```
@@ -1037,6 +1038,7 @@ main {
   <div class="grid-demo-columns-mixed">
     <div>Column 1</div>
     <div>Column 2</div>
+    <div>Column 3</div>
   </div>
 </div>
 
@@ -1199,7 +1201,7 @@ Generates flexbox-based grid CSS rules.
 main {
   .nth-grid(
     @columns: 3,
-    @flex: true
+    @flex: true // default
   );
 }
 ```
@@ -1210,7 +1212,7 @@ main {
 main {
   @include nth-grid(
     $columns: 3,
-    $flex: true
+    $flex: true // default
   );
 }
 ```
@@ -1221,7 +1223,7 @@ main {
 main
   nth-grid(
     $columns: 3,
-    $flex: true
+    $flex: true // default
   )
 ```
 
@@ -1231,7 +1233,7 @@ main
 main {
   nth-grid {
     columns: 3;
-    flex: true;
+    flex: true; /* default */
   };
 }
 ```
@@ -1668,60 +1670,155 @@ main {
 
 ### margin
 
-*Default:* `0`
+- Type:
+  - A single value for horizontal and vertical margins (e.g., `2%`)
+  - A space-separated list of horizontal and vertical margin values (e.g., `0 10px`)
+- Default: `0`
 
 Sets the vertical and horizontal margins of the grid *within* the grid container.
 
-- Accepts a unit value for *matched* horizontal and vertical margins.
+<!-- tabs:start -->
 
-  ```scss
-  // Sass
-  // A grid with a matched margins
-  .myclass {
-      .nth-grid(
-          // ...
-          // Vertical and horizontal margins = 2%
-          $margin: 2%
-      );
-  }
-  ```
+##### **Less**
 
-- Accepts a space-separated list of unit values as *mixed* horizontal and vertical margins.
+```less
+main {
+  border: 1px solid orange;
+
+  .nth-grid(
+    @columns: 3,
+    @margin: 2%
+  );
+}
+```
+
+##### **Sass**
 
 ```scss
-  // Sass
-  // A grid with a mixed margins
-  .myclass {
-      .nth-grid(
-          // ...
-          // Vertical margins = 0, horizontal margins = 10px
-          $margin: 0 10px
-      );
-  }
+main {
+  border: 1px solid orange;
+
+  @include nth-grid(
+    $columns: 3,
+    $margin: 2%
+  );
+}
 ```
+
+##### **Stylus**
+
+```stylus
+main
+  border: 1px solid orange
+
+  nth-grid(
+    $columns: 3,
+    $margin: 2%
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  border: 1px solid orange;
+
+  nth-grid {
+    columns: 3;
+    margin: 2%;
+  };
+}
+```
+
+<!-- tabs:end -->
+
+<div class="app-frame mac centered" data-title="Grid Margin">
+  <div class="grid-demo-margin">
+    <div>Column 1</div>
+    <div>Column 2</div>
+    <div>Column 3</div>
+  </div>
+</div>
 
 ### order
 
-*Default:* `false`
+- Type: A space-separated list of `number`s (e.g., `1 2 3`) or `false` for DOM order
+- Default: `false`
 
 Sets the column presentation order.
 
-- Accepts `false` or a space-separated list of unitless values.
+<!-- tabs:start -->
 
-  ```scss
-  // Sass
-  // A grid with an adjusted column presentation order
-  .myclass {
-      .nth-grid(
-          // Three columns
-          $columns: 3,
-          // Column 3 is moved to the first position
-          // Column 1 is moved to the second position
-          // Column 2 is moved to the third position
-          $order: 3 1 2
-      );
-  }
-  ```
+##### **Less**
+
+```less
+main {
+  .nth-grid(
+    @columns: 3,
+    @gap: 2%,
+    // Column 3 is moved to the first position
+    // Column 1 is moved to the second position
+    // Column 2 is moved to the third position
+    @order: 3 1 2
+  );
+}
+```
+
+##### **Sass**
+
+```scss
+main {
+  @include nth-grid(
+    $columns: 3,
+    $gap: 2%,
+    // Column 3 is moved to the first position
+    // Column 1 is moved to the second position
+    // Column 2 is moved to the third position
+    $order: 3 1 2
+  );
+}
+```
+
+##### **Stylus**
+
+```stylus
+main
+  nth-grid(
+    $columns: 3
+    $gap: 2%
+    // Column 3 is moved to the first position
+    // Column 1 is moved to the second position
+    // Column 2 is moved to the third position
+    $order: 3 1 2
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  nth-grid {
+    columns: 3;
+    gap: 2%;
+    /*
+      Column 3 is moved to the first position
+      Column 1 is moved to the second position
+      Column 2 is moved to the third position
+    */
+    order: 3 1 2;
+  };
+}
+```
+
+<!-- tabs:end -->
+
+<div class="app-frame mac centered">
+  <div class="grid-demo-order">
+    <div>Column 1</div>
+    <div>Column 2</div>
+    <div>Column 3</div>
+  </div>
+</div>
 
 ### overlay
 
@@ -1811,45 +1908,133 @@ main {
 
 ### warnings
 
-*Default:* `true`
+- Type: `boolean`
+- Default: `true`
 
 Sets the output of grid layout warnings during compilation. Compilation warnings are generated when `legacy` is set to `true` and a grid configuration is defined that is not compatible with legacy browsers.
 
-- Accepts `true` or `false`.
+<!-- tabs:start -->
 
-  ```scss
-  // Sass
-  // A grid with compilation warnings enabled
-  .myclass {
-      .nth-grid(
-          // Mixed-unit grid configurations are not compatible with legacy browsers
-          $columns: 2 200px,
-          // Legacy browser support is enabled for this grid
-          $legacy: true,
-          // A warnings will be displayed during compilation
-          $warnings: true
-      );
-  }
-  ```
+##### **Less**
+
+```less
+main {
+  .nth-grid(
+    // Mixed-unit grid configurations are not compatible with legacy browsers
+    @columns: 2 200px,
+    @legacy: true,
+    @warnings: true
+  );
+}
+```
+
+##### **Sass**
+
+```scss
+main {
+  @include nth-grid(
+    // Mixed-unit grid configurations are not compatible with legacy browsers
+    $columns: 2 200px,
+    $legacy: true,
+    $warnings: true
+  );
+}
+```
+
+##### **Stylus**
+
+```stylus
+main
+  nth-grid(
+    // Mixed-unit grid configurations are not compatible with legacy browsers
+    $columns: 2 200px
+    $legacy: true
+    $warnings: true
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  nth-grid {
+    /* Mixed-unit grid configurations are not compatible with legacy browsers */
+    columns: 2 200px;
+    legacy: 3;
+    warnings: true;
+  };
+}
+```
+
+<!-- tabs:end -->
+
+**Output**
+
+```text
+NTH-GRID: "main" requires calc() support. This grid will not render properly in legacy browsers.
+```
 
 ### width
 
-*Default:* `auto`
+- Type: A valid CSS [width](https://developer.mozilla.org/en-US/docs/Web/CSS/width) value
+- Default: `auto`
 
 Sets the width of the grid container.
 
-- Accepts a unit value.  When the `width` option is omitted, a width value of `auto` is applied to the grid container element.
+<!-- tabs:start -->
 
-  ```scss
-  // Sass
-  // A grid that is 80% of the width of its parent width
-  .myclass {
-      .nth-grid(
-          // ...
-          $width: 80%
-      );
-  }
-  ```
+##### **Less**
+
+```less
+main {
+  .nth-grid(
+    @columns: 3,
+    @width: 75%
+  );
+}
+```
+
+##### **Sass**
+
+```scss
+main {
+  @include nth-grid(
+    $columns: 3,
+    $width: 75%
+  );
+}
+```
+
+##### **Stylus**
+
+```stylus
+main
+  nth-grid(
+    $columns: 3,
+    $width: 75%
+  )
+```
+
+##### **PostCSS**
+
+```css
+main {
+  nth-grid {
+    columns: 3;
+    width: 75%;
+  };
+}
+```
+
+<!-- tabs:end -->
+
+<div class="app-frame mac centered" data-title="Grid Margin">
+  <div class="grid-demo-width">
+    <div>Column 1</div>
+    <div>Column 2</div>
+    <div>Column 3</div>
+  </div>
+</div>
 
 ## Legacy Browsers
 
@@ -1866,8 +2051,6 @@ The following grid configurations are not supported by legacy browsers due to la
 
 - Grid columns set to a list of *mixed-unit* values
 - Grid columns, gap, and margin values with *mixed* units.
-- Equal-height columns
-- Vertically-aligned columns
 
 **Android v4.x Browser App**
 
@@ -1875,16 +2058,16 @@ The following grid configurations are not supported by legacy browsers due to la
 
 **Internet Explorer 9**
 
-- **CSS Calc() Limitations:** IE9 supports CSS calc() values up to 128 characters and will truncate values that exceed this length. Grids that require calc() values larger than 128 characters will therefore render incorrectly in this browser. This typically isn't an issue, although long calc() values can be generated when using the `order` setting with grids that contain a mix of fixed- and fluid-width columns, gaps and margins.
+- **CSS Calc() Limitations:** IE9 supports CSS calc() values up to 128 characters and will truncate values that exceed this length. Grids that require calc() values larger than 128 characters will therefore render incorrectly in this browser. This typically isn't an issue, although long calc() values can be generated when using the [`order`](#order) setting with grids that contain a mix of fixed- and fluid-width columns, gaps, and margins.
 
 **Internet Explorer 7/8**
 
-- **Grid Configurations:** As detailed in the [Legacy Browsers](#legacy-browsers) section, Nth-Grid provides legacy browser support for some (but not all) grid configurations. Please review this section for a list of compatible grid configurations.
+- **Grid Configurations:** Nth-Grid provides legacy browser support for some but not all grid configurations. See the requirements above for details.
 - **CSS Minifiers:** Nth-Grid uses the the CSS "star hack" to target IE7 without requiring additional CSS classes, HTML markup or JavaScript. Many CSS minifiers will strip these rules by default during minification assuming legacy support is not needed. If you find that grids are not rendering properly in IE7 while using a CSS minifier, first disable to your minifier to see if this fixes the issue. If this resolves the issue, you most likely need to enable legacy support in your minifier settings.
 
 ## SassDoc
 
-Nth-Grid includes SassDoc-compatible comments in the Sass source code. This makes including Nth-Grid documentation in your own SassDoc-generated documentation as simple as including `path/to/_nth-grid.sass` in the list of Sass files to process.
+Nth-Grid includes SassDoc-compatible comments in the Sass source code. This makes including Nth-Grid in your own SassDoc documentation as simple as including `path/to/_nth-grid.sass` in the list of Sass files to process.
 
 For more information on SassDoc, please visit [sassdoc.com](http://sassdoc.com).
 

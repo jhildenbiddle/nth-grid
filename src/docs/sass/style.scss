@@ -26,20 +26,20 @@
   }
 }
 
-.grid-demo-columns-symmetric {
-  @include nth-grid(3);
-}
-
 .grid-demo-columns-asymmetric {
   @include nth-grid(1 2 3);
 }
 
 .grid-demo-columns-fixed {
-  @include nth-grid(150px 150px);
+  @include nth-grid(100px 100px 100px);
 }
 
 .grid-demo-columns-mixed {
-  @include nth-grid(150px 1);
+  @include nth-grid(150px 1 150px);
+}
+
+.grid-demo-columns-symmetric {
+  @include nth-grid(3);
 }
 
 .grid-demo-debug {
@@ -54,6 +54,22 @@
   @include nth-grid(3, 2%);
 }
 
+.grid-demo-margin {
+  border: 1px solid orange;
+
+  @include nth-grid(
+    $columns: 3,
+    $margin: 2%,
+  );
+}
+
+.grid-demo-order {
+  @include nth-grid($columns: 3,
+    $gap: 2%,
+    $order: 3 1 2
+  );
+}
+
 .grid-demo-overlay {
   @include nth-grid(
     $columns: 3,
@@ -62,27 +78,18 @@
   );
 }
 
-.grid-demo-usage-columns {
-  @include nth-grid(3);
-}
-
-.grid-demo-usage-rows {
-  @include nth-grid(3, 2%);
-}
-
-.grid-demo-usage-order {
-  @include nth-grid(
-    $columns: 3,
-    $gap: 2%,
-    $order: 3 1 2
-  );
-}
-
-.grid-demo-usage-troubleshooting {
+.grid-demo-troubleshooting {
   @include nth-grid(
     $columns: 3,
     $gap: 2%,
     $overlay: true,
     $debug: true,
+  );
+}
+
+.grid-demo-width {
+  @include nth-grid(
+    $columns: 3,
+    $width: 75%,
   );
 }
