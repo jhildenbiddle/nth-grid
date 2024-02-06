@@ -16,7 +16,7 @@ exports[`sass @import snapshots grid-calc-fixed 1`] = `
   width: calc(192px + 2rem);
 }
 .grid-calc-fixed:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -79,7 +79,7 @@ exports[`sass @import snapshots grid-calc-fixed-first-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -142,7 +142,7 @@ exports[`sass @import snapshots grid-calc-fixed-first-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -202,7 +202,7 @@ exports[`sass @import snapshots grid-calc-fixed-firstlast-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-firstlast-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -265,7 +265,7 @@ exports[`sass @import snapshots grid-calc-fixed-last-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -328,7 +328,7 @@ exports[`sass @import snapshots grid-calc-fixed-last-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -388,7 +388,7 @@ exports[`sass @import snapshots grid-calc-fixed-middle-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -451,7 +451,7 @@ exports[`sass @import snapshots grid-calc-fluid-first-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -514,7 +514,7 @@ exports[`sass @import snapshots grid-calc-fluid-first-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -574,7 +574,7 @@ exports[`sass @import snapshots grid-calc-fluid-last-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -637,7 +637,7 @@ exports[`sass @import snapshots grid-calc-fluid-last-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -697,7 +697,7 @@ exports[`sass @import snapshots grid-calc-fluid-middle-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -760,7 +760,7 @@ exports[`sass @import snapshots grid-calc-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -823,7 +823,7 @@ exports[`sass @import snapshots grid-calc-nested 1`] = `
   width: 95%;
 }
 .grid-calc-nested:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -877,7 +877,7 @@ exports[`sass @import snapshots grid-calc-nested 1`] = `
   width: auto;
 }
 .grid-calc-nested .grid-n:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -935,7 +935,7 @@ exports[`sass @import snapshots grid-calc-order 1`] = `
   width: 95%;
 }
 .grid-calc-order:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -976,15 +976,15 @@ exports[`sass @import snapshots grid-calc-order 1`] = `
 }
 .grid-calc-order > *:nth-child(3n+2) {
   position: relative;
-  left: calc(0px - (\\"(99.99% - 2rem) / 3\\" + 0.5rem));
+  left: calc(0px - ("(99.99% - 2rem) / 3" + 0.5rem));
 }
 .grid-calc-order > *:nth-child(3n+3) {
   position: relative;
-  left: calc((\\"(99.99% - 2rem) / 3\\" + 0.5rem) - (\\"(((99.99% - 2rem) / 3) * 2)\\" + \\"(0.5rem * 2)\\"));
+  left: calc(("(99.99% - 2rem) / 3" + 0.5rem) - ("(((99.99% - 2rem) / 3) * 2)" + "(0.5rem * 2)"));
 }
 .grid-calc-order > *:nth-child(3n+1) {
   position: relative;
-  left: calc(\\"(((99.99% - 2rem) / 3) * 2)\\" + \\"(0.5rem * 2)\\");
+  left: calc("(((99.99% - 2rem) / 3) * 2)" + "(0.5rem * 2)");
 }"
 `;
 
@@ -1008,7 +1008,7 @@ exports[`sass @import snapshots grid-calc-rtl 1`] = `
   width: 95%;
 }
 .grid-calc-rtl:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1065,7 +1065,7 @@ exports[`sass @import snapshots grid-calc-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1122,7 +1122,7 @@ exports[`sass @import snapshots grid-calc-singleratio-nogap 1`] = `
   width: 95%;
 }
 .grid-calc-singleratio-nogap:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1177,7 +1177,7 @@ exports[`sass @import snapshots grid-calc-singleratio-nomargin 1`] = `
   width: 95%;
 }
 .grid-calc-singleratio-nomargin:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1235,7 +1235,7 @@ exports[`sass @import snapshots grid-nocalc-fixed 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1302,7 +1302,7 @@ exports[`sass @import snapshots grid-nocalc-fixed-first-multiratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1369,7 +1369,7 @@ exports[`sass @import snapshots grid-nocalc-fixed-first-singleratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1432,7 +1432,7 @@ exports[`sass @import snapshots grid-nocalc-fixed-firstlast-singleratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-firstlast-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1499,7 +1499,7 @@ exports[`sass @import snapshots grid-nocalc-fixed-last-multiratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1566,7 +1566,7 @@ exports[`sass @import snapshots grid-nocalc-fixed-last-singleratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1629,7 +1629,7 @@ exports[`sass @import snapshots grid-nocalc-fixed-middle-multiratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1695,7 +1695,7 @@ exports[`sass @import snapshots grid-nocalc-fluid-first-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1753,7 +1753,7 @@ exports[`sass @import snapshots grid-nocalc-fluid-first-singleratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1808,7 +1808,7 @@ exports[`sass @import snapshots grid-nocalc-fluid-last-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1866,7 +1866,7 @@ exports[`sass @import snapshots grid-nocalc-fluid-last-singleratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1921,7 +1921,7 @@ exports[`sass @import snapshots grid-nocalc-fluid-middle-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -1979,7 +1979,7 @@ exports[`sass @import snapshots grid-nocalc-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2037,7 +2037,7 @@ exports[`sass @import snapshots grid-nocalc-nested 1`] = `
   width: 95%;
 }
 .grid-nocalc-nested:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2086,7 +2086,7 @@ exports[`sass @import snapshots grid-nocalc-nested 1`] = `
   width: auto;
 }
 .grid-nocalc-nested .grid-n:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2148,7 +2148,7 @@ exports[`sass @import snapshots grid-nocalc-order 1`] = `
   width: 95%;
 }
 .grid-nocalc-order:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2216,7 +2216,7 @@ exports[`sass @import snapshots grid-nocalc-rtl 1`] = `
   width: 95%;
 }
 .grid-nocalc-rtl:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2268,7 +2268,7 @@ exports[`sass @import snapshots grid-nocalc-singleratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2320,7 +2320,7 @@ exports[`sass @import snapshots grid-nocalc-singleratio-nogap 1`] = `
   width: 95%;
 }
 .grid-nocalc-singleratio-nogap:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2372,7 +2372,7 @@ exports[`sass @import snapshots grid-nocalc-singleratio-nomargin 1`] = `
   width: 95%;
 }
 .grid-nocalc-singleratio-nomargin:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2427,7 +2427,7 @@ exports[`sass @use snapshots grid-calc-fixed 1`] = `
   width: calc(192px + 2rem);
 }
 .grid-calc-fixed:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2490,7 +2490,7 @@ exports[`sass @use snapshots grid-calc-fixed-first-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2553,7 +2553,7 @@ exports[`sass @use snapshots grid-calc-fixed-first-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2613,7 +2613,7 @@ exports[`sass @use snapshots grid-calc-fixed-firstlast-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-firstlast-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2676,7 +2676,7 @@ exports[`sass @use snapshots grid-calc-fixed-last-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2739,7 +2739,7 @@ exports[`sass @use snapshots grid-calc-fixed-last-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2799,7 +2799,7 @@ exports[`sass @use snapshots grid-calc-fixed-middle-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fixed-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2862,7 +2862,7 @@ exports[`sass @use snapshots grid-calc-fluid-first-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2925,7 +2925,7 @@ exports[`sass @use snapshots grid-calc-fluid-first-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -2985,7 +2985,7 @@ exports[`sass @use snapshots grid-calc-fluid-last-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3048,7 +3048,7 @@ exports[`sass @use snapshots grid-calc-fluid-last-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3108,7 +3108,7 @@ exports[`sass @use snapshots grid-calc-fluid-middle-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-fluid-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3171,7 +3171,7 @@ exports[`sass @use snapshots grid-calc-multiratio 1`] = `
   width: 95%;
 }
 .grid-calc-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3234,7 +3234,7 @@ exports[`sass @use snapshots grid-calc-nested 1`] = `
   width: 95%;
 }
 .grid-calc-nested:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3288,7 +3288,7 @@ exports[`sass @use snapshots grid-calc-nested 1`] = `
   width: auto;
 }
 .grid-calc-nested .grid-n:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3346,7 +3346,7 @@ exports[`sass @use snapshots grid-calc-order 1`] = `
   width: 95%;
 }
 .grid-calc-order:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3387,15 +3387,15 @@ exports[`sass @use snapshots grid-calc-order 1`] = `
 }
 .grid-calc-order > *:nth-child(3n+2) {
   position: relative;
-  left: calc(0px - (\\"(99.99% - 2rem) / 3\\" + 0.5rem));
+  left: calc(0px - ("(99.99% - 2rem) / 3" + 0.5rem));
 }
 .grid-calc-order > *:nth-child(3n+3) {
   position: relative;
-  left: calc((\\"(99.99% - 2rem) / 3\\" + 0.5rem) - (\\"(((99.99% - 2rem) / 3) * 2)\\" + \\"(0.5rem * 2)\\"));
+  left: calc(("(99.99% - 2rem) / 3" + 0.5rem) - ("(((99.99% - 2rem) / 3) * 2)" + "(0.5rem * 2)"));
 }
 .grid-calc-order > *:nth-child(3n+1) {
   position: relative;
-  left: calc(\\"(((99.99% - 2rem) / 3) * 2)\\" + \\"(0.5rem * 2)\\");
+  left: calc("(((99.99% - 2rem) / 3) * 2)" + "(0.5rem * 2)");
 }"
 `;
 
@@ -3419,7 +3419,7 @@ exports[`sass @use snapshots grid-calc-rtl 1`] = `
   width: 95%;
 }
 .grid-calc-rtl:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3476,7 +3476,7 @@ exports[`sass @use snapshots grid-calc-singleratio 1`] = `
   width: 95%;
 }
 .grid-calc-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3533,7 +3533,7 @@ exports[`sass @use snapshots grid-calc-singleratio-nogap 1`] = `
   width: 95%;
 }
 .grid-calc-singleratio-nogap:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3588,7 +3588,7 @@ exports[`sass @use snapshots grid-calc-singleratio-nomargin 1`] = `
   width: 95%;
 }
 .grid-calc-singleratio-nomargin:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3646,7 +3646,7 @@ exports[`sass @use snapshots grid-nocalc-fixed 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3713,7 +3713,7 @@ exports[`sass @use snapshots grid-nocalc-fixed-first-multiratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3780,7 +3780,7 @@ exports[`sass @use snapshots grid-nocalc-fixed-first-singleratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3843,7 +3843,7 @@ exports[`sass @use snapshots grid-nocalc-fixed-firstlast-singleratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-firstlast-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3910,7 +3910,7 @@ exports[`sass @use snapshots grid-nocalc-fixed-last-multiratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -3977,7 +3977,7 @@ exports[`sass @use snapshots grid-nocalc-fixed-last-singleratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4040,7 +4040,7 @@ exports[`sass @use snapshots grid-nocalc-fixed-middle-multiratio 1`] = `
   width: 14rem;
 }
 .grid-nocalc-fixed-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4106,7 +4106,7 @@ exports[`sass @use snapshots grid-nocalc-fluid-first-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-first-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4164,7 +4164,7 @@ exports[`sass @use snapshots grid-nocalc-fluid-first-singleratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-first-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4219,7 +4219,7 @@ exports[`sass @use snapshots grid-nocalc-fluid-last-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-last-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4277,7 +4277,7 @@ exports[`sass @use snapshots grid-nocalc-fluid-last-singleratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-last-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4332,7 +4332,7 @@ exports[`sass @use snapshots grid-nocalc-fluid-middle-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-fluid-middle-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4390,7 +4390,7 @@ exports[`sass @use snapshots grid-nocalc-multiratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-multiratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4448,7 +4448,7 @@ exports[`sass @use snapshots grid-nocalc-nested 1`] = `
   width: 95%;
 }
 .grid-nocalc-nested:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4497,7 +4497,7 @@ exports[`sass @use snapshots grid-nocalc-nested 1`] = `
   width: auto;
 }
 .grid-nocalc-nested .grid-n:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4559,7 +4559,7 @@ exports[`sass @use snapshots grid-nocalc-order 1`] = `
   width: 95%;
 }
 .grid-nocalc-order:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4627,7 +4627,7 @@ exports[`sass @use snapshots grid-nocalc-rtl 1`] = `
   width: 95%;
 }
 .grid-nocalc-rtl:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4679,7 +4679,7 @@ exports[`sass @use snapshots grid-nocalc-singleratio 1`] = `
   width: 95%;
 }
 .grid-nocalc-singleratio:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4731,7 +4731,7 @@ exports[`sass @use snapshots grid-nocalc-singleratio-nogap 1`] = `
   width: 95%;
 }
 .grid-nocalc-singleratio-nogap:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
@@ -4783,7 +4783,7 @@ exports[`sass @use snapshots grid-nocalc-singleratio-nomargin 1`] = `
   width: 95%;
 }
 .grid-nocalc-singleratio-nomargin:after {
-  content: \\"\\";
+  content: "";
   display: table;
   clear: both;
 }
