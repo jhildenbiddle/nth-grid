@@ -3,7 +3,7 @@
 const fs                   = require('fs');
 const glob                 = require('glob');
 const handlebars           = require('handlebars');
-const mkdirp               = require('mkdirp');
+const { mkdirp }           = require('mkdirp');
 const path                 = require('path');
 const { registerHelpers }  = require('./helpers/register-hbs');
 const { registerPartials } = require('./helpers/register-hbs');
