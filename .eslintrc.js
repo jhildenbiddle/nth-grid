@@ -14,7 +14,7 @@ module.exports = {
         'src/demo/static/js/vendor'
     ],
     'parserOptions': {
-        'ecmaVersion': 2018,
+        'ecmaVersion': 2022,
         'sourceType' : 'module'
     },
     'plugins': [

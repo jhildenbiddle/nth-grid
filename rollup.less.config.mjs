@@ -1,16 +1,18 @@
 // Dependencies
 // =============================================================================
-const path = require('path');
+import { babel } from '@rollup/plugin-babel';
+import commonjs  from '@rollup/plugin-commonjs';
+import eslint    from '@rollup/plugin-eslint';
+import fs        from 'node:fs';
+import json      from '@rollup/plugin-json';
+import merge     from 'lodash.merge';
+import path      from 'node:path';
+import resolve   from '@rollup/plugin-node-resolve';
+import terser    from '@rollup/plugin-terser';
 
-import { babel }  from '@rollup/plugin-babel';
-import commonjs   from '@rollup/plugin-commonjs';
-import { eslint } from 'rollup-plugin-eslint';
-import json       from '@rollup/plugin-json';
-import merge      from 'lodash.merge';
-import pkg        from './package.json';
-import resolve    from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-
+const pkg = JSON.parse(
+  fs.readFileSync(new URL('./package.json', import.meta.url), 'utf8') // prettier-ignore
+);
 
 // Settings
 // =============================================================================
@@ -19,8 +21,8 @@ const currentYear = (new Date()).getFullYear();
 const releaseYear = 2015;
 
 // Output
-const entryFile  = path.resolve(__dirname, 'src', 'postcss', 'index.js');
-const outputFile = path.resolve(__dirname, 'dist', 'postcss', 'index.js');
+const entryFile  = path.resolve('.', 'src', 'less', 'plugin', 'index.js');
+const outputFile = path.resolve('.', 'dist', 'less', `less-plugin-${pkg.name}.js`);
 
 // Banner
 const bannerData = [
@@ -45,7 +47,7 @@ const pluginSettings = {
             ['@babel/env', {
                 modules: false,
                 targets: {
-                    node: 8
+                    browsers: ['ie >= 9']
                 }
             }]
         ]
@@ -80,9 +82,6 @@ const config = {
         banner   : `/*!\n * ${ bannerData.join('\n * ') }\n */`,
         sourcemap: true
     },
-    external: [
-        'postcss'
-    ],
     plugins: [
         resolve(),
         commonjs(),
@@ -104,20 +103,31 @@ const config = {
 
 // Formats
 // -----------------------------------------------------------------------------
-// CommonJS
-const cjs = merge({}, config, {
+// IIFE
+const iife = merge({}, config, {
     output: {
-        exports: 'default',
-        format: 'cjs'
+        format: 'iife'
     },
-    plugins: [
+    plugins: config.plugins.concat([
         terser(pluginSettings.terser.beautify)
-    ]
+    ])
+});
+
+// IIFE (Minified)
+const iifeMinified = merge({}, config, {
+    output: {
+        file  : iife.output.file.replace(/\.js$/, '.min.js'),
+        format: iife.output.format
+    },
+    plugins: config.plugins.concat([
+        terser(pluginSettings.terser.minify)
+    ])
 });
 
 
 // Exports
 // =============================================================================
 export default [
-    cjs
+    iife,
+    iifeMinified
 ];
