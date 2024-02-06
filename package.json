@@ -108,7 +108,7 @@
     "start": "npm-run-all -s build -p watch serve",
     "test": "jest",
     "test:watch": "jest --watch & nodemon --delay 1 -C -q -w tests/fixtures -e '*' -x run-s test",
-    "version": "run-s prepare lint test",
+    "version": "run-s prepare lint test && git add -A docs/sassdoc",
     "watch": "run-p watch:**",
     "watch:demo:less": "nodemon -C -q -w demo -e less -x run-s build:demo:less",
     "watch:demo:postcss": "nodemon -C -q -w demo -e pcss -x run-s build:demo:postcss",
