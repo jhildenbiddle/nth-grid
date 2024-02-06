@@ -37,6 +37,10 @@
     "styl",
     "stylus"
   ],
+  "files": [
+    "dist"
+  ],
+  "main": "dist/postcss/index.js",
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
@@ -75,7 +79,6 @@
   "peerDependencies": {
     "postcss": "^8.0.0"
   },
-  "main": "dist/postcss/index.js",
   "scripts": {
     "build": "npm-run-all -s build:dist -p build:demo build:fixtures build:docs:sass build:sassdoc",
     "build:demo": "npm-run-all -s build:demo:hbs -p build:demo:less build:demo:postcss build:demo:sass build:demo:stylus",
