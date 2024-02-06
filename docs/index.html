@@ -1,68 +1,90 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
-    <meta name="description" content="Nth-Grid is a versatile semantic CSS grid system with legacy browser support for Less, PostCSS, Sass, and Stylus.">
-    <title>Nth-Grid</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+  <meta name="description" content="Nth-Grid is a versatile semantic CSS grid system with legacy browser support for Less, PostCSS, Sass, and Stylus.">
+  <title>Nth-Grid</title>
 
-    <!-- Stylesheets -->
-    <link
-      rel="stylesheet"
-      data-style-group="themeable"
-      href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css"
-      disabled
-    />
-    <link
-      rel="stylesheet"
-      data-style-group="themeable"
-      media="(prefers-color-scheme: dark)"
-      href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"
-    />
-    <link
-      rel="stylesheet"
-      data-style-group="themeable"
-      media="(prefers-color-scheme: light)"
-      href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"
-    />
-    <link rel="stylesheet" href="style.css">
+  <!-- Stylesheets -->
+  <link
+  rel="stylesheet"
+  data-style-group="themeable"
+  href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css"
+  disabled
+  />
+  <link
+  rel="stylesheet"
+  data-style-group="themeable"
+  media="(prefers-color-scheme: dark)"
+  href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"
+  />
+  <link
+  rel="stylesheet"
+  data-style-group="themeable"
+  media="(prefers-color-scheme: light)"
+  href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"
+  />
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="app"></div>
+  <div id="app"></div>
 
-    <!-- JavaScript -->
-    <script>
-        window.$docsify = {
-            // GENERAL
-            // -----------------------------------------------------------------
-            name       : 'Nth-Grid',
-            repo       : 'https://github.com/jhildenbiddle/nth-grid',
-            coverpage  : 'coverpage.md',
-            homepage   : 'index.md',
-            loadSidebar: 'sidebar.md',
+  <!-- JavaScript -->
+  <script>
+    window.$docsify = {
+      // GENERAL
+      // -----------------------------------------------------------------
+      name       : 'Nth-Grid',
+      repo       : 'https://github.com/jhildenbiddle/nth-grid',
+      coverpage  : 'coverpage.md',
+      homepage   : 'index.md',
+      loadSidebar: 'sidebar.md',
 
-            // NAVIGATION
-            // -----------------------------------------------------------------
-            alias: {
-                '.*?/changelog': 'https://raw.githubusercontent.com/jhildenbiddle/nth-grid/master/CHANGELOG.md',
-            },
-            auto2top   : true,
-            maxLevel   : 3,
-            subMaxLevel: 3,
+      // NAVIGATION
+      // -----------------------------------------------------------------
+      alias: {
+        '.*?/changelog': 'https://raw.githubusercontent.com/jhildenbiddle/nth-grid/master/CHANGELOG.md',
+      },
+      auto2top   : true,
+      maxLevel   : 3,
+      subMaxLevel: 3,
 
-            // PLUGINS
-            // -----------------------------------------------------------------
-            ethicalAds: {
-              eaPublisher: 'jhildenbiddle-github-io'
-            },
-            search: {
-                depth      : 3,
-                noData     : 'No results!',
-                placeholder: 'Search...'
-            }
-        };
+      // PLUGINS
+      // -----------------------------------------------------------------
+      ethicalAds: {
+        eaPublisher: 'jhildenbiddle-github-io'
+      },
+      search: {
+        depth      : 3,
+        noData     : 'No results!',
+        placeholder: 'Search...'
+      },
+      plugins: [
+      // Restores initial <title>
+        function persistTitle(hook, vm) {
+          var titleElm = document.querySelector('title');
+          var rootTitle = titleElm && titleElm.textContent;
+          var pageTitlePrefix = window.$docsify.name
+          ? window.$docsify.name + ' - '
+          : '';
+
+          if (rootTitle) {
+            hook.doneEach(function () {
+              var currentTitle = titleElm.textContent;
+              var isRoot = !/\/[a-z]/.test(location.hash);
+              var newTitle = isRoot
+              ? rootTitle
+              : pageTitlePrefix + currentTitle;
+
+              titleElm.textContent = newTitle;
+            });
+          }
+        }
+        ]
+      };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
@@ -75,5 +97,5 @@
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-less.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-scss.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-stylus.min.js"></script>
-</body>
-</html>
+  </body>
+  </html>
