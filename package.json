@@ -18,7 +18,13 @@
     "flexbox",
     "gap",
     "grid",
-    "gutter",
+    "ie",
+    "ie7",
+    "ie8",
+    "ie9",
+    "ie10",
+    "ie11",
+    "legacy",
     "less",
     "mixin",
     "plugin",
@@ -28,6 +34,7 @@
     "sassdoc",
     "scss",
     "semantic",
+    "styl",
     "stylus"
   ],
   "devDependencies": {
