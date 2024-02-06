@@ -4,11 +4,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/jhildenbiddle/nth-grid/blob/master/LICENSE)
 [![Sponsor this project](https://img.shields.io/static/v1?style=flat-square&label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jhildenbiddle)
 
-A lightweight, semantic, legacy-compatible CSS grid system for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
+A semantic, lightweight, legacy-compatible CSS grid system for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
+
+!> Native [CSS grid layouts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) have been [supported](https://caniuse.com/?search=display%3A%20grid) in modern browsers since 2020 and offer a far better experience than custom grid systems like Nth-Grid. For projects that require legacy browser support, Nth-Grid remains an excellent choice for grid-based layouts.
 
 ## Features
 
-- Flexbox and float-based grids
+- Flexbox and float-based CSS grids
 - Semantic HTML without grid-specific class names
 - Simple, easy-to-learn syntax
 - Fixed and/or fluid grids, columns, rows, gaps and margins
@@ -146,7 +148,7 @@ See the official [PostCSS documentation](https://github.com/postcss/postcss) for
 
 ### Grid columns
 
-Nth-Grid requires a "wrapper" element to serve as the grid container. All direct descendants of this container are treated as grid elements.
+Nth-Grid requires a "wrapper" element to serve as a grid container. All direct descendants of this container are treated as grid elements.
 
 A simple three column grid with equal width [columns](#columns) can be created as follows:
 
@@ -196,7 +198,7 @@ main {
 <!-- tabs:end -->
 
 <div class="app-frame mac centered">
-  <div class="grid-demo-usage1">
+  <div class="grid-demo-usage-columns">
     <div>Column 1</div>
     <div>Column 2</div>
     <div>Column 3</div>
@@ -212,14 +214,14 @@ For example, a three column grid with two rows can be created as follows:
 ```html
 <main>
   <!-- Row 1 -->
-  <div>Column 1</div>
-  <div>Column 2</div>
-  <div>Column 3</div>
+  <div>A</div>
+  <div>B</div>
+  <div>C</div>
 
   <!-- Row 2 -->
-  <div>Column 1</div>
-  <div>Column 2</div>
-  <div>Column 3</div>
+  <div>D</div>
+  <div>E</div>
+  <div>F</div>
 </main>
 ```
 
@@ -271,13 +273,15 @@ main {
 <!-- tabs:end -->
 
 <div class="app-frame mac centered">
-  <div class="grid-demo-usage2">
-    <div>Column 1</div>
-    <div>Column 2</div>
-    <div>Column 3</div>
-    <div>Column 1</div>
-    <div>Column 2</div>
-    <div>Column 3</div>
+  <div class="grid-demo-usage-rows">
+    <!-- Row 1 -->
+    <div>A</div>
+    <div>B</div>
+    <div>C</div>
+    <!-- Row 2 -->
+    <div>D</div>
+    <div>E</div>
+    <div>F</div>
   </div>
 </div>
 
@@ -520,12 +524,10 @@ $nth-grid-warnings               = true
 
 #### **PostCSS**
 
-Nth-Grid for PostCSS provides two methods of defining global options:
-
-**CSS**
+Nth-Grid for PostCSS allows global options to be defined via CSS and/or JS:
 
 ```css
-/* Nth-Grid global options */
+/* Nth-Grid global options (CSS) */
 :root {
   /* Layout settings */
   --nth-grid-columns               : 1;
@@ -555,12 +557,8 @@ Nth-Grid for PostCSS provides two methods of defining global options:
 }
 ```
 
-**PostCSS configuration**
-
-For configurations using `postcss.config.js`:
-
 ```javascript
-// Nth-Grid global options
+// Nth-Grid global options (JS)
 var config = {
   // Layout settings
   'columns'               : 1,
@@ -627,28 +625,24 @@ $nth-grid-rem-base = 16
 
 #### **PostCSS**
 
-Nth-Grid for PostCSS provides two methods of defining global options:
-
-**CSS**
+Nth-Grid for PostCSS allows global options to be defined via CSS and/or JS:
 
 ```css
-/* Nth-Grid global options in CSS */
+/* Nth-Grid global options (CSS) */
 :root {
   --nth-grid-rem-base: 16;
 }
 ```
 
-**PostCSS configuration**
-
-For configurations using `postcss.config.js`:
-
 ```javascript
+// Nth-Grid global options (JS)
+var config = {
+  'rem-base': 16
+};
+
 module.exports = {
   plugins: [
-    require('nth-grid')({
-      // Nth-Grid Global Options
-      'rem-base': 16
-    })
+    require('nth-grid')(config)
   ]
 }
 ```
@@ -664,63 +658,35 @@ This option is only available for PostCSS.
 
 Sets the Nth-Grid PostCSS processor to remove Nth-Grid global options specified in CSS after compilation.  This prevents these options from showing up in your compiled CSS. If the `:root` element is empty after removing all Nth-Grid global options, the root element CSS rule will be removed as well.
 
-<!-- tabs:start -->
-
-#### **Less**
-
-```less
-@nth-grid-remove-globals: true;
-```
-
-#### **Sass**
-
-```scss
-$nth-grid-remove-globals: true;
-```
-
-#### **Stylus**
-
-```stylus
-$nth-grid-remove-globals = true
-```
-
-#### **PostCSS**
-
-Nth-Grid for PostCSS provides two methods of defining global options:
-
-**CSS**
+Nth-Grid for PostCSS allows global options to be defined via CSS and/or JS:
 
 ```css
-/* Nth-Grid global options in CSS */
+/* Nth-Grid global options (CSS) */
 :root {
   --nth-grid-remove-globals: true;
 }
 ```
 
-**PostCSS configuration**
-
-For configurations using `postcss.config.js`:
-
 ```javascript
+// Nth-Grid global options (JS)
+var config = {
+  'remove-globals': true
+};
+
 module.exports = {
   plugins: [
-    require('nth-grid')({
-      // Nth-Grid Global Options
-      'remove-globals': true
-    })
+    require('nth-grid')(config)
   ]
 }
 ```
-
-<!-- tabs:end -->
 
 ## Grid Options
 
 ### columns
 
 - Type:
-  - A unitless `number` representing the quantity and width of ratio-based columns (e.g., `3`)
-  - A space-separated list of values, each representing a column's ratio-based or specified width (e.g., `1 2 3`, `150px 2 1`, `100px 10em 10%`)
+  - A unitless `number` representing the column count and ratio width (e.g., `3`)
+  - A space-separated list of values, each representing a column's ratio or unit width (e.g., `1 2 3`, `150px 2 1`)
 - Default: `1`
 
 Sets the column count, width and order for each grid row.
@@ -1611,7 +1577,7 @@ main > *:nth-child(1n) {
   - A space-separated list of horizontal and vertical gap values (e.g., `0 10px`)
 - Default: `0`
 
-Sets the vertical gaps (between rows) and horizontal gaps (between columns). Grid gaps can be specified as:
+Sets the vertical gaps (between rows) and horizontal gaps (between columns).
 
 <!-- tabs:start -->
 
@@ -1691,6 +1657,9 @@ main {
 
 <div class="app-frame mac centered" data-title="Grid Gaps">
   <div class="grid-demo-gap">
+    <div>Column 1</div>
+    <div>Column 2</div>
+    <div>Column 3</div>
     <div>Column 1</div>
     <div>Column 2</div>
     <div>Column 3</div>

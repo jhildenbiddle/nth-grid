@@ -13,14 +13,16 @@
 
 [class*="grid-demo"] {
   > * {
-    background: var(--theme-color);
+    // background: var(--theme-color);
+    background: hsl(var(--theme-hue), var(--theme-saturation), var(--theme-lightness));
     color: #fff;
     text-align: center;
     padding: 0.25em 0.5em;
-  }
 
-  > :nth-child(odd) {
-    opacity: 0.5;
+    // Alternating column colors in 3 column grid
+    &:nth-child(-3n+200) {
+      --theme-lightness: 75%;
+    }
   }
 }
 
@@ -60,11 +62,11 @@
   );
 }
 
-.grid-demo-usage1 {
+.grid-demo-usage-columns {
   @include nth-grid(3);
 }
 
-.grid-demo-usage2 {
+.grid-demo-usage-rows {
   @include nth-grid(3, 2%);
 }
 
