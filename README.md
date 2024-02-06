@@ -1,6 +1,7 @@
 # Nth-Grid
 
 [![NPM](https://img.shields.io/npm/v/nth-grid.svg?style=flat-square)](https://www.npmjs.com/package/nth-grid)
+[![GitHub Workflow Status (main)](https://img.shields.io/github/actions/workflow/status/jhildenbiddle/nth-grid/test.yml?branch=main&label=checks&style=flat-square)](https://github.com/jhildenbiddle/nth-grid/actions?query=branch%3Amain+)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://github.com/jhildenbiddle/nth-grid/blob/master/LICENSE)
 [![jsDelivr](https://data.jsdelivr.com/v1/package/npm/nth-grid/badge)](https://www.jsdelivr.com/package/npm/nth-grid)
 [![Sponsor this project](https://img.shields.io/static/v1?style=flat-square&label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jhildenbiddle)
