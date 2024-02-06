@@ -1,6 +1,6 @@
 {
   "name": "nth-grid",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "John Hildenbiddle",
   "description": "Nth-Grid is a versatile semantic CSS grid system with legacy browser support for Less, PostCSS, Sass, and Stylus.",
   "license": "MIT",
