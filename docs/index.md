@@ -1912,7 +1912,7 @@ main {
 - Type: `boolean`
 - Default: `true`
 
-Sets the output of grid layout warnings during compilation. Compilation warnings are generated when `legacy` is set to `true` and a grid configuration is defined that is not compatible with legacy browsers.
+Sets the output of grid layout warnings during compilation. Compilation warnings are generated when [`float-legacy`](#float-legacy) is set to `true` and a grid configuration is defined that is not compatible with legacy browsers.
 
 <!-- tabs:start -->
 
@@ -1923,7 +1923,8 @@ main {
   .nth-grid(
     // Mixed-unit grid configurations are not compatible with legacy browsers
     @columns: 2 200px,
-    @legacy: true,
+    @float: true,
+    @float-legacy: true,
     @warnings: true
   );
 }
@@ -1936,7 +1937,8 @@ main {
   @include nth-grid(
     // Mixed-unit grid configurations are not compatible with legacy browsers
     $columns: 2 200px,
-    $legacy: true,
+    $float: true,
+    $float-legacy: true,
     $warnings: true
   );
 }
@@ -1949,7 +1951,8 @@ main
   nth-grid(
     // Mixed-unit grid configurations are not compatible with legacy browsers
     $columns: 2 200px
-    $legacy: true
+    $float: true
+    $float-legacy: true
     $warnings: true
   )
 ```
@@ -1961,7 +1964,8 @@ main {
   nth-grid {
     /* Mixed-unit grid configurations are not compatible with legacy browsers */
     columns: 2 200px;
-    legacy: 3;
+    float: true;
+    float-legacy: true;
     warnings: true;
   };
 }
@@ -2045,7 +2049,7 @@ Nth-Grid uses a variety of CSS features to render grid layouts, some of which ar
 
 1. [Selectivizr.js](https://github.com/keithclark/selectivizr) polyfill for nth-child support
 2. [Respond.js](https://github.com/scottjehl/Respond) polyfill for media query support (optional)
-3. Nth-Grid's [legacy](#legacy) option set to `true`
+3. Nth-Grid's [float](#float) and [float-legacy](#float-legacy) option set to `true`
 4. Nth-Grid's [rem-base](#rem-base) option set to the font size of the root element
 
 The following grid configurations are not supported by legacy browsers due to lack of CSS [calc() values](http://caniuse.com/#feat=calc) and [flexbox](http://caniuse.com/#feat=flexbox) support:
