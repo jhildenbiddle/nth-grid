@@ -4,8 +4,8 @@
 > A grid system for Less, PostCSS, Sass, and Stylus
 
 - Float and flexbox-based grid layouts
-- Clean, semantic HTML without bloated class lists
-- Legacy browser support (IE9+)
+- Clean, semantic HTML without grid class requirements
+- Legacy browser support (IE9+ or IE7+ with polyfills)
 - SassDoc integration
 
 [Get Started](#main) <!-- markdownlint-disable MD051 -->

@@ -8,7 +8,7 @@
 
 Nth-Grid is a versatile semantic CSS grid system with legacy browser support for [Less](http://lesscss.org/), [PostCSS](https://github.com/postcss/postcss), [Sass](http://sass-lang.com/), and [Stylus](http://stylus-lang.com/).
 
-!> The official [CSS Grid Layout Module](https://www.w3.org/TR/css-grid-1/) was finalized has been widely [supported](https://caniuse.com/?search=display%3A%20grid) in modern browsers since 2020. [Native CSS grids](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) offer a far better experience than grid systems like Nth-Grid for projects that do not require legacy browser support. For projects that do support legacy browsers, Nth-Grid remains an excellent choice for grid layouts.
+!> The official [CSS Grid Layout Module](https://www.w3.org/TR/css-grid-1/) has been finalized and in universally [supported](https://caniuse.com/?search=display%3A%20grid) in modern browsers. [Native CSS grids](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) offer a far better experience than grid systems like Nth-Grid for projects that do not require legacy browser support. For projects that do support legacy browsers, Nth-Grid remains an excellent choice for grid layouts.
 
 ## Features
 
@@ -32,7 +32,9 @@ Nth-Grid is a versatile semantic CSS grid system with legacy browser support for
 
 ## Why Nth-Grid?
 
-Nth-Grid provides all of the features expected of a modern CSS grid system while simplifying grid concepts and implementation.
+Nth-Grid was conceived long ago (2011) when CSS grid-based layouts were gaining popularity, responsive design was still a new but exciting concept, and support for "legacy" browsers was required for most websites and applications. Specifications for modern layout modules like [CSS Flexbox](https://www.w3.org/TR/css-flexbox-1/) and [CSS Grid](https://www.w3.org/TR/css-grid-1/) were years away from being finalized and widely support, so [float](https://developer.mozilla.org/en-US/docs/Web/CSS/float)-based layouts were the preferred method of implementing CSS grids. Frameworks like [Bootstrap](https://getbootstrap.com) and [Foundation](https://get.foundation) were quickly establishing themselves as the "easy" way to implement grid-based layouts, but their systems were inflexible and required scattering arcane CSS class names throughout a project's HTML. Stand-alone libraries like [Semantic.GS](https://dbwebb-se.github.io/semantic.gs/webroot/) and [Susy](https://www.oddbird.net/susy/) provided grid flexibility, but they worked with only one CSS preprocessor and required scattering grid helpers throughout a project's CSS.
+
+Nth-Grid was designed to address the shortcomings of other CSS grid layout solutions by providing the following:
 
 1. **Custom grids without limitations**
 
